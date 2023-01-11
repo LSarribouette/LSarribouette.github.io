@@ -1,0 +1,699 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>UML</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="87f16c85-8c46-4b5e-9c28-c0e1a720eb12" class="page sans"><header><img class="page-cover-image" src="media/10-02-uml/2023-01-03_20_33_26-pexels-antonio-friedemann-11633337.jpg_-_Photos.png" style="object-position:center 14.190000000000003%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">UML</h1></header><div class="page-body"><blockquote id="7f0e4e90-680c-4a9e-a747-9d427c5e92dd" class="">Objectif de modéliser —&gt; communiquer, documenter, tracer, produire, anticiper</blockquote><p id="45a1a3bb-b1d4-43f5-a6ce-020ba38eead2" class="">
+</p><p id="b24b892f-0b58-4f0f-b081-47707d505664" class=""><em>Unified Modeling Language </em></p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="f9325988-7a19-484d-8553-1fa7eed16457"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">pas une méthode mais un outil</div></figure><figure id="17fd25c6-7b08-4ba8-b0a0-b0096963037d" class="image"><a href="media/10-02-uml/Untitled.png"><img style="width:1030px" src="media/10-02-uml/Untitled.png"/></a></figure><figure id="9c1ce350-f127-4626-9c1e-a855e1dc7a68" class="image"><a href="media/10-02-uml/Untitled%201.png"><img style="width:981px" src="media/10-02-uml/Untitled%201.png"/></a><figcaption><em><a href="https://perso.liris.cnrs.fr/christine.solnon/coursUML.pdf">https://perso.liris.cnrs.fr/christine.solnon/coursUML.pdf</a></em></figcaption></figure><p id="aca16f9b-0e91-4fbd-b97e-c0409eadb062" class="">
+</p><blockquote id="9807fe75-202e-4308-93be-61779b0ec36c" class="">Les plus utilisés (en <mark class="highlight-orange">orange</mark>) : diagrammes de classe, des cas d’utilisation, d’activité, d’objets, de paquetage, d’états-transition et de séquence.</blockquote><p id="8d43f9b3-595d-47ba-8fbb-05ee54228d98" class="">
+</p><div id="b301df8b-a745-48ce-9034-0231c31a0e45" class="column-list"><div id="51967d40-a5a2-45dc-b0c8-1fff2c7e06a9" style="width:145.45454545454544%" class="column"><p id="f60e15f7-054a-4408-b4b0-9cc7138b4544" class="block-color-gray_background">Diagramme de package</p><figure id="218c66ef-93f0-4a95-822d-ab5f5c25bf83" class="image" style="text-align:center"><a href="media/10-02-uml/Untitled%202.png"><img style="width:214px" src="media/10-02-uml/Untitled%202.png"/></a></figure><p id="7ddfdd69-2eef-4b72-91ff-2090762caf3a" class="">
+</p><p id="7aa165a3-c7c6-4422-8985-9f0d22404f3f" class="block-color-gray_background">Diagramme d’activité</p><p id="c784038b-449c-401e-936f-1a7fa0501b35" class="">~ processus métier</p><figure id="a02c5af8-50fc-4c9c-a85e-593bb5e9cebe" class="image" style="text-align:center"><a href="media/10-02-uml/Untitled%203.png"><img style="width:249px" src="media/10-02-uml/Untitled%203.png"/></a></figure><p id="7dd28bbd-e73f-4036-b0a8-997958e15a1c" class="">
+</p></div><div id="a07c11ad-18c0-4441-b2eb-568a3c7b8737" style="width:218.18181818181816%" class="column"><p id="0f1b7fce-4324-4dbb-b729-337e8822edd4" class="block-color-gray_background">Diagramme de cas d’utilisation</p><p id="9ee3abe7-7d34-45bb-9b9d-c5d35eb94b38" class="">Diagramme de cas d’utilisation système</p><p id="a01006ec-6e31-440e-88be-2a729292b230" class="">~ acteurs autour du système</p><figure id="0f3c0719-92f2-497e-8610-359da73d8972" class="image" style="text-align:center"><a href="media/10-02-uml/Untitled%204.png"><img style="width:523px" src="media/10-02-uml/Untitled%204.png"/></a></figure><p id="3c3af7cc-b8de-4249-9297-9381bb9d2de9" class="">
+</p><p id="80b79cfb-c7ec-4308-b710-25bdd303f695" class="">Diagramme de cas d’utilisation global</p><p id="dccba048-93f6-4419-bd5d-21ed6dfe923f" class="">~ fonctionnalités et acteurs, <strong>tous</strong> les scénarios</p><figure id="3ece19f8-d548-4bc0-a9b6-fb2b699ef6f2" class="image" style="text-align:center"><a href="media/10-02-uml/Untitled%205.png"><img style="width:586px" src="media/10-02-uml/Untitled%205.png"/></a></figure><p id="a9c3574e-55f2-46df-87e8-ac28867f56b5" class="">
+</p></div></div><div id="0e9ca2cf-e205-4d47-a1fa-24c82f8c18b9" class="column-list"><div id="1f58a035-53e6-4b2a-8a99-999bc71dc13f" style="width:100%" class="column"><p id="0b083355-b3c1-4565-b2ea-af76fde80228" class="block-color-gray_background">Diagramme d’états-transitions</p><figure id="f18abfce-a4f0-4e4c-aefe-c3252efc0b35" class="image"><a href="media/10-02-uml/Untitled%206.png"><img style="width:205px" src="media/10-02-uml/Untitled%206.png"/></a></figure></div><div id="479aa1a1-58c6-4d3f-bff8-6d2a98fac299" style="width:100%" class="column"><p id="f230fd0d-79e2-41ae-a41b-a7e943dfe1b7" class="block-color-gray_background">Diagramme de séquence</p><p id="8551584a-40bc-4bd1-b9de-4854052f5f3d" class="">~ détails d’<strong>un</strong> scénario</p><figure id="f5d308d6-f633-4167-81d8-cdbf356260c6" class="image"><a href="media/10-02-uml/Untitled%207.png"><img style="width:305px" src="media/10-02-uml/Untitled%207.png"/></a></figure></div></div><div id="789c2fd2-0131-43e1-9a84-11a0c1298b55" class="column-list"><div id="e8de7507-e454-4de1-8911-489833ddb6ee" style="width:100%" class="column"><p id="9f17d401-813e-4c7d-8219-88eac199b162" class="">
+</p><p id="1f26503d-6b68-447d-a1c4-e9942cd80c85" class="block-color-gray_background">Diagramme de classe</p><p id="b3ddb060-6fc8-46ed-acd7-f922e18548de" class="">~ structure statique des systèmes (classes, relations entre classes)</p><figure id="b2ed5938-cb10-4ec0-86ef-40ee4bfd08cf" class="image"><a href="media/10-02-uml/Untitled%208.png"><img style="width:336px" src="media/10-02-uml/Untitled%208.png"/></a></figure><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="ab2ff271-56a4-48bd-b64a-15e985fd4dea"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Un diagramme de classe peut être utilisé pour l’analyse ou la conception : il sera plus précis pour la conception.</div></figure></div><div id="39806ce7-f103-4207-86ba-8ea802159bfc" style="width:100%" class="column"><p id="86bdec05-fef3-4839-8e2e-3ecffebdc5bc" class="">
+</p><p id="a43343c1-10dc-4e36-8a8c-e8f6e3e5a4e3" class="block-color-gray_background">Diagramme objet</p><p id="a1004e6c-3536-4947-99a5-adfd7053c2b3" class="">~ instances, exécution des classes</p><figure id="6a61f980-c1d8-4d8b-8f85-fb6ff1785660" class="image"><a href="media/10-02-uml/Untitled%209.png"><img style="width:264px" src="media/10-02-uml/Untitled%209.png"/></a></figure></div></div><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="ccf2264a-2b05-4428-891e-2f94817b6321"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin :
+<a href="https://www.clicours.com/elements-communs-aux-diagrammes-uml/">https://www.clicours.com/elements-communs-aux-diagrammes-uml/</a>
+<a href="https://www.uv.es/nemiche/cursos/UML5.pdf">https://www.uv.es/nemiche/cursos/UML5.pdf</a></div></figure><h2 id="6d580262-6ebe-4f1b-a26c-b1813708362e" class="">Signalétique</h2><hr id="f4569b3a-80c2-441d-8964-b2044c886061"/><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="58e6425c-7204-4517-830c-05e90105cbce"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Tous les éléments sont issus de <a href="https://www.umlet.com/">UMLet 15.0 (Free UML Tool for Fast UML Diagrams)</a>.</div></figure><h3 id="5ad2a6a6-6224-43f4-b2bb-be67efa50f3e" class=""><details open=""><summary>Éléments communs à tous les diagrammes</summary></details></h3><div class="indented"><div id="917fb567-6830-4cf2-97e4-40190be5f277" class="column-list"><div id="019ca73c-28ea-4480-97ac-302ba4aa5043" style="width:100%" class="column"><p id="b07e63bc-75e9-4450-b5f0-96f4192a2b8e" class="">Note</p><figure id="aee9a081-fd16-42f7-b71c-fb3d60bec5d2" class="image"><a href="media/10-02-uml/Untitled%2010.png"><img style="width:246px" src="media/10-02-uml/Untitled%2010.png"/></a></figure></div><div id="1491b0dc-12b2-4134-90c6-c1b58a640cc3" style="width:100%" class="column"><p id="ecfa1e52-7ab8-4146-b850-0211b0fad9c0" class="">Lien d’héritage</p><figure id="0ca0a412-a000-4eb4-a4ee-9d27b7f1b78f" class="image"><a href="media/10-02-uml/Untitled%2011.png"><img style="width:173px" src="media/10-02-uml/Untitled%2011.png"/></a></figure></div><div id="a7f08fc1-ef6c-403b-9841-214f17f66a75" style="width:100%" class="column"><p id="dba73eee-c9a4-4784-abe1-05aa5c90632a" class="">Lien de dépendance</p><figure id="602bd734-ea83-4730-af31-963061ca3379" class="image"><a href="media/10-02-uml/Untitled%2012.png"><img style="width:173px" src="media/10-02-uml/Untitled%2012.png"/></a></figure></div><div id="ef0b91d1-9e52-4aca-9182-979d44aae845" style="width:100%" class="column"><p id="8d280e51-4e0f-49e7-8a34-cd0638bf5e29" class="">Package</p><figure id="88f1b10b-38aa-408a-80fd-ee298b88ca82" class="image"><a href="media/10-02-uml/Untitled%2013.png"><img style="width:164px" src="media/10-02-uml/Untitled%2013.png"/></a></figure></div></div></div><h3 id="6140dce7-45c2-40e1-8a27-51f933b6cb96" class=""><details open=""><summary>Diagramme de package</summary></details></h3><div class="indented"><div id="79c38112-9c0f-4dd4-ad8c-b4a7b70b4c59" class="column-list"><div id="23a21ac4-db91-4e49-ba0e-b5563270d4d2" style="width:50%" class="column"><p id="9f0a03e1-1d20-4190-ad81-372e4101cf8d" class="">Deux possibilités équivalentes :</p><figure id="1ed3adcb-892e-4347-af3f-51546f5f3541" class="image"><a href="media/10-02-uml/Untitled%2014.png"><img style="width:401px" src="media/10-02-uml/Untitled%2014.png"/></a></figure><p id="0b07a49f-9a9a-4fb5-88f3-774427df5dc0" class="">
+</p></div><div id="9fc06164-abbc-4332-b0fa-7d7cb2d4b9e4" style="width:50%" class="column"><p id="bbad7ab2-52eb-4af4-acd5-fe09a247124c" class="">
+</p><figure id="1e1a6e55-709a-4d0c-a944-fbc4038e5576" class="image"><a href="media/10-02-uml/Untitled%2015.png"><img style="width:214px" src="media/10-02-uml/Untitled%2015.png"/></a></figure></div></div></div><h3 id="fd255dd9-5b78-4928-ade2-dfbc9c304709" class=""><details open=""><summary>Diagramme d’activité</summary></details></h3><div class="indented"><div id="9834c1c9-e68a-4d55-a3ae-b73691e1d830" class="column-list"><div id="d9d0d76a-a16a-4e7b-9bc6-bdf96e8c09d4" style="width:75%" class="column"><p id="c038b10b-dc58-4d87-a64b-b26c98250ce4" class="">Activités :</p><div id="9a46fb19-2a51-438c-ab4c-7c52196ab3a1" class="column-list"><div id="7cf517fc-e72b-48c6-afc7-6317c0c7c45f" style="width:50%" class="column"><p id="0a776049-eb31-43ad-9003-27f740c03cdc" class="">activité</p></div><div id="ea550e7d-e3b3-4363-9268-4efb9afd378b" style="width:93.75%" class="column"><figure id="db3cf126-1dd3-4c45-a308-f02ae357dd57" class="image"><a href="media/10-02-uml/Untitled%2016.png"><img style="width:110px" src="media/10-02-uml/Untitled%2016.png"/></a></figure></div></div><div id="f21cfc98-3139-4c52-957d-4d14cadee71b" class="column-list"><div id="c77eaadf-5c06-42fc-9d04-15efbde1c7cf" style="width:100%" class="column"><p id="281db1ae-bdb2-4438-989c-d1baaacb34f7" class="">initiale</p></div><div id="f430135d-ecbc-40e2-b1f4-55c0de4568b8" style="width:100%" class="column"><figure id="73a32b2f-8ea8-4351-9211-9409e287dd77" class="image"><a href="media/10-02-uml/Untitled%2017.png"><img style="width:29px" src="media/10-02-uml/Untitled%2017.png"/></a></figure></div></div><div id="dcae645d-5179-4f97-a892-91c16f8c007e" class="column-list"><div id="2d5d7a6b-3445-4d94-b850-aac82f079554" style="width:100%" class="column"><p id="e04586ac-d85b-4ecd-82a4-35a5d5977930" class="">finale</p></div><div id="7ff85d72-1c20-4fcc-b65a-26a1b26b9296" style="width:99.99999999999999%" class="column"><figure id="04ab6cac-2ad2-435b-855d-9ff94882bd2d" class="image"><a href="media/10-02-uml/Untitled%2018.png"><img style="width:30px" src="media/10-02-uml/Untitled%2018.png"/></a></figure></div></div></div><div id="c159298e-11a7-4c03-b8e8-aba868095fe9" style="width:87.50000000000001%" class="column"><p id="bd9c8d04-ef8a-449b-8291-96601fdb9c98" class="">Enchaînements :</p><div id="ed009304-2cd9-48c6-a49f-7f37b3804d5e" class="column-list"><div id="382dc6e8-76b8-43c3-91e8-6697b608a2b0" style="width:100%" class="column"><p id="67522545-adf2-4cee-87cc-74e2276df4f9" class="">simple</p></div><div id="01be907e-ba95-4e75-bfe9-19929c3edeb3" style="width:100%" class="column"><figure id="40d69230-c4d8-49a0-9901-40ec166d5072" class="image"><a href="media/10-02-uml/Untitled%2019.png"><img style="width:129px" src="media/10-02-uml/Untitled%2019.png"/></a></figure></div></div><div id="ec3dde70-6894-4fb6-9df5-5f5e31f3d294" class="column-list"><div id="5b1582cc-e39a-433b-aadc-ef79325226a2" style="width:125%" class="column"><p id="f79eb657-300a-4cd2-aec3-c51d9b024aa5" class="">noeud de décision</p></div><div id="46092a91-2388-4c82-a08b-1f67ebdde44c" style="width:56.25%" class="column"><figure id="173c528d-38be-455c-8d06-1f1d27c5bfae" class="image"><a href="media/10-02-uml/Untitled%2020.png"><img style="width:48px" src="media/10-02-uml/Untitled%2020.png"/></a></figure></div></div><div id="f8658640-38a9-4fbe-a63c-a7651150e98c" class="column-list"><div id="74035a7e-9163-466b-a3a8-981cf273f74c" style="width:100%" class="column"><p id="d2ba5aa3-24bf-414a-a95b-c3f991adfce0" class="">fourche</p></div><div id="32418004-55cf-4980-87ea-f6bd1edca17c" style="width:100%" class="column"><figure id="df870a89-87a6-43e1-a9dd-3138bd19f799" class="image"><a href="media/10-02-uml/Untitled%2021.png"><img style="width:106px" src="media/10-02-uml/Untitled%2021.png"/></a></figure></div></div><div id="65700408-a334-4fa6-97f3-e2d4d6f90d69" class="column-list"><div id="dee6ad3e-61e0-423d-8d36-062e1e12fcae" style="width:100%" class="column"><p id="eaad4f16-d699-4804-8c39-9ed2c53f8d34" class="">synchronisation</p></div><div id="0ccc83e8-ff9d-44fd-b82e-ac6a6126a32f" style="width:100%" class="column"><figure id="2857d79f-495f-4da7-a33c-af52550b4003" class="image"><a href="media/10-02-uml/Untitled%2022.png"><img style="width:106px" src="media/10-02-uml/Untitled%2022.png"/></a></figure></div></div><div id="bf219d3f-e6db-4eaa-ac7a-3e9b4d98dd13" class="column-list"><div id="cc28dce2-5476-4ffd-8e32-7cd6062cd1c4" style="width:93.75%" class="column"><p id="29d7bfdb-3b71-4d89-be36-7d5242b6dd78" class="">noeud de fusion</p></div><div id="0a142f52-d0c5-4d9d-9c18-315cd3ac0ff5" style="width:56.249999999999986%" class="column"><figure id="c4c67412-a9e7-41d2-8eb4-04bc01e5eacd" class="image"><a href="media/10-02-uml/Untitled%2020.png"><img style="width:48px" src="media/10-02-uml/Untitled%2020.png"/></a></figure></div></div><div id="1cdc4e89-b176-4302-89db-0060e845c56f" class="column-list"><div id="37b1ecb1-a606-412a-a645-36ffd9677406" style="width:100%" class="column"><p id="d466dc05-d94c-4924-a4b0-34089a0b07d4" class="">activité temporelle</p></div><div id="50d5b63f-3c06-4def-ac34-c85eb5618182" style="width:100%" class="column"><figure id="2274ae0d-1bf4-4b45-a15c-f3b297269154" class="image"><a href="media/10-02-uml/Untitled%2023.png"><img style="width:121px" src="media/10-02-uml/Untitled%2023.png"/></a></figure></div></div></div></div></div><h3 id="ad950722-cf84-4115-bb4d-6f1f2255a00b" class=""><details open=""><summary>Diagramme de cas d’utilisation système</summary></details></h3><div class="indented"><div id="ef387550-b87f-4748-8cad-184f60a19e8e" class="column-list"><div id="ca44e369-7d00-468e-8f72-0a996dd1b9d5" style="width:100%" class="column"><div id="99453ad2-819a-48cc-87c2-32b4fe8d93fb" class="column-list"><div id="fb1e3808-5b4f-465e-869a-488cef1a3ee5" style="width:100%" class="column"><p id="7854a49a-2d5f-4958-939d-94c7b2ecb065" class="">Acteurs :</p></div><div id="e1329b51-1dc3-46ae-bd6a-3326f74f5e62" style="width:100%" class="column"><p id="00a5e6e0-b342-4470-8315-a337fd0dfd1c" class="">
+</p></div></div><div id="3b301491-8242-4e49-83cb-cdbb281722fe" class="column-list"><div id="a696653d-32c0-4784-8440-c2c0c219ef00" style="width:56.25%" class="column"><p id="fe8b2136-5a67-4021-b654-cff62a72de35" class="">principal</p></div><div id="c94dcd70-aec9-46b6-9763-9428bc6e6321" style="width:87.5%" class="column"><figure id="fdec16c9-22fb-41b3-a0a0-5baca541dfcb" class="image"><a href="media/10-02-uml/Untitled%2024.png"><img style="width:108px" src="media/10-02-uml/Untitled%2024.png"/></a></figure></div></div><div id="4b23d7d9-5a69-41cd-bd5a-306f68bf7397" class="column-list"><div id="3c7ed4c9-da66-4f73-90c0-ef8ec73fad7d" style="width:56.25%" class="column"><p id="43f83159-2c8d-4d91-81b1-3d922caa111d" class="">secondaire</p></div><div id="132a5fb3-81dc-4a75-b0dc-2d1f3963b82e" style="width:87.5%" class="column"><figure id="a7503163-bac8-4dd9-9186-7187f13b3ad3" class="image"><a href="media/10-02-uml/Untitled%2025.png"><img style="width:119px" src="media/10-02-uml/Untitled%2025.png"/></a></figure></div></div><div id="567581ff-dbcb-4631-913c-a40729f17040" class="column-list"><div id="a053c498-0fb1-4222-a415-198c50c34766" style="width:50%" class="column"><p id="7a52fe56-f8db-43a1-898c-27174751cd0b" class="">non humain</p></div><div id="a22a2038-3bcd-4816-8a70-2a1eeffca411" style="width:93.74999999999999%" class="column"><figure id="f4e49832-9e39-406f-88de-dd2eab7d0144" class="image"><a href="media/10-02-uml/Untitled%2026.png"><img style="width:137px" src="media/10-02-uml/Untitled%2026.png"/></a></figure></div></div></div><div id="69d7865f-9992-4c35-801e-84fc93fb2989" style="width:100%" class="column"><div id="988e362d-69e9-4ddf-aaf9-ec296d008165" class="column-list"><div id="49e538ea-3e30-4898-830a-eaf0d8d810d8" style="width:100%" class="column"><p id="e5b364fe-33ca-4440-871d-669414228c0c" class="">Système :</p></div><div id="f6333fed-4280-4282-a4f6-1e71c7981bc0" style="width:100%" class="column"><figure id="07e80f0f-9cef-4aeb-a427-81bab73fb396" class="image"><a href="media/10-02-uml/Untitled%2027.png"><img style="width:107px" src="media/10-02-uml/Untitled%2027.png"/></a></figure></div></div><p id="dbc635d0-02b4-4974-b963-b147161a4bba" class="">Cas d’utilisation :</p><div id="b419f2ec-27db-4243-8927-7694d39f159e" class="column-list"><div id="b2241809-576e-4af0-bae4-3926e3f5d1cd" style="width:100%" class="column"><p id="eee4fb91-1c20-40ab-aa14-4009accded83" class="">cas principal</p></div><div id="8b8322c5-8ddd-44a2-8dd3-8e3bd03fc276" style="width:100%" class="column"><figure id="b8fea0ea-a070-4e8c-a873-cc105e6d9d16" class="image"><a href="media/10-02-uml/Untitled%2028.png"><img style="width:128px" src="media/10-02-uml/Untitled%2028.png"/></a></figure></div></div><div id="09c96f55-d04f-4dbc-bfd3-c0b598cc3967" class="column-list"><div id="7f4c73e4-ef0a-4324-be75-44ae751c86e0" style="width:37.5%" class="column"><p id="296426be-59a1-49bd-b4a5-59ad0f3c7e50" class="">cas inclus</p></div><div id="2235b5df-04cf-41bc-a9b9-10581539d96b" style="width:100%" class="column"><figure id="22587f2e-8651-44bd-a665-d7fb769f310c" class="image"><a href="media/10-02-uml/Untitled%2029.png"><img style="width:236px" src="media/10-02-uml/Untitled%2029.png"/></a></figure></div></div><div id="7ae9d140-6d56-4d5a-b59c-74d7d2d42f53" class="column-list"><div id="675b37af-665d-4bc8-a11a-97cce73b73bb" style="width:56.25%" class="column"><p id="4be893c2-e4be-4e21-802e-130eafe06ff6" class="">cas optionnel</p></div><div id="837794f7-c7bb-476b-a323-0ff52da7bd18" style="width:93.75%" class="column"><figure id="8aa678e8-a0fd-4a08-bb50-2591cbad98a7" class="image"><a href="media/10-02-uml/Untitled%2030.png"><img style="width:192px" src="media/10-02-uml/Untitled%2030.png"/></a></figure></div></div></div></div></div><h3 id="3aeef5eb-0bff-4d35-8e1b-86626588f38f" class=""><details open=""><summary>Diagramme d’états</summary></details></h3><div class="indented"><div id="6e28f232-7b91-4be2-ac69-a08326cfac1a" class="column-list"><div id="fba33a35-6c69-4529-8e10-7fb9b6a28982" style="width:100%" class="column"><p id="a73b6d60-cd05-4c55-80ad-d609bf50ccd9" class="">Transition :</p><div id="074b4988-93ff-4761-8472-1285ac9d4e0c" class="column-list"><div id="38b3d7b4-3354-4ae1-afcb-3d48859c1add" style="width:37.5%" class="column"><p id="46b0e10c-8d8b-493f-a95c-32e689b5d3c8" class="">externe</p></div><div id="2b18d405-89b0-4bff-ab44-d4798ba74c33" style="width:162.5%" class="column"><figure id="f60e9b19-fb6d-4a79-b639-a6cc102e85a5" class="image"><a href="media/10-02-uml/Untitled%2031.png"><img style="width:296px" src="media/10-02-uml/Untitled%2031.png"/></a></figure></div></div><div id="c2d3a8cb-a08e-460a-acc9-14905d75b146" class="column-list"><div id="097dd6f3-b48e-40eb-90ec-ed9fff6cada6" style="width:37.5%" class="column"><p id="a2f8e590-38a2-436e-a855-89dd7f91f213" class="">réflexive</p></div><div id="339505dc-a7a4-4490-b8fc-45e072712482" style="width:106.25%" class="column"><figure id="05386263-20bc-4b36-bdfa-bd7479ebd64d" class="image"><a href="media/10-02-uml/Untitled%2032.png"><img style="width:137px" src="media/10-02-uml/Untitled%2032.png"/></a></figure></div></div></div><div id="6b7b7f14-964c-4d2d-9cda-b712a2323eda" style="width:43.75000000000002%" class="column"><p id="b49cda82-ac76-4b4e-9eb3-7148e4175a27" class="">États :</p><div id="720990d0-00be-4ddd-9959-01e2273dd26b" class="column-list"><div id="0ede6b33-c1e1-4f4d-a228-0cee83e60147" style="width:50%" class="column"><p id="1848be44-19e7-4c90-a10d-daefc4bc0494" class="">simple</p></div><div id="753dba74-a159-4519-94d5-05f31fedab1c" style="width:93.75%" class="column"><figure id="06a82db5-16c8-49a6-900c-4ee9549bb8b8" class="image"><a href="media/10-02-uml/Untitled%2033.png"><img style="width:97px" src="media/10-02-uml/Untitled%2033.png"/></a></figure></div></div><div id="e2ca0410-87a1-489d-98b7-a2103d682238" class="column-list"><div id="2d9ce980-965a-4a1b-8596-bcbef44b01e3" style="width:100%" class="column"><p id="eb156eb3-a5ae-4807-adda-429e91ea72ab" class="">initial</p></div><div id="e5862c61-886b-461f-8e92-a1a5519d71bc" style="width:100%" class="column"><figure id="01c8f019-dcba-4804-8b2f-a36418b0bab1" class="image"><a href="media/10-02-uml/Untitled%2017.png"><img style="width:29px" src="media/10-02-uml/Untitled%2017.png"/></a></figure></div></div><div id="85ce170b-443f-41b1-a451-41fbb89cfbd4" class="column-list"><div id="f43ed030-dd6f-46d4-943e-55bbb78061f8" style="width:100%" class="column"><p id="8229b9a6-fcb0-4a1f-8b38-d6a57643d0c4" class="">final</p></div><div id="0d580613-1970-4bbb-b2f4-ec0502ad7a11" style="width:100%" class="column"><figure id="a4e44a91-eb3a-4fe9-bf1b-c51b57b7e897" class="image"><a href="media/10-02-uml/Untitled%2018.png"><img style="width:30px" src="media/10-02-uml/Untitled%2018.png"/></a></figure></div></div></div></div></div><h3 id="6ddc7570-1ec3-4f19-8b5b-54954a4992ed" class=""><details open=""><summary>Diagramme de séquence</summary></details></h3><div class="indented"><div id="4beb3a15-71af-4be6-839a-d6da788202dd" class="column-list"><div id="1fa41ee7-41f2-481e-980a-31f15093c3c1" style="width:112.5%" class="column"><div id="a1fbca48-2b52-4351-b59c-ad0aa018c43f" class="column-list"><div id="a8a5720d-fad9-497f-8e03-a1e12ac2d2fc" style="width:118.75%" class="column"><p id="e1c51753-d2f1-4f41-8106-1d055d616953" class="">Instance (= un objet) avec ligne de vie :</p></div><div id="f700de2f-feaa-4150-a93d-1cd690cbe5cb" style="width:81.25%" class="column"><figure id="e8febdb5-a406-4b37-9d16-6f8e8a7b1574" class="image"><a href="media/10-02-uml/Untitled%2034.png"><img style="width:104px" src="media/10-02-uml/Untitled%2034.png"/></a></figure></div></div><div id="6f19f2af-c343-4d09-b4f8-40f87550c809" class="column-list"><div id="685c047d-e7bc-462e-96f4-03f915bbdf1e" style="width:68.75%" class="column"><p id="34575bd9-66ab-41f2-811d-b10364fab8e0" class="">Message (entre lignes de vie) :</p></div><div id="b22a3af1-001a-4b1d-b738-cca9028a7608" style="width:106.25%" class="column"><figure id="503858ab-e8d8-4355-bef3-96c5f87ae2a3" class="image"><a href="media/10-02-uml/Untitled%2035.png"><img style="width:157px" src="media/10-02-uml/Untitled%2035.png"/></a></figure></div></div><div id="318565aa-7ceb-4db5-9b0a-1d3071e940e4" class="column-list"><div id="57151143-3a9f-4988-a5a8-1353fc03c18f" style="width:75%" class="column"><p id="952a614b-f885-4720-a58a-883f236a4f66" class="">Cadres d’interaction :</p></div><div id="273425eb-85ea-42af-9cb5-8ff86fd34f90" style="width:125%" class="column"><figure id="8092b283-42e5-4bc5-8160-0cf46c80e07e" class="image"><a href="media/10-02-uml/Untitled%2036.png"><img style="width:197px" src="media/10-02-uml/Untitled%2036.png"/></a></figure></div></div></div><div id="8b18b261-90a4-44d9-9786-ecd7253ce769" style="width:62.500000000000014%" class="column"><div id="07a0950b-95ee-401c-8e98-e712f92802cb" class="column-list"><div id="3e2955fb-53ff-40f8-86b0-629bb0501d9a" style="width:118.75%" class="column"><p id="38a7b77b-e61a-4e97-aed7-c32e11c03500" class="">Acteur avec ligne de vie :</p></div><div id="e4dffbaa-9b8c-4464-ae56-d3a579c2ea99" style="width:50.00000000000002%" class="column"><figure id="668fcfc0-091a-411f-b4b5-2c55861ceb87" class="image"><a href="media/10-02-uml/Untitled%2037.png"><img style="width:50px" src="media/10-02-uml/Untitled%2037.png"/></a></figure></div></div><p id="dd37e28b-0543-40ec-8f92-336fde4d193f" class="">
+</p><p id="9d248aba-5156-448c-b1e0-8fc45b3eed55" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="cc579459-5a5e-4539-9af4-68d4913a9ac6"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%"><em>alt</em> = alternative (<em>switch</em>)
+<em>opt</em> = optionnel
+<em>loop</em> = boucle
+<em>par</em> = exécution parallèle
+<em>ref</em> = référence à un autre diagramme d’interaction</div></figure></div></div><p id="6a5a80e6-ec1f-4b71-8251-a07573280c22" class="">
+</p></div><h3 id="c5706998-a89e-4abb-8af6-a70518dfb369" class=""><details open=""><summary>Diagramme de classe</summary></details></h3><div class="indented"><div id="15cb1ffb-03bc-4179-b197-feed015d71af" class="column-list"><div id="6ec36cea-8c28-4675-b7df-eb04bfd842ca" style="width:200.00000000000009%" class="column"><p id="523b69eb-50d6-43a3-93cc-8b5a3a61c192" class="">Classe :</p><div id="83a98cab-a871-4bf0-a83d-58e3f993970a" class="column-list"><div id="806281e3-58a1-4658-833d-163ff723294e" style="width:56.25%" class="column"><p id="d93419c8-e37e-427a-a97f-ce8ca4c6f22b" class="">simple</p></div><div id="3134f90b-e8f3-4a05-876e-c28cc907ea7e" style="width:106.25%" class="column"><figure id="50778b80-b68e-49d6-8416-52e7d043076e" class="image"><a href="media/10-02-uml/Untitled%2038.png"><img style="width:167px" src="media/10-02-uml/Untitled%2038.png"/></a></figure></div></div><div id="8a5a7925-b904-45d1-8abf-fabcc8438a6b" class="column-list"><div id="52473090-332f-43b3-a24b-9729d85fab7e" style="width:56.25%" class="column"><p id="ba53dec5-e4ee-4a82-ab4b-94da67989966" class="">avec attributs</p></div><div id="778260ce-ab9b-41a4-a02a-ece943dd75da" style="width:100%" class="column"><figure id="b81dbf80-8307-49b3-8a6e-f072a79f59d5" class="image"><a href="media/10-02-uml/Untitled%2039.png"><img style="width:164px" src="media/10-02-uml/Untitled%2039.png"/></a></figure></div></div><div id="801c1400-d730-4d05-8b2f-256fd165df85" class="column-list"><div id="b450d00a-b5f4-45f9-9b64-8a1db0e0287c" style="width:56.25%" class="column"><p id="8e033063-1fff-4ac2-84cf-471364e79c7c" class="">avec attributs</p><p id="3611ae56-e4bc-4204-ac82-7f54c64b5c9f" class="">et méthodes</p></div><div id="56a5187f-e205-4466-a2a5-2ebdf210b727" style="width:93.75%" class="column"><figure id="5492215b-72b2-4a5c-8397-cd437456713f" class="image"><a href="media/10-02-uml/Untitled%2040.png"><img style="width:167px" src="media/10-02-uml/Untitled%2040.png"/></a></figure></div></div><div id="50e3217d-1784-4eb8-8bcd-6570f09cbaa4" class="column-list"><div id="c0a278d9-de98-46e2-9cb1-1e3055670086" style="width:50%" class="column"><p id="14c44d33-b483-45a8-afda-cdf4cdc4dd4e" class="">générique (paramétrable)</p></div><div id="1bdfcaa0-e355-4518-a07c-bfdb43625060" style="width:75%" class="column"><figure id="434d0213-bfec-40f9-a994-a2ed2922af70" class="image"><a href="media/10-02-uml/Untitled%2041.png"><img style="width:200px" src="media/10-02-uml/Untitled%2041.png"/></a></figure></div></div><p id="a5c45323-485b-4cc9-b30a-a688c5aa5316" class="">
+</p><p id="5bd89a9d-3730-42de-aa43-e97b54277eb2" class="">Héritage :</p><figure id="ea39c81b-7e62-4795-ab2f-d41faac6f835" class="image" style="text-align:center"><a href="media/10-02-uml/Untitled%2042.png"><img style="width:166px" src="media/10-02-uml/Untitled%2042.png"/></a></figure><p id="9915d044-a389-4073-8232-4ede9232cebb" class="">Classe d’association :</p><figure id="6d607f42-81b9-43fd-92c2-f5b5dc7d5d5b" class="image"><a href="media/10-02-uml/Untitled%2043.png"><img style="width:426px" src="media/10-02-uml/Untitled%2043.png"/></a></figure><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="bb020660-8b98-4075-ae6b-0920b78839f1"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Cette association n’est pas applicable directement techniquement : on la transformera en une classe intermédiaire entre A et B.</div></figure><p id="4a9ba42e-baf5-4fe4-94f9-4bca5297e271" class="">
+</p><p id="0a390da3-b937-4df7-a1bf-db8cf211ef1f" class="">Agrégation :</p><figure id="49138d06-9af5-48a2-ad2f-ce88734fa33d" class="image" style="text-align:center"><a href="media/10-02-uml/Untitled%2044.png"><img style="width:225px" src="media/10-02-uml/Untitled%2044.png"/></a></figure><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="0ecf0cd8-c2c3-481d-8b71-3234f9bd360e"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Relation faible : quand je supprime l’agrégat, je ne supprime pas les éléments liés.</div></figure><p id="70dabcb9-601b-458e-8b32-2561583d215d" class="">
+</p><p id="a9007787-051c-4ebe-b132-ba961cbff597" class="">Visibilité des attributs et méthodes :</p><figure id="65a9f988-3527-43a6-a2eb-848de67935dc" class="image" style="text-align:center"><a href="media/10-02-uml/Untitled%2045.png"><img style="width:199px" src="media/10-02-uml/Untitled%2045.png"/></a></figure><p id="422877eb-ce9e-401c-8baf-b7519e90f3b0" class="">
+</p></div><div id="9c51e9ca-1a87-4f21-9f07-9eb5d9ac75ed" style="width:100.00000000000003%" class="column"><p id="cf254e3c-f698-48da-b698-39c8902b38b7" class="">Association :</p><div id="1aec945a-83ab-40bb-ae64-09ef976620eb" class="column-list"><div id="32f20eca-742f-4285-aea8-2f27e122b255" style="width:100%" class="column"><p id="beba4536-75dd-46cb-a81f-38fc371401c1" class="">unidirectionnelle</p></div><div id="2ea8f1f4-4bb7-45c0-a9e4-89de755b339d" style="width:100%" class="column"><figure id="ac14b290-0fb7-426a-addf-034806616976" class="image"><a href="media/10-02-uml/Untitled%2046.png"><img style="width:97px" src="media/10-02-uml/Untitled%2046.png"/></a></figure></div></div><div id="a0cc9b1d-ab66-456c-a62b-c8d09e8cc1bb" class="column-list"><div id="2851d64b-be8b-456c-8108-e8c67daffc87" style="width:100%" class="column"><p id="a32dc378-1650-4360-8575-e729034c8564" class="">bidirectionnelle</p></div><div id="6cc2d461-1d97-449c-bcd2-3da31765b494" style="width:100%" class="column"><figure id="461844d1-434c-4fb2-8d30-d102894a2c5c" class="image"><a href="media/10-02-uml/Untitled%2047.png"><img style="width:102px" src="media/10-02-uml/Untitled%2047.png"/></a></figure></div></div><div id="2caa6e55-0d5a-4a6e-a4c9-8a2c5bdf93ad" class="column-list"><div id="f2ac4db1-caf6-45a4-ba9a-64d4460cf188" style="width:100%" class="column"><p id="c998ec7a-7652-4b96-8626-08d647f6065b" class="">nom d’association</p></div><div id="5405c1b6-938d-45b2-a3f4-34b788c1a80a" style="width:100%" class="column"><figure id="49713257-2cf7-4268-865a-71bc111c26af" class="image"><a href="media/10-02-uml/Untitled%2048.png"><img style="width:96px" src="media/10-02-uml/Untitled%2048.png"/></a></figure></div></div><div id="66f83385-0532-4126-86ee-08fcf295d73d" class="column-list"><div id="9fb6d80e-f897-4a70-b3a1-2bc84ccb1351" style="width:100%" class="column"><p id="a0bd8697-9db2-4e4e-97d0-e550610fc7d1" class="">variable (ou rôle ou attribut)</p></div><div id="307d610a-2e1c-4731-843e-5dc2968bea22" style="width:100%" class="column"><figure id="26c9f867-2845-4f08-8082-230c49bfc15d" class="image"><a href="media/10-02-uml/Untitled%2049.png"><img style="width:166px" src="media/10-02-uml/Untitled%2049.png"/></a></figure></div></div><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="549b056d-c61b-4dc9-a448-bf9e227cf7c2"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">L’attribut contenu dans la classe est indiqué à l’opposé sur le lien d’association.</div></figure><div id="1e79abaf-96fb-4270-8366-57c1f2d7b543" class="column-list"><div id="5afbefac-03e8-457e-9edd-e3cd886e36fa" style="width:100%" class="column"><p id="40152179-9954-4c0c-8086-d29886d06538" class="">multiplicité (cardinalité)</p></div><div id="5edaab9c-9fcd-447c-88e1-9cb1c54d45e8" style="width:100%" class="column"><figure id="e90f516a-1e74-4e58-a5d4-458343963e19" class="image"><a href="media/10-02-uml/Untitled%2050.png"><img style="width:167px" src="media/10-02-uml/Untitled%2050.png"/></a></figure></div></div><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="9a2c80aa-956f-465f-809b-4b93e12e6afb"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">0..1 = au plus un
+1 = un seul
+0..* = un nombre indéterminé
+1..* = au moins un</div></figure><p id="fb8602dc-33c3-476c-9385-55b3b5d860c6" class="">
+</p><p id="5726692a-6131-42ce-9af8-30ab870bf693" class="">Composition :</p><figure id="ddeb8877-68d6-4741-8faf-99217c3082d5" class="image" style="text-align:center"><a href="media/10-02-uml/Untitled%2051.png"><img style="width:225px" src="media/10-02-uml/Untitled%2051.png"/></a></figure><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="75a67e5d-348c-45e0-a507-a11ac7105d57"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Relation forte: quand je supprime le composite, je supprime les éléments liés.
+—&gt; implique une cardinalité à 1 côté composant</div></figure><p id="dd4d163f-c9b9-47d4-80fd-1b79604528ce" class="">Abstraction (lien d’héritage) :</p><figure id="84e7c227-63b2-4de6-8f00-f41bb95ac529" class="image" style="text-align:center"><a href="media/10-02-uml/Untitled%2052.png"><img style="width:198px" src="media/10-02-uml/Untitled%2052.png"/></a></figure><p id="ada119c0-8d34-4991-9945-2f47c751a36d" class="">Interface (lien d’implémentation) :</p><figure id="9de9c778-bf6a-4ff3-b4f3-49ba5531f7e5" class="image" style="text-align:center"><a href="media/10-02-uml/Untitled%2053.png"><img style="width:197px" src="media/10-02-uml/Untitled%2053.png"/></a></figure></div></div></div><h3 id="98ad87e6-2b20-4bbe-ac01-40336c2f445f" class=""><details open=""><summary>Diagramme objet</summary></details></h3><div class="indented"><div id="047886ae-3dd7-4a06-b28b-98aef982be77" class="column-list"><div id="29be20fd-eebb-48b9-ba4a-1760ff693856" style="width:31.25%" class="column"><p id="3808ef26-a5c0-4d9b-a10b-922b504f73d8" class="">Instance = un objet :</p></div><div id="871b3e77-0bc4-45c8-839c-ae70c038893d" style="width:93.75%" class="column"><figure id="d0408ec6-87a6-4678-86b9-7a7af5efad7b" class="image"><a href="media/10-02-uml/Untitled%2054.png"><img style="width:194px" src="media/10-02-uml/Untitled%2054.png"/></a></figure></div></div><div id="cfd0a4d1-8a2b-4476-a6fe-4496daaf98b5" class="column-list"><div id="ea444576-cfb9-4a5c-9dd5-cd96ef7956d9" style="width:43.75%" class="column"><p id="103d34ff-9d94-497a-9b3b-f2c0bb9223bc" class="">Instance avec ses attributs :</p></div><div id="9d8b03c5-e067-4900-b9ba-8ec6d4de0960" style="width:93.75%" class="column"><figure id="403739cd-f202-4935-a9d0-d708409fae2b" class="image"><a href="media/10-02-uml/Untitled%2055.png"><img style="width:154px" src="media/10-02-uml/Untitled%2055.png"/></a></figure></div></div><div id="5b471aab-c6d2-4760-a359-e959f61b6bec" class="column-list"><div id="6efd8c50-ee8d-4414-8dc0-130c56a98784" style="width:31.25%" class="column"><p id="68c2406f-e191-4429-b5f0-283ecbde47e0" class="">Lien entre instances : </p></div><div id="bc7499a5-0017-49ab-9750-be9560422485" style="width:106.25%" class="column"><figure id="444a4b92-a3f1-4811-83ca-a19c7fc4cf82" class="image"><a href="media/10-02-uml/Untitled%2056.png"><img style="width:465px" src="media/10-02-uml/Untitled%2056.png"/></a></figure></div></div></div></div></article></body></html>
