@@ -1,0 +1,714 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Analyse de données</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8cf7e538-194e-4fb4-80b6-946e7a2ddb0e" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📘</span></div><h1 class="page-title">Analyse de données</h1></header><div class="page-body"><p id="99e19538-3144-4bc9-a12b-ed8ecad6e1cc" class="">
+</p><p id="ccfb92c3-d244-4a94-b66d-c542b519407e" class="">Objectif —&gt; concevoir une base de données</p><p id="c4c1894c-67e1-48f8-9cf2-fc3fb4af2747" class="">
+</p><p id="adfd0005-caf5-469f-8214-f79a2e9d7f81" class="">Etapes de modélisation :</p><ul id="66212288-375f-40b8-810b-34c620e743a7" class="bulleted-list"><li style="list-style-type:disc">Modélisation Conceptuelle des Données (<em>MCD</em>) ~ vue de l’entreprise (schéma entités/association)</li></ul><ul id="7c691fe0-a3cf-437e-b189-be95ab40dc25" class="bulleted-list"><li style="list-style-type:disc">Modélisation Relationnelle des Données (<em>MRD</em>) ~ vue du système</li></ul><ul id="5ad2330b-b576-40e5-b625-cf81b9f28b70" class="bulleted-list"><li style="list-style-type:disc">Modélisation Physique des Données (<em>MPD</em>) ~ script de création des tables</li></ul><p id="26c612d6-96db-4124-ae35-18ea1e6d3da9" class="">—&gt; On obtient alors une base de données opérationnelle.</p><p id="77a820b8-cc57-45cf-bad1-bda64d515184" class="">
+</p><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="a55c1193-663d-4944-8ebc-6f9b6af19e7f"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">SQL Developer Data Modeler :
+<a href="https://www.oracle.com/fr/database/sqldeveloper/technologies/sql-data-modeler/">https://www.oracle.com/fr/database/sqldeveloper/technologies/sql-data-modeler/</a></div></figure><p id="a4cc7063-5ab9-4cf3-8c61-545a5f94022e" class="">
+</p><h2 id="3f7d8325-38bf-41cb-807a-2fe7504a53d3" class="">MCD</h2><hr id="de05b30d-5e63-4acb-b832-a408ec58675b"/><p id="bb3d30d6-bd4c-4f75-90ea-e71666ebed30" class="block-color-yellow_background">SCHEMA DATAMODELER</p><h3 id="40cecc38-e41c-4065-b8f4-9c08b44b78ee" class="">Vocabulaire</h3><p id="1b3b0243-579f-4745-ad70-44ed27bf359b" class="">Entité : ensemble homogène d’informations (~objet, classe)</p><p id="0adea80e-13de-4b49-aa20-734d2390a01d" class="">Propriété : champ de l’entité (~attribut, caractéristique), atomique</p><ul id="6d21c7ee-3f1f-43fd-8890-cac9d157885d" class="bulleted-list"><li style="list-style-type:disc">obligatoire = *</li></ul><ul id="68a0a278-e933-416c-876e-0d8b509269db" class="bulleted-list"><li style="list-style-type:disc">optionnel = O</li></ul><ul id="6878ca96-e3fe-42b6-9799-ebee5c97874d" class="bulleted-list"><li style="list-style-type:disc">identifiant : <ul id="cf8f471d-2e58-429a-a4b6-44191c8c709c" class="bulleted-list"><li style="list-style-type:circle">principal = #<ul id="89be329b-9d8e-4cd9-8e09-93c8893c51a1" class="bulleted-list"><li style="list-style-type:square">simple = un numéro unique par exemple</li></ul><ul id="a65f2196-1f42-43ed-8035-fecd53366476" class="bulleted-list"><li style="list-style-type:square">composé de propriétés et/ou “de liens”  (peut se lire “à chaque”) = un trait perpendiculaire au trait de la relation</li></ul></li></ul><ul id="eac66bb8-2b6b-484f-9c8d-83f6b0fcfede" class="bulleted-list"><li style="list-style-type:circle">secondaire = U</li></ul></li></ul><p id="fc2435b9-599c-4d2e-a3f4-902daf2d142a" class="">Occurrence de donnée  : une “chose” identifiable de manière unique et sans ambiguïté (une ligne de valeurs)</p><p id="66989e36-27a5-4cf2-8b94-da0ee6f7ca86" class="">Relations ou association : représentation d’une liaison logique entre plusieurs entités, avec un nom composé d’un verbe et des cardinalités</p><p id="46993cdd-bc4d-443e-a0b4-112fecd53edb" class="">—&gt; toujours bidirectionnelle</p><ul id="05cc53c7-830e-4884-bd46-4447f46825d6" class="bulleted-list"><li style="list-style-type:disc">obligatoire (au moins 1) = trait plein</li></ul><ul id="f84854b2-ba98-4929-9772-663a2dbf4ce1" class="bulleted-list"><li style="list-style-type:disc">optionnel (peut être 0) = trait pointillé</li></ul><ul id="c3b7a0ca-e30d-4402-b3c7-c5e39456cb74" class="bulleted-list"><li style="list-style-type:disc">cardinalité maximale, “plusieurs” = patte d’oie ou “un et un seul” = rien </li></ul><ul id="3c13e566-d3bd-4c6c-a5ce-3e67c8e59341" class="bulleted-list"><li style="list-style-type:disc">manitoumani : double patte d’oie ~création d’une entité d’intersection </li></ul><ul id="363bf69d-93c8-4bd8-a45b-d4a08c9ce6d1" class="bulleted-list"><li style="list-style-type:disc">héritage : une entité [générique] peut être décomposée en plusieurs entités [spécifiques] mutuellement exclusifs</li></ul><ul id="1c97f77a-3a0c-4e70-a996-cb5071e22b70" class="bulleted-list"><li style="list-style-type:disc">liens exclusifs : même nom et même cardinalité = arc</li></ul><ul id="ef108083-8672-4423-bf8b-fbd56bec28cd" class="bulleted-list"><li style="list-style-type:disc">liens transférables / non transférables : modifiables dans le temps ou non = losange</li></ul><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="436da285-f717-4781-bed3-1aa76e85d377"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Lecture d’un lien :
+Une occurrence de A {doit | peut} être <em>nomdulien</em> {un ou plusieurs | un et un seul} occurrence de B.</div></figure><p id="b1da1206-5e9c-4841-aacb-c0b5e84c042f" class="">Domaines de valeurs statiques ~ énumérations —&gt; pour des données stables qui ne changeront pas au fil du temps (mois, jours, unités de mesure)</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="c59fd075-bd03-4403-b28a-60cdb00f5b22"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">BP : on utilise pas ça, on fait une entité normale pour pouvoir modifier.</div></figure><p id="0a6b9072-ce31-488b-aba2-125b94534611" class="">
+</p><blockquote id="79c2bccb-e7af-4afe-ac93-749baf3a09dd" class="">Commentaires en vrac :
+- chaque table est identifiée avec une clé primaire —&gt; une occurrence doit être identifiée de manière unique
+- on essaie d’avoir des identifiants principaux avec une seule colonne et sans informations métiers (qui sont souvent modifiées) —&gt; plus facile à gérer
+- le trait vertical sur le lien c&#x27;est &quot;à chaque&quot;
+Ex : à chaque numéro de place dans le train correspond un numéro de wagon du train. 
+Les numéros de place se répètent dans chaque wagon, donc on associe numPlace et numWagon à chaque fois pour être sûr qu&#x27;on sait de quoi on parle.</blockquote><p id="648322a2-267f-45ee-b6a8-99990b5c0eaf" class="">
+</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="269bbce6-7eee-47fd-a1cf-952b7149cc4b"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://www.base-de-donnees.com/occurrence/">https://www.base-de-donnees.com/mcd/</a></div></figure><p id="0af7d1fd-557a-40c4-98f4-1914cf3ab4ec" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="a8859824-2cc5-433f-8e0b-6f1e69633f1a"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Lors de la réalisation effective de la base de données :
+une entité deviendra une table,
+une propriété deviendra un champ,
+une occurrence deviendra une ligne dans une table,
+une relation deviendra une clé étrangère.</div></figure><h2 id="eedae7a9-64e9-40d8-8316-fbf1a9533f4c" class="">MRD</h2><hr id="fd724cac-3534-457d-853b-61de87164548"/><p id="073c3b95-c85e-4903-9432-dd57d9dcc76e" class="block-color-yellow_background">EXEMPLE D’UNE TABLE + DATAMODELER + notepad++</p><p id="740e9ef7-28a0-4338-9458-119e50a2cf01" class="">Transposition :<div class="indented"><p id="fb6f001e-bbf4-4ade-a811-7c572e9099fa" class="">entités —&gt; tables</p><p id="29ab2ec0-7e8a-427f-88dc-16dd2583c612" class="">attributs —&gt; colonnes</p><p id="268d05fa-c823-4b38-9987-48cda64d7465" class="">identifiants principaux et secondaires —&gt; clés primaires et uniques</p><p id="409c6be5-19be-4a90-8b63-472345fcddd7" class="">liens —&gt; clés étrangères</p><p id="991f2fa6-9506-4711-a87f-6e6636ca85e4" class="">options pour les arcs</p><p id="9a9df0b0-02b9-417b-a43a-d9717721a026" class="">options pour les entités génériques / spécifiques</p></div></p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="168da622-2b3f-4fac-94a6-8f1b0bce900c"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">MCD ~ noms des entités au singulier ≠ MRD ~ noms des tables au pluriel</div></figure><p id="a7545f80-4973-4783-a68b-5816dccc3c1a" class="">
+</p><p id="8c2a072d-b4f0-48e5-b6d1-b52df10cdea5" class="">Le modèle relationnel de données est l’ensemble des tables qui composeront la base de données, avec la liste des colonnes et les différentes relations entre tables.</p><blockquote id="ed86539e-e13f-4d64-aed5-8c08e14f74dd" class="">On détermine ici les contraintes de chaque table : 
+- clé primaire (<em>PK</em>)
+- clé étrangère (<em>FK</em>)
+- non nullité (<em>NN</em>)
+- clé secondaire (<em>UK</em>)
+- domaine de valeurs statique (<em>CHECK</em>)</blockquote><p id="50916e27-414e-4428-8f2f-d3a16ab9659b" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="891cbfd5-8523-4647-b5a8-8f3f76b9d7b7"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Intégrité des données (vu en SQL) :<ul id="94a06843-e0cf-47c0-8af3-8aa51b795946" class="bulleted-list"><li style="list-style-type:disc">contrainte de non nullité : <code>NOT NULL</code></li></ul><ul id="fff03cf8-45d0-4c0c-b22b-25844c292c41" class="bulleted-list"><li style="list-style-type:disc">contrainte d’unicité : <code>UNIQUE</code> (aussi appelée clé secondaire)</li></ul><ul id="a55ac7e7-3c38-4133-a08f-77a538de080b" class="bulleted-list"><li style="list-style-type:disc">contrainte de clé primaire : <code>PRIMARY KEY</code> (regroupe implicitement les deux contraintes précédentes)</li></ul><ul id="18187980-4287-42d7-a1da-beffddcca5f1" class="bulleted-list"><li style="list-style-type:disc">contrainte d’intégrité référentielle (clé étrangère) : <code>FOREIGN KEY</code></li></ul><ul id="a30bdcce-3a4f-4382-a255-0920891e3ce4" class="bulleted-list"><li style="list-style-type:disc">contrainte de validation : <code>CHECK</code> (conditions imposées)</li></ul><ul id="5d7c3fc4-fb80-4e0b-b695-7c76d478ce35" class="bulleted-list"><li style="list-style-type:disc">(+) possibilité de donner une valeur par défaut : <code>DEFAULT</code></li></ul><ul id="069fd9c9-0f90-489f-8f1d-3a78eb16928c" class="bulleted-list"><li style="list-style-type:disc">(+) possibilité d’ajouter un compteur (incrément automatique, un seul par table) : <code>IDENTITY</code></li></ul></div></figure><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="194100f9-b7c4-4f05-a7f0-5b10c8a8074f"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin, voir les cours 04 - SQL et 05 - PL-SQL.</div></figure><p id="7bfc6285-698c-4022-87d5-2a8774f1f4f0" class="">
+</p><blockquote id="b52c2e2f-5ea7-46c5-992e-97b2fa7e6bfa" class="">Concrètement :
+- si le lien est optionnel (pointillés), la colonne peut être <em>null</em> ; si le lien est obligatoire (trait plein), la colonne est <em>NN
+</em>- si le lien est de type onetoumani (une patte d’oie d’un côté), la table qui porte la patte d’oie a une colonne <em>FK </em>qui correspond à la <em>PK </em>de la table liée
+- si le lien est de type onetouone, la table qui porte un lien d’obligation a une colonne <em>FK</em> (qui est également <em>UK</em>) ; sinon analyse métier pour choisir quelle table a une colonne <em>FK
+</em>- si un lien est de type manitoumani (deux pattes d’oie), il est préférable de le résoudre amont pour n’avoir que des onetoumani, ce qui permet de passer plus facilement au modèle relationnel
+            = <em>on la résoud en créant une table intermédiaire</em>
+- si une entité possède un identifiant de lien (petit trait vertical), la table correspondante a une clé primaire composée de plusieurs colonnes, dont l’une vient d’une autre table
+            = <em>on a donc la PK qui est composée d’une ou plusieurs colonnes de la table et d’une colonne FK, celle-là est donc à la fois PK et FK</em></blockquote><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="d863e204-2408-42cd-98de-c234efa9d931"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Dans un lien onetouone, il n’y a qu’une seule table qui porte une <em>FK</em> puisqu’elle est liée à la <em>PK</em> de l’autre —&gt;Cela n’indique pas si l’association sera uni- ou bi-directionnelle. </div></figure><p id="3a10215a-3459-413a-bc5f-54f9e3edd551" class="">
+</p><p id="730b54d2-6d9d-4a28-bbf1-94c7f028b664" class="">datamodeler : le check c’est le domaine de valeurs statiques en fait (liste, plage de valeurs)</p><p id="65cee734-0c8e-4f4f-9b63-43c4be9c9aa6" class="">
+</p><p id="3f1d6dc7-90b9-462b-bef6-af4f84f1f8ee" class="">héritage : on a pas cette notion en DB (sauf un peu PostgreSQL) donc différentes façons de gérer ça</p><p id="b4c458e6-84bf-4eaf-b64c-418befe74776" class="">
+</p><p id="723735bf-08a8-4c95-8b58-39fc1773f9c3" class="">datamodeler génère tout seul le modèle relationnel</p><p id="bc713901-2383-47ea-b9cc-d0646641f84f" class="">
+</p><p id="8f675048-ecd3-4525-907b-76dfdacf3999" class="">transposition des arcs : arc = exclusivité mutuelle </p><p id="4d92a31d-38c7-4f0d-bbdf-ed6317bfaeed" class="">
+</p><p id="1a7f9008-c1d5-4e69-9dac-568f8b7ffa52" class="">pates d’oie se traduisent pas  FK</p><p id="b22eb5ce-a87f-4f7b-9446-5a33c51b8eaf" class="">
+</p><p id="3e7645a1-9458-40a1-abc2-507a643a8026" class="">possibilité : ajout de déclencheurs</p><p id="0bf1b649-9ac7-41a0-929a-ee2503494525" class="">
+</p><p id="5fd2cea6-14f0-469e-b090-75bdfeec7b61" class="">TRANSPOSER LES LIENS EN FK : </p><p id="588b9bb6-3fbe-41de-93af-649487af2b56" class="">c’est l’entité qui porte la pâte d’oie qui aura une colonne FK</p><p id="3141337b-08b1-44a8-944e-b402db092e75" class="">(et pas l’autre entité sinon on dédouble le schmilblik et c’est le dawa !!!)</p><p id="efcdc35b-d2c5-48d2-bdc7-41b3bbd0d3d3" class="">
+</p><h3 id="a415573b-7ded-4498-81d9-cc6807aa802c" class="">MPD</h3><hr id="6105f919-77ed-4b02-b544-fa057b99c343"/><p id="d844c383-9e33-41f3-a581-634625cff792" class="">= cours SQL</p><p id="85cc5695-c1d5-4583-b546-10714150cbda" class="">on utilise ici le DDL (pour create table)</p><p id="c5655053-aeee-46fa-b656-94ab49f3e78e" class="">
+</p><p id="f399b4ca-4656-4d75-b6b8-3a54847e86d3" class="">losange = non transférables —&gt; on refuse les update du num_client sur commande = <strong>trigger </strong>on command before update nope tu fais pas mon grand</p><p id="48daf325-87c8-4b16-859e-8674e4876e64" class="">
+</p><p id="369eba75-c8d5-4da4-a6e5-9c876a1dc74d" class="">datamodeler transcrit aussi le MRD en MPD</p><h2 id="f8238325-249d-4b18-9a91-bb7247776140" class=""><strong>A retenir sur ce module :</strong></h2><p id="76da191f-5283-43e2-b86a-153f5b4aef12" class="">objectif = être capable de concevoir une DB</p><p id="8f4b6cb0-17b3-4053-a674-54d85db33e71" class="">en sachant qu&#x27;il y a la compétence &quot;accès aux données&quot; dans le titre</p><p id="19b49606-6ba5-4bc7-898a-e1bd9cd393c3" class="">Le + important = MCD (entités, liens, attributs...) + domaine de valeurs dynamique etc</p><p id="7f78fd38-a406-4a0c-903f-ef687edeea00" class="">[ECF : refaire exo commande pour s&#x27;entrainer]</p><p id="0bd07334-87e6-4735-b2df-2e65f163b9fa" class="">Intermédiaire : MRD</p><p id="0098b566-c002-4cc0-8f47-bb5ff1a15951" class="">on identifie les tables, la liste des colonnes avec les PK et les FK</p><p id="b86628cf-2703-43b5-80fa-bf501ba4fb09" class="">difficulté : transposer les liens entre entités ~ c&#x27;est là les PK (identifier et où les mettre)</p><p id="bfe84269-704e-4001-be6b-f5fc045dfa6d" class="">et bam easypeasy de faire le script</p><p id="203da064-d842-4772-ac12-5d58eb72fc87" class="">MPD : pas le + important --&gt; A la fin on veut un script (on a eu le cours SQL) mais on va quand même aller jusque là pour bien voir les liens</p><p id="afba06c1-344d-4b4e-acf3-890275749428" class="">
+</p></div></article></body></html>
