@@ -1,0 +1,716 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Les tests</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e02d6baf-2064-48b0-b7a0-211d82df4950" class="page sans"><header><img class="page-cover-image" src="media/10-07-tests/2023-01-15_19_43_00-pexels-ji-mikol-4842882.jpg_-_Photos.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Les tests</h1></header><div class="page-body"><p id="da59ced1-679c-496f-b729-c53434582aed" class="">
+</p><p id="5ed1e2fc-229f-4d8e-ae78-1cc587e10ecb" class="">Objectif —&gt; éviter les bugs</p><p id="00c37bb4-b7c7-478a-8c57-de6b0430a243" class="">
+</p><p id="f6bd5184-a51d-4dfb-907e-b2f78f230645" class="">Mais comment faire ? <strong>Maîtriser les processus d’ingénierie du logiciel :</strong></p><ul id="2f862904-9ced-4455-9fe6-40f4b220b1ab" class="bulleted-list"><li style="list-style-type:disc">analyser et concevoir correctement le projet en amont</li></ul><ul id="4d89f04b-e564-4fd2-848b-1af6ba38a81d" class="bulleted-list"><li style="list-style-type:disc">mettre en place de bonnes méthodes de travail et d’organisation</li></ul><ul id="45cb7e0a-c1ca-4d0c-80c2-b2f026843077" class="bulleted-list"><li style="list-style-type:disc">coder dans de bonnes conditions</li></ul><ul id="34f3090e-a1c8-4708-b53c-6f490ab960d0" class="bulleted-list"><li style="list-style-type:disc"><em>tester</em></li></ul><blockquote id="bb4df7f9-afd9-4e9f-a082-d03d90e79357" class="">La règle 40-20-40 identifie qu’en moyenne, 
+40% de l’effort est requis pour spécifier et concevoir, 
+20% va à la programmation et 
+<strong>40% va aux tests</strong> de vérification (”le système fait-il correctement son travail ?”) et de validation (”le système réalisé correspond-il aux besoins du client ?”).</blockquote><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="ebd0afe5-891e-44cc-a417-b6170dd9f634"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">La norme ISO 9126 sur la Qualité Logicielle définit 6 groupes de facteurs de qualité des logiciels ~FURPSE
+- <em>Functionality</em>
+- <em>Usability</em>
+- <em>Reliability</em>
+- <em>Performance</em>
+- <em>System maintainability</em>
+- <em>Evolutivity</em></div></figure><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="f438a3af-d2d1-4e34-a976-4c0d702548eb"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://sites.lesia.obspm.fr/emmanuel-grolleau/files/2016/07/Master_OSAE_Cours_Tests_Grolleau.pdf">https://sites.lesia.obspm.fr/emmanuel-grolleau/files/2016/07/Master_OSAE_Cours_Tests_Grolleau.pdf</a>
+—&gt; Nombre d’informations dans cette note sont tirées de ce pdf.</div></figure><h3 id="7ab0f575-0a04-4dd7-b0d4-a5d833f9a5d1" class="">Définition</h3><p id="4462b6fa-a7cc-457d-90dc-17c8f1891127" class=""><a href="https://fr.wikipedia.org/wiki/Test_(informatique)">Un test</a> est un ensemble de <em>cas à tester </em>(état de l&#x27;objet à tester avant exécution du test, actions ou données en entrée, valeurs ou observations
+ attendues, et état de l&#x27;objet après exécution), éventuellement accompagné d&#x27;une <em>procédure d&#x27;exécution </em>(séquence d&#x27;actions à exécuter). Il est lié à un objectif.</p><blockquote id="5152852c-5b94-4c5d-b0b1-fb496a6c7767" class="">On distingue deux scénarios : positif (ça marche) et négatif (ça ne marche pas mais ce n’est pas un bug).</blockquote><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="8d53ccd1-5ec3-44c1-8259-b5d8e3394d32"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">En pratique : on choisit un traitement à tester, on définit en amont le résultat attendu, on compare le résultat obtenu à celui-ci. Si les deux sont identiques, alors c’est bon, sinon il y a un bug qu’il faut corriger.</div></figure><h3 id="8783c543-c1c3-4c82-b730-d985d7cf6925" class="">Grands principes de test</h3><ol type="1" id="a1b2048a-3109-4fa9-a4e2-0e9221f04597" class="numbered-list" start="1"><li>Indépendance ~ un développeur ne teste pas ses propres programmes</li></ol><ol type="1" id="3ddbbb27-f905-4f6c-93de-43522c6ec46c" class="numbered-list" start="2"><li>Paranoïa ~ ne pas faire de tests avec l’hypothèse qu’il n’y a pas d’erreur</li></ol><ol type="1" id="715d48b7-5aa9-4837-8b2b-ed8dad5926cf" class="numbered-list" start="3"><li>Prédiction ~ définir les résultats attendus <span style="border-bottom:0.05em solid">avant</span> l’exécution des tests (plan de test)</li></ol><ol type="1" id="9c6f6bda-b029-4595-818f-bf77fa2794f9" class="numbered-list" start="4"><li>Vérification ~ séparer l’exécution et l’analyse : inspecter minutieusement les résultats de chaque test</li></ol><ol type="1" id="fd9cde45-3701-4558-8296-f30b3030511e" class="numbered-list" start="5"><li>Robustesse ~ écrire les jeux de tests pour des entrées invalides/incohérentes <span style="border-bottom:0.05em solid">mais aussi</span> pour des entrées valides</li></ol><ol type="1" id="220feac2-07ee-4309-858d-d892dcc870ec" class="numbered-list" start="6"><li>Complétude ~ vérifier qu’un logiciel réalise ce qu’il est supposé faire mais aussi ce qu’il fait en dehors de ce qu’il est supposé faire</li></ol><p id="5963b75c-ff0f-4d61-9388-1a04d23c40e6" class="">
+</p><h2 id="c9e8a2da-6a81-4eea-91e3-c2ade8ba5010" class="">Classification des tests</h2><hr id="60e53167-d48e-418e-bc40-5b3c680e64b9"/><figure id="dd0a0bca-7716-4afa-a591-8ca3495fbd2d" class="image"><a href="media/10-07-tests/Untitled.png"><img style="width:638px" src="media/10-07-tests/Untitled.png"/></a><figcaption>Exemple de représenation des différents types de tests (schéma issu de <a href="https://www.slideshare.net/bilelabed/test-de-logiciels-i">https://www.slideshare.net/bilelabed/test-de-logiciels-</a>i)</figcaption></figure><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="5bc89e75-196e-4260-ac1c-1967c8448ea7"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://www.slideshare.net/bilelabed/test-de-logiciels-i">https://www.slideshare.net/bilelabed/test-de-logiciels-i</a>
+—&gt; Définition de chaque test.</div></figure><h3 id="a1ed0da1-2343-4c3f-b746-e33773716ad7" class="">Selon le cycle de vie</h3><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="a4ea3a16-7699-413a-93a2-00090cebfd7d"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://www.cftl.fr/">https://www.cftl.fr/</a>
+—&gt; Le Comité Français du Test Logiciel identifie 4 niveaux de tests.</div></figure><ul id="eb5d59ec-dd15-4ad5-b4e9-ebb191bbd753" class="bulleted-list"><li style="list-style-type:disc">test unitaire ~ test à l’échelle d’un composant, indépendamment du reste</li></ul><ul id="03e76a90-acd3-4721-9b95-1f503139b111" class="bulleted-list"><li style="list-style-type:disc">test d’intégration ~ test à l’échelle de modules ou parties de code qui coopèrent</li></ul><ul id="4ea4e6de-1d03-4ff6-b314-4043d85e682b" class="bulleted-list"><li style="list-style-type:disc">test système (vérification) ~ test à l’échelle du système entier, en inspectant sa fonctionnalité</li></ul><ul id="f61dbf85-3f9e-406e-8c31-7f51b7b5528c" class="bulleted-list"><li style="list-style-type:disc">test d’acception ou recette utilisateur (validation) ~ test à l’échelle du système entier, en inspectant sa cohérence avec les spécifications</li></ul><ul id="fd56abc7-d21f-451d-83e8-c6acd331ac05" class="bulleted-list"><li style="list-style-type:disc">(test de non-régression) ~ test d’un système préalablement testés lorsqu’il y a mise à jour ou évolution pour vérifier qu’il n’y a pas de régression (<em>on ne veut pas que ça casse tout</em>)
+—&gt; intérêt notamment de l’intégration continue puisqu’il faut refaire les tests unitaires &gt; d’intégration &gt; système &gt; recette</li></ul><h3 id="7045b6ef-3851-40b8-81b2-a32dbb9144db" class="">Selon la nature de la connaissance</h3><ul id="b5a8bc05-4917-4a53-ac16-356a1f5d36a7" class="bulleted-list"><li style="list-style-type:disc">test structurel ou en “boîte blanche” ~ vérifie qu’il n’y a pas des erreurs dans le code, l’implémentation,…
+dont <em>test unitaire, test d’intégration, test de non-régression</em></li></ul><ul id="b86e6a65-83f2-46cc-8eb4-ea303605281f" class="bulleted-list"><li style="list-style-type:disc">test fonctionnel ou en “boîte noire” ~ vérifie que le logiciel respecte les attentes du client (on ne regarde pas le code mais simplement le logiciel)
+dont <em>test système, test d’acceptation</em></li></ul><h3 id="77d0500c-5f68-4664-be6f-1a545ef005c7" class="">Selon la qualité</h3><ul id="957c45f4-04c9-4a5a-a323-43df8eeda0ac" class="bulleted-list"><li style="list-style-type:disc">test de conformité (validation)
+dont <em>test d’acceptation</em></li></ul><ul id="2cb37ed5-01f1-4635-8a1f-b5ff06dca9cd" class="bulleted-list"><li style="list-style-type:disc">test de robustesse ~ vérifie la stabilité et la fiabilité du logiciel</li></ul><ul id="a7fbb1e9-52c5-4f38-b6e5-59d9115696a1" class="bulleted-list"><li style="list-style-type:disc">test de performance ~ vérifie que les performances annoncées sont atteintes (test des temps de réponse, de la durée des traitements, de la consommation de ressources) et souvent cas de montée en charge avec des tests de charge (hausse importance du nombre d’utilisateurs par exemple)</li></ul><ul id="6a68f683-4351-4114-b205-2163896e15cf" class="bulleted-list"><li style="list-style-type:disc">test de sécurité ~ vérifie les attaques, la gestion des connexions, l’authentification, la validation des données…</li></ul><h3 id="1d51327f-a724-4426-8251-4a9affc32931" class="">Autres classifications</h3><ul id="9d9abf0d-a394-4171-9dc5-16c67107aac2" class="bulleted-list"><li style="list-style-type:disc">test statique (par l’humain) ou dynamique (par la machine, notion de fiabilité)</li></ul><ul id="49c2e5e7-d2d7-4f07-9032-e66960a8f02a" class="bulleted-list"><li style="list-style-type:disc">test manuel (par le développeur) ou automatisé (outils de tests)</li></ul><p id="cc85c637-9760-4ddf-96b4-39814e65163a" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="c6d08220-40e8-46c7-a7c9-76943350b0ec"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Les tests peuvent également être reliés aux facteurs de qualité de logiciel FURPSE :
+- <em>Functionality
+      </em>test fonctionnel, test de vulnérabilité (sécurité du logiciel)
+- <em>Usability
+</em>      test utilisateur
+- <em>Reliability
+</em>      test de robustesse
+- <em>Performance
+</em>      test de performance
+- <em>System maintainability
+</em>      test de non-régression
+- <em>Evolutivity
+</em>      test sur différents OS</div></figure><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="e401cfe6-318b-40f4-a152-0aab3d1c39e8"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">On peut voir le processud de test comme un projet à part entière.</div></figure><p id="15b80bd4-914f-4a39-ad89-38a1153084ab" class="">
+</p><h2 id="6e8d60dc-9da8-48f2-9343-eb7e93946383" class="">Intégration continue</h2><hr id="e1207df2-24a2-4cd5-8858-cff4c66974bf"/><p id="c3cd8936-ed2a-4375-bcaa-22577e9682b1" class=""><a href="https://fr.wikipedia.org/wiki/Int%C3%A9gration_continue">L&#x27;intégration continue</a> est un ensemble de pratiques utilisées en génie logiciel consistant à vérifier à chaque modification de code source que le résultat des modifications ne produit pas de régression dans l&#x27;application développée.</p><p id="b66a9306-79c9-4a7b-8eee-143511bb9020" class="">Elle nécessite une automatisation de la compilation et des tests ainsi que certains prérequis :</p><ul id="be74dd91-20c3-4c52-9387-5a559d17a835" class="bulleted-list"><li style="list-style-type:disc">utiliser un logiciel de gestion de version</li></ul><ul id="0dba4b3f-a11a-42be-94df-1d622541457b" class="bulleted-list"><li style="list-style-type:disc">faire des commit réguliers</li></ul><ul id="3076e97b-c312-4755-aeaa-fb8e1f0bfec2" class="bulleted-list"><li style="list-style-type:disc">utiliser un framework de test, qui permet de standardiser des résultats interprétables</li></ul><ul id="e123efb1-ebe0-44fd-8150-f114266a8f71" class="bulleted-list"><li style="list-style-type:disc">utiliser une application d’intégration continue pour compiler, exécuter les tests, automatiser le déploiement et présenter les résultats</li></ul><blockquote id="dbf6417b-7fa0-4151-9353-3b99164b31d4" class=""><mark class="highlight-teal">Avantages :</mark>
+test immédiat des modifications,
+notification rapide en cas de code incompatible ou manquant,
+détection des problèmes d’intégration pour une réparation rapide (et pas de problèmes de dernière minute),
+une version est toujours disponible pour un test, une démonstration ou une distribution.</blockquote><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="01caecb3-2710-4a89-b002-73d27da6abee"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Exemples de framework d’automatisation des tests :
+- Java : <strong>Junit</strong>, TestNG
+- C++ : CPPUnit, doctest
+- Python : Pytest, unittest (Pyunit), Nose</div></figure><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="d248cad2-1626-4f2c-9774-228c79ad442e"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://en.wikipedia.org/wiki/List_of_unit_testing_frameworks">https://en.wikipedia.org/wiki/List_of_unit_testing_frameworks</a></div></figure><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="2e82e663-9254-4e7c-9dc3-c250e0426aac"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Exemples d’applications de suivi des anomalies et demandes de modification :
+- JIRA, Redmine, Bugzilla, Mantis, Module “issues” de GitHub</div></figure><h2 id="59ae435c-e58e-47a7-a0bd-c47ef656ea22" class="">Développement piloté par les tests (TDD)</h2><hr id="2662b921-1071-43a1-9535-ab4095588da2"/><p id="f87a39b0-0ae7-4e5c-93e6-91f10685464b" class="">Le <em>Test Driven Development </em>est une technique de développement de logiciel qui préconise d’écrire les tests unitaires avant d’écrire le code source d’un logiciel.</p><blockquote id="3a6c570c-0ac5-438f-9c81-b9c1a91461ae" class="">La logiques des tests poussée à l’extrême.</blockquote><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="c4ce1b5b-b067-43e9-be81-2fe74d8f92b5"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="http://www.extremeprogramming.org/">http://www.extremeprogramming.org/</a></div></figure></div></article></body></html>
