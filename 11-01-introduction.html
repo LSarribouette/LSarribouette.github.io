@@ -1,0 +1,815 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Introduction au JavaScript</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3091e1d2-4e18-426e-8c83-5bd09d3cb0a5" class="page sans"><header><img class="page-cover-image" src="media/11-01-introduction/2023-01-19_12_01_30-pexels-valdemaras-d-1683724.jpg_-_Paint.png" style="object-position:center 37.55%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Introduction au JavaScript</h1></header><div class="page-body"><p id="3283a5d2-3e8f-4673-83c3-8574f2fe7d3b" class="">
+</p><p id="3fcb232d-a856-4ac3-830e-049d90637823" class="">Usage du JavaScript aujourd’hui : jQuery, Angular, Vue.js, React, NodeJS, NPM.</p><blockquote id="a51d40c4-1bb8-465d-b996-2345951534fb" class="">Rien à voir avec java…</blockquote><p id="ec42a0ba-178c-4b73-ab45-2454172b3a1a" class="">
+</p><p id="9c15db12-e5f3-41fa-8625-812c4ad92603" class="">Langage interprété par les navigateurs (<em>càd lu et exécuté à chaque fois</em>), très utilisé avec les technologies HTML/CSS.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="8ec9d2e4-1498-42db-9da3-f2e553a64889"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Le moteur d’exécution (<em>programme qui interprète et exécute le code</em>) est souvent embarqué par le navigateur, mais il peut être autonome.
+Exemples : V8, WebStorm.</div></figure><p id="7a25bc0d-d8bd-43d6-a6df-4f2f4b95ce53" class="">
+</p><p id="d8b5bce4-95d0-4f69-b454-901833316a50" class="">Langage “full stack” avec l’apparition de NodeJS (JavaScript côté serveur) —&gt; révolution à l’époque.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="aa9d2ed1-13ee-4933-9e87-063d495a2494"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Le client et le serveur communique toujours <em>via</em> le protocole HTTP.</div></figure><p id="938db2f1-ea6a-404f-a728-afb3a382b2cd" class="">
+</p><p id="cfb640ce-3db9-4e77-8715-c9a9a8065fb7" class="">De nombreuses librairies et frameworks existent pour faire évoluer et améliorer JavaScript.</p><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="df4c8fe3-ceeb-49d5-8db5-e7555a74cb68"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Exemples : 
+- côté client : jQuery, Angular, React
+- côté serveur : NodeJS, Vue.js
+- gestionnaires de dépendances : NPM, Bower —&gt; permettent de gagner du temps à ne pas redévelopper des fonctionnalités qui existent déjà</div></figure><blockquote id="3c205aab-fe81-4bad-8205-fd1ca2cdb2ce" class="">BP : faire attention aux dépendances dans les librairies que l’on utilise.
+Dans la vraie vie, on se laisse souvent dépasser !</blockquote><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="1a599211-5ad3-4739-ae70-ebff9f902433"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">React ≠ React Native (un framework d’applications mobiles)</div></figure><p id="d2e22615-cdfe-4c58-90ea-edf8bc91c696" class="">
+</p><p id="0b487dae-43d2-4564-9863-e6f13c96c8ff" class=""><strong>TypeScript =</strong> sur-ensemble syntaxique stricte du JavaScript, libre et open source, qui permet d’avoir un typage des variables et une syntaxe moins “barbare”. </p><p id="e522c043-268f-402d-b18f-f86dee8cb58e" class="">Le code est transpilé ou trans-compilé : il est d’abord compilé en JavaScript avant d’être interprété par l’ordinateur.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="90769ab8-2ab7-41a9-98e2-d223a7ea0ead"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">TypeScript n’est pas une évolution du JavaScript, ils existent en parallèle.</div></figure><p id="ae16c7a1-34eb-4ddd-9fe0-f0b445f74a70" class="">
+</p><h2 id="1184c6d4-4954-4b0f-b756-d9b71902bba6" class="">Let’s get started</h2><hr id="55d50545-37fb-4289-87a1-037e1e0a4b19"/><h3 id="3aa8d102-2def-4d64-8ad1-19745c5af066" class="">Mise en place</h3><ol type="1" id="b90acfe0-b2d4-4ad2-aec5-29d5f1dc0815" class="numbered-list" start="1"><li>Choisir son IDE</li></ol><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="6501337f-a316-418d-8917-6f6c864504de"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Quelques IDE adaptés pour JavaScript : WebStrom, Visual Studio Code, IntelliJ</div></figure><ol type="1" id="a2dc03a8-77d0-43f6-ae27-03ea3ab2e2da" class="numbered-list" start="2"><li>Télécharger NodeJS</li></ol><p id="ad67f263-68d5-460c-bd3d-1bbec5db0234" class="">
+</p><h3 id="e8c0bd18-a09d-44c8-afb5-6ad5139c56c9" class="">Bases du langage</h3><p id="8bed2ed9-7ff7-4f3b-99a9-4494f2692060" class="">JavaScript respecte les paradigmes de la <em>programmation orientée-objet</em>, de la <em>programmation impérative</em> (exécution des lignes de code les unes après les autres), de la <em>programmation fonctionnelle</em> (appel de fonctions).</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="49e62f65-6e8e-4ffe-ae26-42728c37dd28"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Langage “souple” :
+- le <code>;</code> n’est pas obligatoire (mais il est possible de le mettre pour <em>garder de bonnes habitudes</em>) —&gt; penser à être cohérent,
+- l’opérateur <code>+</code> fera dynamiquement soit l’addition de nombres soit la concaténation de chaînes de caractères.</div></figure><p id="dc73ba8e-2104-4d7c-afe9-e2391165df2d" class="">
+</p><p id="60cca87b-5694-421e-9c35-e714d065775c" class="">Typage dynamique des variables : il n’est pas nécessaire de donner un type à la variable que l’on déclare (<code>var maVariable</code>), c’est l’interpréteur qui gère.</p><ul id="335b33e9-ab2f-4360-8912-f718e76740c8" class="bulleted-list"><li style="list-style-type:disc">types primitifs : <code>boolean</code>, <code>null</code>, <code>undefined</code>, <code>number</code> et <code>string</code></li></ul><ul id="c95cd2cd-80be-4081-9757-002c1250518a" class="bulleted-list"><li style="list-style-type:disc">types objets : <code>Date</code>, <code>Math</code>, <code>Array</code>, <code>Object</code>, <code>Function</code>, <code>NaN</code>,…</li></ul><blockquote id="b0f49bc9-b005-46b2-bc65-c68ed5831a75" class="">Les objets donnent accès à des méthodes et des propriétés.</blockquote><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="668c02d8-623b-4a09-b19c-5ab676f24684"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">String : charAt(), concat(), indexOf(), substring()…
+Number : MAX_VALUE, MIN_VALUE, isInteger(), isNaN()…
+Math : random(), floor(), ceil()…
+Date : getDate(), getMonth()+1, getYear(), getHours(), setMinutes(), setSeconds(), toLocaleDateString()…
+Error : name, message…
+Propriétés et variables globales : Infinity, NaN, undefined, isNaN(), Number(), parseFloat(), parseInt()…</div></figure><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="bc02700f-a2cf-4952-8184-c057f3b37620"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">https://developer.mozilla.org/en-US/docs/Web/JavaScript</a>
+<a href="https://www.w3schools.com/js/default.asp">https://www.w3schools.com/js/default.asp</a></div></figure><p id="77d87926-cf18-4e5d-8107-cdf8883d2bed" class="">
+</p><p id="735e0347-a761-407f-a93e-3709c337415a" class="">Déclarer une constante : <code>const MA_CONSTANTE</code>.</p><p id="e0625bc9-7598-4f59-a116-2df57f0981dd" class="">
+</p><p id="8a3e5fef-656b-4bf7-9ac4-24ea55a527a2" class="">Portée d’une variable : <code>let</code> <em>vs</em> <code>var</code>.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="ba3b6d90-d4e8-497b-a0b3-33820d0c1bbf"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">‘let’ a une portée inférieure, limitée au bloc dans lequel il se trouve tandis que ‘var’ a une portée globale.</div></figure><blockquote id="51746793-74ed-4021-82bf-5ec4bf6744b2" class="">BP : il est recommandé d’utiliser let qui permet de limiter les erreurs (on garde var pour quand on sait ce qu’on fait et qu’on a besoin d’une variable globale).</blockquote><p id="337a316a-d87c-4fee-873a-a5bb036b99ee" class="">
+</p><p id="5482b5b4-39e8-4d76-a70f-88226d832ec2" class="">Commentaires : sur une ligne <code>//</code>, sur plusieurs lignes <code>/* ... */</code>.</p><p id="c171aa0d-8f27-495e-8b42-ef59300d8f8f" class="">
+</p><p id="fc25bf1a-ee85-4d78-840b-14f17ebe8df0" class="">Fonctions : déclaration avec <code>function</code>, un nom adéquat, zéro ou plusieurs paramètres, le corps de la fonction entre <code>{}</code> qui peut potentiellement retourner une valeur (<code>return</code>).</p><p id="48ca7633-4433-4423-9d64-a6e3db2d2242" class=""><code>function sonpetitnom (param) { corps [return] };</code></p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="5a14c596-8983-49cf-8896-cb07d3cbbff0"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%"><code>console.log()</code> permet d’afficher en console —&gt; utile uniquement pour déboguer ou afficher avec NodeJS.
+BP : supprimer les console.log() avant mise en production.</div></figure><p id="2d5d15db-99c0-476d-9864-6e3389e70855" class="">
+</p><p id="e2cb2300-c9a7-4b62-a7f3-eb39fe7d10f6" class="">Opérateurs de base : similaires à Java, avec en plus <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>l’égalité stricte</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> <code>=== || !==</code> qui permet de comparer à la fois la valeur et le type des variables.</p><blockquote id="62fcedf3-40ad-4e51-9d5f-cab10837f758" class="">BP : La stratégie en JavaScript est de comparer avec cet opérateur stricte, ce qui permet d’éviter des petites erreurs pouvant se glisser dans le code.</blockquote><p id="adc5527e-d95b-4778-822d-e4f32e077b33" class="">
+</p><pre id="a3650daf-2bcc-494b-91ec-1e3bd125749b" class="code"><code>//--- Quelques exemples de variables
+
+var uneVariable; // variable globale non definie
+console.log(uneVariable); //undefined
+
+let unBooleen = true; // variable dont le type est dynamiquement defini (boolean)
+
+let aujourdhui = Date();
+console.log(&quot;La date d&#x27;aujourd&#x27;hui est &quot; + aujourdhui);
+//La date d&#x27;aujourd&#x27;hui est Thu Jan 19 2023 10:09:39 GMT+0100 (heure normale d’Europe centrale)
+
+let unNombreAleatoire = Math.floor(Math.random()*10); 
+// nombre aleatoire entre 0 et 10, arrondi a l&#x27;entier
+console.log(unNombreAleatoire);
+
+let unNombre = 5; 
+let autreNombre = 7;
+let somme = add(unNombre, autreNombre); // appel de la fonction add()
+console.log(somme); //12
+
+// declaration de la fonction add()
+function add(a,b) {
+    return a+b;
+}</code></pre><p id="ae59d709-63ae-450a-be23-1eb91e62baf0" class="">
+</p><h3 id="bcf13990-eaab-49f6-86c0-92068df9c5d3" class="">Structures de code</h3><blockquote id="628634a6-b0d7-4adf-b10e-6771c297d710" class="">Très similaires à Java.</blockquote><p id="0230a4b2-5e77-4b14-8c25-9ecf019d4b40" class="">Les conditionnelles :</p><ul id="473f707d-ec73-4851-87db-3fd16ee38fa0" class="bulleted-list"><li style="list-style-type:disc">if…else</li></ul><ul id="a0c00296-72ee-4674-a6c0-86ef3bd5e8ea" class="bulleted-list"><li style="list-style-type:disc">switch</li></ul><p id="9d76944b-c1a5-47bb-acfa-78333db1e7b8" class="">Les boucles : </p><ul id="80cd8bc2-d626-4ca2-b00c-8f481af36a6b" class="bulleted-list"><li style="list-style-type:disc">while</li></ul><ul id="5514438b-899b-4a27-bf22-738d1af2017a" class="bulleted-list"><li style="list-style-type:disc">do…while</li></ul><ul id="5eab1fb6-8203-4a58-9b00-55beb357581d" class="bulleted-list"><li style="list-style-type:disc">for</li></ul><ul id="49e0a0d7-860b-42af-a51e-2ebfe2696f9f" class="bulleted-list"><li style="list-style-type:disc">for…in et for…of —&gt; utilisés pour les objets et les tables </li></ul><p id="d2ed7078-c1e2-498c-8f04-3b519970eb93" class="">La gestion d’erreurs : try…catch</p><p id="a27b0fe9-94f5-4e40-a6ba-27c496708952" class="">
+</p><pre id="077a47b0-30ba-442b-95cc-af90df6f4856" class="code"><code>//--- Quelques exemples de structures de code
+
+// if et egalite stricte
+let leNombre = 10;
+let laString = &#x27;10&#x27;;
+
+if (leNombre === laString) {
+    console.log(&quot;Les deux variables sont égales en valeur et en type.&quot;)
+} else if (leNombre == laString) {
+    console.log(&quot;Les deux variables sont égales en valeur mais pas en type.&quot;)
+    //c&#x27;est cette solution qui sera affichee en console
+} else {
+    console.log(&quot;Les deux variables ne sont pas égales.&quot;)
+}
+
+// switch
+let gateau = &#x27;tarte au citron meringuée&#x27;;
+switch (gateau) {
+    case &#x27;tarte au citron meringuée&#x27;:
+        console.log(&#x27;Mangeons une tarte au citron meringuée !&#x27;);
+        //c&#x27;est cette solution qui sera affichee en console
+        break;
+    case &#x27;brownie&#x27;:
+        console.log(&#x27;Mangeons un brownie !&#x27;);
+        break;
+    default:
+        console.log(&#x27;Ce gateau n\&#x27;est pas au menu...&#x27;);
+}
+
+// while
+let i=0;
+while (i&lt;4) {
+    i++;
+    console.log(i);
+}
+
+// do...while
+let alea = 0;
+do {
+    console.log(alea + &quot; est différent de 2.&quot;);
+    alea = Math.floor(Math.random()*10);; // relance
+} while (alea !== 2);
+console.log(&quot;Enfin ! &quot; + alea + &quot; est strictement égal à 2.&quot;);
+
+// for
+for (let i=0; i&lt;6; i++) {
+    console.log(&quot;tour &quot; + (i+1) + &quot;/6&quot;);
+}
+
+// try...catch
+try {
+    console.log(compteur);
+} catch (error) {
+    console.log(&quot;Une erreur est survenue !&quot;);
+    console.error(error.message); //compteur is not defined
+}</code></pre><p id="cf82169c-89fa-4aeb-a646-eb1442873318" class="">
+</p><h3 id="53631c09-1fe8-4540-9dd8-651b64399ecb" class="">Principaux objets disponibles</h3><blockquote id="8d545962-393a-4966-baff-a98b13cb350b" class="">Très similaires à Java.</blockquote><p id="bb923ea7-a946-47ec-b24a-ef87447e4735" class="">Notation avec les crochets [] (ou new Array() qui est non-recommandé).</p><p id="b955516e-ead8-4325-8873-5b306f04c624" class="">Taille non fixée.</p><p id="814b2ff8-2d65-4b26-9ea9-e846280736c5" class="">Propriétés et méthodes disponibles : length, push(), pop(), slice(), sort(), toString()…</p><pre id="2e064fef-a019-4a61-bfc4-a73458bb3061" class="code"><code>//--- Quelques exemples de tableaux
+
+let tabVide = [];
+
+let tabFleurs = [&#x27;marguerite&#x27;, &#x27;rose&#x27;, &#x27;tulipe&#x27;];
+// non-recommande ~ let unTab = new Array(TAILLE_FIXE);
+
+console.log(tabFleurs); //[ &#x27;marguerite&#x27;, &#x27;rose&#x27;, &#x27;tulipe&#x27; ]
+console.log(&quot;premier element : &quot; + tabFleurs[0]); //premier element : marguerite
+console.log(&quot;taille : &quot; + tabFleurs.length); //taille : 3
+
+//enlever le dernier
+tabFleurs.pop();
+console.log(tabFleurs); //[ &#x27;marguerite&#x27;, &#x27;rose&#x27;]
+
+// ajouter un element
+tabFleurs.push(&quot;jasmin&quot;);
+console.log(tabFleurs); //[ &#x27;marguerite&#x27;, &#x27;rose&#x27;, &#x27;jasmin&#x27; ]
+
+// decouper : index a partir duquel je cree un nouveau tableau
+let tabDecoupe=tabFleurs.slice(1);
+console.log(&quot;tableau découpé : &quot; + tabDecoupe); //tableau découpé : rose,jasmin
+
+// episser : ajouter et/ou supprimer des elements
+// trois param : index, nombre d&#x27;elements a supprimer, elements a ajouter
+tabFleurs.splice(1,1, &#x27;lavande&#x27;, &#x27;lilas&#x27;, &#x27;tournesol&#x27;);
+console.log(tabFleurs); //[ &#x27;marguerite&#x27;, &#x27;lavande&#x27;, &#x27;lilas&#x27;, &#x27;tournesol&#x27;, &#x27;jasmin&#x27; ]
+
+// tri tab par ordre alphabetique
+// - possible de lui mettre d&#x27;autres methodes pour un tri perso
+tabFleurs.sort();
+console.log(tabFleurs); //[ &#x27;jasmin&#x27;, &#x27;lavande&#x27;, &#x27;lilas&#x27;, &#x27;marguerite&#x27;, &#x27;tournesol&#x27; ]
+
+// pour reinitialiser le tableau
+tabFleurs = [];</code></pre><p id="359bfaf7-a08e-4348-aac1-fa22bc982f40" class="">
+</p><p id="801fbbb4-5f54-482e-9647-4132a63b3aa3" class="">
+</p></div></article></body></html>
