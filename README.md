@@ -4,3 +4,5 @@
       <div class="methodes">Les pages de notes sont prises sur <a href="https://www.notion.so/">Notion.so</a> pour la simplicité de la mise en forme. Elles sont ensuite exportées au format html et modifiées légèrement pour fonctionner dans ce projet.</div>
 
 https://LSarribouette.github.io/
+
+> Technologies : JavaScript, HTML, CSS, Visual Studio Code 1.73.1
