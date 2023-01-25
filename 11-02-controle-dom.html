@@ -1,0 +1,819 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Le contrôle du DOM par le JavaScript</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="eb2d9767-f645-4681-aba0-96a9152cf7a4" class="page sans"><header><img class="page-cover-image" src="media/11-02-controle-dom/2023-01-19_12_16_18-pexels-egor-kamelev-3204595.jpg_-_Paint.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Le contrôle du DOM par le JavaScript</h1></header><div class="page-body"><p id="6d53a149-9d27-4dd0-8abb-b02f200011bb" class="">
+</p><blockquote id="d510038f-fed2-489e-afe2-eb39927cb368" class=""><em>Document Object Model</em> = lors du chargement d’une page web, le navigateur crée un “arbre d’objets” appelé DOM, avec chaque objet possédant des propriétés, des méthodes, des événements.
+Les élements à la base de l’arbre sont : 
+la balise racine&lt;html&gt;
+&gt;&gt; la balise &lt;head&gt; 
+      &gt;&gt; les balises &lt;title&gt;, &lt;meta charset=”utf-8”&gt;, &lt;link rel=”stylesheet” href=&quot;&quot;&gt;,…
+&gt;&gt; la balise &lt;body&gt;
+      &gt;&gt; les balises &lt;h1&gt;, &lt;div&gt;, &lt;p&gt;, &lt;span&gt;, &lt;ol&gt;, &lt;li&gt;, &lt;header&gt;, &lt;footer&gt;…</blockquote><p id="62df61a2-412e-437d-8c17-65ce7e8bdae4" class="">
+</p><p id="8dcd3833-2500-4b8c-b8cb-3feaadecf9ce" class="">Le JavaScript fonctionne conjointement avec le HTML et le CSS. </p><p id="f0fbdd5a-0514-4ea5-8f25-96e301c66714" class="">La DOM HTML est une API (<em>Application Programming Interface</em>) pour JavaScript, qui peut :</p><ul id="c5c4dc71-68d6-45d8-b0b7-5db0cf7b5e02" class="bulleted-list"><li style="list-style-type:disc">modifier, ajouter, supprimer des éléments HTML</li></ul><ul id="44ff6e39-cff5-4443-9c55-71786c4b5c55" class="bulleted-list"><li style="list-style-type:disc">modifier, ajouter, supprimer leurs attributs</li></ul><ul id="90435467-e772-4d35-a504-530b3b117f3e" class="bulleted-list"><li style="list-style-type:disc">modifier, ajouter, supprimer les styles CSS</li></ul><ul id="4e2d3dc7-faeb-48fe-8d81-d5306a3d1076" class="bulleted-list"><li style="list-style-type:disc">réagir aux événements HTML</li></ul><ul id="7b53c19b-bd58-472d-8383-aa4ee96577ac" class="bulleted-list"><li style="list-style-type:disc">modifier, ajouter, supprimer les événements HTML</li></ul><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="7cfd85df-bcd6-4e68-8a6b-bfa8e1bb177f"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://www.w3schools.com/whatis/whatis_htmldom.asp">https://www.w3schools.com/whatis/whatis_htmldom.asp</a>
+<em>voir cours 03 - HTML/CSS</em></div></figure><p id="00b58847-ecc6-4b98-b761-8d16dd1b2700" class="">
+</p><p id="9fce713f-0400-4f04-a2b5-ef60dec056b2" class="">Le JavaScript est intégré au fichier HTML grâce à la balise <code>&lt;script&gt;</code>, à laquelle il est possible de passer directement du code JavaScript ou bien de lier un fichier JavaScript avec l’attribut <code>src</code>.</p><blockquote id="5b93597f-6d86-44a7-b8d6-7930355d7454" class="">BP : séparer les rôles et ressources —&gt; on met le script JavaScript dans son propre fichier (souvent dans un répertoire dédié).</blockquote><pre id="2dea6fe0-1930-4bd5-b202-6c2b59ad7531" class="code"><code>&lt;script src=&quot;js/script.js&quot;&gt;&lt;/script&gt;</code></pre><p id="5f8bdb7e-2483-4e9e-8d86-32a5a93acc3b" class="">L’appel du script peut être fait dans le &lt;head&gt; ou tout à la fin, juste avant la fermeture du &lt;/body&gt; : le choix est fait selon quand on a besoin du script.</p><blockquote id="ec831659-f50f-457c-95fe-15358853ed51" class="">BP : mieux vaut appeler le script à la fin, pour ne pas ralentir le chargement de la page web.</blockquote><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="137d5722-af3d-49b0-a655-4127fd67bd57"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Il est possible d’appeler plusieurs fichiers JavaScript mais attention à l’ordre : la moindre erreur entrainera l’arrêt de la lecture du fichier.</div></figure><blockquote id="eec536f0-9a1f-4799-820f-4b38e07126be" class="">BP : garder la console du navigateur ouverte tout le temps, pour suivre les erreurs au fil de l’eau.</blockquote><h2 id="9ed9a312-fe75-4015-8209-87d5ed4fc883" class="">Propriétés et méthodes accessibles</h2><hr id="ca0176a0-cbe4-4caf-8f16-51a464746838"/><p id="a92d3b0a-10de-4a02-9b24-fbb611edfc91" class="">L’accès à un élément HTML avec JavaScript se fait par son <strong>id</strong>, son <strong>tag name</strong> (sa balise associée), sa <strong>class name</strong>, son <strong>sélecteur CSS</strong> ou sa collection d’objets.</p><p id="8388fb86-32c1-4cf2-a419-4c1b197fbc64" class="">
+</p><p id="7f9ef899-f307-4d02-b605-e6a636e7c7f9" class="">Les principales propriétés sont accessibles avec <code>document.</code> suivi de l’élément concerné (head, title, body…).</p><p id="9fe73e30-424a-4318-9fb2-110a209c55ea" class="">Les principales méthodes sont accessibles avec <code>document.</code> suivi de la méthode concernée :</p><ul id="9e15b0e4-2b0e-4c27-b4ea-66ea482f103e" class="bulleted-list"><li style="list-style-type:disc">Lecture :</li></ul><pre id="d1357462-b028-4c48-9040-54ea422d363d" class="code"><code>document.getElementByID();
+document.getElementsByTagName();
+document.getElementsByClassName();
+document.querySelector();
+document.querySelectorAll();
+// exemples de collection d&#x27;objets : document.images ou document.links</code></pre><ul id="807378d3-2399-47d5-9c40-e8f7493ae3f1" class="bulleted-list"><li style="list-style-type:disc">Ecriture</li></ul><pre id="53b1e335-1cbe-4c8d-9385-9fbb4fe953a6" class="code"><code>document.write();
+document.createElement();
+document.createAttribute();
+document.createTextNode();</code></pre><p id="e543b7cc-6af1-4cf9-8e3f-8b9f8fc8f538" class="">
+</p><p id="5c2dad59-9500-4955-9420-a0e933e1269c" class="">Une fois l’élément récupéré, il possède des propriétés et de méthodes qui lui sont propres, telles que :</p><pre id="c14bb9ad-0472-455c-ad12-d5fcc15a4eef" class="code"><code>// exemples de proprietes
+unElement.id;
+unElement.value;
+unElement.attributes;
+unElement.innerText;
+unElement.innerHTML;
+
+unElement.firstElementChild;
+unElement.lastElementChild;
+unElement.nextElementSibling;
+unElement.previousElementSibling;
+unElement.parentElement;
+
+// exemples de methodes
+// -- lecture
+unElement.getAttribute();
+unElement.hasAttribute();
+unElement.hasAttributes();
+unElement.focus();
+unElement.getElementsByTagName();
+unElement.querySelector();
+
+// -- ecriture
+unElement.insertAdjacentElement();
+unElement.setAttribute();
+unElement.appendChild();
+unElement.replaceChild();
+unElement.removeChild();
+unElement.removeAttribute();</code></pre><p id="e44764b8-ec0a-43dd-a6bc-1afb8918b216" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="fda6d3ca-2c8b-4cd2-8138-0477ca5e16b7"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%"> JQuery propose d’autres sélecteurs avec une syntaxe plus facile (voir module 04 - Jquery).</div></figure><p id="11d01c70-b40e-408c-9ce5-6c12446e3b8d" class="">
+</p><h3 id="51344fe9-520d-45c9-a207-33ac3a3d9c51" class="">Objet racine d’une page web</h3><p id="b3d28941-22c8-48e7-ae8f-1b7b79f7cb4c" class="">Le “document” fait partie d’un objet encore plus grand : “window”. Il possède des fonctions comme <code>alert()</code> ou <code>prompt()</code> et permet d’accéder à d’autres objets : <div class="indented"><p id="29d85342-f468-4192-8181-287e25f17346" class="">“console” ~ <code>log()</code>, <code>clear()</code></p><p id="ffa821d1-05fb-4be6-a4d1-c4b47d5bd45c" class="">“history” ~ <code>back()</code>, <code>forward()</code>, <code>go()</code></p><p id="4b666f33-0b8b-40de-8634-047790b609fd" class="">“location” ~ <code>href</code></p></div></p><p id="bec8a7a8-c9c3-4b51-b70f-62aa67e3e28a" class="">
+</p><h3 id="04fba08d-e5d1-4717-ae5e-7e40f73378ea" class="">Démo à refaire……………………..</h3><pre id="843ef18b-d2e5-4cdc-92f3-ac2f03171d22" class="code"><code>// DEMO !!
+
+alert(&quot;je suis du js externe oui oui&quot;);
+// modif elt
+document.title = &quot;bla&quot;;
+document.getElementsByTagName(&quot;h1&quot;)[0].innerText = &quot;blabla&quot;;
+
+// crea elt
+let my_div = document.createElement(&quot;div&quot;);
+
+// modif style
+my_div.style.backgroundColor=”lightblue”;
+
+// ajout src, alt...
+
+// bam on prend nos modif et on les ajoute au body
+my_div.appendChild(my_p);
+document.body.appendChild(my_div);
+my_div.innerHTML += &quot;&lt;br&gt;&lt;button&gt;un boutton&lt;/button&gt;&lt;br&gt;&quot;,</code></pre><p id="f220f944-a263-4d98-822d-23b2992d5460" class="">
+</p><h2 id="c5f352a8-76fb-436c-a733-f14cf534e94e" class="">Événements</h2><hr id="5d9bc230-bebc-456e-befe-9aac34a3cbf1"/><p id="97c86f8d-999f-409c-947c-5f65eabf4763" class="">Une fonction peut être appelée lorsqu’un événement se produit, parce que le navigateur ou l’utilisateur fait quelque chose.</p><blockquote id="c0faa959-d851-4584-bc1d-2cd54abcffab" class="">Un événement concerne un élément HTML. Le JavaScript réagit à cet événement.</blockquote><p id="9b74578c-8d98-492d-8e1c-98310d3c8422" class="">
+</p><p id="4ab95c71-9886-44ea-8866-38bf1d5e603e" class="">Principaux événements :</p><ul id="e29634b9-f5b6-464b-85ba-6c5073be924f" class="bulleted-list"><li style="list-style-type:disc"><code>onchange</code> : un élément HTML a été modifié</li></ul><ul id="d5b06180-671a-4d94-b638-fa373a5453a2" class="bulleted-list"><li style="list-style-type:disc"><code>onclick</code> : l’utilisateur a cliqué sur un élément HTML</li></ul><ul id="1dbcfcd5-0d7b-477e-921d-d3156e7f3bef" class="bulleted-list"><li style="list-style-type:disc"><code>onmouseover</code> : l’utilisateur passe sa souris sur un élément HTML</li></ul><ul id="88e36f31-3c8c-4b0b-b5ee-36ce08283cd1" class="bulleted-list"><li style="list-style-type:disc"><code>onmouseout</code> : l’utilisateur sort sa souris d’un élément HTML</li></ul><ul id="a3075e81-e7ad-46e5-aa81-7f4e9716810c" class="bulleted-list"><li style="list-style-type:disc"><code>onkeydown</code> : l’utilisateur appuie sur une touche du clavier</li></ul><ul id="c334bf57-0057-4f92-8cb2-5bd9781beebe" class="bulleted-list"><li style="list-style-type:disc"><code>onload</code> : le navigateur a fini de charger la page</li></ul><p id="819ab642-1664-457c-bcdb-3227e76abfe6" class="">
+</p><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="36dfcf39-e364-4f0f-a359-b314d84d3249"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Une liste plus complète d’événements :
+<a href="https://www.w3schools.com/jsref/dom_obj_event.asp">https://www.w3schools.com/jsref/dom_obj_event.asp</a></div></figure><p id="0a6fa33f-c882-4f77-bfdf-4bd8ebbd9902" class="">
+</p><p id="9fcec2a7-a32d-42db-82fd-d3f6bb6f996a" class="">On parle de “s’abonner à un événement” lorsqu’on lie du code JavaScript pour réagir à un événement.</p><p id="fc434fa4-e8cb-4792-8c3b-b6604eea6f30" class="">Il est possible d’intégrer du code JavaScript directement dans une balise HTML : </p><pre id="d1986a8d-49de-48c4-9ab5-1e06bba2eed1" class="code"><code>// modifier le texte affiché h1
+&lt;h1 onclick=&quot;this.innerHTML = &#x27;Texte changé !&#x27;&quot;&gt;Clique sur le texte ?&lt;/h1&gt;
+
+// modifier le texte de la balise p juste après
+&lt;button onclick=&quot;document.getElementById(&#x27;demo&#x27;).innerHTML=Date()&quot;&gt;
+	Quelle heure est-il?
+&lt;/button&gt;
+&lt;p id=&quot;demo&quot;&gt;&lt;/p&gt;</code></pre><blockquote id="7bac123b-e577-4fd2-9cfc-ce58185f689f" class="">BP : On range son code !! On préfère mettre le code JavaScript dans des fonctions (et d’ailleurs les fonctions dans un script externe) et appeler des fonctions dans le fichier HTML.</blockquote><pre id="6085eb12-e2ed-42b2-b83e-0a3cb5157920" class="code"><code>// mieux : code dans fonctions
+&lt;h1 onclick=changementTexte(this)&gt;Clique sur le texte ?&lt;/h1&gt;
+
+&lt;button onclick=&quot;afficheDate(&#x27;demo&#x27;)&quot;&gt;
+	Quelle heure est-il?
+&lt;/button&gt;
+&lt;p id=&quot;demo&quot;&gt;&lt;/p&gt;
+
+&lt;script&gt;
+function changementTexte(obj) {
+	obj.innerHTML = &quot;Texte changé !&quot;;
+}
+function afficheDate(zone) {
+	document.getElementById(zone).innerHTML=Date();
+}
+&lt;/script&gt;</code></pre><p id="29618b5a-7d09-4497-b98e-743a92894ee7" class="">
+</p><p id="0fb5e5ab-c47a-4465-a474-f7b60d8e8c58" class="">Il est possible d’assigner un événement dans le code JavaScript :</p><ul id="fd5a6167-c1f0-4c7e-bc14-f7874a257588" class="bulleted-list"><li style="list-style-type:disc">en utilisant la DOM HTML : <code>unElement.evenement = fonctionAExecuter();</code><p id="3062d245-0d95-4d44-842f-59057d45a087" class="">—&gt; peu utilisé</p></li></ul><ul id="a5b091c4-4741-43df-9017-df6eea27ba03" class="bulleted-list"><li style="list-style-type:disc">avec une méthode écouteur d’événement, qui permet d’ajouter un événement et de lui spécifier à quel moment il arrive et à quelle méthode il est lié : <code>unElement.addEventListener(&quot;evenement&quot;, fonctionAExecuter);</code></li></ul><pre id="e9a29d97-a3dd-4827-a1b8-9fd013a2ed6e" class="code"><code>// changer la couleur de fond de la page
+// - utilisation d&#x27;une méthode anonyme
+
+// un bouton
+&lt;button id=&quot;test&quot;&gt; Cliquer pour changer la couleur de fond&lt;/button&gt;
+
+// V1 pas jolie
+&lt;script&gt;
+    document.getElementById(&quot;test&quot;).addEventListener(&#x27;click&#x27;,
+        () =&gt; {
+        let fond = document.getElementsByTagName(&quot;body&quot;)[0];
+        function aleatoire255() {
+            return Math.floor(Math.random() * 256);
+        }
+        function choixCouleur() {
+            let red = aleatoire255();
+            let green = aleatoire255();
+            let blue = aleatoire255();
+            return &quot;rgb(&quot;+red+&quot;,&quot;+green+&quot;,&quot;+blue+&quot;)&quot;;
+        }
+            Math.floor(Math.random() * 256);
+        console.log(choixCouleur());
+        fond.style.background = choixCouleur(); //&quot;rgb(255,45,255)&quot;
+        })
+&lt;/script&gt;
+
+// V2 optimisée
+&lt;script&gt;
+    function aleatoire255() {
+        return Math.floor(Math.random() * 256);
+    }
+    document.getElementById(&quot;test&quot;).addEventListener(&#x27;click&#x27;,
+        () =&gt; {
+        let fond = document.getElementsByTagName(&quot;body&quot;)[0];
+
+        fond.style.background = &quot;rgb(&quot;+aleatoire255()+&quot;,&quot;+aleatoire255()+&quot;,&quot;+aleatoire255()+&quot;)&quot;; 
+        })
+&lt;/script&gt;</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="36a1487c-37b9-4246-81fa-3551024760cc"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">BP : utiliser une fonction anonyme si on n’a pas besoin de la réutiliser plus tard.
+Attention : ce qui est dedans n’existe que dans son contexte donc on ne crée pas de fonctions à l’intérieur.</div></figure><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="197f0d20-d284-4fde-b6bc-c6cdc86aeb92"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://developer.mozilla.org/fr/docs/Learn/JavaScript/Building_blocks/Events">https://developer.mozilla.org/fr/docs/Learn/JavaScript/Building_blocks/Events</a></div></figure><h2 id="dddacc03-eda7-48e6-bea2-e1b994be0dac" class="">Bonnes pratiques en vrac</h2><hr id="b853c992-8961-4198-94e2-0365bb923ba5"/><ul id="67dfc9bb-4195-4216-847f-8bd38cb6a4bf" class="bulleted-list"><li style="list-style-type:disc">Faire une fonction d’initialisation (<code>init()</code>) où l’on crée les éléments dont on a besoin, qui sera appelée au début du programme et à chaque rechargement de la page.<ul id="57b56e47-f608-4dc4-a826-d317a868182b" class="bulleted-list"><li style="list-style-type:circle">exemples : la date et l’heure se mettent à jour, le focus revient directement dans le premier champs de saisie…</li></ul></li></ul><ul id="4f24bea8-0d8c-4bb7-8155-1cd1adfa9127" class="bulleted-list"><li style="list-style-type:disc">Plutôt que de créer des balises avec les méthodes <code>createElement(balise)</code> et <code>appendChild(element)</code>, il est plus rapide et lisible d’utiliser <code>unElement.innerHTML += &#x27;chaine de caracteres comprenant les balises HTLM&#x27;</code></li></ul><ul id="0cafd819-1bd1-4e56-8f1a-416aa41cb8e7" class="bulleted-list"><li style="list-style-type:disc">Les balises ne prennent pas la même place sur la page : <p id="6d681556-54e4-4c61-b418-fda577f0eb5f" class="">~ div : prend toute la longueur de la page (générique)</p><p id="d121b875-d389-4734-b46a-a67634cbcc8c" class="">~ p : avec un padding top et bottom (saut de ligne)</p><p id="321a7715-de58-4d5d-a725-d8e8aa8ad6dc" class="">~ span : prend l’espace minimal pour afficher son contenu (le +petit conteneur)</p></li></ul><p id="a8248d6e-5282-4ae5-9ad3-82c95d28a92e" class="">
+</p><h3 id="1e184db3-c62a-4866-9945-0737a332322e" class="">Bonus</h3><pre id="3cc74205-8e98-4386-8636-d8b21f072c8e" class="code"><code>// BONUS : supprimer l&#x27;element sur lequel on clique
+// - mieux avec une alert de verification avant suppression
+
+obj.addEventListener(&quot;click&quot;, supprimer);
+
+function supprimer(event) {
+// fonction qui supprime le li sur lequel on clique
+// - ici le param n&#x27;est pas obligatoire, mais il augmente la 
+//   lisibilité et la maintenabilité
+    let obj= event.currentTarget.childNodes[0].textContent;
+    event.currentTarget.remove();
+}</code></pre><p id="554a1624-362b-44ba-a06d-207f45a4e358" class="">
+</p></div></article></body></html>
