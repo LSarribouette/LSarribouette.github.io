@@ -715,28 +715,31 @@ unElement.setAttribute();
 unElement.appendChild();
 unElement.replaceChild();
 unElement.removeChild();
-unElement.removeAttribute();</code></pre><p id="e44764b8-ec0a-43dd-a6bc-1afb8918b216" class="">
+unElement.removeAttribute();
+
+// -- autre
+unElement.focus();</code></pre><p id="e44764b8-ec0a-43dd-a6bc-1afb8918b216" class="">
 </p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="fda6d3ca-2c8b-4cd2-8138-0477ca5e16b7"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%"> JQuery propose d’autres sélecteurs avec une syntaxe plus facile (voir module 04 - Jquery).</div></figure><p id="11d01c70-b40e-408c-9ce5-6c12446e3b8d" class="">
 </p><h3 id="51344fe9-520d-45c9-a207-33ac3a3d9c51" class="">Objet racine d’une page web</h3><p id="b3d28941-22c8-48e7-ae8f-1b7b79f7cb4c" class="">Le “document” fait partie d’un objet encore plus grand : “window”. Il possède des fonctions comme <code>alert()</code> ou <code>prompt()</code> et permet d’accéder à d’autres objets : <div class="indented"><p id="29d85342-f468-4192-8181-287e25f17346" class="">“console” ~ <code>log()</code>, <code>clear()</code></p><p id="ffa821d1-05fb-4be6-a4d1-c4b47d5bd45c" class="">“history” ~ <code>back()</code>, <code>forward()</code>, <code>go()</code></p><p id="4b666f33-0b8b-40de-8634-047790b609fd" class="">“location” ~ <code>href</code></p></div></p><p id="bec8a7a8-c9c3-4b51-b70f-62aa67e3e28a" class="">
-</p><h3 id="04fba08d-e5d1-4717-ae5e-7e40f73378ea" class="">Démo à refaire……………………..</h3><pre id="843ef18b-d2e5-4cdc-92f3-ac2f03171d22" class="code"><code>// DEMO !!
+</p><p id="04fba08d-e5d1-4717-ae5e-7e40f73378ea" class="">Quelques exemples :</p><pre id="843ef18b-d2e5-4cdc-92f3-ac2f03171d22" class="code"><code>// modifier des elements
+document.title = &quot;Un beau titre de document&quot;;
+document.getElementsByTagName(&quot;h1&quot;)[0].innerText = &quot;Un titre principal&quot;;
+document.getElementById(&quot;un-id&quot;).innerHTML = &quot;du texte&quot;;
 
-alert(&quot;je suis du js externe oui oui&quot;);
-// modif elt
-document.title = &quot;bla&quot;;
-document.getElementsByTagName(&quot;h1&quot;)[0].innerText = &quot;blabla&quot;;
+// creer un element
+let une_div = document.createElement(&quot;div&quot;);
 
-// crea elt
-let my_div = document.createElement(&quot;div&quot;);
+// modifier le style d&#x27;un element
+une_div.style.backgroundColor = &quot;lightblue&quot;;
 
-// modif style
-my_div.style.backgroundColor=”lightblue”;
+// ajout de l&#x27;element juste cree au body
+document.body.appendChild(une_div);
 
-// ajout src, alt...
+// autre facon de modifier un element
+une_div.innerHTML += &quot;&lt;br&gt;&lt;button&gt;un boutton&lt;/button&gt;&lt;br&gt;&quot;;
 
-// bam on prend nos modif et on les ajoute au body
-my_div.appendChild(my_p);
-document.body.appendChild(my_div);
-my_div.innerHTML += &quot;&lt;br&gt;&lt;button&gt;un boutton&lt;/button&gt;&lt;br&gt;&quot;,</code></pre><p id="f220f944-a263-4d98-822d-23b2992d5460" class="">
+// creer une pop-up
+alert(&quot;Je suis une pop-up !&quot;);</code></pre><p id="f220f944-a263-4d98-822d-23b2992d5460" class="">
 </p><h2 id="c5f352a8-76fb-436c-a733-f14cf534e94e" class="">Événements</h2><hr id="5d9bc230-bebc-456e-befe-9aac34a3cbf1"/><p id="97c86f8d-999f-409c-947c-5f65eabf4763" class="">Une fonction peut être appelée lorsqu’un événement se produit, parce que le navigateur ou l’utilisateur fait quelque chose.</p><blockquote id="c0faa959-d851-4584-bc1d-2cd54abcffab" class="">Un événement concerne un élément HTML. Le JavaScript réagit à cet événement.</blockquote><p id="9b74578c-8d98-492d-8e1c-98310d3c8422" class="">
 </p><p id="4ab95c71-9886-44ea-8866-38bf1d5e603e" class="">Principaux événements :</p><ul id="e29634b9-f5b6-464b-85ba-6c5073be924f" class="bulleted-list"><li style="list-style-type:disc"><code>onchange</code> : un élément HTML a été modifié</li></ul><ul id="d5b06180-671a-4d94-b638-fa373a5453a2" class="bulleted-list"><li style="list-style-type:disc"><code>onclick</code> : l’utilisateur a cliqué sur un élément HTML</li></ul><ul id="1dbcfcd5-0d7b-477e-921d-d3156e7f3bef" class="bulleted-list"><li style="list-style-type:disc"><code>onmouseover</code> : l’utilisateur passe sa souris sur un élément HTML</li></ul><ul id="88e36f31-3c8c-4b0b-b5ee-36ce08283cd1" class="bulleted-list"><li style="list-style-type:disc"><code>onmouseout</code> : l’utilisateur sort sa souris d’un élément HTML</li></ul><ul id="a3075e81-e7ad-46e5-aa81-7f4e9716810c" class="bulleted-list"><li style="list-style-type:disc"><code>onkeydown</code> : l’utilisateur appuie sur une touche du clavier</li></ul><ul id="c334bf57-0057-4f92-8cb2-5bd9781beebe" class="bulleted-list"><li style="list-style-type:disc"><code>onload</code> : le navigateur a fini de charger la page</li></ul><p id="819ab642-1664-457c-bcdb-3227e76abfe6" class="">
 </p><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="36dfcf39-e364-4f0f-a359-b314d84d3249"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Une liste plus complète d’événements :
