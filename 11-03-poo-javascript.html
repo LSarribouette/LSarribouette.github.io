@@ -1,0 +1,784 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>La POO en JavaScript</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3384072a-4a69-4173-a398-eaf2c799147b" class="page sans"><header><img class="page-cover-image" src="media/11-03-poo-javascript/2023-01-19_12_19_08-pexels-zir-yu-8444918.jpg_-_Paint.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">La POO en JavaScript</h1></header><div class="page-body"><blockquote id="796d14a1-b667-48c8-9156-9cbaf6ca1688" class="">Semblable à Java… en plus souple.</blockquote><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="af65cbff-e550-449e-a15f-4da46509283f"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Pour faire de la POO, on utilise maintenant TypeScript.</div></figure><h2 id="5717cbbb-32e0-4e61-8080-65527d342097" class="">Créer des objets</h2><hr id="60f1131a-2520-4d61-9a4e-dbcdda755b04"/><p id="592740f7-6138-42ec-b7b9-5761777d16bf" class="">Un objet est déclaré avec des accolades, à l’intérieur desquelles on déclare une liste de propriétés qui sont des paires nom:valeur.</p><p id="02b5573e-60a4-48d0-8086-e6b86907a89a" class="">On accède à la clé avec le point (BP) ou les crochets.</p><p id="ee042543-19af-4901-b583-d12604a3bbe8" class="">Les objets sont dynamiques : pas de new, ajout de propriétés simplifié —&gt; cela demande une certaine rigueur pour ne pas faire n’importe quoi !</p><pre id="8b34c0b2-44ac-440b-9c8a-e4d383be68f8" class="code"><code>let uneFleur = {nom:&quot;tulipe&quot;, couleur:&quot;jaune&quot;};
+console.log(uneFleur); //{ nom: &#x27;tulipe&#x27;, couleur: &#x27;jaune&#x27; }
+console.log(uneFleur.nom + &quot; === &quot; + uneFleur[&quot;nom&quot;]); //tulipe === tulipe
+uneFleur.couleur=&quot;orange&quot;; //orange
+console.log(uneFleur.couleur);</code></pre><p id="dda82bbe-8aaa-4673-bc3e-f20073019101" class="">Il est possible de faire des tableaux d’objets, même des tableaux de tableaux d’objets… </p><p id="ee054f70-bfcb-4780-99b0-6234025699f3" class="">—&gt; notation <strong>JSON.</strong></p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="7df9c335-41de-425b-8e42-c2f260d12bd7"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin :
+- sur les objets en JavaScript
+<a href="https://www.w3schools.com/js/js_objects.asp">https://www.w3schools.com/js/js_objects.asp</a>
+- sur JSON 
+<a href="https://la-cascade.io/articles/json-pour-les-debutants">https://la-cascade.io/articles/json-pour-les-debutants</a>
+<a href="https://developer.mozilla.org/fr/docs/Learn/JavaScript/Objects/JSON">https://developer.mozilla.org/fr/docs/Learn/JavaScript/Objects/JSON</a></div></figure><h2 id="113eb5f2-b4c6-4c38-b8fd-6a6d17d770ea" class="">Créer des classes</h2><hr id="949641b2-be4d-4c3f-9788-a9fe89b6b626"/><h3 id="a419f4d8-4d9a-486e-93d8-b6df7c62baa6" class="">1.  façon traditionnelle </h3><p id="e776997b-6810-4351-89f5-216d3b608d2c" class="">Une classe se déclare avec <code>let</code> (comme une variable) et le mot-clé <code>function</code> : elle prend entre zéro et plusieurs paramètres, des attributs et des éventuelles fonctions.</p><p id="b400cc05-00e4-4203-84eb-9cec22e005fc" class="">Une instance se crée avec le mot-clé <code>new</code> et en renseignant les valeurs des différents paramètres.</p><pre id="333bf268-8698-46da-aa91-6ca33ff02082" class="code"><code>let UneClasseALancienne = function (unParam, autreParam) {
+    this.unParam = unParam;
+    this.autreParam = autreParam;
+    this.uneFonction =  function () {
+        console.log(&quot;Je suis une fonction de classe.&quot;);
+    }
+}
+
+let uneInstance = new UneClasseALancienne(&quot;une chaine de caractères&quot;, 42);
+console.log(uneInstance);
+/*
+	UneClasseALancienne {
+	  unParam: &#x27;une chaine de caractères&#x27;,
+	  autreParam: 42,
+	  uneFonction: [Function (anonymous)]
+	}
+*/
+console.log(uneInstance.uneFonction()); //Je suis une fonction de classe.</code></pre><p id="b2ed4079-b129-49f8-b873-288ce7719473" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="e65617ed-b7c2-46f2-be57-3c90de1123d3"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%"><strong><em>Classe</em></strong><em> vs </em><em><strong>Objet</strong></em> :
+- un objet peut être modifié à la volée, il est facile à manipuler et à utiliser
+- une classe permet de structurer le code et améliore la maintenabilité, notamment utile en <em>SPA</em> (single page application)
+
+BP : sur un gros projet, il est préférable de passer par des classes.</div></figure><p id="40714361-aae4-4d5e-86ac-4f4787d1f059" class="">
+</p><h3 id="2d6ecca7-c818-4caf-a5d3-fb882a9c64c4" class="">2.  Nouvelle façon (TypeScript)</h3><p id="0ee4bc5a-7a4c-4217-bd33-93e9ad48f866" class="">Une classe se déclare avec le mot-clé <code>class</code>, elle possède un constructeur auquel on passe des paramètres et au sein duquel on déclare les attributs, elle possède également des méthodes.</p><blockquote id="a12cbbbd-97f8-448a-971d-b30ed77269ef" class="">Comme en Java, mais simplifié… 
+On passe en fait par le <em>tsc</em>, compiler du TypeScript.</blockquote><pre id="5d7d1f1d-6f3b-4fcd-be22-caccf46a55b0" class="code"><code>class UneClasse {
+    constructor(unParam, autreParam) {
+        this.unParam = unParam;
+        this.autreParam = autreParam;
+    }
+    uneFonction() {
+        console.log(&quot;Je suis une fonction de classe.&quot;);
+    }
+}
+let uneNouvelleInstance = new UneClasse(&quot;une chaine de caractères&quot;, 42);
+console.log(uneNouvelleInstance); //UneClasse { unParam: &#x27;une chaine de caractères&#x27;, autreParam: 42 }
+console.log(uneNouvelleInstance.uneFonction()); //Je suis une fonction de classe.</code></pre><p id="b4804337-42ca-4d18-b898-2c01117609d5" class="">
+</p><h2 id="e2f21393-11c0-479c-8cbf-c5e6c30a4982" class="">Héritage</h2><hr id="cb4ef2e5-9097-464d-80cf-354a6114c828"/><p id="16e98311-4154-492d-bf19-89e646c0f15f" class="">Une classe hérite des attributs et méthodes du parent.</p><ul id="30f0e714-5bff-47d6-8622-beec3b153ab5" class="bulleted-list"><li style="list-style-type:disc">à l’ancienne, le lien à la classe parent se fait explicitement lors de la déclaration de la classe enfant avec <code>ClasseParent.call(this, params parent);</code></li></ul><ul id="cafcfb7b-89d8-4cd0-9bba-0ab4d574e2bd" class="bulleted-list"><li style="list-style-type:disc">avec la nouvelle manière, le lien à la classe parent se fait avec <code>extends</code> lors de la déclaration de la classe enfant et on utilise <code>super(params parent);</code> dans le constructeur enfant pour faire appel au constructeur parent</li></ul><blockquote id="a0b5d7e8-8523-447f-8d8d-6da8b64be103" class="">BP : préférer l’utilisation de <code>class</code> et <code>extends</code>.</blockquote><p id="42088146-192a-44e4-98e4-1db5394578cc" class="">
+</p><h3 id="9b693476-1822-4dfc-bf0a-22ab55d408d0" class="">(+) Notion de prototype</h3><blockquote id="c432796b-8557-4171-b5e3-2ad879bc74f7" class="">Notion qui me reste hermétique… et qui est désuète.</blockquote><p id="ff0a8ce8-a66d-4b33-a2c0-333506ab8e63" class="">Un prototype est la structure || forme que doit respecter la classe enfant et permet l’héritage des fonctions parent avec <code>ClasseEnfant.prototype = Object.create(ClasseParent.prototype);</code>.</p><p id="064e11b2-0d13-49c8-b25d-ffb6f4d0ee1d" class="">Il est ensuite possible de substituer les fonctions avec <code>ClasseEnfant.prototype.fonctionASubstituer = ...</code></p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="81c200ec-f926-4624-93d8-83b98e428e88"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">La substitution d’une fonction à ce stage sous-entend que la classe a juste été mal prévue au début…</div></figure><p id="8ffb9c37-0db9-44f3-a641-37d0a15dfda3" class="">
+</p><h2 id="7f80db60-52ef-458f-b730-572f71313d70" class="">Librairies</h2><hr id="754503eb-c01a-40b1-bdbb-e1a9fa333bc0"/><p id="22cf8dff-bba9-4bbb-ad27-6511f927ac8e" class="">Un fichier JavaScript peut être considéré comme une libraire (ex : jQuery).</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="2e805bad-5baa-4399-8e2e-3a39f87f758f"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Lors de l’appel de plusieurs scripts JavaScript (ou <em>librairies</em>) dans un fichier HTML, le plus bas dans le script est interprété <strong>en dernier</strong> —&gt; attention à l’ordre !</div></figure><h3 id="747361b1-be6e-42b5-8891-bd9bc39c9309" class="">Contexte d’exécution</h3><p id="2fc68ee2-a0da-4878-a42c-687a5fa5d68b" class="">Quand on a différentes librairies, on veut avoir des contextes (ou cadres) d’exécution.</p><p id="264ac5d4-7601-4e40-9d73-fcabb96a183c" class="">On utilise des <strong>fonctions anonymes</strong>, déclarées avec <code>let uneFonctionAnonyme = function(params) { instructions }</code> et appelées simplement avec <code>uneFonctionAnonyme(valeurs);</code>. </p><p id="2c62c70a-2d47-4f96-ba75-0909646b99f2" class="">Une autre façon de déclarer une fonction anonyme est d’enlever le <code>let</code> et de l’encapsuler entre parenthèses : <code>(function(param) { instructions }) ();</code>.</p><blockquote id="db5f2973-fa3e-4826-9d9a-d2b9283a1f5e" class="">BP : c’est mieux d’encapsuler la fonction anonyme car elle n’est pas enregistrée (elle n’a pas de nom), ce qui permet un gain de performance.</blockquote><p id="f97585cf-65f8-4591-a29b-4c08d3978cf7" class="">Il est possible de les déclarer et de les appeler immédiatement : <strong>fonctions anonymes immédiatement invoquées</strong>. La fonction est encapsulée dans des parenthèses, on renseigne la valeur des paramètres juste après : <code>(function(param) { instructions }) (valeurs);</code></p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="36c7681a-6648-4602-ac8c-9ca004d936bc"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">L’encapsulation permet de protéger les traitements.</div></figure><p id="e6de125b-6ec0-46c9-8ee3-f56e5fef30a4" class="">On utilise également des <strong>fonctions fléchées</strong> qui diffèrent des fonctions anonymes car elles n’utilisent pas le mot-clé <code>function</code>. Il s’agit d’une simplification de la syntaxe de déclaration dans laquelle les paramètres sont entre parenthèses (qui restent vides s’il n’y a pas de paramètres), suivis d’une flèche <code>=&gt;</code> et des instructions entre accolades. Lors de l’appel, les instructions sont évaluées et le résultat est retourné : <code>let uneFonctionFlechee = () =&gt; { instructions };</code>.</p><blockquote id="69c8721e-e9bd-4944-9394-502078b44191" class="">En Java, cela équivaut aux fonctions lambda.</blockquote><pre id="5e6079db-c313-40d4-8b07-7bcfd117126a" class="code"><code>let fonctionAnonyme = function(param) {
+    console.log(&quot;Je suis une fonction anonyme !&quot;);
+}
+
+let fonctionInvoquee = (
+	function(param) {
+    console.log(&quot;Je suis immédiatement invoquée !&quot;);
+})(&quot;un paramètre&quot;);
+
+(() =&gt; {
+    console.log(&quot;Je suis aussi une fonction invoquée, mais fléchée !&quot;);
+})();</code></pre><h3 id="ea770117-7675-401e-a59b-8fa1b2591102" class="">(+) Notion de closure</h3><blockquote id="76b083af-ab46-4d7f-ada9-7e255fc19132" class="">Désuet…</blockquote><p id="daf596cf-3953-445f-a5df-bfc1955ae733" class="">Spécialisation de méthodes :</p><p id="7f40914a-e6a9-42c0-9f80-5cf4b08f0371" class="">via prototype possible mais verbeux et statique</p><p id="f34c4642-91f8-4e08-8a31-f3f7e55dd4af" class="">via une fonction contextualisée (une closure) qui permet de retourner une fonction encapsulée (protégée du code)</p><p id="75096e9a-45c3-4fbd-b509-dd840f87fe4a" class="">exemple avec un compteur : on utilise une fonction anonyme automatiquement invoquée qui let un compteur et qui retourne une fonction anonyme dans laquelle j’incrémente le compteur et retourne le compter</p><p id="1189c51a-5909-460e-9293-f78bd84463db" class="">—&gt; donc le let est immédiatement invoqué lorsque le script est interprété (quand il passe sur la ligne) et ensuite quand on appelle la fonction, y a que le return qui est exécuté (ça incrémente le compteur et il est hors de portée si on passe par la fonction)</p><p id="25ff6439-256d-44ea-bd0d-c2055f6a505e" class="">(+) pattern factory par closure</p><p id="9d544e5c-e4f0-44c3-9b26-743890b28023" class="">
+</p><h2 id="f983e18e-9a83-42ad-ae8d-3bccd3c4f65a" class="">Stockage local</h2><hr id="4c3d59b8-ffad-4394-8985-2fcd48ab41e9"/><p id="88841cad-80df-4bc0-b830-89e13dc9fdd2" class="">Deux variables sont disponibles pour sauvegarder des choses dans le navigateur, qui disparaissent lorsque le cache est supprimé : <code>LocalStorage</code> et <code>SessionStorage</code>, avec des méthodes associées comme <code>setItem(cle,valeur)</code>, <code>geItem(cle)</code>, <code>removeItem(cle)</code>, <code>clear()</code>.</p><pre id="79c15984-859f-4411-aa95-fdc1911698e4" class="code"><code>object = { name: &quot;Bob&quot;, age: 42 };
+
+// sauvegarder un tableau, prealablement transforme en string
+localStorage.setItem(&quot;oneObject&quot;, JSON.stringify(object));
+
+// recuperer ce tableau
+object = JSON.parse(localStorage.getItem(&quot;key&quot;));
+
+console.log(object);</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="8ad542b7-5386-4633-a5ac-4bc789fd246b"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">La méthode <code>JSON.stringify()</code> permet de transformer un objet JSON en string. L’inverse se fait avec la méthode <code>JSON.parse()</code>.
+—&gt; Souvent utilisé pour les échanges de données depuis et vers un serveur web, puisqu’il faut que la donnée soit une string pour être envoyée à un serveur web.</div></figure><p id="3deccf0b-780b-489b-b13a-b4c387fa5f4c" class="">
+</p><h2 id="6b632356-9796-4ef5-9a4f-3ad26a90572d" class="">Traitements asynchrones</h2><hr id="6bbcf652-5ce8-4682-9ed7-d95bdcce1395"/><p id="049c843d-2186-4f83-8751-a794e12c0745" class="">On parle de “synchrone” lorsque les traitements sont effectués les uns après les autres et d’”asynchrone” lorsqu’ils sont effectués en parallèle.</p><p id="200fd3b3-b8e7-4370-adae-01400288f113" class="">Les traitements asynchrones permettent de laisser des traitements un peu longs se faire et récupérer le résultat plus tard, ce qui donne des applications plus réactives.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="0f2197f9-8318-4f62-a971-57e0cdebee0b"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Côté front, il n’est pas possible de multi-threader.</div></figure><p id="13161655-c7cc-4a27-ba9b-93190b410223" class="">
+</p><h3 id="e8fb6ff9-9047-4f1b-84fc-3ad7a6ecd7b0" class="">Option 1 : les callbacks</h3><blockquote id="8d6af174-bc3b-452f-a7a8-c0266b05f630" class="">Désuet… Révolution à l’époque, maintenant on utilise des <strong>observables</strong> et des promesses.</blockquote><p id="6b92d27d-29eb-4acb-b47f-03e5d3482ed1" class="">“Capacité de passer une fonction à une autre fonction et s‘assurer que cette fonction peut être appelée dans notre fonction”.</p><p id="b2a348ea-8e28-4af8-8510-d8552d6c1bc2" class="">Le mot-clé <code>callback</code> est passé en paramètre d’une fonction A lors de sa déclaration. Lors de l’appel de cette fonction A, une fonction B est passée pour le paramètre callback.</p><p id="eb1160f1-49dc-45a0-898c-bc58aaf2f274" class="">Exemple d’utilisation : mettre à jour une information sur un site (nombre de visiteurs, compteurs…) grâce aux méthodes <code>setTimeout()</code> ou <code>setInterval()</code> utilisées comme callbacks.</p><pre id="af29e527-e7cd-4bfb-890a-c4ead357d47d" class="code"><code>// Exemple d&#x27;Alain Cariou
+//  les méthodes direHello() et direHaha() sont passés en tant que callback 
+//  à la méthode repeter
+function direHello() {
+    console.log(&quot;Hello World !&quot;);
+}
+
+function direHaha() {
+    console.log(&quot;Haha !&quot;)
+}
+
+function repeter(callback) {
+    setInterval(function() {
+        callback()
+    }, 1000);
+}
+
+repeter(direHello);
+console.log(&quot;Après répéter&quot;);
+repeter(direHaha);</code></pre><h3 id="5f8c92a6-5e95-4033-8f78-18620ed7c497" class="">Option 2 : les promesses (très actuel)</h3><p id="d38f2a5e-4cd6-48d2-9cfe-86c29ed5d28e" class="">“Mécanisme qui permet de faire un traitement de manière asynchrone”.</p><p id="9fc3763d-de1d-42e5-9f34-ee63de5a2534" class="">Il fonctionne avec un objet <code>Promise</code> qui prend en paramètre une fonction, qui elle-même prends deux paramètres (<code>resolve</code> si la promesse est un succès et <code>reject</code> en cas d’erreur).</p><p id="eb7ddccf-3302-44cf-b9fd-2875987c601a" class="">Pour l’exécuter, on l’appelle et on récupère le résultat avec <code>.then</code>. On peut utiliser un <code>. catch</code>.</p><p id="3c8b22f9-f853-4b15-bf66-a44aa64de53f" class="">Exemple de traitement : interroger une API.</p><pre id="d17ff7ae-0810-45dd-81ad-f72d7508d935" class="code"><code>// Exemple d&#x27;Alain Cariou
+function getData() {
+    return new Promise((resolve, reject) =&gt; {
+        console.log(&quot;Début promesse !&quot;);
+        resolve({&quot;ok&quot;: &quot;Tout s&#x27;est bien passé !&quot;});
+
+        // setTimeout(() =&gt; {
+        //     resolve({&quot;ok&quot;: &quot;Tout s&#x27;est bien passé !&quot;});
+        //     reject(new Error(&quot;Echec de la promesse !&quot;));
+        // }, 2000);
+    });
+}
+
+let result;
+console.log(&quot;I - Je fais des trucs.&quot;);
+getData().then((data) =&gt; {
+    result = data;
+    console.log(&quot;II - Récupération des données : &quot; + data);
+}).catch((error) =&gt; {
+    console.log(error);
+});
+result = getData();
+console.log(&quot;III - Je fais d&#x27;autres trucs !&quot;);
+console.log(result);</code></pre><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="58ddaa7c-c2df-4e55-aaae-da168b2a2e20"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://guide-angular.wishtack.io/angular/callback-hell-vs.-promise-vs.-async-await/promise">https://guide-angular.wishtack.io/angular/callback-hell-vs.-promise-vs.-async-await/promise</a></div></figure><p id="74818ee3-3f23-4f1d-a8ff-dc76ac307e7e" class="">
+</p><h3 id="28792e45-1ecd-414a-b440-7cb0d7b0a332" class="">(+) les observables</h3><blockquote id="3fe6c78f-88a8-49cf-8e08-4a2cae2e4ef6" class="">Hors programme.</blockquote><p id="c3604798-e18e-4bbd-b91d-0b07561fcba7" class="">On peut chaîner les uns aux autres, on s’y subscribe (le flux de données peut continuer à arriver) ≠ promesse qui est juste une action qui commence et se termine.</p><p id="938dfde6-dd17-4c53-a1f4-00c33090d3e7" class="">
+</p></div></article></body></html>
