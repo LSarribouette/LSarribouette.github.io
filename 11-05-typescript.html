@@ -1,0 +1,773 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>TypeScript</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c8bb6b67-8a1a-4f15-96fa-8cf6f1eca585" class="page sans"><header><img class="page-cover-image" src="media/11-05-typescript/2023-01-19_15_11_19-pexels-tom-fisk-3482718.jpg_-_Paint.png" style="object-position:center 21.199999999999996%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">TypeScript</h1></header><div class="page-body"><blockquote id="c3369335-9bee-42e9-9bbd-5d71796b1a2b" class="">Sur-ensemble de JavaScript open source et supporté par n’importe quel navigateur ou OS, dont le code sera compilé en JavaScript avant d’être interprété.
+De plus en plus utilisé !!</blockquote><p id="c3cc99cb-0a95-4063-8e10-63e1fb16a435" class="">Le premier intérêt par rapport à JavaScript est la possibilité d’avoir un <strong>typage </strong>statique, ce qui n’améliore pas les performances mais améliore la lisibilité et la maintenance.</p><p id="98bd2b59-06c7-4296-b915-cb927b6e28bc" class="">Le second intérêt est de faire la <strong>POO </strong>avec TypeScript, qui permet de créer et utiliser des classes, interfaces, énumérations, génériques, modules (ou packages).</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="93b25d9e-dd5c-41f5-8b4e-b737a04f0baa"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://www.typescriptlang.org/">https://www.typescriptlang.org/</a>
+<a href="https://www.typescriptlang.org/docs/handbook/intro.html">https://www.typescriptlang.org/docs/handbook/intro.html</a></div></figure><p id="ea99de2d-311d-4893-bdf3-e0df02b915f3" class="">
+</p><h2 id="1556bd5e-938f-41fa-95f4-d21b04a0efcc" class="">Mise en place</h2><hr id="19c3e01b-3769-4533-ad0d-3fdc5a7d3e58"/><p id="4bdd2144-cdb1-45e2-acee-2552f0b67288" class="">Installation <em>via</em> le terminal avec <code>npm -g install typescript</code>.</p><p id="fa0fa3a8-2821-4660-90d4-f398cab4f0dc" class="">Transcompilation <em>via</em> le terminal avec <code>npx tsc nomDuFichier.ts</code> : cela va créer un fichier JavaScript (nomDuFichier.js).</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="d0eda879-d0da-466c-aa13-d03cd2fa8a62"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">La transcompilation est la compilation du TypeScript en JavaScript. Elle est faite par le <em>tsc</em> (TypeScript Compiler) par “suppression” des ajouts du TypeScript.
+Exemple : 
+<code>let varTypee: string = “une string”;</code> en TypeScript deviendra <code>var varTypee = “une string”;</code> en JavaScript.</div></figure><p id="5ddfa866-8c65-4ede-b5d1-ce36a278dbb1" class="">
+</p><h2 id="22981405-decd-41d6-b12b-c704454dae80" class="">Utilisation du TypeScript</h2><hr id="ccc81971-745c-4389-bd73-ea85645c38a9"/><h3 id="9cfcd6c7-da6c-446a-bf39-22871312756d" class="">Variables typées</h3><p id="646f63e0-0cd5-4eaa-b26a-aa48b1158119" class="">La déclaration des variables se fait en précisant le type après le nom de la variable avec deux-points : <code>let unBooleen: boolean = true;</code>.</p><p id="f70d0f2c-2fa7-447b-b020-3250071142d2" class="">Les principaux types primitifs sont <code>string</code>, <code>number</code> et <code>boolean</code>, que l’on peut utiliser pour créer des tableaux avec <code>number[]</code> ou <code>Array&lt;number&gt;</code>.</p><p id="ebd16e3b-d942-4a0a-9e14-9a8a5de04b12" class="">Il existe un type spécial, <code>any</code>, qui permet de supprimer la vérification de type sur la variable et ne renvoie donc aucune erreur.</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="fbe8c239-7309-48ed-88cb-1b1d48e85b79"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Si une variable est déclarée sans type (comme en JavaScript) et que le TypeScript n’arrive pas à lui inférer dynamiquement un type, alors celui-ci sera automatiquement <code>any</code>.</div></figure><p id="f82e328f-4594-49b3-8a18-24e8ec187b07" class="">
+</p><h3 id="bfc41868-9685-425f-9fbc-bc81472c8c02" class="">Énumérations</h3><pre id="4055cb47-d861-4245-b104-a2084d08367e" class="code"><code>// declaration
+enum JoursSemaine { Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche };
+
+// utilisation
+let jourDuMarche: JoursSemaine = JoursSemaine.Mardi;</code></pre><p id="b2dbc21c-5051-44f4-968b-61382d8fdb3d" class="">
+</p><h3 id="b2220dc5-5ea5-48e6-b33d-70c24bdd157f" class="">Classes</h3><pre id="3b7d35c4-bb47-4474-80bb-0d1880e39f8b" class="code"><code>// declaration d&#x27;une classe
+class Livre {
+	protected isbn: number;
+	protected titre: string;
+	protected auteur: string;
+
+	constructor(titre: string, auteur: string) {
+		this.titre = titre;
+		this.auteur = auteur;
+	}
+
+	public afficher():void {
+		console.log(&#x27;Le titre de ce livre est &#x27; + this.titre 
+								+ &#x27;, son auteur est &#x27; + this.auteur + &#x27;.&#x27;);
+	}
+}
+
+// instanciation
+let unLivre = new Livre(&quot;L&#x27;existentialisme est un humanisme&quot;, &quot;Jean-Paul Sartre&quot;);
+unLivre.afficher();
+//Le titre de ce livre est L&#x27;existentialisme est un humanisme, son auteur est Jean-Paul Sartre.</code></pre><blockquote id="83ad0c7c-7854-4708-b83f-e9376b831974" class="">BP : Il est possible de déclarer les attributs directement le constructeur mais ce n’est pas recommandé car cela diminue la lisibilité et la maintenabilité.</blockquote><p id="29308dd7-5015-41d7-adba-1aa4476bb844" class="">
+</p><h3 id="be4c6b7f-63cf-4f0c-b4c4-2e08dbe58403" class="">Héritage</h3><pre id="d6952d8c-ce1e-4c2d-8f38-dc3fbdfa6d82" class="code"><code>// declaration d&#x27;une classe enfant
+class Roman extends Livre {
+  private genre: string;
+
+  constructor(titre: string, auteur: string, genre: string) {
+      super(titre, auteur);
+      this.genre = genre;
+  }
+
+  public afficher(): void {
+      super.afficher();
+      console.log(&quot;C&#x27;est un roman du genre littéraire &quot; + this.genre + &quot;.&quot;);
+  }
+}
+
+// instanciation
+let unRoman = new Roman(&quot;Darkest minds&quot;,&quot;Alexandra Bracken&quot;, &quot;Dystopie&quot;);
+unRoman.afficher();
+//Le titre de ce livre est Darkest minds, son auteur est Alexandra Bracken.
+//C&#x27;est un roman du genre littéraire Dystopie.</code></pre><p id="eb681c62-4cc5-4db6-b780-e2cad52abea9" class="">
+</p><h3 id="77b40a4f-a86d-4198-8912-05fccc239c07" class="">Interfaces</h3><blockquote id="8e7cc062-4461-4d07-a13b-2f87376bc9d3" class="">“Signature ou contrat d’une classe”.</blockquote><pre id="7f63d890-488d-415e-9927-ab0228f61628" class="code"><code>// declaration d&#x27;une interface
+interface Vendable {
+    // - propriete optionnelle
+    promotion?: number;
+
+    etreVendu(librairie: string, nbExemplaires: number): void;
+}
+
+// declaration d&#x27;une classe qui l&#x27;implemente
+class PieceDeTheatre extends Livre implements Vendable {
+    private premiereRepresentation: number;
+
+    constructor(titre: string, auteur: string, premiereRepresentation: number) {
+        super(titre, auteur);
+        this.premiereRepresentation = premiereRepresentation;
+    }
+
+    public afficher(): void {
+        super.afficher();
+        console.log(&quot;C&#x27;est une pièce de théatre dont la première représentation eut lieu en &quot;
+                    + this.premiereRepresentation + &quot;.&quot;);
+    }
+
+    // - methode de l&#x27;interface a definir
+    public etreVendu(librairie: string, nbExemplaires: number): void {
+        console.log(&quot;La pièce de théatre &quot; + this.titre
+            + &quot; a été vendue par la librairie &quot;
+            + librairie + &quot;, &quot; + nbExemplaires + &quot; fois.&quot;);
+    }
+}
+
+// instanciation
+let unePiece = new PieceDeTheatre(&quot;Les Bonnes&quot;, &quot;Jean Genet&quot;, 1947);
+unePiece.afficher();
+//Le titre de ce livre est Les Bonnes, son auteur est Jean Genet.
+//C&#x27;est une pièce de théatre dont la première représentation eut lieu en 1947.
+unePiece.etreVendu(&quot;Mollat&quot;, 152);
+//La pièce de théatre Les Bonnes a été vendue par Mollat, 42 fois.</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="290e539c-24c4-4994-a557-29bab28879b5"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Lors de la transpilation, les interfaces TypeScripts disparaissent totalement puisqu’elles ne contiennent pas de code.</div></figure><h3 id="af33e6ae-fad8-4482-83f2-59620d8bb831" class="">Génériques </h3><p id="e6af9321-b222-4a65-ac98-b7912c4a5906" class="">Un type générique est indiqué avec la notation diamant <code>&lt;Type&gt;</code> et peut être utilisé par exemple pour créer un tableau, une fonction ou une classe.</p><pre id="adc72ad5-95b6-4919-a641-6b226f44302d" class="code"><code>// tableaux
+let unTableau: Array&lt;number&gt;;
+let unAutreTableau: Array&lt;string&gt;;
+
+// fonctions
+function afficherUnMessage&lt;T&gt;(message: T): void {
+    console.log(&quot;Le message est : &quot; + message);
+}
+afficherUnMessage(&quot;un message en chaine de caractères&quot;);
+afficherUnMessage(569684);
+afficherUnMessage(true);</code></pre><p id="5a34a50f-b9b5-4bf4-bbab-66deb4066d53" class="">
+</p><h3 id="b36932c4-6f1b-428e-9019-246296677157" class="">Modules</h3><p id="18f09794-9d8c-418e-a900-f83746b47498" class="">Un module est créé avec le mot-clé <code>module</code>, il contient des instructions et des <code>export</code> de n’importe quelle déclaration (variable, fonction, classe, interface…) puis il peut être <code>import</code> dans d’autres fichiers.</p><h3 id="82aa3198-7aea-465a-acc3-4d85004a80c1" class="">Expressions lambdas</h3><p id="60c1a453-436b-4dd0-8f5f-8fc00c8de298" class="">Les expressions lambdas sont des fonctions fléchées, elles ne sont pas stockées en mémoire de façon classique mais exécutée à la volée.</p><pre id="9fc2fc3b-3caa-4a40-bb4a-731e4d24f354" class="code"><code>let uneExpressionLambda = (a,b) =&gt; a+b;
+console.log(uneExpressionLambda(5,4)); //9</code></pre><p id="98d7ab7b-b179-4a9a-9e4c-7224ad43601c" class="">
+</p></div></article></body></html>
