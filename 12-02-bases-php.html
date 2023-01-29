@@ -1,0 +1,752 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Les bases du PHP</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a9c9bc8e-545e-4844-8c5b-3c933c259c07" class="page sans"><header><img class="page-cover-image" src="media/12-02-bases-php/2023-01-29_23_08_53-pexels-%25ED%259D%25AC%25EC%25A0%2595-%25EA%25B9%2580-7792241.jpg_-_Photos.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Les bases du PHP</h1></header><div class="page-body"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="11f6d95d-d770-46bc-8f2d-b3c5aeaef50b"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://www.php.net/docs.php">https://www.php.net/docs.php</a></div></figure><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="4243e0cf-1dd7-47d7-af99-936c2ed45c3c"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Pour la soutenance : fonction ≠ méthode ≠ procédure
+
+- procédure et fonction : on dit plus ça, une <strong>fonction </strong>retourne quelque chose ou pas 
+- une fonction —&gt; pas besoin d’instance pour l’utiliser
+- une <strong>méthode </strong>est à l’intérieur d’une classe —&gt; besoin d’une instance pour l’utiliser —&gt; donc POO 
+(si j’ai une fonction et que je la mets dans une classe, c’est une méthode)</div></figure><p id="caa281f3-d72c-441c-8cc6-b638702dec9a" class="">
+</p><h2 id="428aa4c5-37b5-44da-ae9e-e9e686685d1a" class="">Balises PHP</h2><hr id="5c1a4e56-4115-41c7-9cc9-8d3607eb3220"/><p id="ef64f71f-7a13-4ec1-9e47-2ea1ff0825d6" class="">Un bloc de code PHP est toujours entouré des balises <code>&lt;?php ... ?&gt;</code> ou juste <code>&lt;? ... ?&gt;</code>.  S’il n’y a pas d’autres instructions après le bloc, alors la balise de fin n’est pas obligatoire.</p><p id="851af2be-1edf-4b49-baea-d65ec3b55e49" class="">Pour faire de l’affichage dans le navigateur, il est possible d’utiliser la fonction <code>echo</code> ou les balises <code>&lt;?= ... ?&gt;</code>.</p><p id="f119f0a4-5ef4-4b21-be01-0d3ec7c6af32" class="">Les instructions php <strong>doivent</strong> être séparées par un point-virgule <code>;</code> à la fin.</p><p id="b475b7aa-5a33-4e83-963a-a98adce1e992" class="">Les commentaires sont écrits avec <code>//</code> ou <code>#</code> sur une ligne, avec <code>/* ...*/</code> sur plusieurs lignes.</p><p id="5d757f1c-eada-4875-894c-31abfd6fbf0a" class="">Les variables sont indiquées avec un dollar <code>$</code>.</p><blockquote id="26a6220a-f6c8-43df-be33-359e73aaf33a" class="">BP : ne pas laisser de <em>magic numbers</em>, mieux vaut définir une constante avec un nom qui a une signification concrète.</blockquote><p id="6dad7300-6a44-424b-a11d-c84464bf5672" class="">
+</p><p id="d8f6db27-bb15-49d4-97b8-90f0870f9412" class="">Les strings sont concaténées avec un point : <code>echo &#x27;Hello &#x27;.$prenom;</code>.</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="9848d808-52ea-4c81-9930-5ce9055de39b"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Attention quand on fera de l’objet, on n’utilisera pas le point mais une flèche <code>instance=&gt;methode()</code>.</div></figure><p id="e81ccb74-c151-4906-a926-52cdacddb0cc" class="">
+</p><h3 id="c8e22c57-ccda-4dfd-be64-350786604ef9" class="">Variables</h3><p id="c679c2c2-9d4c-4f19-b89e-6b22c8eda96c" class="">Elles commencent toujours par un dollar <code>$</code> et ne sont pas typées (inférence de type).</p><p id="d089df55-2fca-4649-b9b8-435e8076224a" class="">Il n’y a pas de typage fort : une variable peut changer de type au cours de son existence.</p><p id="660928d0-0bde-4884-b6e3-058d899ab3d7" class="">Le transtypage implicite est possible si le premier caractère correspond au type souhaité (une multiplication sur une string qui commence par un chiffre, par exemple). Le transtypage explicite est possible avec <code>settype()</code>. </p><p id="578dd9dd-143f-4358-a924-3a5578076bb8" class="">
+</p><p id="e1465727-7bac-439f-bcdd-0f7ec22d1a0b" class="">Leur portée est à l’échelle du fichier : si une variable est assignée dans un bloc PHP, elle est accessible dans un autre bloc PHP plus loin.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="267a353f-e51e-4dc9-858c-1ad4d50d6cb6"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">L’interpréteur PHP lit d’abord la page en entier et ensuite il remplace comme il faut.</div></figure><p id="427dc312-58e0-4b94-bfee-3a251a30f5e2" class="">
+</p><p id="be0c94cc-9072-4695-ab69-a676ff9ccdf7" class="">L’assignation par valeur est faite avec le <code>=</code> (classique).</p><p id="657a2902-3e0f-4a9a-808e-7401e01a205c" class="">Il est possible d’assigner par référence avec <code>&amp;</code> tel que la valeur de var2 est au même endroit mémoire que var1, donc toute modification s’applique aux deux variables : <code>$var2 = &amp;$var1;</code>.</p><p id="a095da35-906e-4b4d-a137-09ddf20b4bb1" class="">(+) Il est possible d’utiliser des variables dynamiques (rarement vu dans la vraie vie), avec le <code>$$</code>.</p><p id="72fc6d4c-4112-4d45-9046-eabe02f71124" class="">
+</p><p id="327a9403-d147-47fa-ab1a-a4ded7fdbd79" class="">Les constantes n’ont pas besoin de $ et sont nommées en majuscules avec le mot-clé <code>const</code> ou la fonction <code>define()</code> : <code>define(&#x27;SON_NOM&#x27;, &#x27;sa valeur définitive&#x27;);</code>. </p><p id="d4d4fdd4-cc66-41e9-991e-782ba60298b4" class="">Il est possible de tester l’existence d’une constante avec <code>defined()</code>.</p><p id="dd6f3228-4a07-464d-b4c0-5c1370586f42" class="">
+</p><h3 id="e16da098-2ba3-40b7-a67a-8d0885792187" class="">Fonctions utiles</h3><ul id="edfe80cc-d0be-43be-9446-0463c99d5a26" class="bulleted-list"><li style="list-style-type:disc"><code>var_dump()</code> = affiche les informations de la variable (son type, sa valeur…)</li></ul><ul id="796f7544-c12f-4607-af61-78505f357a85" class="bulleted-list"><li style="list-style-type:disc"><code>isset()</code> = teste l’existence d’une variable</li></ul><ul id="af9a291d-3929-4e18-b6ed-c049acaebd49" class="bulleted-list"><li style="list-style-type:disc"><code>empty()</code> = teste si une variable est vide</li></ul><ul id="fc2f8d86-00f8-4b15-b666-5e765e83a97c" class="bulleted-list"><li style="list-style-type:disc"><code>unset()</code> = supprime une variable</li></ul><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="c4f6570a-d8f2-467d-b122-13c3d00d3c00"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">null ≠ vide (pas null mais rien dedans) ≠ undefined</div></figure><p id="7b137ab1-6b95-4f23-87d2-a65fbd716606" class="">
+</p><h3 id="aad1873f-85a1-4dd6-bf78-a011ed114ce8" class="">Types</h3><p id="d111d7d3-8eef-42d7-91cf-ac8d0734aba4" class="">Type <em>boolean</em> : </p><p id="ae5cc1e0-a7b1-4544-bb51-b0fe498640fc" class="">- deux valeurs : <code>true</code> et <code>false</code></p><p id="626854bd-1a29-476b-9643-6548b3875521" class="">- insensible à la casse</p><p id="e484def3-5850-40ad-95a6-1a79446320e3" class="">- opérateurs de comparaison : classiques, avec le strictement identique ou différent (<code>===</code> ou <code>!==</code>)</p><p id="f656a1a8-1ad7-417f-b926-3fd2ad379b9a" class="">- opérateurs booléens : et (<code>AND</code>, <code>&amp;&amp;</code>), ou (<code>OR</code>, <code>||</code>), ou exclusif (<code>XOR</code>), non (<code>!</code>)</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="2a9efca0-c000-406d-86ec-45799d60934a"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">OR : la première condition est vérifiée, si elle est fausse alors la vérification s’arrête et les autres conditions ne sont pas vérifiées.
+XOR : soit l’un soit l’autre mais pas les deux (donc 1 1 donne 0).</div></figure><p id="6baadadd-3872-4c50-bbb3-e4656b316c27" class="">- équivalent à <code>false</code>: <code>0</code>, <code>&#x27;&#x27;</code>, <code>&#x27;0&#x27;</code>, <code>[]</code>, <code>null</code></p><p id="20d96562-56f5-47c4-95f0-2d8ef89ec832" class="">
+</p><p id="f2b4aa27-68dc-4c6b-b2fd-4f8f293bf087" class="">Types <em>int</em> et <em>float</em> : </p><p id="3add8c81-5552-41a5-9f11-7fea8fb30092" class="">- nombres entiers et à virgule</p><p id="e4739652-cbfa-48d9-a1e9-bcbfbd2faf98" class="">- opérateurs arithmétiques classiques</p><p id="9c5105f6-5887-44be-8e2e-ac7484afeb37" class="">
+</p><p id="dbbb50e5-cf25-4821-9e7e-0e6632f9c1ed" class="">Type <em>string</em> : </p><p id="3fdf05bd-67b3-45ec-b1c7-cd112649aa14" class="">- simples quotes <code>&#x27;&#x27;</code> : pas d’interprétation</p><p id="709ea244-38f8-4f24-98db-2db3f84042c0" class="">- double quotes <code>&quot;&quot;</code> : interprétation des variables, des caractères de mise en forme (\n, \r, \t…)</p><p id="2af084b8-312b-4bc8-80a9-3c7dc0584fce" class="">- back slash <code>\</code> : caractère d’échappement (<code>\\</code>, <code>\&quot;</code>, <code>\$</code>...)</p><p id="61ea8402-b2b7-4a8c-b7bc-1fc918ccba05" class="">- point <code>.</code> : opérateur de concaténation</p><p id="b6313df1-3e5e-4e88-91a4-543b74c454fc" class="">
+</p><h3 id="1e8f9433-52a4-4fc4-880a-f8fa233447eb" class="">Tableaux </h3><blockquote id="e5a77dad-131f-4759-ad51-471792bb04b0" class="">Très souple, ils sont beaucoup utilisés en PHP.</blockquote><p id="8ff01d03-a4b0-4ba3-a056-7b39d4f25147" class="">La syntaxe des tableaux est classique : <code>[]</code> ou <code>array()</code>.</p><p id="4a51a2aa-2f6d-4d95-aff1-1a16c1ae5d83" class="">Un tableau peut être indicé (numérique) consécutif ou non, associatif (clé/valeur), ou même mixte.</p><p id="9b1edfc2-3eca-412f-8d62-a2ceab5d8d67" class="">On peut mettre des tableaux dans un tableau pour créer des tableaux multidimensionnels.</p><p id="36d951cd-31b2-4abd-b1f3-436bf3035867" class="">
+</p><p id="811a4095-dbdc-4572-9f00-570ade845d51" class="">L’assignation successive de valeurs à un tableau remplit les cases dans l’ordre.</p><p id="0e3799e2-f12e-4557-8241-7215b4b33bc6" class="">Il est possible d’indiquer l’indice pour modifier l’ordre.</p><p id="cd5a8030-e844-4dec-91c8-e4968dc5cb57" class="">Il est possible de préciser une clé qui sera associée à la valeur assignée.</p><pre id="0222aa4f-987b-499e-a7b0-7179861ebb7b" class="code"><code>// tableau indice
+$tabI[] = &#x27;bleu&#x27;;
+$tabI[] = &#x27;rouge&#x27;;
+$tabI[] = &#x27;vert&#x27;;
+var_dump($tabI); //array(3) { [0]=&gt; string(4) &quot;bleu&quot; [1]=&gt; string(5) &quot;rouge&quot; [2]=&gt; string(4) &quot;vert&quot; }
+// - equivaut a
+$arrI = array(&#x27;bleu&#x27;, &#x27;rouge&#x27;, &#x27;vert&#x27;);
+
+echo &#x27;&lt;br&gt;&lt;br&gt;&#x27;;
+
+// tableau associatif
+$tabA[&#x27;ville&#x27;] = &#x27;Bordeaux&#x27;;
+$tabA[&#x27;département&#x27;] = &#x27;Gironde&#x27;;
+$tabA[&#x27;région&#x27;] = &#x27;Nouvelle-Aquitaine&#x27;;
+var_dump($tabA);
+// - equivaut a
+$arrA = array(&#x27;ville&#x27; =&gt; &#x27;Bordeaux&#x27;, &#x27;département&#x27; =&gt; &#x27;Gironde&#x27;, &#x27;région&#x27; =&gt; &#x27;Nouvelle-Aquitaine&#x27;);
+
+echo &#x27;&lt;br&gt;&lt;br&gt;&#x27;;
+
+// tableau multidimensionnel
+$tabVilles = [&#x27;France&#x27; =&gt; [&#x27;Paris&#x27;,&#x27;Bordeaux&#x27;,&#x27;Marseille&#x27;], &#x27;Espagne&#x27; =&gt; [&#x27;Madrid&#x27;,&#x27;Bilbao&#x27;]];
+var_dump($tabVilles);
+// - equivaut a
+$arrVilles = array(&#x27;France&#x27; =&gt; array(&#x27;Paris&#x27;,&#x27;Bordeaux&#x27;,&#x27;Marseille&#x27;), &#x27;Espagne&#x27; =&gt; array(&#x27;Madrid&#x27;,&#x27;Bilbao&#x27;));</code></pre><p id="00fb9a76-f4e0-4012-afe8-64f27a30fb3d" class="">
+</p><p id="9b1599e8-2354-44ee-b090-3d2cefbf8a4d" class="">L’accès aux éléments du tableau se fait avec leur indice ou leur clé entre crochets : <code>tabMultidim[&#x27;clé dim1&#x27;][indice dim2]</code>.</p><p id="84028726-e4e5-4c1f-a1bd-e5a2729997ed" class="">
+</p><p id="e7891a60-32fb-4bca-ac95-96f3cfb34f84" class="">Fonctions utiles :</p><p id="03c07648-e5d5-442b-abfa-697e0d7cc177" class="">- <code>explode()</code> = crée un tableau à partir d’une string, on précise le séparateur (utile notamment pour le JSON)</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="7d475cc8-5c42-4d92-b4ec-37ede1b4312d"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">La fonction retourne un tableau donc pas besoin de mettre des crochets à la suite du nom de la variable.</div></figure><p id="32728653-a5d0-4e62-a969-b0a330bcd484" class="">- <code>implode()</code> = l’inverse, on précise également le séparateur</p><p id="e58b3225-53b0-4728-81da-f60e2039123c" class="">
+</p><h2 id="5ac1c3ed-aa1a-43cb-8266-84516502b54d" class="">Structures de contrôle</h2><hr id="08237d5f-4272-46ec-b2b7-7b01e721b594"/><h3 id="e97520e6-169c-4c3b-af9f-5eadc784390c" class="">Conditions</h3><p id="557e4aea-7054-46df-9d58-73dd819cc6d7" class="">Les conditionnelles sont classiques : <code>if</code>, <code>else</code>, <code>elseif</code> d’une part, <code>switch</code>, <code>case</code>, <code>break</code>, <code>default</code> d’autre part.</p><pre id="c889aa33-3f66-460e-816b-d96aad793982" class="code"><code>if ($a === $b) {
+	echo &#x27;a est strictement égal à b&#x27;;
+}
+
+switch ($repas) {
+	case 1 :
+		echo &#x27;petit déjeuner&#x27;;
+		break;
+	case 2 :
+		echo &#x27;déjeuner&#x27;;
+		break;
+	case 3 :
+		echo &#x27;goûter&#x27;;
+		break;
+	case 4 :
+		echo &#x27;dîner&#x27;;
+		break;
+	default :
+		echo &#x27;c\&#x27;est pas l\&#x27;heure de manger&#x27;;
+		break;
+}</code></pre><p id="44e5c4f9-d7cd-40a4-aa01-ef57e10a52ae" class="">Il existe une forme alternative avec <code>if (condition) : ...instructions... endif;</code> et <code>switch ($var) : ...instructions... endswitch;</code>. On peut alors mettre du html au milieu du PHP (pas recommandé).</p><p id="167b2fd6-91ff-400a-a9bb-711d8e9ebcd6" class="">
+</p><h3 id="ce3c39a3-2fed-4cb0-bd97-268024e0298c" class="">Opérateur ternaire</h3><p id="9999cabf-d529-4eb5-bea9-c51ea90306ab" class="">Il est utilisé lorsqu’on peut répondre oui ou non à la question : <code>condition ? valeur si vraie : valeur si faux</code>.</p><pre id="caffc03f-b602-4392-910f-5afbc39c9f13" class="code"><code>echo &#x27;Il y a &#x27;.$nb.&#x27; personne&#x27;.($nb&gt;1 ? &#x27;s&#x27; : &#x27;&#x27;).&#x27; dans la pièce.&#x27;;
+// si $nb=1 : Il y a 1 personne dans la pièce.
+// si $nb=6 : Il y a 6 personnes dans la pièce.</code></pre><p id="4bdc1bac-acc0-4eef-b5ca-e46a0e07a9ed" class="">
+</p><h3 id="ac447eb2-5c7a-41bd-9d66-e89f1ccb3c0d" class="">Boucles</h3><p id="1119304f-b6b7-48ca-8643-20b0d19a7719" class="">Les boucles sont également classiques : 
+   <code>while (condition) { instructions }</code>, </p><p id="1b3af215-2b90-44f0-bb2b-596bc1dbe629" class="">   <code>do { instructions } while (condition);</code>, </p><p id="fb9d79fa-512d-440c-ba0c-da28d6b88f89" class="">   <code>for (initialisation, condition, incrémentation) { instructions }</code>, </p><p id="927888b9-9ed8-4c91-adf4-8f6e91785b5a" class="">   <code>foreach ($tableau as $element) { instructions }</code>,</p><p id="43304d4f-521c-4c26-8757-02e4c680ff66" class="">   <code>foreach ($tableau as $cle =&gt; $valeur) { instructions }</code></p><p id="9283f9c7-68b7-4618-aebe-d83e12c36ece" class="">
+</p><h2 id="352f2f84-69fc-4267-b44d-66397e90d925" class="">Quelques fonctions utiles</h2><hr id="00215476-711d-4e39-b130-14f0956153e5"/><h3 id="a45fb719-dc57-43f4-8b55-b8c25f26e5d3" class="">Inclure un fichier PHP</h3><p id="ee8f5fb5-fa6d-4b18-8500-ff591f570c98" class="">On peut inclure un fichier avec <code>include</code>, souvent placé au début du fichier pour une meilleure lisibilité. Si le fichier n’est pas trouvé, un <em>warning</em> sera renvoyé mais le traitement ne sera pas arrêté.</p><blockquote id="435c59cd-e2ec-4a92-8c30-234e7fd4244b" class="">Cela ne ralentit rien car il faut attendre que tout le fichier soit chargé avant qu’il y ait affichage.</blockquote><p id="52f7bfd0-cf47-43c2-afea-2b9044b15b89" class="">On peut aussi inclure un fichier avec <code>require</code>, qui retournera une erreur fatale et arrêtera le traitement si le fichier n’est pas trouvé.</p><p id="ff95fb15-5048-45cf-9ca0-774865073c35" class="">Pour éviter d’appeler plusieurs fois un même fichier dans une cascade d’inclusion, il est recommandé d’utiliser <code>include_once</code> et <code>require_once</code>.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="c652aeb3-f851-4b46-b0e7-300a2e221412"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">On inclue ainsi le fichier PHP dans le HTML (tout comme le CSSet le JavaScript), mais on peut aussi inclure des fichiers PHP dans d’autres fichiers PHP (pour la POO, par exemple).</div></figure><blockquote id="7d097bea-a9e2-4b03-94cc-740e8e0d374c" class="">BP : La séparation du code en différents fichiers (notamment selon le langage) permet à plusieurs collègues de travailler en parallèle (comme designer et développer) mais aussi une plus grande maintenabilité, la réutilisation de parties de code…</blockquote><p id="a4498bb3-a0b0-4585-b975-cbaca9f5265a" class="">
+</p><h3 id="7e75e789-2a6b-4366-9bf5-1458d8bb9b2b" class="">Changer la casse</h3><p id="8e376497-9bd6-4fce-83d6-1c9ccfc14835" class=""><code>strtoupper()</code> en majuscules,</p><p id="b39baeab-8b2c-4255-b9c8-431a54eab4e1" class=""><code>strtolower()</code> en minuscules, </p><p id="aab29d2e-ee00-4344-b27c-d125c76d39d6" class=""><code>ucwords()</code> pour la première lettre de chaque mot en majuscule</p><p id="72a8cbb1-6de2-4c87-b211-466a6b861bdb" class="">
+</p><h3 id="86da9b4e-2055-4b98-87b0-03bf47c1447a" class="">Formater les nombres</h3><p id="c87fc958-98b7-4175-8989-2a24a3cd5838" class=""><code>sprintf()</code> pour formater une chaîne de caractères (avec par exemple %02d pour un nombre sur deux caractères, qui ajoute un zéro devant si le nombre est sur un seul caractères)</p><p id="9cb54000-92e5-4b2f-bb7e-2b74548b168e" class=""><code>number_format()</code> pour transformer un nombre en une chaîne de caractères formatée, avec des paramètres pour le nombre de décimales, le séparateur des décimales, le séparateur des milliers. </p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="65751150-9cc4-4415-860f-cf02dddca50e"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Cette fonction ne change pas la valeur de la variable, juste l’affichage.</div></figure><p id="561be2d7-2c7c-4d72-a24e-ac1f7c0d432c" class="">
+</p><h3 id="b7a5fa9e-e46b-4831-8c44-777d11ba5932" class="">Rechercher dans une chaîne de caractères</h3><p id="ccd4214b-d28a-4975-90ad-b39fa730ad83" class=""><code>strpos()</code> pour chercher un caractère, soit elle le retourne soit elle retourne faux</p><p id="3e8cb035-637f-4a8a-9800-a53d593a2554" class=""><code>strrpos()</code> pour chercher la dernière occurrence d’un caractère</p><p id="b28f8ff6-2e9b-4063-bf0f-5c553ec2662e" class=""><code>stripos()</code> pour chercher un caractère sans tenir compte de la casse</p><p id="209217fd-9963-43a0-a0c9-58b3ca555ec5" class=""><code>strripos()</code> pour chercher la dernière occurrence d’un caractère, sans tenir compte de la casse</p><p id="95a15447-a72c-4791-95f3-a0ea39e81ba9" class="">
+</p><h3 id="1973f442-0948-456d-b286-eb8aeb981b69" class="">Manipuler les dates</h3><p id="7dc130ce-df16-4f0c-848b-134e696583f6" class="">On utilise le <em>timestamp Unix</em> (nombre de secondes écoulées depuis le 1er janvier 1970) pour comparer les dates.</p><p id="46fec0ea-5a48-4c35-abaa-5b9487ec09b5" class=""><code>mktime()</code> pour calculer le nombre de secondes entre le <em>timestamp</em> et la date indiquée</p><p id="b9a84d59-97c7-44ea-8a94-94346f396417" class=""><code>date()</code> pour formater la date : <code>date(&#x27;d/m/Y&#x27;)</code> pour un format jj/mm/aaaa.</p><p id="45623d3a-cab1-4a7b-9b13-08117bd5cd9f" class=""><code>ini_set()</code> pour changer la configuration sur quelques lignes (fuseau horaire, par exemple)</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="e99c9463-d420-47d7-9eef-f1e8b33cb517"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Le fichier <a href="http://php.ni">php.ini</a> contient toute la configuration d’un projet.
+Il est possible de la modifier pour tout le projet dans un éditeur de texte. 
+Exemples : 
+;date.timezone ⇒ si je décommente, php prendra en compte la timezone de mon choix
+;extension=pgsql ⇒ à décommenter si on veut une db (nous on utilisera pdo_truc car php data object)</div></figure><p id="e3942a59-9aad-49c3-a88e-2fa297c7aa8b" class="">
+</p><h3 id="7f3cf3fe-2255-4e2f-b340-f9912766df96" class="">Créer et appeler une fonction</h3><p id="cce8f808-4013-4c2f-9d47-942f511be4c0" class="">Les fonctions n’ont pas besoin d’avoir été définies avant leur utilisation</p><p id="df3d420b-3e55-4af6-8337-00f8043f5aa8" class="">Une fonction est créée avec <code>function unNom(params) { instructions [return] }</code> puis appelée avec son nom et la valeur de ses éventuels paramètres.</p><p id="1fc1bb6b-b1f5-4e52-82dc-879ffb45fad8" class="">Il est possible de passer des valeurs par défaut à des paramètres lors de la création (<code>$param1 = &quot;une valeur par défault&quot;</code>).</p><p id="78a4ee93-66f1-453f-b345-8042a0b30979" class="">Il est possible de créer des fonctions anonymes, des fonctions typées (en précisant le type de la variable retournée), d’utiliser des variables globales avec <code>$GLOBALS</code>.</p><p id="1d51ab74-919f-4532-9c34-588c27cbddaf" class="">
+</p><h3 id="b31a4110-fb10-4128-ad8d-6370e8b0d220" class="">Les expressions rationnelles</h3><p id="b1e8437c-aeb7-4374-891e-6d8ee3a9c07f" class=""><em>pas vues en cours, à compléter…</em></p><p id="ef1ecdf2-eac3-433b-a23a-0619e0967f89" class="">
+</p><h2 id="7ab9b38a-0cac-4e12-9207-2b63051b30e6" class="">BP en vrac</h2><hr id="f02ce1fa-1a87-4e42-8ba1-12bd8712c834"/><ul id="4a676f30-81c6-421e-b572-b527aacee47b" class="bulleted-list"><li style="list-style-type:disc">Faire attention à la lisibilité, surtout si la fonction est dans un autre fichier.</li></ul><ul id="5b8e341a-a5bd-4950-8933-be7654504a72" class="bulleted-list"><li style="list-style-type:disc">Se balader dans les fichiers avec ./jesuisdanslememedossier.php et ../jesuisdansledossieraudessus.php (et pas avec des chemins absolus).</li></ul><ul id="539019f3-b7f6-49e4-b0a8-97e018523166" class="bulleted-list"><li style="list-style-type:disc">A partir de PHP8, il est possible de donner le type des paramètres et du return : c’est plus facile à lire et ça fait une vérification de plus.</li></ul><ul id="6721094c-b551-436b-bfc6-741542d4ab96" class="bulleted-list"><li style="list-style-type:disc">Lors de l’écriture d’une fonction, se demander d’abord “qu’est-ce qu’elle retourne et de quoi elle a besoin ?”.</li></ul><ul id="f8663969-7452-4675-ae7b-f5f3bd5d6b6c" class="bulleted-list"><li style="list-style-type:disc">Documenter ses scripts !! avec /**</li></ul><ul id="2522d1b2-bbea-4cb7-9f23-2ac9144d1f8d" class="bulleted-list"><li style="list-style-type:disc">Faire un fichier à part avec les  fonctions et utiliser le require_once.</li></ul></div></article></body></html>
