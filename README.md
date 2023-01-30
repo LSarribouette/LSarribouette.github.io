@@ -5,4 +5,4 @@
 
 https://LSarribouette.github.io/
 
-> Technologies : JavaScript, HTML, CSS, Visual Studio Code 1.73.1
+> Technologies : HTML, CSS, JavaScript, PHP, Visual Studio Code 1.73.1
