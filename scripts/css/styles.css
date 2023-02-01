@@ -55,10 +55,6 @@ h2, h3 {
 	}
 
 
-/* Header */
-header { box-shadow: 0px 10px 9px -9px rgba(153,156,153,0.37); }
-
-
 /* Formulaire contact */
 #contact input[name='reponse'] { display: none; }
 
@@ -78,23 +74,49 @@ html {
 }
 
 body {
-	margin: 0;
-	box-sizing: border-box;	
+	/* box-sizing: border-box;	 */
 	background-color: #fff;
-	color: #000;
+	/* color: #000; */
 	font-family: Luciole-Regular, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	/* letter-spacing: 0.12em; Accessible */
 	/* word-spacing: 0.16em; Accessible */
-	font-size: 1.4rem;
+	font-size: 1.4rem; 
+	display: grid;
+    grid-template-rows: 0fr 1fr 0fr;
+    grid-template-areas: "header" "main" "footer";
+	min-height: 100%;
+    /* height: 100vh; */
+    margin: 0;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-right: 15%;
+    padding-left: 15%;
+}
+
+header { 
+	grid-area: header;
+	box-shadow: 0px 10px 9px -9px rgba(153,156,153,0.37); 
+}
+
+main {
+	grid-area: main;
+}
+
+footer {
+	grid-area: footer;
+	box-shadow: 0px 10px 9px -9px rgba(153,156,153,0.37); 
 }
 
 
 /*body > script { display: none !important; } Vérif la pertinence 06/01/2021 */
 
-* { box-sizing: inherit; }
+/* * { box-sizing: inherit; } */
 
+/* FIXME 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary { display: block; }
+*/
+
 
 /* Pas utilisé 06/01/2021
 audio, canvas, progress, video {
