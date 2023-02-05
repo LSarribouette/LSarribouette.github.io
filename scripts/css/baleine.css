@@ -1,7 +1,15 @@
 /* Ajouts home-made */
-
+header { 
+    background-image: none !important;
+	min-height: 400px;
+}
+	header > nav {
+		padding: 1% 1%;
+        
+	}
+    
 .baleines {
-    margin: 0 auto;
+    margin: 1% auto;
     width: 100px;
 }
 
