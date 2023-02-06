@@ -1,0 +1,725 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Les formulaires</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1a0c8913-9b27-4dea-967f-9b3fbbf7f1d0" class="page sans"><header><img class="page-cover-image" src="media/12-04-formulaires/2023-02-05_16_28_00-pexels-lexi-lauwers-12842422.jpg_-_Photos.png" style="object-position:center 0%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Les formulaires</h1></header><div class="page-body"><p id="695662da-93b1-4e4e-867c-ab47048faafa" class="">
+</p><p id="47acc5bb-25a6-4a49-a9b6-89d10c95e6eb" class="">Organisations possibles entre fichiers HTML et PHP :</p><ol type="1" id="824dfab9-a73c-403f-abe5-042ba53f586b" class="numbered-list" start="1"><li>le formulaire dans un fichier HTML et le traitement dans un fichier PHP</li></ol><ol type="1" id="5a3b468f-6771-491b-af48-788d1e7ec5cc" class="numbered-list" start="2"><li>le formulaire dans un fichier PHP qui gère l’affichage et le traitement dans un autre fichier PHP</li></ol><ol type="1" id="b6d0314d-2224-4354-a49f-574aedc47e22" class="numbered-list" start="3"><li>un seul fichier PHP qui gère à la fois l’affichage et le traitement (fonctionnement de Symfony)</li></ol><p id="20a31e5a-7c8c-4b54-a413-d4314a2f6dd9" class="">
+</p><h2 id="75d09393-e174-460f-9622-6380b4d0cb2a" class="">Afficher un formulaire</h2><hr id="e0f7da0d-2d70-4cb1-b863-9d5cb883465a"/><h3 id="790d23c6-d38f-4a51-88ca-188f13827c1b" class="">HTML</h3><p id="fa105a45-9e4f-4cfb-a8eb-23e073f61ff9" class="">La balise <code>form</code> est utilisée, avec la propriété <code>action</code> qui appelle le fichier PHP responsable du traitement et la propriété <code>method</code> qui est généralement <code>POST</code>.</p><p id="4eeaad73-1790-432a-b975-623f95f53218" class="">Chaque champ de saisie est défini avec la balise <code>input</code>, avec les propriétés <code>type</code> (submit, text, number, email, date…), <code>name</code> et <code>id</code>.</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="173cef08-0bb3-45af-aeb5-2c2d37f5c604"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">En JavaScript, on peut récupérer un input avec  son id alors qu’en PHP, on le récupère par son name.</div></figure><p id="f31e86e3-cf2d-4971-9bd2-24e215e9b37b" class="">Les champs de saisie sont généralement accompagnés de libellés avec la balise <code>label</code>, avec la propriété <code>for=&quot;idChampsConcerne&quot;</code>.</p><p id="1a2c3e4a-e1ae-4087-b938-85cf93f24b65" class="">Le bouton de validation est déclaré avec un <code>input</code> de type “submit”, avec une propriété supplémentaire <code>value</code> qui affiche un message à l’intérieur du bouton.</p><pre id="dbde991d-9e4b-4e4a-a41a-a6fcdda41b6e" class="code"><code>&lt;form action=&quot;traitement.php&quot; method=&quot;POST&quot;&gt;
+	&lt;label for=&quot;prenom&quot;&gt;Prénom : &lt;/label&gt;
+	&lt;input type=&quot;text&quot; name=&quot;prenom&quot; id=&quot;prenom&quot;&gt;&lt;br&gt;
+
+	&lt;label for=&quot;nom&quot;&gt;Nom : &lt;/label&gt;
+	&lt;input type=&quot;text&quot; name=&quot;nom&quot; id=&quot;nom&quot;&gt;&lt;br&gt;
+
+	&lt;input type=&quot;submit&quot; name=&quot;ok&quot; value=&quot;Valider&quot;&gt;&lt;br&gt;
+&lt;/form&gt;</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="8a0e8296-f5d8-4aa6-b292-898af3a227bf"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Si le traitement est fait dans le même fichier, on laisse <code>action=&quot;&quot;</code>.</div></figure><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="94196aab-2b33-494d-8692-29becea503bf"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Si j’ai plusieurs inputs avec le même name, je récupère alors un tableau.</div></figure><p id="0709b397-dffb-4431-b4df-3baa92097238" class="">
+</p><h3 id="766e6150-933a-4fe1-9c0d-b70adf31a22d" class="">PHP</h3><p id="0de3f89a-5e57-485e-b247-f694ad0009ce" class="">Au sein d’un fichier PHP, on insère tout le HTML dont on a besoin.
+On peut boucler sur un tableau de données pour en afficher chaque case, dans une liste déroulante avec la balise <code>select</code> ou des cases à sélectionner avec des inputs de type <code>checkbox</code> ou <code>radio-button</code>.</p><pre id="5ecc8e62-46fa-4d27-8b0b-b03bf1bd8478" class="code"><code>&lt;body&gt;
+&lt;form action=&quot;&quot; method=&quot;POST&quot;&gt;
+    &lt;label for=&quot;liste&quot;&gt;Liste déroulante : &lt;/label&gt;
+    &lt;select name=&quot;liste&quot; id=&quot;liste&quot;&gt;
+        &lt;?php
+        $jours = array(&#x27;lundi&#x27;,&#x27;mardi&#x27;,&#x27;mercredi&#x27;,&#x27;jeudi&#x27;,&#x27;vendredi&#x27;,&#x27;samedi&#x27;,&#x27;dimanche&#x27;);
+        foreach ($jours as $numero=&gt;$jour) {
+            echo &#x27;&lt;option value=&quot;&#x27; . $numero . &#x27;&quot;&gt;&#x27; . $jour . &#x27;&lt;/option&gt;&#x27;;
+        }
+        ?&gt;
+    &lt;/select&gt;&lt;br&gt;
+    Choix multiple : &lt;br&gt;
+        &lt;?php
+        $choix = [&#x27;choix 1&#x27;, &#x27;choix 2&#x27;, &#x27;choix 3&#x27;];
+        foreach ($choix as $unChoix) {
+            echo &#x27;&lt;input id=&quot;&#x27;.$unChoix.&#x27;&quot; type=&quot;checkbox&quot; name=&quot;&#x27;.$unChoix.&#x27;&gt;&lt;label for=&quot;&#x27;.$unChoix.&#x27;&quot;&gt;&#x27;.$unChoix.&#x27;&lt;/label&gt;&lt;br&gt;&#x27;;
+        }
+
+        ?&gt;
+    &lt;input type=&quot;submit&quot; name=&quot;ok&quot; value=&quot;Valider&quot;&gt;
+&lt;/form&gt;</code></pre><p id="c9cf0a69-db05-426a-9ec7-be2f68230a7d" class="">
+</p><h2 id="ce3b5cd9-0031-4db4-803d-f07a305794ad" class="">Traiter un formulaire</h2><hr id="43af8617-d4bb-4287-b6b5-7e7b31227d2a"/><h3 id="cea9649e-1f5c-4a99-945f-1e02ec128358" class="">Variables superglobales </h3><p id="ecfefa42-ef70-467c-af16-e9492448204c" class="">Les variables $_GET, $_POST, $_REQUEST sont disponibles pour récupérer la valeur des inputs sous la forme de tableaux associatifs (clé: name / valeur: saisie).</p><p id="a18942f1-3cd7-4145-bb67-439b0f87519a" class="">
+</p><p id="8d5be7fb-7fbd-4bde-b360-310ecf6b1955" class="">On teste l’existence de la variable avant de récupérer les valeurs :</p><pre id="e6a83f9f-9762-4794-ac43-a80ee63998ba" class="code"><code>if (isset($_GET[&#x27;prenom&#x27;]))
+	echo&#x27;La valeur saisie est &#x27;.$_GET[&#x27;prenom&#x27;];</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="e6bc2b03-0ea4-47d8-8403-a6203df78e7f"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Le tableau est remplacé à chaque submit.
+Au départ, le tableau est vide (il ne connaît pas les input) puis après le premier submit il les connait, même si les champs sont vides.</div></figure><p id="1bd3be88-bd0c-485c-b7e8-f7f191bf7eb7" class="">
+</p><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="2b9393b9-b535-40e1-849c-984971bcf272"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Outils : <a href="https://emmet.io/">Emmet</a>
+<code>ul&gt;li*5&gt;lorem</code>+tab permet de rapidement créer la structure avec une ul composée de 5 li, remplis de <em>lorem ipsum</em>.</div></figure><p id="0d148e75-c126-4820-913f-cb28b6cc82d8" class="">
+</p><h3 id="99eac7df-0f89-4119-9083-3f8775b67dff" class="">Validation des données saisies</h3><blockquote id="452b4ce1-904e-415f-b109-c53238aedcea" class="">Il faut purifier les input sinon on se fait hacker…. —&gt; on sanitize toujours.</blockquote><p id="442dddc7-caa2-4086-bc87-ce402c8a5652" class="">Plusieurs méthodes sont disponibles : <code>filter_var</code> ou <code>filter_input</code> pour une seule valeur, <code>filter_var_array</code> ou <code>filter_input_array</code> pour plusieurs valeurs <div class="indented"><p id="1d7abfa2-d2da-4349-a473-15fe892ca46f" class="">avec chacune des paramètres comme : <code>FILTER_SANITIZE_STRING</code> (pour ne pas interpréter les balises), <code>FILTER_SANITIZE_SPECIAL_CHARS</code> (pour…….), <code>FILTER_VALIDATE_INT</code> (pour spécifier le type à récupérer), <code>FILTER_VALIDATE_EMAIL</code>…</p></div></p><p id="aef6c33e-f8ce-48f1-8003-5ab4306d1434" class="">Il est possible de créer des filtres de validation personnalisés avec un tableau de filtre et  <code>FILTER_VALIDATE_REGEXP</code>.</p><pre id="866bf01f-1173-4fc7-a941-b215181a4550" class="code"><code>// Verification que l&#x27;utilisateur a clique sur &#x27;OK&#x27; et que le nom a ete renseigne
+// (sinon un message est affiche), si tout est bon alors il est redirige vers la 
+// page prevue
+
+&lt;?php
+if (isset($_POST[&#x27;ok&#x27;])) {
+	$message = &#x27;&#x27;; // on initialise un message vide
+	$nom = filter_input(INPUT_POST, &#x27;nom&#x27;, FILTER_SANITIZE_STRING); // on purifie l&#x27;input
+	if (!$nom) 
+		$message .= &quot;Il faut renseigner le nom.&quot;;
+	if (!$message) {
+		// tout est bon, on effectue le traitement 
+		header(&#x27;chemin...&#x27;);
+	}
+}
+?&gt;</code></pre><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="fb202cce-788d-46de-9182-fcb61cd16efe"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">En HTML, on utilise <code>required</code> pour rendre des champs de saisie obligatoires : utile pour faire passer des messages à l’utilisateur mais <strong>pas</strong> pour la sécurité.
+Il est facile de modifier le code source donc on ne fait <strong>jamais</strong> confiance à l’utilisateur !!</div></figure><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="b05257da-9d2e-44f6-b109-33b1afb2cded"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">On utilise souvent la ternaire —&gt; un opérateur fait la même chose (<em>nullish coalescing</em>) : il retourne le côté droit si le côté gauche est nul ou indéfini <code>$var ?? &quot;&quot;</code>.</div></figure><p id="da6e65f9-b1d6-477e-b451-cd5880ca78dd" class="">
+</p></div></article></body></html>
