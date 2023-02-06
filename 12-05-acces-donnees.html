@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>L’accès aux données</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f7620dca-6133-4644-aa0e-431d185839c2" class="page sans"><header><img class="page-cover-image" src="media/12-05-acces-donnees/2023-02-05_16_33_41-pexels-gerard-whelan-4609907.jpg_-_Photos.png" style="object-position:center 35.089999999999996%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">L’accès aux données</h1></header><div class="page-body"><p id="0420584e-dc54-4390-a684-845ac39a05c2" class="">
+</p><p id="1b6f3117-8b4a-47bb-844f-2fcdeac6b5c6" class="">\\10.22.0.254</p><h2 id="1ea9a09a-13c4-4173-a72e-f31905a3fb10" class="">Mise en place</h2><hr id="9e816807-3f5e-45c7-8049-ceb5f2614461"/><ul id="f3c51faa-9cac-4c9e-b048-848ec2f45793" class="bulleted-list"><li style="list-style-type:disc">Installation du SGBD voulu (ici, MySQL Server 8.0.32)<p id="521c73d1-b77d-4e84-a054-5e0a9d49fd3f" class="">On obtient MySQL Workbench (équivaut à SSMS et pgAdmin)</p><p id="14279447-8061-4fe5-8603-766fcd71c9b4" class="">—&gt; on s’en sert pas parce qu’on peut accéder directement à nos DB grâce à PhpStorm</p></li></ul><blockquote id="1501e233-2e17-4935-91c8-c5c158c710ff" class="">BP : pour l’instant on crée pas d’user, mais dans l’idée il faut.</blockquote><p id="278233ad-a307-4829-b7a5-82a37c3924c4" class="">
+</p><p id="9cb2f56c-3e9e-49e3-9c33-da9dccb2bcdd" class="">Dans PhpStorm :</p><ul id="99367b09-00da-4110-ae37-38d4f0660d2f" class="bulleted-list"><li style="list-style-type:disc">Connexion au SGBD : <p id="8a7893df-0755-4be8-898e-c7c675d70581" class="">onglet database &gt; + &gt; Data source &gt; MySQL<div class="indented"><p id="af516dbc-e546-460a-9365-c1e33fa4bc38" class="">avec user = root ; password = notre joli mot de passe &gt; test connection</p></div></p></li></ul><ul id="10f86258-13dc-4739-aa2e-e2fda3f8d0c9" class="bulleted-list"><li style="list-style-type:disc">Il propose de télécharger les drivers &gt; OK</li></ul><ul id="4b5dfff5-8001-41f2-9b66-88c2a930c820" class="bulleted-list"><li style="list-style-type:disc">SQL dialect &gt; “mysql”</li></ul><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="6a0193f5-43aa-4363-8c27-573966a2bec5"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">MySQL propose une base de données d’exemples : sakila.</div></figure><p id="760a461e-4ba3-409e-bbcb-8228ef76d50d" class="">
+</p><p id="fdcd6d52-ae52-47d5-93a3-df4b5acc77e9" class="">Dans le dossier PHP :</p><ul id="9147cd1f-791d-474b-8ceb-4b44833a8cee" class="bulleted-list"><li style="list-style-type:disc">On met à jour selon nos besoins le php.ini<p id="89f19f65-8662-45c5-b095-127b87552514" class="">ex pour MySQL : 
+on ouvre le php.init-development &gt; on le copie-colle et renomme ‘php.ini’ &gt; ligne 939 on décommente l’extension pdo_mysql + ligne 763 on décommente l’indication du dossier où trouver les extensions (ext)</p></li></ul><ul id="65524960-771d-42fa-8462-efab7bbf9214" class="bulleted-list"><li style="list-style-type:disc">On rédemarre l’IDE</li></ul><p id="7267b372-61c1-447f-aed8-26b6733c30f5" class="">
+</p><p id="ee005eb2-189c-485d-85b1-bf43dd67be3b" class="">Pour faire des requêtes SQL, clique-droit sur <a href="http://localhost">localhost</a> &gt; new &gt; query console.</p><pre id="bf11e3c6-2050-48fe-a0d8-1b62541f0cef" class="code"><code>// Une base de donnees avec une table et une donnees inseree
+CREATE DATABASE unedb;
+
+// soit je precise la table avec use
+// soit je la nomme dans le create table
+CREATE TABLE unedb.utilisateurs (
+    id int primary key auto_increment,
+    nom varchar(255) not null,
+    prenom varchar(255) not null
+);
+
+INSERT INTO unedb.utilisateurs (nom, prenom)
+    VALUES (&#x27;un nom&#x27;, &#x27;un prénom&#x27;);</code></pre><h2 id="7bfa02da-0837-417b-953b-cbdd95232a3e" class="">PDO</h2><hr id="92d298f2-d6ee-4d44-8fd1-f94ed084d64f"/><blockquote id="844fd92c-da9f-425c-bae3-fbe1d8ad19ab" class=""><em>Php Data Object </em>: une classe PHP qui permet de se connecter à n’importe quelle base de données (sur n’importe quel SGBD).</blockquote><p id="a586d05b-e01f-4492-98e0-caf59e183036" class="">
+</p><h3 id="62ea9082-8da7-469c-8eb9-84775ad48938" class="">La connexion avec PDO</h3><ol type="1" id="a768ffb3-f5b4-46ac-af63-91e884b7ba44" class="numbered-list" start="1"><li>On crée une chaine de connexion (ou <em>dsn</em>) selon le SGBD utilisé</li></ol><pre id="4c416dd7-9bf8-4d59-b714-b621b0cc8cc2" class="code"><code>$dsn = &#x27;mysql:host=localhost;dbname=unedb&#x27;;
+//par exemple, PostgreSQL : &#x27;pgsql:host.....&#x27;</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="ba3df2af-c55f-4a61-bd86-e3d8a18e92af"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Il est possible de rajouter des options de connexion, comme l’encodage UTF-8 pour MySQL avec : <code>$options = [PDO]::MYSQL_ATTR_INIT_COMMAND =&gt; “SET NAMES utf8”];</code>.</div></figure><ol type="1" id="6fb64e98-9156-40e2-9265-777be6774459" class="numbered-list" start="2"><li>On utilise ensuite cette chaine de connexion pour se connecter, en créant une instance de PDO</li></ol><pre id="96b71e2c-c2c9-4f20-8386-c94dd4e507f7" class="code"><code>$pdo = new PDO($dsn, &#x27;root&#x27;, &quot;secretpassword&quot;);</code></pre><ol type="1" id="25ea8cde-3c8b-4167-9229-99c74bed4d34" class="numbered-list" start="3"><li>Pour gérer les exceptions éventuelles lors de la connexion à la base de données, on met tout ça dans un try..catch (<strong>toujours</strong>)</li></ol><pre id="1546f45b-850f-436f-8b05-fd8b02619f73" class="code"><code>try {
+	$dsn = &#x27;mysql:host=localhost;dbname=unedb&#x27;;
+	$pdo = new PDO($dsn, &#x27;unUtilisateur&#x27;, &quot;sonsecretpassword&quot;);
+	echo &#x27;Connexion OK&#x27;;
+} catch (PDOException $e) {
+	$msg = &#x27;Connexion KO : &#x27;.$e-&gt;$getMessage();
+	die($msg);
+}</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="842348cc-0cb7-497c-9e70-fd576dc0aed0"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">La méthode <code>die()</code> permet d’arrêter le traitement en cas d’erreur.</div></figure><p id="c57da9f9-e199-4b08-8984-aae41a8d9083" class="">
+</p><h3 id="ec42164f-2f09-4deb-8fa9-22a7aa06b483" class="">L’utilisation de requêtes</h3><ol type="1" id="7ea39ebe-d550-404f-bd69-accefadc68af" class="numbered-list" start="1"><li>On crée une variable pour stocker la requête dans une string</li></ol><ol type="1" id="287b6f94-afb9-482c-b846-93d5b2034aab" class="numbered-list" start="2"><li>Pour les <em>SELECT</em> : on utilise la méthode query() de PDO sur la requête et on récupère le résultat avec <code>fetch()</code> pour une seule ligne (dans un tableau PHP) ou avec <code>fetchAll()</code> pour plusieurs lignes (dans un tableau de tableaux)</li></ol><pre id="5b74eb21-0d0d-4e2d-8fec-db2cd0e0f41a" class="code"><code>$req = &#x27;SELECT nom, prenom FROM unedb.utilisateurs&#x27;;
+$res = $pdo-&gt;query($req)-&gt;fetchAll();
+var_dump($res);
+for ($i=0; $i&lt;count($res); $i++) {
+	echo &#x27;Les nom et prénom sont : &#x27;.$res[$i][&quot;nom&quot;].&#x27; &#x27;.$res[$i][&quot;prenom&quot;].&#x27;.&lt;br&gt;&#x27;;
+}</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="22e1f841-5c38-4eb7-8bec-d2cf68b318e3"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">On récupère un tableau associatif et indexé : on peut donc lire les valeurs soit avec le libellé soit avec l’index, <em>çàd</em> avec le nom ou la position de la colonne.</div></figure><blockquote id="49586e09-2eee-4082-95b3-24d8df40df7e" class="">BP : Il est recommandé d’utiliser le nom de la colonne pour une meilleure lisibilité.</blockquote><ol type="1" id="954217be-80c3-489e-b79d-e7d396f162c4" class="numbered-list" start="3"><li>Pour les <em>INSERT</em>, <em>UPDATE</em>, <em>DELETE</em> : on utilise la méthode exec() sur la requête et on récupère le nombre de lignes affectée</li></ol><pre id="6840d7f9-8116-46c5-a2f0-7aeb65da5eca" class="code"><code>$req = &#x27;INSERT INTO unedb.utilisateurs (nom, prenom) VALUES (&quot;Daly&quot;,&quot;Ruby&quot;);&#x27;;
+$nbLignes = $pdo-&gt;exec($req);
+var_dump($res);
+echo &#x27;Nombre de lignes affectées : &#x27;.$nbLignes.&#x27;&lt;br&gt;&#x27;;</code></pre><p id="eae54c19-f313-407d-93e9-db4fe8e9b187" class="">
+</p><h3 id="53e1df58-2451-4764-b921-c8a4a89f7535" class="">Les injections SQL</h3><p id="3ace2169-fa52-4a56-b53a-19718b2e06ce" class="">Pour empêcher que la saisie utilisateur ne soit interprétée comme du code, on utilise des <strong>requêtes préparées</strong> (ou paramétrées).</p><p id="3146d654-a645-401b-aff5-aeeb82562a28" class="">Au lieu de passer des variables directement dans la requête, on insère des <code>?</code> puis on associe des valeur à ces “trous” à partir des saisies.</p><ol type="1" id="500c231e-01b0-44f4-8eed-d540b6645ffe" class="numbered-list" start="1"><li>On crée une variable pour stocker la requête dans une string, avec des paramètres <code>?</code></li></ol><ol type="1" id="af6268a9-e078-4d4d-9caa-157e1eeafef0" class="numbered-list" start="2"><li>On utilise la méthode <code>prepare()</code> sur la requête</li></ol><ol type="1" id="eee74cd3-6ddd-42ac-bbe3-d072cb48806c" class="numbered-list" start="3"><li>On associe chaque paramètre à une valeur avec <code>bindValue(numero, $varSaisie)</code></li></ol><ol type="1" id="6264fcb5-c7d3-46ad-82ab-34030a6be977" class="numbered-list" start="4"><li>On exécute la requête ainsi complète avec <code>execute()</code></li></ol><ol type="1" id="6484e079-f478-49b3-84f5-59561dc321d6" class="numbered-list" start="5"><li>On récupère les données selon le type de requête (<em>SELECT</em> ou <em>INSERT</em>, <em>UPDATE</em>, <em>DELETE</em>)</li></ol><pre id="3d1e06fa-2a39-4967-8641-0a79761fc3be" class="code"><code>$req = &#x27;SELECT nom, prenom FROM unedb.utilisateurs WHERE prenom=?;&#x27;;
+$prep = pdo-&gt;prepare($req);
+$prep-&gt;bindValue(1,$prenomSaisi);
+$prep-&gt;execute();
+$res = $prep-&gt;fetch();
+var_dump($res);
+echo &quot;Le nom associé au prénom demandé est : &quot;.$res[&quot;nom&quot;];</code></pre><p id="e55770b0-fb5c-4b40-ab32-7e112eee693b" class="">
+</p><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="e6d7eddb-e0f0-4e20-bd06-8862e9662188"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Outils : 
+DVWA (<em>Damn Vulnerable Web App</em>) Security → une application (incluse dans le Linux des hacker, “Kali”)</div></figure></div></article></body></html>
