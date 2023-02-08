@@ -1,0 +1,742 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Hello World</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="26ab5f54-c8b8-40fe-b276-019c4037eb97" class="page sans"><header><img class="page-cover-image" src="media/13-02-hello-world/2023-02-08_22_29_15-pexels-vivi-10915503.jpg_-_Photos.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Hello World</h1></header><div class="page-body"><blockquote id="87ce7598-18ee-4092-bc0d-715d8d8586e9" class="">Premier projet Symfony !</blockquote><p id="54016ce5-3178-4dee-8a11-7139a8472157" class="">
+</p><h2 id="747b5191-fc87-4229-93c9-23d16067a0fa" class="">Parcours d’une requête HTTP sous Symfony </h2><hr id="d0011d5c-6e9b-4878-95a3-b6d04362d84b"/><ol type="1" id="5e6f9402-0ff1-42dc-95b3-277db4cd0b32" class="numbered-list" start="1"><li>Le client <em>via</em> le navigateur tape une URL et arrive sur notre application.</li></ol><ol type="1" id="7a990045-e291-4fc3-9656-cfea3a5c04de" class="numbered-list" start="2"><li>Il arrive sur <em>index.php</em> (dans public), qui retourne juste une instance de la classe <em>kernel.php</em>.</li></ol><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="acbe8c4f-fe84-4ab7-8d75-eb81d4c3a2f2"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Le Kernel est le noyau de Symfony, qui connait toutes les routes et le contrôleur correspondant qu’il faut appeler. Il est chargé de gérer la requête et de retourner une réponse.
+<em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>On n’y touche jamais.
+</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em>Il gère les correspondances entre routes (URL) et traitements : nous, on développe les méthodes nécessaires au traitement.</div></figure><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="507ffff0-3904-48f3-90fd-82dd74b35f8d"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Il n’y a pas de servlets mais des contrôleurs en Symfony.</div></figure><ol type="1" id="75dfa813-0948-4a9e-b4ca-a69b7610948d" class="numbered-list" start="3"><li>Selon la route choisie, le kernel dirige vers le contrôleur concerné, qui appelle le Twig associé qui, lui, retourne la page HTML.</li></ol><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="fd4c439f-9d66-4480-bc20-c3203262d733"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Le Twig est un moteur de templates. 
+Lors de l’appel d’un Twig, le template voulu est compilé pour créer la bonne page HTML et l’afficher.</div></figure><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="8376d485-54c0-42de-9226-4430e47ef39f"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Il n’y a pas de JSP mais des Twigs en Symfony.</div></figure><ol type="1" id="5593292c-de43-4022-acf4-878079b58c0f" class="numbered-list" start="4"><li>Pour afficher le Twig, le contrôleur requête une base de données <em>via</em> l’entité concernée.</li></ol><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="177b353b-73c2-4a09-abdf-51155a1127ab"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Le modèle (ou <em>BO</em>) n’est pas composé de classes mais d’entités en Symfony.</div></figure><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="4e545bf3-7af8-4cd8-a24f-84e2a9868332"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Les liens entre entités et base de données sont gérés par Symfony (on ne s’en occupe pas).</div></figure><p id="b572535e-288c-42a5-9fad-b156295a6165" class="">
+</p><p id="1bf9fab9-970c-4333-8e70-2aa0a74dd443" class="">Quand quelqu’un arrive sur le site, une instance de <code>Request</code> est créée. La <strong>requête au serveur</strong> se fait donc par une URL et est gérée par le fichier <em>.htaccess</em>, qui redirige forcément sur <em>index.php</em> et bloque l’accès aux autres dossiers.</p><p id="e6930dd2-9c28-4351-a413-d3de983505bb" class="">
+</p><p id="1f4aa78f-249a-44a6-a640-5e32766adcbc" class="">Le <strong>système de routage</strong> se fait avec une URL qui correspond à une méthode. Chaque URL est appelée une route et porte un nom unique.</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="7ce3ba75-4dc2-4d81-8b51-e9ea28fdc285"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">On peut avoir autant de contrôleurs avec autant de méthodes qu’on veut, par contre une seule méthode correspond à une seule URL.
+Attention parce que ça ne crée pas d’erreurs, le système de routage prendra juste la première route trouvée donc il faut s’auto-gérer.</div></figure><p id="dc625fe6-0a5d-432e-a876-def420a9ee7e" class="">
+</p><p id="a3b7fe28-df6f-49e0-8fd2-22dbe9139ef0" class="">Les <strong>contrôleurs</strong> contiennent les fonctions appelées par le système de routage. Un contrôleur peut contenir plusieurs fonctions et donc correspondre à plusieurs routes.</p><p id="3146a92f-7c4a-4074-a9a6-041356da665a" class="">Ils héritent de <code>AbstractController</code>, qui connait toutes les méthodes servant à retourner des réponses HTTP, grâce au paquet <code>...\HttpFoundation\Response</code>.</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="85ad9f63-43e5-4be0-875a-ce59da1ab964"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Il n’y a pas d’imports mais des <em>use</em> en Symfony.
+Il n’y a pas de packages mais des <em>namespace</em> en Symfony, qui indiquent où se trouve le chemin depuis “App” (src).</div></figure><p id="7bf6f238-f378-43e9-a9ee-d729a86748e0" class="">
+</p><p id="2dc17f6f-cc15-4706-8a55-3fb3dd6c0605" class="">Le <strong>moteur de templates</strong> remplace le PHP et génère du HTML, ce qui simplifie la lecture et l’écriture. Il correspond à la Vue du modèle MVC.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="644ab7b9-085b-48e4-8410-4ee61d8c616f"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">D’autres templates existent, par défaut Twig est utilisé.</div></figure><p id="3c8d25d8-73bb-4da8-80a5-7a442d97910f" class="">Conventions :</p><p id="3dea5492-9f73-4e4b-ab4c-b4a4517a7605" class="">- dans le dossier templates/ 
+- une extension .html.twig</p><p id="94514863-9f4e-4c0c-815b-0fdc31b2149e" class="">- un fichier twig par méthode de contrôleur</p><p id="4d1c894a-4d8c-4551-a140-42a4ec2b8152" class="">- le même nom que la méthode associée (ça va bloquer sinon)</p><p id="d18d49d2-44f8-49c9-a54f-b72dc6389084" class="">- dans un sous-dossier qui porte le même nom que le contrôleur </p><p id="12378bd0-159a-420f-a331-c2c169c6b179" class="">- sans majuscules (snake_case pour les noms de méthodes)</p><p id="19e51359-469a-4fc0-be50-73519befe0ff" class="">Pour déclencher l’affichage du fichier twig, on met un <code>return </code>dans la méthode du contrôleur qui conduit vers le twig : <code>$this-&gt;render(&quot;main/home.html.twig&quot;);</code>.</p><p id="bf5b14f7-a11a-489c-8300-eb6e26637b6f" class="">
+</p><p id="aafedba1-cc47-41a9-91f6-7e4756999512" class="">
+</p><h2 id="26b083ad-1c5e-43ff-bb21-79a4e69b94c3" class="">Premiers contrôleur et Twig</h2><hr id="2d38b993-530e-4c53-a478-28d29eb85893"/><p id="c93a4c30-443a-4871-bf89-f03b58227047" class="">Dans le terminal de l’IDE (ici, PhpStorm) : </p><ul id="1d3b5630-baa2-463e-9fa1-c8165ee7eef7" class="bulleted-list"><li style="list-style-type:disc">on installe le paquet requis : <code>composer require symfony/maker-bundle --dev</code></li></ul><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="7ccf7f93-2dec-441d-b763-668bac0d59b8"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Quand il y a une erreur, Symfony propose une solution : s’il manque un paquet, il en propose un qui semble convenir et dit comment le télécharger.</div></figure><ul id="e2d3c418-f31c-4f84-a518-b3ef6ffbbc3f" class="bulleted-list"><li style="list-style-type:disc">on crée le contrôleur : <code>symfony console make:controller</code> <ul id="6fa167d4-2024-4734-83e3-a25ee5bc9c9f" class="bulleted-list"><li style="list-style-type:circle">choix du nom (on peut aussi écrire le nom directement dans la commande) : <code>Home</code></li></ul><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="0b513a9c-925a-4a88-91ec-37ae425b7b41"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Il renomme automatiquement tous les contrôleurs en ajoutant <em>Controller</em> à la fin : <code>HomeController</code>.</div></figure></li></ul><ul id="c3d764d5-35a1-4475-9490-5e505c995a16" class="bulleted-list"><li style="list-style-type:disc">Le contrôleur est créé et mis au bon endroit : <em>src/Controller/HomeController.php</em></li></ul><p id="c5834cab-807b-4f75-ae87-c3d9c3b4dab4" class="">
+</p><p id="4bf212bb-887a-47b2-9a86-395d2efa5bba" class="">Tout est pré-défini et généré. </p><p id="e4d89e95-b285-4e93-ab87-ffbfbe226743" class="">C’est une classe PHP qui hérite bien de <em><em><em><em><em><em><em><em><em><em><em><em><em>AbstratController</em></em></em></em></em></em></em></em></em></em></em></em></em>, avec une méthode <code>index()</code> à modifier à façon. </p><blockquote id="dbb7c51f-bdd0-437f-9d3e-f8009218ea0e" class="">BP : Le nom de la route est par convention “nomducontroleur_nomdelamethode”. Il y a beaucoup de routes, il faut s’appliquer.</blockquote><pre id="097965f0-fb4f-4546-bb34-39dd46a1a2ec" class="code"><code>&lt;?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
+
+class HomeController extends AbstractController
+{
+    #[Route(&#x27;/&#x27;, name: &#x27;home_index&#x27;)]
+    public function index(): Response
+{
+      return $this-&gt;json([
+          &#x27;message&#x27; =&gt; &#x27;Welcome to your new controller!&#x27;,
+          &#x27;path&#x27; =&gt; &#x27;src/Controller/HomeController.php&#x27;,
+      ]);
+}</code></pre><p id="7842259f-86ae-4029-99d2-a5d67d5b4ffd" class="">Le <code>#</code> peut être appelé métadata ou attribut : le Kernel lit cette ligne pour connaître le nom unique et l’url liés à cette méthode.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="59448ee4-c73d-47d0-b51a-39471b642284"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">L’attribut est nouveau, il apparaît en PHP8.
+Avant, on utilisait des annotations :</div></figure><pre id="53e506c3-a177-4058-b7c2-2b903462a6da" class="code"><code>class HomeController extends AbstractController
+{
+		/**
+		* @Route(&#x27;/&#x27;, name= &#x27;home_index&#x27;)
+		*/
+    public function index(): Response
+{
+      return $this-&gt;json([
+          &#x27;message&#x27; =&gt; &#x27;Welcome to your new controller!&#x27;,
+          &#x27;path&#x27; =&gt; &#x27;src/Controller/HomeController.php&#x27;,
+      ]);
+}</code></pre><p id="b26f28f4-664e-43a6-a599-b146d7d02e3f" class="">
+</p><p id="e3b08fd7-38b1-46b3-9a61-6702b0ee88ec" class="">Lorsqu’on lance le serveur <code>symfony server:start</code> et qu’on écrit l’url voulue du contrôleur, le résultat de la fonction s’affiche.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="9edc1b69-fab0-4b8b-828a-8130d4703109"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Pour l’instant, une route = une méthode.
+Après on pourra mettre des regex !</div></figure><p id="07681bb0-0ba8-4f1e-9379-59775bcbf185" class="">
+</p><p id="51688473-7e9c-4bef-bc3f-d9e9653bc131" class="">Néanmoins, on ne veut pas du JSON mais du HTML : on télécharge le moteur de templates Twig : <code>composer require twig</code>.</p><p id="fabfefe0-e710-4b78-bedf-2f10c7d95fc8" class="">
+</p><p id="52bd835d-1f54-45ec-a5d6-89632a723dc6" class="">On modifie le contrôleur pour qu’il retourne un Twig :</p><ul id="ac7ce308-71aa-4fbc-8dbd-e8ecc947d195" class="bulleted-list"><li style="list-style-type:disc">le type retourné par la fonction est <code>Response</code> </li></ul><ul id="7c9143f5-a93f-4864-9164-9449bef68b6b" class="bulleted-list"><li style="list-style-type:disc">on importe le bon module : <code>use Symfony\Component\HttpFoundation\Response;</code></li></ul><ul id="b77ef0f4-2cff-40ad-9e14-2e4d8ed358ee" class="bulleted-list"><li style="list-style-type:disc">on utilise la fonction <code>render()</code>, qui retourne un fichier <em>.html.twig</em></li></ul><pre id="18a12b8e-a778-4bdf-924e-f07df3956c5d" class="code"><code>class HomeController extends AbstractController
+{
+    #[Route(&#x27;/&#x27;, name: &#x27;home_index&#x27;)]
+    public function index(): Response
+    {
+        return $this-&gt;render(&#x27;home/index.html.twig&#x27;);
+    }
+}</code></pre><p id="a5b58703-e0a7-474d-8532-5e0e6dc2f1c5" class="">
+</p><p id="3af7bf6d-d898-4442-87ca-e84c54d4a960" class="">Le fichier Twig n’existe, l’IDE propose de le créer. </p><p id="2af63154-7228-4b0c-b6c1-181c5b519e29" class="">Il est maintenant disponible dans <em>templates/home/index.html.twg</em>.</p><p id="2000df35-af50-4d23-9229-8220dece0b95" class="">On peut y ajouter du html et lorsqu’on va sur l’url, la page HTML s’affiche.</p><pre id="367f6730-b072-41a1-9eb0-b2512d46f6e1" class="code"><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Hello Symfony&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Un premier Twig&lt;/h1&gt;
+    &lt;p&gt;C&#x27;est ma page d&#x27;accueil.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p id="63785519-baa0-412c-89b5-11c7a0fb1cb2" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="3bfb53d6-165d-4d0e-9a7d-cdf9946391c2"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Maintenant qu’on a télécharger le paquet twig, quand on crée un nouveau contrôleur, Symfony fait tout même le retour de Twig de la fonction du contrôleur.</div></figure><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="aefe036d-7845-4bde-9402-8e6426af246d"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Il est possible de copier le <em>composer.json</em> d’autre projet et lancer <code>composer install</code> que Symfony installe directement tous les paquets présents dans le fichier.</div></figure><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="b969ec15-7919-48cf-b68c-f0df2cc40b99"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Le fichier <em>composer.lock</em> est une version vérrouillée du <em>composer.json</em>.
+C’est une sécurité contre la red team (on peut le supprimer pour ajouter ou supprimer des paquets, il sera recréer automatiquement).</div></figure><p id="0b018a8e-2e16-46ba-b2aa-b1851b881d61" class="">
+</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="9e5d3715-9e54-4f77-942b-ebec79c34876"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+- <a href="https://sensiolabs.com/fr/">SensioLabs</a>
+- <a href="https://les-tilleuls.coop/">Les Tilleuls coop</a>
+- <a href="https://certification.symfony.com/">Certification Symfony</a></div></figure><p id="bdb3eafd-7590-434a-a853-15c56eafe1c7" class="">
+</p><p id="70a82151-f928-42a5-88f5-5fda9aadf3e1" class="">
+</p></div></article></body></html>

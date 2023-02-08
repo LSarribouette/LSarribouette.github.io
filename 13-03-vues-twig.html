@@ -1,0 +1,747 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Vues et Twig</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e6787f8a-b99e-4875-85b2-51bca902ca71" class="page sans"><header><img class="page-cover-image" src="media/13-03-vues-twig/2023-02-08_22_30_13-pexels-thomas-bannenberg-4670824.jpg_-_Photos.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Vues et Twig</h1></header><div class="page-body"><blockquote id="71235f45-d01a-4239-9c8f-e263ccb1cee9" class="">Equivalent en Java à l’<em>expression language</em> et JSTL mais en plus simple.</blockquote><p id="c2481577-2997-4cd9-b213-e6e9018364e8" class="">
+</p><p id="078d0aec-d7cd-45ba-abcd-82d0e7579058" class="">Twig est un moteur de templates minimaliste, lisible et performant qui permet de compiler en PHP un fichier Twig et de créer une page HTML.</p><p id="07883109-986b-4353-b125-2a32dbc99214" class="">Symfany ajoute des fonctionnalités à Twig.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="e25673cb-5589-41ff-8bab-f168b5bec59c"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Moteur de templates semblables :
+- Nunjucks sous JavaScript
+- Jinja sous Python
+- DTL de Django
+- Jtwig sous Java</div></figure><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="0f7d6fac-26b2-4814-a4c3-070e74582af4"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://twig.symfony.com/doc/">https://twig.symfony.com/doc/</a>
+Référentiel des BP en PHP : <a href="https://www.php-fig.org/psr/">https://www.php-fig.org/psr/</a></div></figure><p id="8b9798ce-d42b-4e24-91cc-c9f20b59ad14" class="">
+</p><h2 id="0e289e30-bf68-4726-a55a-7211090b5bf6" class="">Délimiteurs</h2><hr id="c1ad7073-4b21-4b3f-8ab8-fe573a9a19ae"/><p id="5dbd9cab-7767-43c8-ac25-d0e7e1034500" class="">Twig propose trois délimiteurs pour exécuter du code :</p><ol type="1" id="64b1cafa-140e-44fc-977d-166bc9bd4a5c" class="numbered-list" start="1"><li>{# … #} pour les commentaires
+(que pour le dev, le client dans le navigateur ne les voit pas)</li></ol><ol type="1" id="65c4da1f-3228-42ac-bb52-8a1997d2b134" class="numbered-list" start="2"><li>{{ … }} (double moustache) pour afficher une variable ou une fonction qui retourne une chaine de caractères
+(on ne met pas le dollar de la variable)</li></ol><ol type="1" id="60ee22f5-c500-4345-8994-54266cfa4f6f" class="numbered-list" start="3"><li>{% … %} pour exécuter du code PHP et pour les balises Twig</li></ol><p id="bee03b0f-ff1b-4083-b816-d2151b2a7509" class="">
+</p><h2 id="d4b04249-6319-4ca7-99a8-21b80997edc1" class="">Balises Twig (tags)</h2><hr id="2b4d70b9-f2e9-4458-8f8a-66a3ca1391c0"/><p id="c1bee06c-3d25-44a4-8e33-2873263df61d" class="">Les balises Twig sont nombreuses, parmi les plus utilisées on trouve : </p><ul id="c8ae6c1b-403b-4d1a-9085-6f52316839bf" class="bulleted-list"><li style="list-style-type:disc">apply</li></ul><ul id="6255aa5a-4f33-4870-9a35-52f51d7ecfb0" class="bulleted-list"><li style="list-style-type:disc">autoescape</li></ul><ul id="b638fb4a-e4db-4719-9065-876f9042784f" class="bulleted-list"><li style="list-style-type:disc"><strong>block</strong></li></ul><ul id="3613a49b-ba38-4b80-910c-a0f89406b973" class="bulleted-list"><li style="list-style-type:disc">deprecated</li></ul><ul id="7fc18d06-bdd4-4699-8f66-396012aacf35" class="bulleted-list"><li style="list-style-type:disc">do</li></ul><ul id="14c6dc54-8e4d-40f4-80d3-5d32da0d9961" class="bulleted-list"><li style="list-style-type:disc">embed</li></ul><ul id="925ef164-e3c4-42e4-9aa8-d3212b090bc5" class="bulleted-list"><li style="list-style-type:disc"><strong>extends</strong></li></ul><ul id="7d6be35a-e73c-4acb-a92d-4ed3e0ea7243" class="bulleted-list"><li style="list-style-type:disc">flush</li></ul><ul id="421c979e-7fe9-424f-94dd-87be63be06e3" class="bulleted-list"><li style="list-style-type:disc"><strong>for</strong></li></ul><ul id="7075d624-50d4-42b1-80d0-53fdc641b81f" class="bulleted-list"><li style="list-style-type:disc">from</li></ul><ul id="f7fb6845-08dd-4d6d-b068-f3a513436b30" class="bulleted-list"><li style="list-style-type:disc"><strong>if</strong></li></ul><ul id="6c438e5c-6e26-4a73-86b7-a429a6b7d948" class="bulleted-list"><li style="list-style-type:disc">import</li></ul><ul id="e9a0bd87-963b-413e-b0be-a99bc76a7724" class="bulleted-list"><li style="list-style-type:disc"><strong>include</strong></li></ul><ul id="b112f0ca-68f5-499f-b301-53e66c926fb9" class="bulleted-list"><li style="list-style-type:disc">macro</li></ul><ul id="fd3ea244-458d-4954-903b-890d77a0088e" class="bulleted-list"><li style="list-style-type:disc">sandbox</li></ul><ul id="cefad3dd-e50e-44c4-9ca2-1ece552d4664" class="bulleted-list"><li style="list-style-type:disc"><strong>set</strong></li></ul><ul id="f301931e-f349-4296-b583-2129b7bb7b65" class="bulleted-list"><li style="list-style-type:disc">use</li></ul><ul id="eabe958f-ce58-4c53-97bc-e33337e79519" class="bulleted-list"><li style="list-style-type:disc">verbatim</li></ul><ul id="f272add4-4a04-4bf2-b6bb-a7d5f0ea60d9" class="bulleted-list"><li style="list-style-type:disc">with</li></ul><p id="cb9afabc-5604-408b-9831-3f31cbbe8309" class="">
+</p><p id="8094d4fe-14ab-4613-81e6-f0b4076d7075" class="">Il est possible de faire de l’héritage entre Twigs avec <code>extends</code>, <code>block</code> et <code>include</code>.</p><p id="bb80ad5e-e1e1-4943-a0cf-e48f0c12e54c" class="">
+</p><p id="8c115a38-ed7d-42fb-be4a-56010a03a78e" class="">La balise <code>if</code> finit par un <code>endif</code> et on utilise les mots-clé <code>and</code>, <code>or</code>, <code>not </code>au lieu des opérateurs habituels.</p><p id="6ef21bb5-f782-4039-b0d8-3f26ce6c048f" class="">Il n’y a pas de switch mais un équivalent existe.</p><p id="9c1bc1a2-a747-45e6-a112-0a9d169ebcf1" class="">
+</p><p id="d70b4048-0d6c-4194-b0da-c625f67b7e0a" class="">La balise <code>set</code> permet de créer une variable directement dans la vue. Elle est peu utilisée sauf quand on veut la récupérer d’ailleurs (ex : afficher la date du jour).</p><p id="1c683a36-fbd9-4462-9de5-9462aa45b0a4" class="">
+</p><p id="b6f51902-7286-42ec-928b-bf0d878a162d" class="">La balise <code>for</code> finit par un <code>endfor</code> et permet de récupérer des informations, comme le dernier élément, le premier, l’actuel, l’index…</p><p id="5e8eddf5-321d-475a-a433-c0c7bf711b25" class="">On peut faire un ‘for … else’ si jamais la variable est vide.</p><p id="edc62fdc-7f99-4d40-aef6-bc9e0e457e3e" class="">
+</p><pre id="045e1580-4160-4af4-afa6-aa2ec5e2885a" class="code"><code>{% set fleurs = [&quot;rose&quot;, &quot;tulipe&quot;, &quot;marguerite&quot;] %}
+&lt;h2&gt;Exemple d&#x27;un if : &lt;/h2&gt;
+    {% if fleurs[0] == &quot;rose&quot; %}
+        &lt;p&gt;La fleur est une rose.&lt;/p&gt;
+    {% else %}
+        &lt;p&gt;Eh bien non, ce n&#x27;est pas une rose.&lt;/p&gt;
+    {% endif %}
+&lt;h2&gt;Exemple d&#x27;une boucle for : &lt;/h2&gt;
+    &lt;ul&gt;
+        {% for fleur in fleurs %}
+            &lt;li&gt;{{ fleur }}&lt;/li&gt;
+        {% else %}
+            &lt;li&gt;Pas de fleurs.&lt;/li&gt;
+        {% endfor %}
+    &lt;/ul&gt;</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="47407c4f-f746-4569-a2cc-a27a906c887b"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Les getters sont utilisés de manière automatique, sans qu’on le voit.</div></figure><p id="bb4b7feb-eceb-470c-a372-6dd7696c42ea" class="">
+</p><h2 id="cce12309-e91c-4d47-bb0a-429ae3ac13b9" class="">Filtres Twig</h2><hr id="a1c8f331-1d61-4777-8c73-69cea0001f7d"/><p id="e01dc8e5-15a6-4be6-9607-686b212173cf" class="">Un filtre sert à modifier l’affichage d’une variable sans la modifier, avec un pipe <code>|</code>.</p><pre id="5be5c8c3-67aa-46f0-a4cc-5a9935c928fe" class="code"><code>{% set fleurs = [&quot;rose&quot;, &quot;tulipe&quot;, &quot;marguerite&quot;] %}
+&lt;h2&gt;Exemple d&#x27;un filtre : &lt;/h2&gt;
+&lt;p&gt;J&#x27;affiche {{ fleurs[1] }} en majuscules : {{ fleurs[1] | upper }}&lt;/p&gt;</code></pre><p id="6cb9f6df-d4af-43dd-bab0-143508534b6e" class="">
+</p><p id="c25fbd0f-2d0e-45f7-a325-d527a898507b" class="">Les filtres sont nombreux, parmi les plus utilisées on trouve : 
+•abs</p><p id="924f7844-b8dd-4adb-b47c-b28e47b62222" class="">•batch</p><p id="58b75b1c-1be8-4d4d-9050-4ea8629a53ab" class="">•capitalize</p><p id="bcaf4efb-b65c-4a99-9d59-ae3c695f6949" class="">•convert_encoding</p><p id="ea8008d5-41ec-4757-a4e4-e5010dece181" class="">•date</p><p id="cfafbb07-983f-419d-90fd-e09b9088bd6d" class="">•date_modify</p><p id="060c6b49-be8b-42e9-9150-3c3e874e0861" class="">•default</p><p id="9feb27df-bf6d-4e87-838e-5698a57e7a2b" class="">•escape</p><p id="a7784918-450d-486e-afe6-abee23144056" class="">•first</p><p id="1bec39b1-e13a-4b1e-bab3-179354cb8739" class="">•format</p><p id="98e98d1f-0aac-40a8-8353-f9280c4463ee" class="">•join</p><p id="395564c8-efc8-472b-856f-2eff3821afd6" class="">•json_encode</p><p id="9ac06456-19b6-420a-89e3-2eeec7e02aa2" class="">•keys</p><p id="02c091db-3da5-42c0-b2cb-3ae02a2f9e1b" class="">•last</p><p id="c8ac3fe1-c815-44cc-b7a7-921f77acee2f" class="">•length</p><p id="76370fe4-e5ef-44f9-ba3e-d3016fa1367c" class="">•lower</p><p id="c5bd915b-0959-4fbe-941a-ae4c2fb7330b" class="">•markdown_to_html</p><p id="bac521fb-9f5f-43a4-bbec-83063bad7a61" class="">•merge</p><p id="d79b3bca-a363-4c6c-8ecc-81992be633f3" class="">•nl2br (pour convertir les sauts de ligne en balise &lt;br&gt;)</p><p id="81bc3b59-b410-430e-abdc-27464fae1003" class="">•number_format</p><p id="de3af961-199e-433a-aa48-17d9ef9473ae" class="">•raw</p><p id="936aeb02-f53c-418e-95cb-d8f1993d436d" class="">•replace</p><p id="7cb792ce-7aa8-45c3-9f9b-e52102dba617" class="">•reverse</p><p id="738bed08-194f-4142-9a41-f1379cb9dd8c" class="">•round</p><p id="24773207-b2b8-4380-93f5-1a6022bb7ce4" class="">•slice</p><p id="419c619f-e05f-4e84-9423-60e6d8845370" class="">•sort</p><p id="0f50f262-9e10-456a-9e05-6516bd7d76aa" class="">•split</p><p id="3b768d2d-70fe-43d9-8e2f-938df688e068" class="">•striptags</p><p id="870de671-bcfa-4c08-8c83-b2cc962c1011" class="">•title</p><p id="1ffbbb13-00fd-4195-8218-01c2df8ce80e" class="">•trim</p><p id="77a6986b-ae6a-4f99-b8fc-02b8b9bdec65" class="">•upper•url_encode</p><p id="b8b2001b-9be2-46ed-98ce-dac6a7e93fb7" class="">
+</p><h2 id="7b76ae04-1071-4e1d-a674-c398c02d0330" class="">Blocs et héritage</h2><p id="2b05976a-4b6d-48ea-b9f4-7118addf2463" class="">Afin de limiter les répétitions, il est possible de créer des gabarits réutilisables avec des blocs et de l’héritage entre Twigs.</p><p id="c2fcdf74-6200-4a62-9b6c-7b714f67d2bb" class="">Une page principale contient la trame générale : <em>base.html.twig</em>, ce fichier est d’ailleurs créé automatiquement. Des blocs sont définis pour les parties à modifier selon le Twig (ex : un block title, un block body…) avec <code>{% block title %}{% endblock %}</code>.</p><p id="c0314375-1e65-4941-ad2a-2a5f18e17101" class="">Les autres Twigs héritent de cette page avec <code>{% extends ‘</code><code><em>base.html.twig</em></code><code>’ %}</code> et les blocs sont remplis à façon :</p><pre id="df807095-6434-41ff-9943-5f7c76eb5549" class="code"><code>{% extends ‘base.html.twig’ %}
+
+{% block body %}
+	&lt;p&gt;Un contenu de body&lt;/p&gt;
+{% endblock %}
+
+{% block title %}Un titre de Twig{% endblock %}</code></pre><p id="bf4c90d1-b3b5-455a-b0b3-b250305d16c2" class="">
+</p><p id="91ef678b-ba75-4d18-8607-9a58062e3130" class="">Un autre possibilité est d’utiliser l’inclusion avec <code>include()</code> comme en PHP mais on l’utilise rarement : <code>{% include(&#x27;fichier.html.twig&#x27;) %}</code>.</p><p id="429972e2-c50c-407b-b8e9-6505232664c1" class="">
+</p><h2 id="ac32e940-e728-4034-a508-bef12712fc2a" class="">Gestion des assets</h2><hr id="37fac03c-5b7a-458f-b553-03c060615e0f"/><p id="eef6b23d-b746-419f-9112-b3e736784674" class="">Avec l’héritage, on ne peut pas appeler de fichiers (css, javascripts, images…) puisque le chemin est différent selon le Twig dans lequel on se trouve.</p><p id="d50e9d29-2df9-41e9-9995-3c3a6cb512e0" class="">On met tous ces fichiers dans le répertoire <em>public</em> (chacun bien rangé dans des répertoires, bien sûr) et on utilise des <em>assets</em> qui permettent d’y accéder dynamiquement.</p><p id="0686a5f3-cbe3-43b1-ab75-c23dd58a2ba2" class="">Par exemple pour un fichier de style : </p><pre id="0e647cb0-09b1-48b1-b820-27cade6fdeb7" class="code"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;{{ asset(&#x27;css/style.css&#x27;) }}&quot;&gt;</code></pre><p id="85c7ae9e-ab2b-49db-803e-aa595329e826" class="">
+</p><p id="74684407-a523-49a7-8e15-f81a35c4bfcc" class="">De même pour les liens à des URLs internes, on utilise soit <code>{{ path(&#x27;home&#x27;) }}</code> qui trouve par le nom de la route, soit <code>{{ url(&#x27;home&#x27;) }}</code> qui trouve par l’URL.</p><blockquote id="7374b499-b743-4108-9a7c-0ddfd87c23a6" class="">BP : Il est recommandé d’utiliser <code>path</code> parce qu’il y a très peu de raisons de changer le nom unique d’une route alors qu’il est possible que son URL évolue.</blockquote><p id="3171262a-7dc6-4c28-a384-108414336414" class="">
+</p><p id="243b4837-a3ab-41f0-949f-c297cbf10ec2" class="">Il faut installer le paquet <em>asset</em> : <code>composer require symfony/asset</code></p><p id="d437ce2d-8206-49a2-853f-1aefea013d10" class="">
+</p><h2 id="28109b4f-e348-4abc-904a-6eeff41a8e42" class="">Passer des variables à la vue</h2><p id="8a822106-3ea9-41c9-a412-a9f4fe641561" class="">Dans le contrôleur :</p><p id="2a921676-da8d-4820-9ff5-64aa694efc26" class="">On utilise la méthode <code>render()</code> dans laquelle on passe un deuxième paramètre qui est un tableau avec la liste des variables qu’on veut envoyer à la vue, sous la forme de clé=&gt;valeur.</p><p id="6dcd31f8-98ed-47fa-892b-a2c2e01d67f6" class="">Il est possible de déclarer le tableau avec les crochets ou bien avec la méthode <code>compact()</code> :</p><pre id="60875cc3-3c2c-48a1-a3c8-e564143921af" class="code"><code>// avec les crochets
+#[Route(&#x27;/&#x27;, name: &#x27;home_index&#x27;)]
+    public function index(): Response
+    {
+        $uneVar = &quot;bonjour&quot;;
+        $uneAutre = 42;
+        return $this-&gt;render(&#x27;home/index.html.twig&#x27;, [
+            &quot;uneVar&quot; =&gt; $uneVar,
+            &quot;uneAutre&quot; =&gt; $uneAutre
+        ]);
+    }
+
+// avec compact()
+#[Route(&#x27;/&#x27;, name: &#x27;home_index&#x27;)]
+    public function index(): Response
+    {
+        $uneVar = &quot;bonjour&quot;;
+        $uneAutre = 42;
+        return $this-&gt;render(&#x27;home/index.html.twig&#x27;,
+            compact(&#x27;uneVar&#x27;, &#x27;uneAutre&#x27;)
+        );
+    }</code></pre><blockquote id="63544e03-40e6-437b-9189-a3e9dd513da5" class="">BP : Souvent, on met le même nom pour la clé et la variable si on utilise les crochets.</blockquote><p id="005378bb-18af-48a3-a79d-1123a06b0804" class="">
+</p><p id="d50fb83f-0f09-4494-a865-27d5f99dcd12" class="">Dans le Twig :</p><p id="ee0b6278-3e48-4aba-b9ee-25019153747a" class="">On utilise les double moustaches dans lesquelles on appelle la clé.</p><pre id="b93d7b05-60f9-4212-bcf7-d789720607d1" class="code"><code>&lt;p&gt;J&#x27;affiche les variables : {{ uneVar }} et {{ uneAutre }}.&lt;/p&gt;</code></pre><p id="5485866a-01d0-4d8b-bbac-9b83127b2f42" class="">
+</p><h2 id="9a0cec9b-1492-4a6a-8191-9981ee44ef99" class="">En vrac</h2><hr id="8129b5ac-ea8e-4914-b6a5-aee9a0869c76"/><ul id="f0fe8522-3bcb-4e66-81c2-dfd932b22cf7" class="bulleted-list"><li style="list-style-type:disc">Symfony ne crée une instance du contrôleur que si on y accède (et c’est un singleton). </li></ul><ul id="d424314b-0249-4c1c-94e8-1996e24deaee" class="bulleted-list"><li style="list-style-type:disc">Git permet de créer des <em>gist</em> : ça crée un bout de code qu’on peut partager avec l’URL et on peut discuter en dessous.</li></ul><ul id="f54acd96-2ba4-44fb-8f0a-d6f019fc1135" class="bulleted-list"><li style="list-style-type:disc">Des blocks <em>stylesheets</em> et <em>JavaScript</em> sont générés par défaut : ils sont utilisés par le paquet <em>encore</em> (dont module Symfony UX) pour faire du JavaScript à l’intérieur de Symfony (Angular, Svelte, React, Vue….).</li></ul><ul id="6eb009ef-c34c-43c5-8018-b6ca378c9fd5" class="bulleted-list"><li style="list-style-type:disc"> à la soutenance, penser à mettre un fil d’ariane</li></ul><ul id="d0dd7a6d-342c-4fc2-8058-dc9da9d22f18" class="bulleted-list"><li style="list-style-type:disc">Pour avoir des feuilles de style appelées seulement dans certains Twigs, on peut faire un bloc css.</li></ul><ul id="63e0501e-3320-4a9b-9233-ee74c46b35e8" class="bulleted-list"><li style="list-style-type:disc">Il est possible de récupérer le contenu du bloc parent et de le concaténer avec un nouveau avec la variable symfony <code>parent()</code></li></ul><pre id="d5873249-70d6-453a-bd4c-b62d569b3da4" class="code"><code>{% block title %} {{ parent() }} - Accueil {% endblock %}</code></pre><ul id="dc9ef450-ad89-47de-b031-53829fdb18bc" class="bulleted-list"><li style="list-style-type:disc">Pour l’accessibilité, on utilise des vraies balises (afin qu’on puisse lire la class et son contenu).</li></ul><ul id="af57be20-8cad-43ae-a4e7-ede6a6add859" class="bulleted-list"><li style="list-style-type:disc">Pour afficher un footer avec l’année en cours : <code>{{ &quot;now&quot; | date(&quot;Y&quot;) }}</code> (mieux) <p id="7915f8bb-21e7-4317-b566-d48eb1f6cb32" class="">ou bien créer une var date dans le controleur (<code>$date = new \DateTime();</code>) et l’envoyer via le <code>render()</code>.</p></li></ul><ul id="695ac4f6-b9e5-409f-aec7-4012b8ae8352" class="bulleted-list"><li style="list-style-type:disc">Pour ajouter une font en la téléchargeant : <ul id="eaacf9be-0af8-4939-be57-6e4fa86d2d5d" class="bulleted-list"><li style="list-style-type:circle">on ajoute les fichiers dans public, dans un répertoire /font</li></ul><ul id="5b356db5-e47e-49b6-b43b-3f35eee7db28" class="bulleted-list"><li style="list-style-type:circle">dans le css : on crée la police et on lui donne un nom (autant de font-face que de fichiers)</li></ul><ul id="6fa70352-5183-40c1-b8ff-ee292b606367" class="bulleted-list"><li style="list-style-type:circle">puis on peut l’utiliser</li></ul></li></ul><blockquote id="827c9142-677c-4906-b949-6820a244536b" class="">BP : mettre plusieurs polices si jamais il y a un problème.</blockquote><pre id="b8a6f6ac-16ef-4e2a-8b97-fda9c2fe631c" class="code"><code>@font-face {
+	src: url(&quot;../fonts/Luciole-Regular.ttf&quot;);
+	font-family: &quot;Luciole-Regular&quot;;
+}
+
+body {
+	font-family: Luciole-Regular, sans-serif;
+}</code></pre><p id="63c12a6a-3754-4792-8465-82d0f957bc34" class="">
+</p></div></article></body></html>

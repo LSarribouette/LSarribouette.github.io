@@ -114,7 +114,7 @@ section {
 
 article {
 	text-align: left;
-	display: inline-block;
+	display: inline-grid;
 	width: 30%;
 	padding-top: 0;
 	padding-bottom: 20px;
