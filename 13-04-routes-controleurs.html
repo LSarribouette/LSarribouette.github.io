@@ -1,0 +1,711 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Routage et contrôleurs</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="eee95190-565d-42fb-a2b8-cfc7edd8d102" class="page sans"><header><img class="page-cover-image" src="media/13-04-routes-controleurs/2023-02-08_22_30_32-pexels-artem-mizyuk-1739809.jpg_-_Photos.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Routage et contrôleurs</h1></header><div class="page-body"><h2 id="70826a26-bc38-439f-8957-6b15838f3340" class="">Routes</h2><hr id="df0701ad-b3a6-4c7c-98af-e71b74481717"/><p id="836ebd54-c3dd-4d6f-821e-360991d13ab0" class="">Le système de routage fait qu’une route est une correspondance entre une URL (dans le navigateur) et une méthode PHP (dans le contrôleur).</p><p id="f8731522-4f80-4f53-a7bb-a0069113023c" class="">Il est possible de passer des paramètres de l’URL à la méthode, de manière plus jolie que <code>?id=1</code>.</p><h3 id="d305b0b2-0b9a-47b3-8e70-cf2de2213792" class="">Configuration</h3><p id="08bf564d-f925-41e8-9d21-5389c38fd477" class="">5 façons possibles :</p><ul id="afc76ecf-b825-4e48-a161-d63be12bf047" class="bulleted-list"><li style="list-style-type:disc">PHP (jamais)</li></ul><ul id="df6f87a0-e739-44db-92e4-273ffa9743b4" class="bulleted-list"><li style="list-style-type:disc">YAML (fichier de configuration <em>route.yaml</em> où on peut mettre toutes les routes — utilisé parfois car cela permet d’avoir toutes les routes au même endroit)</li></ul><ul id="d13fc61c-c376-4451-8b20-ec8d56e1056e" class="bulleted-list"><li style="list-style-type:disc">XML (très similaire au fichier YAML, mais moins bien)</li></ul><ul id="970f2bf6-e68e-4e3f-87a7-3151da8b02ef" class="bulleted-list"><li style="list-style-type:disc">annotations (/** *@UneAnnotation */ au dessus de la méthode associée — utilisé)</li></ul><ul id="d3a2f682-2791-450b-aedf-111c9a0042d6" class="bulleted-list"><li style="list-style-type:disc">attributs (avec #  au dessus de la méthode associée, c’est ça que fait le make:controller — utilisé)</li></ul><blockquote id="757f9718-577d-4ba6-b151-c4ce8cd14a78" class="">BP : on utilise maintenant au maximum les attributs.</blockquote><p id="2ba53ea9-d2bd-4663-afad-858f3c86e1e6" class="">
+</p><h3 id="fbea9f57-637e-44e7-bfe5-07f6f5e2fe16" class="">(Annotations ou) attributs</h3><p id="13399c81-6374-467b-86bc-bfc2613eed21" class="">Ce sont en fait des commentaires interprétés, placés au-dessus du code PHP associé.</p><p id="2f736d45-7b27-45f0-bd88-c9df31f625e7" class="">Ils doivent impérativement avoir cette forme : <code>#[Route(….)]</code>.</p><p id="0a3be669-f45d-4ded-b553-f3b75ffba18c" class="">Dans le contrôleur, on importe la classe de route de Symfony et on lui donne un alias, puis on crée l’annotation au-dessus de chaque méthode.</p><pre id="9b192786-88b8-4a29-a611-42108f8b776b" class="code"><code>...
+use Symfony\Component\Routing\Annotation\Route;
+...
+#[Route(&#x27;/&#x27;, name: &#x27;home_index&#x27;)]
+    public function index(): Response
+{
+	...
+}</code></pre><p id="f89e4718-26e2-4865-a0a2-97ea41c6649f" class="">
+</p><h3 id="f03d5dd4-de33-4efc-a21d-12a170af1922" class="">Paramètres</h3><p id="dcf48056-6312-409d-b2bb-1b813bdc7305" class="">Dans les paramètres passés à l’attribut, on donne obligatoire l’URL souhaitée de la route et un nom à cette route  ; éventuellement, on peut ajouter des conditions (<em>requirements</em>) et des méthodes.</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="dc7f9a0a-46dd-4fe9-bb6b-90cc8b263057"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">On peut avoir la même route pour différentes méthodes (ex: get et post) mais leur nom doit être unique (et en <em>snake_case</em>).</div></figure><p id="d43afc9f-bf9b-4ec1-88b6-dfda11dca432" class="">Dans l’URL de la route, on passe entre accolades le paramètre qu’on souhaite prendre en compte dans la méthode.</p><p id="427b28ed-27fa-48b2-80f5-854cbf3696ab" class="">On peut ajouter des conditions sur ce paramètre avec <em>requirements</em> ou un paramètre par défaut.</p><pre id="e8440437-e813-444d-8087-f8800a44908a" class="code"><code>#[Route(&quot;/utilisateurs/profils/{user}&quot;)]
+...
+
+#[Route(&quot;/utilisateurs/profils/{id}&quot;, requirements={&quot;id&quot;=&quot;\d+&quot;}))]
+...
+
+#[Route(&quot;/utilisateurs/profils/{page}&quot;)]
+public function listusers($page = 1)
+{
+	...
+}</code></pre><p id="587cc278-9694-46a0-b342-a63d38a0075a" class="">Il existe d’autres conditions au <em>match</em> de la requête :</p><p id="24021d92-3743-40b3-b825-90e62138e29b" class="">- <code>method</code></p><p id="e8087560-0a60-46ff-83b9-1140c7f58525" class="">- <code>host</code> pour rediriger selon l’hôte</p><p id="1b62d9e3-7aac-464e-99a5-2d6d7773550b" class="">- <code>_locale</code> pour la langue </p><p id="2f321882-49a1-47c9-a5fd-c6fe19b2b406" class="">- <code>UTF-8</code> pour vérifier que le navigateur est bien codé en UTF-8</p><p id="e6d18b19-85e6-45bd-9465-9659a6fd9e12" class="">
+</p><h3 id="9cb13b7f-1402-4d26-b3b0-9944035c5516" class="">Console</h3><p id="196d1479-9723-4ad5-aaa0-b0662d18b11b" class="">Afficher la liste des routes : <code>symfony console debug:router</code></p><p id="d924e267-8eb3-42bb-866d-7efe7482c9a0" class="">Afficher les détails d’une route : <code>symfony console debug:router name_route</code></p><p id="9a0f86ab-d1e5-40cb-abcf-8c53e198f3f4" class="">Tester le match entre une URL et une route : <code>symfony console router:match /url-a-tester</code></p><p id="303c35c2-0faa-4812-962f-e7bad94a316d" class="">
+</p><p id="0e4c4e69-74ce-4613-b426-15083248bc63" class="">
+</p><h2 id="a3764758-f667-410b-b270-f3d7631cab68" class="">Contrôleurs</h2><hr id="8c31a372-a33b-49e5-9b12-05ffd1137ac3"/><p id="f6da318e-0b51-450a-86b5-71fe00661304" class="">Un contrôleur est une simple classe PHP, qui hérite du contrôleur de Symfony <code>AbstractController</code>. Il retourne un objet <code>Response</code>.</p><p id="0a73795b-85c3-453f-a615-2425ec3ba68f" class="">On peut en créer autant qu’on veut mais chaque méthode du contrôleur n’est lié qu’à une seule page, elle retourne un et un seul Twig.</p><blockquote id="ba198abf-b8f7-41bf-aafa-d1ee51c677e4" class="">BP : On essaie de regrouper les méthodes et Twigs qui se ressemble et d’avoir un contrôleur par fonctionnalité.</blockquote><p id="28c6f1ff-a7ca-4c31-a0e1-aa569ec05280" class="">
+</p><p id="5bef5ad8-253d-4b4e-9d84-b1303c282246" class="">Pour créer un contrôleur : <code>symfony console make:controller</code> &gt; <code>nomController</code></p><p id="fd063f2e-a6f3-41b0-8321-5e8b6feaf3b1" class="">
+</p><h3 id="f25bc46c-f8cc-46da-923c-335b3ee864ca" class="">Méthodes</h3><p id="2749ba7e-108e-4739-8152-74b4a8501b9c" class="">Affichage et réponses : </p><ul id="38acbba5-b82d-4da6-afc4-df59be4c1e75" class="bulleted-list"><li style="list-style-type:disc"><code>render()</code></li></ul><ul id="4aa0f872-ccfd-4652-88bb-bf7d683c6291" class="bulleted-list"><li style="list-style-type:disc"><code>json()</code></li></ul><ul id="cff185b4-ddc2-4fde-95f0-05fa8d1dc3eb" class="bulleted-list"><li style="list-style-type:disc"><code>file()</code> pour télécharger un ficher</li></ul><ul id="c0cdd92c-b20e-448b-8282-10b640692204" class="bulleted-list"><li style="list-style-type:disc"><code>createNotFoundException()</code></li></ul><p id="32e6c4cb-b600-452c-9637-1cc79593e7f1" class="">Routage :</p><ul id="6402e1a5-94f3-4ec0-9edd-b6ffb9d4cdf9" class="bulleted-list"><li style="list-style-type:disc"><code>redirectToRoute()</code> pour diriger vers un autre contrôleur</li></ul><ul id="fd742abb-10c0-4357-8919-542c995467a7" class="bulleted-list"><li style="list-style-type:disc"><code>generateURL()</code> pour générer une URL</li></ul><ul id="0ba75b06-2864-4245-8a7a-1c950140c52f" class="bulleted-list"><li style="list-style-type:disc"><code>redirect()</code> pour diriger vers une autre site web</li></ul><p id="59786b63-7d20-47f1-acd8-d46a593833ba" class="">Sécurité :</p><ul id="0d1e518a-de61-4efe-88e6-0ba7c7c5d480" class="bulleted-list"><li style="list-style-type:disc"><code>getUser()</code> pour récupérer l’utilisateur connecté</li></ul><ul id="aa53221b-55a7-40b2-b66d-0100c6f67b9a" class="bulleted-list"><li style="list-style-type:disc"><code>createAccesDeniedException()</code></li></ul><ul id="e9ab96c2-2fcc-4004-ac05-cacfe25e4b2b" class="bulleted-list"><li style="list-style-type:disc"><code>isGranted()</code> pour vérifier si l’utilisateur a les droits</li></ul><ul id="0395971f-8fa5-4cf7-a2a5-af3442ca9c53" class="bulleted-list"><li style="list-style-type:disc"><code>denyAccessUnlessGranted()</code> pour interdire l’accès à un utilisateur qui n’a pas les droits</li></ul><p id="e660f02e-d861-4943-a471-156811d7f331" class="">Modèle et données : </p><ul id="ca974d71-426e-447d-8e4f-5f8c2719c92c" class="bulleted-list"><li style="list-style-type:disc"><code>createForm()</code></li></ul><ul id="f659bbaa-04b3-4e18-9be4-0cf23a921f51" class="bulleted-list"><li style="list-style-type:disc"><code>getDoctrine()</code></li></ul><p id="07c8b426-f7ef-436b-90c0-2b2fba21cde4" class="">Divers :</p><ul id="c4f79bf8-18e5-4587-a31e-987649b11fdf" class="bulleted-list"><li style="list-style-type:disc"><code>addFlash()</code> pour afficher un message qui n’apparaît qu’une fois (ex: confirmation d’ajout en base de données)</li></ul><p id="bb3550e5-2048-4e14-9a7d-0dc0287f868f" class="">
+</p><h3 id="36064e24-acb9-478d-9fb3-959f45c6ea49" class="">Préfixes</h3><p id="97e3540e-c0f9-43eb-9768-680de6dc7658" class="">Pas obligatoire, ils sont utiles quand on répète plusieurs fois le même début d’URL.</p><p id="5226781f-7eb1-4122-bffc-b23964e7ae96" class="">On l’attribut de la route commune au dessus du contrôleur et ainsi toutes les routes commencent par le préfixe.</p><p id="229fb41f-1a6f-4a5e-9bba-d3230d21a8e2" class="">Les noms de route sont concaténés. On touche pas au chemin du twig.</p><blockquote id="92408d33-2834-4ac8-9347-116c78f051e6" class="">BP : on laisse le nom de la route dans la fonction avec un <em>underscore</em>, ce qui indique au lecteur qu’on utilise un préfixe.</blockquote><pre id="3286fdb7-5339-4550-81ba-4101c04972b0" class="code"><code>#[Route(&#x27;/series&#x27;, name: &#x27;serie&#x27;)]
+class SerieController
+	#[Route(&#x27;/&#x27;, name: &#x27;_series&#x27;)]
+	public function series(): Response
+	{
+		return $this-&gt;render(&#x27;serie/series.html.twig&#x27;, []);
+	}
+	
+	#[Route(&#x27;/{id}&#x27;, name: &#x27;_serie&#x27;), requirements: [&#x27;id&#x27;=&gt;&#x27;\d+&#x27;])]
+	public function serie(int $id): Response
+	{
+		return $this-&gt;render(&#x27;serie/serie.html.twig&#x27;, []);
+	}</code></pre><p id="85c4da72-b115-4d9d-a79e-49a79141df69" class="">
+</p><h2 id="8000184d-c5fa-492c-8419-5511d19b6b62" class="">Débogage</h2><hr id="1785a680-b2f4-4459-8cb6-19d2d44792f5"/><p id="28e86dab-31e4-4a8a-8ab7-3af0742944de" class="">Des paquets permettent d’ajouter une barre de débogage dans le navigateur, en environnement de développement.</p><p id="44581985-6993-4e90-b807-3eede3c80a11" class="">
+</p><p id="51932a23-25c9-4d06-9808-5846c52665fb" class="">Pour installer la barre de débogage : <code>composer require symfony/profiler-pack --dev</code></p><p id="6fc92f7c-c647-40f4-94ff-c72b6fc50097" class="">Pour installer le paquet pour les <code>dump()</code> sur les variables : <code>composer require symfony/var-dumper --dev</code></p><p id="d57a833f-e324-4f57-b345-993665745b2f" class="">Pour installer le paquet qui affiche les <code>dump()</code> dans la barre : <code>composer require symfony/debug-bundle --dev</code></p><p id="ee2a61ad-2825-40e4-8fe7-f53ca2ac762a" class="">
+</p><p id="57057533-d932-4108-b850-c4b1f36e09ef" class="">Les méthodes disponibles sont <code>dump()</code> pour réaliser un “joli” <code>var_dump()</code> dans la barre de débogage et <code>dd()</code> qui réalise un <code>dump()</code> suivi d’un <code>die()</code> (arrêt du traitement).</p><p id="0871503f-0906-4623-bcb5-849941abcc8b" class="">
+</p><p id="e21d46c1-8159-49a9-ad9d-94393d9f17b2" class="">La barre montre de nombreuses informations : statut http, @nom de la route, temps de traitement, mémoire utilisée, messages d’erreurs, warnings, temps d’affichage du twig, nombre de requêtes SQL…</p><p id="3274e6eb-9329-48fc-9f32-062a34e13f9f" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="e70454d6-0cbe-4221-b8b8-7323e0f74f4d"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">En développement, le cache est réinitialisé à chaque chargement de page tandis qu’en production, le cache est conservé (+ rapide) et il faut le vider à la main avec <code>symfony console cache:clear</code>.</div></figure></div></article></body></html>
