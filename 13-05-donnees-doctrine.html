@@ -1,0 +1,960 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Données et Doctrine</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2f898f21-e723-4bd0-8297-e2c11db7d604" class="page sans"><header><img class="page-cover-image" src="media/13-05-donnees-doctrine/2023-02-10_19_45_11-pexels-manel-and-sean-13351525.jpg_-_Photos.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Données et Doctrine</h1></header><div class="page-body"><blockquote id="c7e2c647-8f5b-42fc-a26f-f0a1fd8f0ae9" class="">Doctrine est l’ORM de Symfony.</blockquote><p id="13df3960-b3a2-4287-bd27-dab3508bf85b" class="">Un <strong><strong><strong>ORM</strong></strong></strong> ou mapping objet-relationnel (<em>object-relational mapping</em>) est un type de programme informatique qui se place en <strong>interface </strong>entre un programme applicatif et une base de données relationnelle pour simuler une base de données orientée objet. Ce programme définit des correspondances entre les schémas de la base de données et les classes du programme applicatif, comme une « couche d&#x27;abstraction entre le monde objet et monde relationnel ». </p><p id="c249651b-5648-4b7a-8cb9-4c027f2b7a5f" class="">Concrètement, l’ORM met à disposition <strong>des classes objet permettant de manipuler les bases de données relationnelles</strong>. Le développeur manipule ainsi des objets et l’ORM transforme le tout en requêtes compréhensibles par la base de données.</p><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="cd0c5e70-ea05-4a3e-962f-94e11eb22277"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">La majorité des frameworks disposent d’un ORM, par exemple :
+- Artisan pour Laravel (PHP)
+- Hibernate pour Java
+- SQLAchemy, Django, Orator pour Python</div></figure><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="3a409154-e15e-4274-a7ee-81886fd6f044"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://www.doctrine-project.org/projects/orm.html">https://www.doctrine-project.org/projects/orm.html</a>
+<a href="https://fr.wikipedia.org/wiki/Mapping_objet-relationnel">https://fr.wikipedia.org/wiki/Mapping_objet-relationnel
+</a><a href="https://www.base-de-donnees.com/orm/">https://www.base-de-donnees.com/orm/</a></div></figure><p id="c813a4e6-6827-487d-8320-03b575b8cdfe" class="">
+</p><h2 id="6fa6391a-0098-4d0f-b95d-d2c2afb392dd" class="">Mise en place</h2><hr id="2e03582a-1f40-4bfe-8479-002c001d2687"/><ul id="1ae9626c-19cd-4196-a2af-08d3d05f3cb6" class="bulleted-list"><li style="list-style-type:disc">installer l’ORM : <code>composer require symfony/orm-pack</code></li></ul><ul id="f2ce7523-9ece-4838-8b26-df90089d28f0" class="bulleted-list"><li style="list-style-type:disc">dans le <em><em><em><em><em><em><em>php.ini</em></em></em></em></em></em></em>, décommenter la ligne correspondant au SGBD choisi</li></ul><ul id="61c87b73-8c38-43d4-a2f4-9dfdca49962e" class="bulleted-list"><li style="list-style-type:disc">ouvrir le fichier <em>.env</em> : <ul id="ba650e5a-0d99-4f1b-8a65-875d664ca654" class="bulleted-list"><li style="list-style-type:circle">il y a des exemples de valeurs pour la variable DATABASE_URL qui permet de se connecter à la base de données de notre choix, sous la forme <code>DATABASE_URL=&quot;monSBGD://monLogin:monMDP@127.0.0.1:monPort/maBaseDeDonnees&quot;</code></li></ul><ul id="6bfc0ed4-43a5-4147-b029-2f923a514efa" class="bulleted-list"><li style="list-style-type:circle">on les laisse commenter puisque le fichier <em><em><em><em>.env</em></em></em></em> est un fichier partagé (notamment sur git) et on ne va pas mettre les login/mot de passe en clair ici….</li></ul></li></ul><ul id="3ad97f1a-7fe4-4b8e-9a89-f6c250e333d7" class="bulleted-list"><li style="list-style-type:disc">créer un fichier <em><em><em><em><em><em><em><em><em><em>.env.local</em></em></em></em></em></em></em></em></em></em> :<ul id="429654d0-0eb1-4075-9dd0-c9c16fa4c76e" class="bulleted-list"><li style="list-style-type:circle">on copie la version de la <code>DATABASE_URL</code> en accord avec le SGBD qu’on a choisi : <code>DATABASE_URL=&quot;mysql://root:unjolimotdepasse@127.0.0.1:3306/bucketlist&quot;</code></li></ul><ul id="c587349c-5c67-4bae-880b-414c5ace9b8a" class="bulleted-list"><li style="list-style-type:circle">on la complète à façon</li></ul><ul id="ca177bfe-e443-4a59-b742-28ba0e51522f" class="bulleted-list"><li style="list-style-type:circle">on ne met jamais le <em><em><em><em><em><em><em><em><em><em>.env.local</em></em></em></em></em></em></em></em></em></em> sur git : chaque collaborateur a ses propres identifiants</li></ul></li></ul><ul id="0e5ac7b9-6658-48cc-8cc3-0a14720148a3" class="bulleted-list"><li style="list-style-type:disc">créer une base de données à partir des informations dans le <em><em><em><em><em><em><em><em><em><em>.env.local</em></em></em></em></em></em></em></em></em></em> : <code>symfony console doctrine:database:create</code><ul id="543cf162-4635-4e30-91dc-b593a15222ed" class="bulleted-list"><li style="list-style-type:circle">si elle n’existe pas, la base de données est créée</li></ul><ul id="4dd57052-6313-41b4-8359-4b88784c8932" class="bulleted-list"><li style="list-style-type:circle">deux dossiers sont créés dans <em>src</em> : <em><em><em><em><em><em>Entity</em></em></em></em></em></em> et <em><em><em><em><em><em><em><em><em><em>Repository</em></em></em></em></em></em></em></em></em></em></li></ul></li></ul><ul id="5a26bf15-8200-4f4d-b878-934eb97be961" class="bulleted-list"><li style="list-style-type:disc">se connecter à la base de données depuis l’onglet <em>Database</em> : + &gt; Data Source &gt; SGBD<ul id="23f08308-1ec9-4c5a-93cd-7c77447cddba" class="bulleted-list"><li style="list-style-type:circle">ajuster et tester la connexion</li></ul><ul id="7ff6dc5b-2a46-455e-8222-045ca0547fc1" class="bulleted-list"><li style="list-style-type:circle">télécharger les drivers, au besoin</li></ul></li></ul><p id="10fac901-725e-41e5-b279-4439b0f8badf" class="">
+</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="c1a2628c-91f8-4b8f-bd65-c57673697d97"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Pour les mots de passe, il n’est pas possible d’utiliser de dollar <code>$</code> (variables en PHP) ni de point d’interrogation <code>?</code> (paramètres dans l’URL).</div></figure><p id="4c61092f-972e-40aa-bf0e-4221492eba3e" class="">
+</p><h2 id="367589fc-3f7e-4629-938c-f37c970fdf93" class="">Entités</h2><hr id="283d9c0e-9cc1-4698-adb9-519eb9cefbc5"/><p id="645b738b-c7ab-4e41-b71e-1f781130fb08" class="">Une entité est une classe PHP représentant les données, ainsi une classe correspond à une table et une propriété de classe correspond à un champ de table.</p><blockquote id="474ca708-73e5-4750-b54c-ffdf10397291" class="">BP : Une entité est une classe dite <em><em><em>POJO</em></em></em> ou minimaliste avec simplement des attributs, des getters/setters, un constructeur, un toString.</blockquote><p id="f06402fe-836d-4895-9f8a-7042f80d156f" class="">
+</p><p id="ea11c5a1-976e-4f0c-849e-68af11160703" class="">A chaque entité (classe) créée, la table correspondante est créée en base avec en plus, pour les manitoumani, une table d’association. </p><p id="f16c16f2-80f3-49cc-a488-ea9300223056" class="">L’identificateur unique (<em>id</em>) est créé de manière automatique, auto-incrémenté, spécifié comme clé primaire (<em>PK</em>) et utilisé comme clé étrangère (<em>FK</em>).</p><p id="9606bffb-f1ef-441a-9000-2a5909c2d442" class="">
+</p><p id="f45ad93c-2305-4866-a470-781498294180" class="">Pour créer (et modifier) une entité : <code>symfony console make:entity</code> &gt; <code>NomEntite</code></p><ul id="f960b860-7c30-4e96-947f-def1ea2361f6" class="bulleted-list"><li style="list-style-type:disc">l’entité <em>NomEntite.php</em> et le repository <em>NomEntiteRepository.php</em> sont créés<blockquote id="fc453c25-144f-42c8-938c-84aca51ca019" class="">BP : On donne le même nom à l’entité et à son contrôleur.</blockquote></li></ul><ul id="7814e5f9-b10a-46f0-9cab-9c0cde71b8a7" class="bulleted-list"><li style="list-style-type:disc">suite de questions pour définir chaque propriété : nom de l’attribut, type, null ou non…<blockquote id="267899ab-33d6-4fdf-ae69-aff19d866064" class="">BP : On ne met pas d’images dans des classes, mais des liens vers les images (qui sont stockées dans <em>public</em>).</blockquote></li></ul><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="932ce44c-9c15-48aa-8a05-0de8f8c964ad"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Si on se trompe lors de la création de l’entité, il vaut mieux tout supprimer et refaire plutôt que d’essayer de modifier les fichiers concernés. De même pour un attribut, il vaut mieux le supprimer avec ses getter/setter et l’ajouter à nouveau.</div></figure><pre id="99b5cd7b-d802-4ff6-b6e0-85258c9dc13d" class="code"><code>// entite Movie
+&lt;?php
+
+namespace App\Entity;
+
+use App\Repository\MovieRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: MovieRepository::class)]
+class Movie
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $title = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $releaseYear = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $country = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $wasSeen = null;
+
+    public function getId(): ?int
+    {
+        return $this-&gt;id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this-&gt;title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this-&gt;title = $title;
+
+        return $this;
+    }
+
+    public function getReleaseYear(): ?int
+    {
+        return $this-&gt;releaseYear;
+    }
+
+    public function setReleaseYear(?int $releaseYear): self
+    {
+        $this-&gt;releaseYear = $releaseYear;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this-&gt;country;
+    }
+
+    public function setCountry(?string $country): self
+    {
+        $this-&gt;country = $country;
+
+        return $this;
+    }
+
+    public function isWasSeen(): ?bool
+    {
+        return $this-&gt;wasSeen;
+    }
+
+    public function setWasSeen(?bool $wasSeen): self
+    {
+        $this-&gt;wasSeen = $wasSeen;
+
+        return $this;
+    }
+}</code></pre><p id="498e2374-2895-407a-a1fa-f82dbdc3401d" class="">Tout est généré automatiquement : propriétés et getters/setters.</p><p id="45b40260-6625-4137-ac34-0dbdc37db246" class="">Les contraintes de champs à appliquer en base de données sont indiquées par des attributs <code>@ORM\</code> (ou annotations avant PHP 8).</p><p id="ec5bc2a8-0beb-4861-b185-09dbf5c27968" class="">
+</p><pre id="01b26edb-a4b3-4977-bd4f-464a94a43289" class="code"><code>// repository MovieRepository
+&lt;?php
+
+namespace App\Repository;
+
+use App\Entity\Movie;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+
+/**
+ * @extends ServiceEntityRepository&lt;Movie&gt;
+ *
+ * @method Movie|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Movie|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Movie[]    findAll()
+ * @method Movie[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
+class MovieRepository extends ServiceEntityRepository
+{
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Movie::class);
+    }
+
+    public function save(Movie $entity, bool $flush = false): void
+    {
+        $this-&gt;getEntityManager()-&gt;persist($entity);
+
+        if ($flush) {
+            $this-&gt;getEntityManager()-&gt;flush();
+        }
+    }
+
+    public function remove(Movie $entity, bool $flush = false): void
+    {
+        $this-&gt;getEntityManager()-&gt;remove($entity);
+
+        if ($flush) {
+            $this-&gt;getEntityManager()-&gt;flush();
+        }
+    }
+
+//    /**
+//     * @return Movie[] Returns an array of Movie objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this-&gt;createQueryBuilder(&#x27;m&#x27;)
+//            -&gt;andWhere(&#x27;m.exampleField = :val&#x27;)
+//            -&gt;setParameter(&#x27;val&#x27;, $value)
+//            -&gt;orderBy(&#x27;m.id&#x27;, &#x27;ASC&#x27;)
+//            -&gt;setMaxResults(10)
+//            -&gt;getQuery()
+//            -&gt;getResult()
+//        ;
+//    }
+
+//    public function findOneBySomeField($value): ?Movie
+//    {
+//        return $this-&gt;createQueryBuilder(&#x27;m&#x27;)
+//            -&gt;andWhere(&#x27;m.exampleField = :val&#x27;)
+//            -&gt;setParameter(&#x27;val&#x27;, $value)
+//            -&gt;getQuery()
+//            -&gt;getOneOrNullResult()
+//        ;
+//    }
+}</code></pre><p id="defe90dd-23ea-475b-978e-cb6f6d8f24e4" class="">Le repository hérite de <code>ServiceEntityRepository</code>.</p><p id="7608ba9e-7320-4789-b0c2-236ddade9be5" class="">Tout est généré automatiquement : le lien avec l’entité <em>Movie</em>, le constructeur, les méthodes pour enregistrer, supprimer et rechercher dans la base de données (<code>save()</code>, <code>remove()</code>, <code>find()</code>, <code>findOneBy()</code>, <code>findAll()</code>, <code>findBy()</code>).</p><p id="a7b28194-eea6-450b-9223-01683eaace7f" class="">
+</p><p id="791c2eef-4d6a-409d-bf56-66ac43e62c10" class="">Pour créer (ou mettre à jour) à la table d’une entité : </p><ul id="77bd4e62-7d7c-46b4-a6c3-058b3e7331d3" class="bulleted-list"><li style="list-style-type:disc">en environnement de développement : <code>symfony console doctrine:schema:update --force</code></li></ul><ul id="b10106ea-8247-4510-967d-f3d38c7608b3" class="bulleted-list"><li style="list-style-type:disc">en production, on veut garder un historique des modifications de la base de données : <code>symfony console make:migration</code></li></ul><p id="6a2ad8ba-03e4-4e18-9b44-10ad94ae48e0" class="">
+</p><h3 id="741b524f-aaa5-4115-9dd9-3fffd8ee89cc" class=""><em>EntityManager</em></h3><blockquote id="cc402aa5-43d0-45e5-9af8-8993c22cc485" class="">Gestionnaire d’entités.</blockquote><p id="cc081dc5-ab83-4166-b1f1-4ce3edb17ab8" class="">Un seul <em><em><em><em><em><em><em><em><em><em><em><em><em><em>EntityManager</em></em></em></em></em></em></em></em></em></em></em></em></em></em> pour l’ensemble des entités, qui gère la création, la mise à jour et la suppression dans la base de données : <em>Create Update Delete</em> du CRUD.</p><p id="a6e7c969-1746-4404-9db4-de745974aab8" class="">Il est récupéré par injection de dépendances de <code>EntityManagerInterface</code> dans les méthodes concernées des contrôleurs et instancié <code>$em</code> ou <code>$entityManager</code>.</p><p id="bf282bb4-835e-4272-84b6-0bbedd6ba3d0" class="">Principales méthodes : <div class="indented"><p id="95120435-0c85-47c1-931e-317869202953" class=""><code>persist()</code> pour créer ou mettre à jour une ligne en base de données (<em>INSERT</em> et <em>UPDATE</em>), 
+<code>flush()</code> pour effectivement envoyer en base les modifications stockées dans le cache, 
+<code>remove()</code> pour supprimer une ligne en base de données (<em><em><em><em><em><em>DELETE</em></em></em></em></em></em>), 
+<code>createQuery()</code> pour créer une requête personnalisée.</p></div></p><p id="95f433d7-908b-4218-9e3e-598cae42f567" class="">
+</p><h3 id="f1d3bce6-b72a-4a26-a63c-8006478851b1" class=""><em>Repository</em></h3><blockquote id="ff43458c-5e39-4bde-b189-50bb126a9afd" class="">Dépôt.</blockquote><p id="44e8091f-4060-4300-87e8-af3e3fbea72c" class="">Un <em><em><em><em><em><em><em><em><em>Repository</em></em></em></em></em></em></em></em></em> par entité, qui gère la lecture et la recherche dans la base de données : <em>Read</em> du CRUD.</p><p id="8ae7efb9-dce5-45a9-911a-e41b531c986b" class="">Il est récupéré par injection de dépendances de dans les méthodes concernées des contrôleurs et instancié <code>$repository</code>.</p><p id="d7da82c7-dc2d-4deb-a2e1-1511d088a191" class="">Principales méthodes : <div class="indented"><p id="92e88731-6739-48a6-8411-46b1554ad1e5" class=""><code>findAll()</code>, <code>find($var)</code>, <code>findOneByTitle($title)</code>, <code>findOneBy([&quot;name&quot; =&gt; &quot;bob&quot;])</code>, <code>findBy([], [&quot;price&quot; =&gt; &quot;DESC&quot;], 30, 0)</code>, </p><p id="28559b60-6add-462e-be51-e9e5a5889162" class=""><code>count()</code> pour récupérer le nombre d’enregistrements.</p></div></p><p id="333c980a-b2a4-46c6-8fb9-7801c0caa827" class="">
+</p><h3 id="edd5ac5d-62c1-4874-8cf8-b38d0627b95b" class="">Démonstration </h3><ul id="7af55978-28d5-4fd1-b748-9b2d73a81ff4" class="bulleted-list"><li style="list-style-type:disc"><em>MovieController </em>avec une méthode pour lister tous les films, une pour afficher le détail d’un seul film et une pour ajouter un film (voir module suivant pour un formulaire)</li></ul><pre id="674f83fa-6609-48c0-ac35-03681d677e3b" class="code"><code>&lt;?php
+
+namespace App\Controller;
+
+use App\Entity\Movie;
+use App\Repository\MovieRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+#[Route(&#x27;/movie&#x27;, name: &#x27;movie&#x27;)]
+class MovieController extends AbstractController
+{
+    #[Route(&#x27;/&#x27;, name: &#x27;_list&#x27;)]
+    public function list(
+        MovieRepository $movieRepository
+    ): Response
+    {
+        $movies = $movieRepository-&gt;findAll();
+        dump($movies);
+        return $this-&gt;render(&#x27;movie/list.html.twig&#x27;,
+            compact(&#x27;movies&#x27;)
+        );
+    }
+
+    #[Route(&#x27;/{id}&#x27;, name: &#x27;_detail&#x27;)]
+    public function detail(
+        int $id,
+        MovieRepository $movieRepository
+    ): Response
+    {
+        $movie = $movieRepository-&gt;find($id);
+//        $movie = $movieRepository-&gt;findOneBy([&#x27;id&#x27; =&gt; $id]); // equivalent
+        return $this-&gt;render(&#x27;movie/detail.html.twig&#x27;,
+            compact(&#x27;movie&#x27;, &#x27;id&#x27;)
+        );
+    }
+
+    #[Route(&#x27;/create&#x27;, name: &#x27;_create&#x27;)]
+    public function create(
+        EntityManagerInterface $entityManager
+    ): Response
+    {
+        // a transformer en formulaire
+        $movie = (new Movie())
+            -&gt;setTitle(&quot;Vol au-dessus d&#x27;un nid de coucou&quot;)
+            -&gt;setReleaseYear(1975)
+            -&gt;setCountry(&quot;Etats-Unis&quot;)
+            -&gt;setWasSeen(false);
+        $entityManager-&gt;persist($movie);
+        $entityManager-&gt;flush();
+        return $this-&gt;render(&#x27;movie/create.html.twig&#x27;,
+            compact(&#x27;movie&#x27;)
+        );
+    }
+
+}</code></pre><p id="3a5abd0c-b6e4-4187-8745-a68dc399a0fe" class="">
+</p><ul id="3e6c8fd6-dd0a-41dc-950b-de182ce36259" class="bulleted-list"><li style="list-style-type:disc">Twigs associés : un par méthode — uniquement la partie à l’intérieur du bloc <em>body</em></li></ul><pre id="6477b65d-9d28-481e-9aba-885042c575ae" class="code"><code>// list.html.twig
+&lt;h2&gt;Liste de films à voir absolument&lt;/h2&gt;
+    &lt;ol&gt;
+        {% for movie in movies %}
+            &lt;li&gt;&lt;a href=&quot;{{ path(&#x27;movie_detail&#x27;, {&#x27;id&#x27;: movie.id}) }}&quot;&gt;{{ movie.title }}&lt;/a&gt; ({{ movie.country }}) sorti en {{ movie.releaseYear }}&lt;/li&gt;
+        {% else %}
+            Aucun film n&#x27;a été ajouté pour l&#x27;instant.
+        {% endfor %}
+    &lt;/ol&gt;
+
+// detail.html.twig
+&lt;div&gt;
+    Le film n°{{ id }} est &lt;strong&gt;{{ movie.title }}&lt;/strong&gt; ({{ movie.country }}) sorti en {{ movie.releaseYear }}.&lt;br&gt;&lt;br&gt;
+    {% if movie.wasSeen %}
+        Vu !!
+    {% else %}
+        Pas encore vu  !
+    {% endif %}
+&lt;/div&gt;
+
+// create.html.twig
+&lt;div&gt;
+	Le film ajouté est &lt;strong&gt;{{ movie.title }}&lt;/strong&gt; ({{ movie.country }}) sorti en {{ movie.releaseYear }}.
+&lt;/div&gt;</code></pre><p id="ccc8f763-6995-43c1-88fe-e304730e9b9a" class="">
+</p><h2 id="b7344f19-4af5-4e91-8304-e94c1a52252a" class="">Requêtes personnalisées</h2><hr id="97a9e674-7597-4d76-abdc-583280b5ab8a"/><p id="29b87a00-7d27-4985-ba28-d9116e72d61d" class="">Les méthodes proposées par l’<em>EntityManager </em>et les <em>Repository </em>permettent de répondre à la très grande majorité des besoins.</p><p id="12484d15-18fb-4428-8adb-87bd541c7c54" class="">Néanmoins, on peut créer notre propre requête personnalisée : <div class="indented"><ol type="1" id="cf7d004b-ca97-462d-9092-178fb20f657f" class="numbered-list" start="1"><li>en orienté objet avec le QueryBuilder</li></ol><ol type="1" id="9c79754c-e161-4d5f-8c59-bda6b804fadc" class="numbered-list" start="2"><li>en (presque) SQL avec le DQL (<em>Doctrine Query Language</em>)</li></ol></div></p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="725e9e6d-6ded-4f4e-a6e9-be4f8c7879a1"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Les requêtes se font sur des objets PHP et pas sur les tables : 
+- on met le chemin vers l’entité dans le FROM<em>
+</em>- on fait un SELECT sur une instance
+- on fait une jointure sur un attribut</div></figure><p id="d74d9d94-a214-432c-823b-5295790a66ce" class="">
+</p><h3 id="ae5281e3-ea5b-445f-a83f-d3718a0871ab" class="">DQL</h3><p id="63a07f26-ed77-45ec-a911-afebc68aabe1" class="">Dans le <em>Repository</em> d’une entité, </p><ul id="fb1e48f3-fc82-40f9-9ae0-c40bdee14cdf" class="bulleted-list"><li style="list-style-type:disc">on crée une nouvelle méthode</li></ul><ul id="ff380a7b-6e6d-449a-b8a6-634be6690100" class="bulleted-list"><li style="list-style-type:disc">on injecte l’<em>EntityManager</em></li></ul><ul id="d5fac399-272e-4105-afa9-9c450832cd55" class="bulleted-list"><li style="list-style-type:disc">on crée une requête <code>$dql</code></li></ul><ul id="a7722bd9-8463-4a73-b739-5c7830f513ab" class="bulleted-list"><li style="list-style-type:disc">on exécute la requête <code>createQuery()</code></li></ul><ul id="6dfdea04-79e3-4ae8-a77f-b9ba6fb52bec" class="bulleted-list"><li style="list-style-type:disc">on récupère le résultat avec <code>getResult()</code></li></ul><p id="0de3a2d1-7f3e-4966-9199-4a91f71b0023" class="">La méthode peut être appelée dans les contrôleurs comme toutes les autres méthodes.</p><p id="1ac6c1a6-ed0e-4db2-89cc-7023766dd697" class="">
+</p><h3 id="87da7bc6-190a-450c-a82c-86171066c1be" class="">QueryBuilder </h3><p id="b5e1a79e-1fb7-443a-9579-0d94abe46c68" class="">L’objectif est de générer une requête DQL grâce à un enchaînement de conditions.</p><p id="c89df0bd-d04f-4d7e-af5c-3ef4cca7855a" class="">Dans le <em>Repository</em> d’une entité, </p><ul id="aa779092-89b6-4631-9e4b-2e410323a13c" class="bulleted-list"><li style="list-style-type:disc">on crée une nouvelle méthode</li></ul><ul id="e7b3cd04-ec4d-4871-8aa6-81e40b80d461" class="bulleted-list"><li style="list-style-type:disc">on crée une instance <code>$queryBuilder</code> de QueryBuilder</li></ul><ul id="b467939b-cc82-4728-b90f-b789a9c577d3" class="bulleted-list"><li style="list-style-type:disc">on ajoute des conditions avec des méthodes comme <code>select()</code>, <code>andWhere()</code>…</li></ul><ul id="dea03e29-44db-433a-8e73-e3564d757027" class="bulleted-list"><li style="list-style-type:disc">on exécute la requête avec <code>getQuery()</code></li></ul><ul id="c3aef402-2ff9-4765-b2bb-e8798b7b5626" class="bulleted-list"><li style="list-style-type:disc">on récupère le résultat avec <code>getResult()</code></li></ul><p id="4c715571-e492-42b1-a5f1-2212acfaf9f4" class="">
+</p><h3 id="419ba7b9-a76e-4830-88f3-10b1313c95fd" class="">Requêtes dynamiques</h3><p id="cc237ed6-a413-4fa6-a046-171fe4c2381d" class="">Il est possible de rendre la requête dynamique avec des if.</p><p id="1031da40-80d8-4f06-bd2a-23b13b78c3b1" class="">Exemple : </p><p id="7d0b999e-4e2c-46a1-8db4-2009441a1bae" class="">Dans le <em>SerieRepository</em>, une fonction pour la moyenne des notes des séries de Science-Fiction </p><pre id="6fde4bac-8b2d-4cbb-85e3-0fdcee894a64" class="code"><code>/**
+	* @return Serie
+	* @throws NonUniqueResultException
+	*/
+public function findAverageSF() {
+	return $this-&gt;createQueryBuilder(&#x27;s&#x27;)
+		-&gt;select(&#x27;avg(s.vote)&#x27;)
+		-&gt;andWhere(&quot;s.genres like &#x27;%Sci-Fi&#x27;&quot;)
+		-&gt;getQuery()
+		-&gt;getOneOrNullResult();
+}</code></pre><p id="ca42db26-e905-4c37-a14f-2aca6a3bae20" class="">Dans le <em>SerieController</em>, une nouvelle méthode :</p><pre id="561e996e-8062-47ac-bd5b-f702a1af5038" class="code"><code>#[Route(&#x27;/averagesf&#x27;, name: &#x27;_averagesf&#x27;)]
+public function averagesf(
+	SerieRepository $serieRepository
+): Response
+{
+	$avgsf = $serieRepository-&gt;findAverageSF();
+	dump($avgsf); // retourne le resultat dans la barre de debug
+	return $this-&gt;render(&#x27;serie/avgsf.html.twig,
+		[&#x27;avgsf&#x27; =&gt; $avgsf]
+	);
+}</code></pre><p id="eaede1e4-7d2a-453b-ae1d-9b11137de223" class="">
+</p><h2 id="0736fec0-48c7-40ec-bd83-b64a7f50a4ce" class="">En vrac</h2><hr id="95f2d37e-4072-476b-99d9-3a814e5ad356"/><ul id="a3214790-aa82-4806-8f5a-5d6acb709c0f" class="bulleted-list"><li style="list-style-type:disc">Dans un twig, on concatène avec <code>~</code>.</li></ul><ul id="88a3bd8e-4ba6-43cf-bd78-03230cd09c18" class="bulleted-list"><li style="list-style-type:disc">Pour savoir les requêtes SQL qui ont été faites, on les a dans la barre de débogage.</li></ul><ul id="5afc687f-8946-4d1c-a74f-efac627ab717" class="bulleted-list"><li style="list-style-type:disc">Quand on fait un moteur de recherche, on crée une requête personnalisée.</li></ul><ul id="18c9e310-fd70-4714-9f5d-d364410f86f1" class="bulleted-list"><li style="list-style-type:disc">On peut créer un “service” (gros contrôleur) : on y met les contraintes métier et les autres contrôleurs s’y réfèrent.
+On peut aussi mettre des contraintes métiers dans l’attribut de l’entité.</li></ul><ul id="c321e1d3-787a-4d44-b153-830627c2d683" class="bulleted-list"><li style="list-style-type:disc">Un paquet pour envoyer des mails : <code>composer require symfony/mailer</code></li></ul><ul id="eaec751e-8f03-486e-b76c-337c15528815" class="bulleted-list"><li style="list-style-type:disc">Plugins : rainbow brackets, wakatime</li></ul><blockquote id="045c4d95-f7f7-494d-b63f-efdfc3cd7b7d" class="">BP : En collaboration, on indique en commentaires <em>TODO</em> (”à faire”) et <em>FIXME</em> (”je sais que ça marche pas mais j’ai pas eu le temps”).</blockquote><p id="0e04ed21-0f0d-4442-b3af-98b476eaaada" class="">
+</p><h2 id="8fe99b0d-f396-4dd4-a15a-1876f3a58155" class="">SQLite</h2><p id="e7ce095f-5cff-4af1-a870-4b3fc8fcbfca" class="">Une base de donnée SQL minimaliste qui tient en un seul fichier et qu’on peut mettre sur Git.</p><ol type="1" id="ac4b0101-e6cd-4ee3-a177-13f5896428ae" class="numbered-list" start="1"><li>une seul base de données, avec autant de tables qu’on veut</li></ol><ol type="1" id="5be11db0-3491-415e-a6f4-50f2a8904559" class="numbered-list" start="2"><li>pas de login</li></ol><ol type="1" id="bd6bccfd-adc4-4ff6-91bb-1487ac8cdb11" class="numbered-list" start="3"><li>pas de mot de passe</li></ol><p id="95f84437-0bc4-4f4c-8f4a-94fb9dbccee6" class="">On l’utilise notamment pour les tests unitaires.</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="d1a16c4d-d275-4491-9e4f-b2150eeb4482"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">On ne l’utilise jamais en production. </div></figure><pre id="9019bc10-31fb-494f-98e9-0282200c3ba0" class="code"><code>// exemple dans le .env.local
+DATABASE_URL=&quot;sqlite:///%kernel.project_dir%/hello.sqlite&quot;</code></pre><p id="93e70e66-3b13-49e5-9e88-92399e03aa46" class="">
+</p><h3 id="d6cb527b-9794-49c2-90db-14ab539f9221" class="">Hors-programme</h3><p id="bfbc9e70-1fb0-4ef7-a863-00b6acc78bca" class="">Nouveau paquet qui simplifie le passage en paramètre de l’URL, uniquement pour l’<strong>id</strong>. On récupère un objet et pas un <em>int</em>.</p><ul id="92e6064b-1435-4826-88e7-9f535d9006a0" class="bulleted-list"><li style="list-style-type:disc">installer le paquet : <code>composer require sensio/framework-extra-bundle</code></li></ul><p id="6437e2e9-50e3-4b2d-81b8-026d4e6d12ba" class="">Dans le contrôleur,</p><ul id="a843f1fa-f8ee-4942-9fbe-86ecd9eb85da" class="bulleted-list"><li style="list-style-type:disc">on injecte l’entité voulue (au lieu d’un <em>int</em>) et la nomme <code>$id</code></li></ul><pre id="33ded28e-6106-4642-b0d1-75bdde3d16be" class="code"><code>#[Route(&#x27;/{id}&#x27;, name: &#x27;_detail&#x27;)]
+    public function detail(
+        Movie $id,
+        MovieRepository $movieRepository
+    ): Response
+    {
+        $movie = $movieRepository-&gt;find($id);
+        return $this-&gt;render(&#x27;movie/detail.html.twig&#x27;,[
+            &#x27;movie&#x27; =&gt; $id
+        ]);
+    }</code></pre><p id="de1317a8-129b-418d-bd54-ccc0dea082bd" class="">
+</p><p id="73ed14cf-ce0c-4623-a62a-3582dbfa5978" class="">
+</p><p id="11dabe41-bbbf-45ae-b343-0f9972c997ee" class="">
+</p></div></article></body></html>
