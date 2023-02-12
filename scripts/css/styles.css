@@ -29,7 +29,7 @@ body {
 	line-height: 1.5;
 	/* letter-spacing: 0.12em; Accessible */
 	word-spacing: 0.16em; /* Accessible */
-	font-size: 1.2rem; 
+	font-size: 1.4rem; 
 	display: grid;
     grid-template-rows: 0fr 1fr 0fr;
     grid-template-areas: "header" "main" "footer";
@@ -105,7 +105,7 @@ h1 {
 h2, h3 {
 	color: #35747f;
 	font-weight: lighter;
-	font-size: 1.4em;
+	font-size: 1.5em;
 }
 
 

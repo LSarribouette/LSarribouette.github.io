@@ -1,0 +1,810 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Formulaires</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ddbda538-2785-4a9b-8f64-2972a975af45" class="page sans"><header><img class="page-cover-image" src="media/13-06-formulaires/2023-02-10_19_46_12-pexels-ben-phillips-4781957.jpg_-_Photos.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Formulaires</h1></header><div class="page-body"><p id="eadd0712-6226-493c-b67d-bf670749cd1c" class="">Codes répétitifs, validation difficile, HTML illisible, beaucoup d’erreurs possibles…</p><p id="04c88a99-73c2-4ccc-94f1-b404d0bd8c9e" class="">Le paquet <em>Form </em>permet d’automatiser la mise en place d’un formulaire et d’en faciliter la validation (les données soumises et validées sont insérées en base de données automatiquement). L’affichage est automatisé.</p><p id="e214dc21-5747-4d86-8091-2437716ad2f5" class="">Ce paquet est couplé avec le paquet <em>Validator</em> qui permet de personnaliser les règles de validation.</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="c7e28959-4e10-4654-b92a-6d891ad80131"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="http://www.cril.univ-artois.fr/~hemery/enseignement/An18-19/php_symfony/td-tp/td_tp_3.html">http://www.cril.univ-artois.fr/~hemery/enseignement/An18-19/php_symfony/td-tp/td_tp_3.html</a></div></figure><p id="a0f18c0b-6280-4760-9324-a44c7ab9e699" class="">
+</p><h2 id="3c3e8ace-ce39-470f-aec9-28b83d3e4877" class="">Créer un formulaire</h2><hr id="3dceea90-2998-489e-bc40-9e17738ed3d8"/><ul id="72060b06-a7ec-4b94-bf9f-a772370b015a" class="bulleted-list"><li style="list-style-type:disc">installer les deux paquets : <code>composer require form</code></li></ul><ul id="51911b7e-e9eb-4758-a3f7-427414df3f14" class="bulleted-list"><li style="list-style-type:disc">créer un formulaire : <code>symfony console make:form</code> &gt; <code>MonFormType</code> &gt;<code>MonEntiteLiee</code></li></ul><p id="3510b3de-063d-440e-9aef-16978fe69bde" class="">
+</p><p id="a6252236-205f-4f27-a9d3-f6a04fdc95b3" class="">Un dossier <em>Form</em> est créé dans <em>src</em>. Le formulaire est une classe PHP qui hérite de <code>Form</code>.</p><p id="7e8d0814-dc0e-44a4-9332-ccb7e20e6634" class="">Son nom correspond à celui de l’entité concernée, on peut y ajouter le mot-clé “Form” et ilse termine toujours par “Type”.</p><p id="59fb7d42-c76d-46e0-b60f-c5df62e132f0" class="">Il contient la méthode <code>buildForm()</code> avec une variable <code>$builder</code> qui liste les champs du formulaire ou <em>input</em>. Il devine un type par défaut. </p><pre id="ce8ed898-9796-4ca2-8815-ebfdd0bd675a" class="code"><code>// MovieFormType
+&lt;?php
+
+namespace App\Form;
+
+use App\Entity\Movie;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class MovieFormType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            -&gt;add(&#x27;title&#x27;)
+            -&gt;add(&#x27;releaseYear&#x27;)
+            -&gt;add(&#x27;country&#x27;)
+            -&gt;add(&#x27;wasSeen&#x27;)
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver-&gt;setDefaults([
+            &#x27;data_class&#x27; =&gt; Movie::class,
+        ]);
+    }
+}</code></pre><p id="6c8bfacd-a6d9-47ca-9be6-2a1498f6cdf1" class="">Tout est personnalisable.</p><p id="a245174a-0232-4cff-b5fd-173ce41d7e11" class="">Les types de champs sont nombreux, dont <code>Text</code>, <code>TextArea</code>, <code>Email</code>, <code>Password</code>, <code>Integer</code>, <code>Search</code>, <code>Tel</code>, <code>Choice</code>, <code>Entity</code>, <code>Date</code>, <code>File</code>. On les modifie en indiquant le type suivi de <code>::class</code> (on fait appel à la classe en général, sans passer par une instance).</p><p id="1ce0e69b-8fdf-4d1a-9fb0-426964003656" class="">Des options peuvent être ajoutées dans un tableau, comme <code>label</code>, <code>attr </code>et <code>required</code>.</p><pre id="51c56ca3-d3a3-4abf-8069-3f93fd956a49" class="code"><code>class MovieFormType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            -&gt;add(&#x27;title&#x27;, TextType::class, [
+                &quot;label&quot; =&gt; &quot;Titre &quot;,
+                &quot;required&quot; =&gt; true
+            ])
+            -&gt;add(&#x27;releaseYear&#x27;, IntegerType::class, [&quot;label&quot; =&gt; &quot;Année de sortie &quot;])
+            -&gt;add(&#x27;country&#x27;, TextType::class, [&quot;label&quot; =&gt; &quot;Pays &quot;])
+            -&gt;add(&#x27;wasSeen&#x27;, CheckboxType::class, [&quot;label&quot; =&gt; &quot;Déjà vu ?&quot;])
+        ;
+    }</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="65c809df-e122-4d34-8e70-20a6f997eea5"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">C’est ici qu’on définit les contraintes par rapport à l’utilisateur, comme les champs obligatoires qui se transforme en <code>required</code> dans le fichier HTML.</div></figure><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="f9e666f4-65ca-485d-825b-63f81a9592dc"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Ce ne sont en aucun cas des contraintes de validation des données, simplement des indications pour aider l’utilisateur à remplir correctement le formulaire.</div></figure><p id="1f88fa82-599c-4177-b67d-3d79dc727416" class="">
+</p><h2 id="dd9c7ea4-25ef-4cb4-a4dd-884bcaa4f0cd" class="">Afficher un formulaire </h2><hr id="3e9b268b-533b-420a-b91b-301190028a8f"/><p id="704f32e6-d1fa-4766-849e-1642cecca7fc" class="">Dans la classe du formulaire (-<em>Type</em>), on définit les champs.</p><p id="0a0e5efe-faa4-4cea-b91e-f049d7d4fa60" class="">Dans le contrôleur correspondant, </p><ul id="87bfd782-43f3-431a-9644-6f4867554a93" class="bulleted-list"><li style="list-style-type:disc">on crée une instance de l’entité associée</li></ul><ul id="76bbab7f-d75b-405c-b8d6-f638887d7f38" class="bulleted-list"><li style="list-style-type:disc">on crée une instance du formulaire</li></ul><ul id="618bf145-2d3a-428d-8fee-0d0a8a8d034e" class="bulleted-list"><li style="list-style-type:disc">on envoie le formulaire vers le twig</li></ul><pre id="c0e368c1-72ac-4bbf-9c0b-88ac7479bda7" class="code"><code>#[Route(&#x27;/create&#x27;, name: &#x27;_create&#x27;)]
+    public function create(): Response
+    {
+        $movie = new Movie();
+        $movieForm = $this-&gt;createForm(MovieFormType::class, $movie);
+        return $this-&gt;render(&#x27;movie/create.html.twig&#x27;,
+            compact(&#x27;movieForm&#x27;)
+        );
+    }
+</code></pre><p id="df1e4c2f-2caf-44f1-86d1-8253628413bf" class="">
+</p><p id="025612be-5672-49c4-9564-a9513583a925" class="">Dans le twig, il est possible d’afficher le formulaire de façon plus ou moins décomposée</p><ul id="a5ce2e18-eb67-4418-bb60-a5490cd5b721" class="bulleted-list"><li style="list-style-type:disc">en une ligne</li></ul><pre id="4ddfaacc-d71c-4e11-a1ea-fd7b4ec0ccf9" class="code"><code>{{ form(movieForm) }}</code></pre><ul id="4b5100fa-3f5a-4ec5-8c2e-3983ebd73918" class="bulleted-list"><li style="list-style-type:disc">en indiquant le début, le milieu, la fin (BP)</li></ul><pre id="788c0be5-3098-44e2-b29a-39a511ff5040" class="code"><code>{{ form_start(movieForm) }}
+{{ form_widget(movieForm) }}
+&lt;button&gt;OK&lt;/button&gt;
+{{ form_end(movieForm) }}</code></pre><ul id="2ee9109a-b003-41ae-bbea-ef725c2a050c" class="bulleted-list"><li style="list-style-type:disc">en détaillant chaque champ</li></ul><pre id="8fbc7e28-3b79-450b-b2f9-74994a682fe7" class="code"><code>{{ form_start(movieForm) }}
+{{ form_widget(movieForm.champ1) }}
+{{ form_widget(movieForm.champ2) }}
+{{ form_widget(movieForm.champ3) }}
+&lt;button&gt;OK&lt;/button&gt;
+{{ form_end(movieForm) }}</code></pre><ul id="a08adb6d-df8e-4905-8ae5-11396d31f649" class="bulleted-list"><li style="list-style-type:disc">en détaillant encore plus chaque champ</li></ul><pre id="4e1fc597-b4ac-4303-9e9f-1173aa510993" class="code"><code>{{ form_start(movieForm) }}
+&lt;div class=&quot;champ&quot;&gt;
+	{{ form_label(movieForm.champ1) }}
+	{{ form_widget(movieForm.champ1) }}
+	{{ form_errors(movieForm.champ1) }}
+&lt;/div&gt;
+(...)
+&lt;button&gt;OK&lt;/button&gt;
+{{ form_end(movieForm) }}</code></pre><ul id="53344453-794e-4f60-bb03-c77257442712" class="bulleted-list"><li style="list-style-type:disc">en détaillant autant qu’en HTML</li></ul><pre id="69f9cc39-9884-4578-be54-7294f38acb44" class="code"><code>{{ form_start(movieForm) }}
+&lt;div class=&quot;champ&quot;&gt;
+&lt;label for=&quot;{{ field_name(movieForm.champ1) }}&quot;&gt;Champs 1&lt;/label&gt;
+	&lt;input type=&quot;text&quot;
+			id=&quot;{{ field_name(movieForm.champ1) }}&quot;
+			name=&quot;{{ field_name(movieForm.champ1) }}&quot;
+			value=&quot;{{ field_value(movieForm.champ1) }}&quot;
+			placeholder=&quot;{{ field_label(movieForm.champ1) }}&quot;
+			class=&quot;form-control&quot;
+	&gt;
+	
+	{% for error in field_errors(movieForm.champ1) %}
+		&lt;div class=&quot;error&quot;&gt;{{ error}}&lt;/div&gt;
+	{% endfor%}
+&lt;/div&gt;
+(...)
+&lt;button&gt;OK&lt;/button&gt;
+{{ form_end(movieForm) }}</code></pre><p id="b0ecd8c0-13c5-4075-a7eb-932d9b553681" class="">
+</p><p id="d4efead7-9377-4b29-a0b8-f8e440d780dc" class="">Pour le bouton de soumission du formulaire, il existe deux possibilités :<div class="indented"><p id="e8a303b1-b5ec-4610-b533-62cfac2b5bff" class="">soit l’ajouter dans la classe du formulaire : <code>-&gt;add(&#x27;ok&#x27;, ButtonType::class)</code> ou <code>-&gt;add(&#x27;ok&#x27;, SubmitType::class)</code></p><p id="4ca39165-fef2-44a1-bb70-e794baeecf52" class="">soit l’ajouter dans le Twig qui affiche le formulaire, avec une balise <code>&lt;input type=&quot;submit&quot;&gt;</code> ou une balise <code>&lt;button&gt;</code></p></div></p><p id="11f6c9b6-c4bd-46e7-8c2f-de428b3f507a" class="">
+</p><p id="a0ac4e68-6f83-4842-8e4f-f6ac5104952e" class="">Pour pré-remplir une case, on utilise les setters dans le contrôleur : <code>$movie-&gt;setCountry(&quot;France&quot;);</code>.</p><p id="27d4640f-74cd-4f7c-a2f1-e36ff6a372aa" class="">
+</p><p id="bd34b9d2-984d-4bae-82ab-3a399e9df996" class="">Pour ajouter un thème, on l’indique dans le Twig (ex : <em>bootstrap_5_layout.html.twig</em>). </p><pre id="15c6d6b3-1513-4d1d-98f9-4600c2b78f4d" class="code"><code>{% form_theme serieForm &#x27;nomdutheme&#x27; %}</code></pre><p id="84ebe0bf-ff4d-43c8-837c-12d005d16b94" class="">Les classes correspondantes sont ajoutées lors de la compilation en HTML. Il faut en plus rajouter bootstrap en CDN par exemple :</p><pre id="dccf631b-46b6-4f43-a08d-ff8d444e7d9c" class="code"><code>// dans le base.html.twig pour appliquer partout
+&lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot; integrity=&quot;sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD&quot; crossorigin=&quot;anonymous&quot;&gt;</code></pre><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="34eb70d0-e529-47dc-8c1b-c659f4682ae0"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://symfony.com/doc/current/form/form_themes.html">https://symfony.com/doc/current/form/form_themes.html</a></div></figure><p id="d4c63915-29da-4c3f-838c-d80420c578f2" class="">
+</p><h2 id="889c6199-feca-4f9e-8af0-c894b606daad" class="">Traiter un formulaire</h2><hr id="ecc2034c-29d8-4c1f-9a71-a3a130e509be"/><blockquote id="dacadb0a-e887-4c88-8675-5e1583544086" class="">Le traitement se fait sur la même page.</blockquote><p id="82970910-7eab-461a-9117-9a2613aad9a9" class="">Dans le contrôleur, </p><ul id="070730ae-d864-411a-92f5-75eba75113b4" class="bulleted-list"><li style="list-style-type:disc">on injecte <code>Request</code></li></ul><ul id="1e16ce2e-2148-4d29-8050-0f8b5697f57f" class="bulleted-list"><li style="list-style-type:disc">on utilise la méthode de l’instance de formulaire <code>handleRequest</code> pour gérer le traitement de la saisie</li></ul><ul id="1b28d939-96fe-4afc-87e3-6f1ae2c98dc2" class="bulleted-list"><li style="list-style-type:disc">on vérifie si le formulaire est soumis avec <code>isSubmitted</code></li></ul><ul id="3c245d9d-2d46-4f68-8b19-7d52425127c6" class="bulleted-list"><li style="list-style-type:disc">si oui, on effectue le traitement souhaité (insertion ou mise à jour données, redirection, affichage d’un message à l’utilisateur)</li></ul><pre id="8657f037-1e07-4497-82d9-1abf4a02e2bb" class="code"><code>#[Route(&#x27;/create&#x27;, name: &#x27;_create&#x27;)]
+    public function create(
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response
+    {
+        $movie = new Movie();
+        $movieForm = $this-&gt;createForm(MovieFormType::class, $movie);
+        $movieForm-&gt;handleRequest($request);
+        if ($movieForm-&gt;isSubmitted()) {
+						// traitement, ici insertion en base
+            $entityManager-&gt;persist($movie);
+            $entityManager-&gt;flush();
+            $this-&gt;addFlash(&#x27;success&#x27;, &#x27;Film ajouté à la liste !&#x27;);
+            return $this-&gt;redirectToRoute(&#x27;movie_list&#x27;);
+        }
+        return $this-&gt;render(&#x27;movie/create.html.twig&#x27;,
+            compact(&#x27;movieForm&#x27;)
+        );
+    }</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="4812202e-f8d3-43a9-8309-49975c4b890d"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Quand le formulaire est soumis, ça recharge la page (sauf si on indique une redirection avec <code>$this-&gt;redirectToRoute(&#x27;movie_list&#x27;);</code>).</div></figure><p id="53186468-490c-4bb8-a76e-7861bf1293f5" class="">
+</p><p id="92989e33-a646-4d74-b371-17b46f1b1c7f" class="">Pour afficher un message sur la page suivante, on utilise des message flash qui sont stockés en session et détruits dès qu’ils sont affichés.</p><ul id="27a5384a-9170-4668-9814-a25dc34e7eb0" class="bulleted-list"><li style="list-style-type:disc">on en crée un dans le contrôleur, généralement après la soumission et la validation des données : <code>$this-&gt;addFlash(&#x27;success&#x27;, &#x27;Film ajouté à la liste !&#x27;);</code></li></ul><ul id="8d504eb5-2cba-4dee-b2ab-cb9fe386c360" class="bulleted-list"><li style="list-style-type:disc">on indique comment afficher le message flash dans le Twig avec une boucle <code>for</code>, généralement dans le <em>base.html.twig</em> pour en simplifier la gestion</li></ul><pre id="4e51b4da-4d7c-46e5-a361-65fedb7ee23c" class="code"><code>{% for label, messages in app.flashes%}
+	{% for message in messages %}
+		&lt;div class=&quot;alert-{{ label }}&quot;&gt;
+			{{ message }}
+		&lt;/div&gt;
+	{% endfor%}
+{% endfor%}</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="b2f8d5bf-5025-47e8-920b-58c3ceee2614"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Pour modifier l’affichage du message flash en CSS, on utilise le sélecteur de classe <code>.alert-lelabel</code> :</div></figure><pre id="c7eefb01-3eb9-4fb4-9d97-ba43fd495d2f" class="code"><code>.alert-success {
+    text-align: center;
+    background-color: darkseagreen;
+    color: white;
+    padding: 1%;
+}</code></pre><p id="8a0cf909-7a01-477b-af27-d212e64bdde4" class="">
+</p><p id="89eb12db-9aa2-41b4-8a15-8e3ec182277f" class="">Pour vider les champs après soumission, <div class="indented"><p id="7a61f5d7-5872-4c9a-8692-117c4d66b45b" class="">on crée une nouvelle instante de l’entité (<code>$serie = new Serie();</code>) et un autre <code>createForm()</code> pour le lier après le flush,</p><p id="008304f6-8d77-4dfb-9415-6d7c1ece8d94" class="">ou on redirige (sur la même page, ou sur une page qui indique que le traitement a bien fonctionné)</p></div></p><p id="133892bd-2346-4f2c-a249-da96bb523aaf" class="">
+</p><h3 id="96e9851a-483b-4663-b876-a8ca84c752e0" class="">BONUS</h3><p id="dc2bf038-83e7-459b-ab9b-df5e0f981f7d" class="">Un paquet permet de générer automatiquement les 4 formulaires du <em>CRUD</em> avec les contrôleurs et les Twigs. Il génère même les tests unitaires.</p><ul id="8c34eee5-c07e-42d3-a82b-d2ff1b732438" class="bulleted-list"><li style="list-style-type:disc">installer le paquet : <code>composer require security-csrf</code></li></ul><ul id="defea330-5cf6-4a91-86f3-4a1504351d23" class="bulleted-list"><li style="list-style-type:disc">générer tout ça : <code>symfony console make:crud</code> &gt; <code>MonEntite</code> &gt; <code>LeController</code> &gt; <code>Yes</code> (tests unitaires)</li></ul><p id="2ef6d3d2-3fb7-4759-94c0-b12ae7abcccd" class="">
+</p><h2 id="e7b59fc4-32bb-4d14-aee0-1babb570242d" class="">Valider les données</h2><hr id="4533015c-fc10-4b7f-86eb-7a822db8584a"/><p id="ce2232c0-54dc-4e62-b702-d2de78628567" class="">Les règles de validation sont des contraintes métier permettent de s’assurer que l’utilisateur envoie des données telles qu’attendues. </p><p id="15085003-5cb6-415e-a1b3-541a5ec8f2a6" class="">Sous Symfony, on valide l’entité avec une configuration faite avec XML, YAML, PHP, annotations ou <strong>attributs </strong>(BP).</p><p id="06087251-6633-45ac-9af7-5ab24216e63d" class="">Il existe plus de 40 validations prédéfinies et il est possible d’en créer d’autres.</p><p id="073d8178-dfdd-4fb5-8373-16fdad08d59c" class="">Exemples : <code>NotBlank</code>, <code>Type</code>, <code>Email</code>, <code>Length</code>, <code>Url</code>, <code>Regex</code>, <code>Range</code>, <code>EqualTo</code> / <code>NotEqualTo</code>, <code>LessThan</code> / <code>GreaterThan</code>, <code>Date</code>, <code>Choice</code>, <code>UniqueEntity</code>, <code>File</code>, <code>Image</code>, <code>Callback</code>.</p><p id="43d8e3d3-0b5c-4c7e-a69d-da4ac897339e" class="">
+</p><p id="8547ac76-e1f8-453b-aefe-08b337be0a58" class="">Pour appliquer une contrainte :</p><ul id="2d12083d-6f16-4ed9-914a-21385d23a541" class="bulleted-list"><li style="list-style-type:disc">installer le paquet : <code>composer require validator</code><p id="c07e4135-d41a-4756-9dcd-8a654dc40920" class="">Dans l’entité, </p></li></ul><ul id="49c4111a-4d2f-4d45-9beb-0c60328e7aaf" class="bulleted-list"><li style="list-style-type:disc">importer la classe <em><em><em><em><em><em><em><em><em><em><em>Constraints</em></em></em></em></em></em></em></em></em></em></em> et lui donner l’alias <em><em><em><em><em><em><em>Assert</em></em></em></em></em></em></em> : <code>use Symfony\Component\Validator\Constraints as Assert;</code></li></ul><ul id="bc636ae7-0d61-41d9-b80a-754b9f7e9b4b" class="bulleted-list"><li style="list-style-type:disc">ajouter des attributs à façon avec <code>#[@Assert\UneContrainte(des options)]</code></li></ul><p id="7a00d70f-7134-4e7a-bf3c-46cef31509b9" class="">
+</p><blockquote id="2d079622-f631-407a-9c14-3e10edb7ce2c" class="">BP : On met toujours une contrainte de longueur sur les string, pour qu’elles ne soient pas tronquées en base.</blockquote><p id="752a4146-079d-4785-a867-a0d13d5f73ed" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="670b92f8-7ce1-46fa-8b2f-b778e5701009"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">On a ainsi des contraintes “front” avec l’Assert et des contraintes “back” avec l’ORM, elles sont complémentaires.</div></figure><p id="3d8f722f-b1ad-4a26-abc8-b6e05332fd08" class="">
+</p><p id="10aac652-f8d1-4cc5-bbae-10e3ddc671fc" class="">Pour que les contraintes fonctionnent, on vérifie que le formulaire a été soumis (l’utilisateur a cliqué sur le bouton) <em><strong>ET</strong></em> qu’il est valide (tous les champs respectent les contraintes) :</p><pre id="4779827f-c28d-4262-b175-e28dba54d0ea" class="code"><code>if ($movieForm-&gt;isSubmitted() &amp;&amp; $movieForm-&gt;isValid())</code></pre><p id="258eee2a-5959-486d-b4a9-6bb764fdcad3" class="">
+</p><p id="1bf59647-c7c3-4725-9535-677be385a1ff" class="">Il est possible de créer une contrainte, avec une classe qui hérite de <code>Constraints</code> (un peu long).</p><p id="22b06c4d-ef06-417e-9c13-e32e5d51083f" class="">
+</p><h2 id="3756e643-29a6-4215-bb12-3ae55efddce2" class="">En vrac</h2><hr id="f9960cc4-410c-4fad-b2eb-fcc8f7ab3f67"/><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="1762b0ff-3e9b-4917-b57e-24220718a707"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Outils : 
+<strong>Suite Burp</strong>, un outil dédié à l’audit de sécurité des plateformes web
+<a href="https://portswigger.net/burp">https://portswigger.net/burp</a>
+<a href="https://www.vaadata.com/blog/fr/introduction-burp-outil-dedie-securite-plateformes-web/">https://www.vaadata.com/blog/fr/introduction-burp-outil-dedie-securite-plateformes-web/</a></div></figure><p id="2bf32881-23fe-4af1-8d34-36a1da952f79" class="">
+</p><ul id="52de8287-71bb-42ad-a92e-7f3df607b278" class="bulleted-list"><li style="list-style-type:disc">Attaques CSRF (<em>Cross Site Request Forgery</em>) :<p id="1f46e71a-89c4-43a3-b2e9-5e193812e713" class="">Dans la fonction <code>createForm()</code>, Symfony ajoute l’attribut CSRF token afin de pouvoir vérifier si c’est bien ce projet qui a généré le formulaire (soupe obscure interne de vérification).</p><p id="9f825c54-1442-4138-8d1d-a697acae5325" class="">En effet, il est facile de copier le code source d’un formulaire, l’enregistrer en HTML et lancer une copie = une faille de sécurité à citer.</p></li></ul><p id="a88b4247-b103-4e76-b314-d1e1ca2bbd32" class="">
+</p><ul id="7ac7a805-a1d2-4b25-871e-f79bedf86556" class="bulleted-list"><li style="list-style-type:disc">Connaître au minimum le OWASP Top10 : <a href="https://owasp.org/www-project-top-ten/">https://owasp.org/www-project-top-ten/</a></li></ul><p id="8eadc38b-30b7-4100-a193-2de213c94f6b" class="">
+</p><ul id="f6a09190-9ed0-43fd-b9cd-a72721a7e87f" class="bulleted-list"><li style="list-style-type:disc">Un paquet pour hasher un mot de passe : <code>symfony console security:hash</code><p id="661c8a66-8ae1-4c3d-997d-d74bc1b5f887" class="">Il donne accès à une méthode qui nous demande le mot de passe en clair et produit le hash correspondant, qu’on peut insérer en db. </p><p id="9ffd528a-4a49-4ae1-900d-73fe1f41f02a" class="">Utile notamment si on veut changer un mot de passe qu’on a oublié, quand on est en dév…</p></li></ul><p id="119088e9-b388-44a5-829b-ede9d048cea5" class="">
+</p></div></article></body></html>
