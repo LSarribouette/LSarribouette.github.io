@@ -37,9 +37,15 @@ header {
 footer {
     flex: 0 0 auto;
     padding: 1%;
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     background-color: #76a5af;
     color: #fff;
+}
+
+.liens {
+    padding: 0 1%;
 }
 
 section {
