@@ -1,0 +1,927 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Relations entre entités</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4934bb3b-ae1a-4cb2-aab8-c11c9fcf90b4" class="page sans"><header><img class="page-cover-image" src="media/13-07-relations-entite/2023-02-16_21_33_16-pexels-james-lee-2016941.jpg_-_Photos.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Relations entre entités</h1></header><div class="page-body"><p id="cd33bbb0-8325-4b81-96ea-17ec1f62a919" class="">
+</p><p id="4ca74daf-717c-4a5a-bd61-c3f272a0e845" class="">Relation onetoumani / manitouone : </p><p id="5ade762b-4fca-4d9d-b554-9df289c5aff5" class="">Un objet peut être associé à plusieurs autres objets.</p><p id="d6910da1-77ba-4fd7-9101-c15b39d9572b" class="">
+</p><p id="d212547f-5c9e-454b-8b7b-3df47be39398" class="">Relation manitoumani : </p><p id="9a90357a-fc69-458a-8caf-3f885dea5af8" class="">Plusieurs objets peuvent être associés à plusieurs objets.</p><p id="2f7060bf-6c5e-4d35-9bb2-f25d47c0d57c" class="">—&gt; Une table d’association associe les id de la première table avec les id de la deuxième table.</p><p id="28b8f545-ead3-4435-b965-e16c12983de9" class="">
+</p><p id="b9952ca0-779e-4080-b428-22399310a5b7" class="">Relation onetouone :</p><p id="7b171338-82c2-4e1a-aec4-c9292d8130b2" class="">Un objet peut être associé à un et un seul objet.</p><p id="1d986c83-7161-48cd-8d1f-cf39795ffc55" class="">Pas très utilisé : souvent on lui met en attribut et pas dans une table.</p><p id="cc54f60d-6cd8-400a-98ea-f80ba4959b13" class="">Utile par exemple pour l’authentification.</p><p id="76e9b83d-ca3d-4e80-b854-5268ae709c0f" class="">
+</p><p id="f7b590ea-3436-4acb-8d6b-faf79ec27348" class=""><strong>Relation entre objets PHP :</strong></p><p id="93950daa-dec8-407c-bb77-79108bc7236a" class="">Une entité est liée à une autre lorsqu’elle porte un attribut qui porte le même nom que l’entité à laquelle elle est liée (on peut typer en PHP8).</p><blockquote id="2e902133-6b36-461b-a219-0f4680e92654" class="">BP : Si l’attribut est en fait un tableau d’objets, on le met au pluriel.</blockquote><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="7be840f6-fa23-4b7b-a793-bf1251bd2dbf"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">On travaille avec des objets.
+Deux instances sont liées / en relation —&gt; on ne parle pas d’id.</div></figure><p id="80365cb3-b521-43f2-9a36-046057e5d4aa" class="">
+</p><h3 id="a3640fca-ae31-4c0b-8e2c-2e488ef4fe68" class="">Créer une relation entre deux entités</h3><hr id="a12caeaa-4978-4c94-bb0b-41008a198332"/><ul id="a770ae11-4861-4852-aa69-2a29c94931c6" class="bulleted-list"><li style="list-style-type:disc">créer les deux entités à associer (sans relation) : <code>symfony console make:entity</code></li></ul><ul id="d884e6f3-3cec-4f69-913a-63c3b144c759" class="bulleted-list"><li style="list-style-type:disc">ajouter la relation : <code>symfony console make:entity</code> &gt; <code>NomEntite</code> &gt; <code>attributClasseVoulue</code> &gt; type d’attribut <code>relation</code> &gt; type de relation (onetomani, manitoumani…)</li></ul><ul id="af78fea0-aba0-408a-b920-55885a59eadf" class="bulleted-list"><li style="list-style-type:disc">mettre à jour la base de données : <code>symfony console doctrine:schema:update --force</code></li></ul><p id="16f8b476-f7a7-41cd-bd44-99cbe0189819" class="">
+</p><p id="85d8756b-913d-4c1c-83e0-9380ba427ebb" class="">L’entité liée est importée.</p><p id="629eaf2c-f72d-4ffc-b308-a12e0f5af187" class="">Les attributs respectifs portent des attributs (<em>eh oui c’est le même mot……</em>) <code>@ORM\TypeRelation</code> et leurs getter/setter ont été ajoutés.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="78a584e5-d7df-41ec-8d82-2780dcc5f82d"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Dans le cas d’une collection d’instances (”mani” dans la relation), les getter/setter sont sous la forme <code>addEntite()</code> et <code>removeEntite()</code> avec l’initialisation du tableau dans un constructeur <code>__construct()</code>.</div></figure><pre id="603632dd-d433-4945-b4c8-7b1a35b14e01" class="code"><code>// entite Country, liée en onetoumani avec Movie
+&lt;?php
+
+namespace App\Entity;
+
+use App\Repository\CountryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: CountryRepository::class)]
+class Country
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column]
+    private ?int $code = null;
+
+    #[ORM\Column(length: 2)]
+    private ?string $alpha2 = null;
+
+    #[ORM\Column(length: 3)]
+    private ?string $alpha3 = null;
+
+    #[ORM\Column(length: 45)]
+    private ?string $name_english = null;
+
+    #[ORM\Column(length: 45)]
+    private ?string $name_french = null;
+
+    #[ORM\OneToMany(mappedBy: &#x27;country&#x27;, targetEntity: Movie::class)]
+    private Collection $movies;
+
+    public function __construct()
+    {
+        $this-&gt;movies = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this-&gt;id;
+    }
+
+    public function getCode(): ?int
+    {
+        return $this-&gt;code;
+    }
+
+    public function setCode(int $code): self
+    {
+        $this-&gt;code = $code;
+
+        return $this;
+    }
+
+    public function getAlpha2(): ?string
+    {
+        return $this-&gt;alpha2;
+    }
+
+    public function setAlpha2(string $alpha2): self
+    {
+        $this-&gt;alpha2 = $alpha2;
+
+        return $this;
+    }
+
+    public function getAlpha3(): ?string
+    {
+        return $this-&gt;alpha3;
+    }
+
+    public function setAlpha3(string $alpha3): self
+    {
+        $this-&gt;alpha3 = $alpha3;
+
+        return $this;
+    }
+
+    public function getNameEnglish(): ?string
+    {
+        return $this-&gt;name_english;
+    }
+
+    public function setNameEnglish(string $name_english): self
+    {
+        $this-&gt;name_english = $name_english;
+
+        return $this;
+    }
+
+    public function getNameFrench(): ?string
+    {
+        return $this-&gt;name_french;
+    }
+
+    public function setNameFrench(string $name_french): self
+    {
+        $this-&gt;name_french = $name_french;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection&lt;int, Movie&gt;
+     */
+    public function getMovies(): Collection
+    {
+        return $this-&gt;movies;
+    }
+
+    public function addMovie(Movie $movie): self
+    {
+        if (!$this-&gt;movies-&gt;contains($movie)) {
+            $this-&gt;movies-&gt;add($movie);
+            $movie-&gt;setCountry($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMovie(Movie $movie): self
+    {
+        if ($this-&gt;movies-&gt;removeElement($movie)) {
+            // set the owning side to null (unless already changed)
+            if ($movie-&gt;getCountry() === $this) {
+                $movie-&gt;setCountry(null);
+            }
+        }
+
+        return $this;
+    }
+}</code></pre><p id="245631ef-5163-47e0-bb0a-4959087cd505" class="">
+</p><h3 id="0435ad30-81d3-4fe2-90cf-367a06d9dddb" class="">Relation bidirectionnelle</h3><p id="b4f8b77e-41dc-4239-b925-3a82269d619b" class="">Dans la majorité des cas, c’est ce qu’on veut. Les deux classes sont au courant de la relation. Un seul côté est propriétaire, indiqué avec <code>mappedBy</code> tandis que l’autre est indiqué avec <code>inversedBy</code>.</p><p id="fab799ec-b7f0-44fb-8954-ee3d61a2d427" class="">Le côté qui porte le “one” de la relation est propriétaire. Si onetouone , on peut faire comme on veut (Symfony décide souvent pour nous à la création). Si manitoumani, Symfony crée la table d’association, à laquelle on ne peut pas ajouter de colonnes.</p><p id="bef212bf-d405-47b6-bc20-2881f0001e67" class="">
+</p><p id="27d0b267-b786-4e0d-bc4c-6665d94cbbcc" class="">Traduction en base de données avec Doctrine :</p><p id="4942a1cb-ff63-47b5-beb8-ce49274ead7f" class="">@ORM\ManyToOne et @ORM\OneToMany :<div class="indented"><p id="d07f0c4f-51a5-4b34-883c-13a35296dfbb" class="">• la clé étrangère s&#x27;ajoute dans la table côté Many</p></div></p><p id="c9823af9-a9a2-461f-9c29-d4a464ee9351" class="">@ORM\OneToOne() :<div class="indented"><p id="d1ad57d1-2bbc-4d8f-8d49-c9fd9a01fd3f" class="">• on choisit où s&#x27;ajoute la clé étrangère</p></div></p><p id="221fed58-d7d3-4456-ae3a-0685f230c324" class="">@ORM\ManyToMany() :<div class="indented"><p id="ac338482-319c-4f9b-a980-36f0d9ad93ce" class="">• Doctrine crée la table de pivot !</p><p id="49ca08ff-b719-48b2-9e28-87965bd4f086" class="">• Le choix de nom de table est personnalisable</p><p id="1a8902fd-5139-4f74-ad00-ddf8eba1109a" class="">• Impossibilité d&#x27;ajouter des colonnes supplémentaires</p></div></p><p id="b63b19c2-a66c-4f08-bda1-39d57d68f495" class="">
+</p><h2 id="1bc7fa55-2f77-4976-92ac-64326e660489" class="">Récupérer une entité associée à une autre</h2><hr id="8dbc7574-acc7-434b-abb6-b81655a37ae0"/><p id="0205bb9a-9e87-4315-84a2-6ab3dfbb04e6" class="">Il suffit d’utiliser l’attribut objet de l’entité.</p><p id="e99a6be1-7c40-409f-801b-1511df890d59" class="">
+</p><p id="c046eee4-e427-44cc-81ec-4c4d6f463ea0" class="">Exemples :</p><ul id="d7d6d9c1-b9fa-4c70-b43e-e946fde71e57" class="bulleted-list"><li style="list-style-type:disc">dans un Twig, afficher le pays (attribut objet) de l’entité Movie</li></ul><pre id="57a3e5f6-764f-40f8-920c-701298c1fd2f" class="code"><code>{% for movie in movies %}
+    &lt;li&gt;
+			&lt;a href=&quot;{{ path(&#x27;movie_detail&#x27;, {&#x27;id&#x27;: movie.id}) }}&quot;&gt;
+				{{ movie.title }}
+			&lt;/a&gt;
+			 ({{ movie.country.nameFrench }}) sorti en {{ movie.releaseYear }}
+		&lt;/li&gt;
+{% else %}
+    Aucun film n&#x27;a été ajouté pour l&#x27;instant.
+{% endfor %}</code></pre><ul id="b410ec81-f452-4429-81ea-9cba540243d4" class="bulleted-list"><li style="list-style-type:disc">dans un Twig, afficher les saisons (attribut objet) de l’entité Série avec une boucle <code>for</code><p id="6c81fb90-0575-4db6-be7f-4cae502df3ce" class="">et afficher le nombre de saisons quand on <em>hover</em> sur l’image en ajoutant une propriété <code>title</code> dans la balise image</p></li></ul><pre id="3c23aaa9-529f-481a-a5f0-0537f4b97b32" class="code"><code>{% for season in serie.seasons %}
+	&lt;article&gt;
+		&lt;img 
+			src=&quot;{{ asset(&#x27;img/poster/seasons/&#x27;~season.poster }}&quot; 
+			alt=&quot;{{ serie.name }}&quot;
+			title=&quot;{{ serie.seasons | length }}&quot;
+		&gt;
+	&lt;/article
+{% endfor %}</code></pre><p id="a9c151f4-5b43-4672-b203-9bb58828b349" class="">
+</p><h3 id="51a08b35-c87c-41c8-b1a0-ad97b8d4b1b6" class="">Améliorer les requêtes</h3><p id="731a19b4-6f37-4eb4-add7-30d76c1bb1e0" class="">Doctrine se charge des requêtes, mais c’est souvent moche : au lieu de faire une jointure, il fait plusieurs requêtes SELECT.
+Dans ce cas-là, on fait des requêtes personnalisées : possible en DQL ou avec le QueryBuilder.</p><p id="0750583f-acd0-46e9-be68-9274819ac6ec" class="">
+</p><p id="e6952ce2-7abe-4cd2-816f-7670d603de2a" class="">Exemple pour les saisons des séries :</p><ul id="feb758a2-a21f-4007-98b9-977b11e177c2" class="bulleted-list"><li style="list-style-type:disc">dans le <em>SerieRepository </em>:</li></ul><p id="2ec8dc70-868b-495b-bfa8-459074c0383c" class="">On crée une méthode <code>findAllWithSeasons()</code> avec une jointure sur l’attribut s.seasons (dont l’alias est seasons), trié par ordre décroissant de popularité.</p><p id="222ff202-5706-4011-a7b9-ae3ea46897b9" class="">Puis on crée une requête et on récupère le résultat qu’on retourne.</p><pre id="f8b2f035-ea17-4823-b333-711a5e4f7f2e" class="code"><code>public function findAllWithSeasons() {
+	$queryBuilder = ($this-&gt;createQueryBuilder(&#x27;s&#x27;))
+		-&gt;leftJoin(&#x27;s.seasons&#x27;, &#x27;seasons&#x27;); // pour aussi avoir les series sans saison
+		-&gt;addSelect(&#x27;seasons&#x27;)
+		-&gt;addOrderBy(&#x27;s.popularity&#x27;, &#x27;DESC&#x27;);
+	$query = $queryBuilder-&gt;getQuery();
+	$query-&gt;setMaxResults(10);
+	return $query-&gt;getResult();
+}</code></pre><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="9be08f81-ac1b-476c-bb8a-2236ab1b2974"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Après une jointure, il faut préciser qu’on veut l’utiliser pour afficher la colonne sur laquelle on fait la jointure.</div></figure><ul id="87b6e710-b0eb-4661-9102-165ebcb59960" class="bulleted-list"><li style="list-style-type:disc">dans le <em>SerieController </em>:</li></ul><p id="9f478fcc-1211-40ce-a57f-40d01410a7c5" class="">On utilise la méthode <code>findAllWithSeasons()</code> à la place du <code>findAll()</code>.</p><p id="1b57a7e5-08f7-4109-8283-138882724b4e" class="">
+</p><h3 id="522f3c51-c8be-4a21-a92e-a5be3c28c9f9" class="">Gérer la pagination</h3><p id="a1bcf21c-3e10-4bb1-a9e8-70956acd282c" class=""><strong>Paginator </strong>est un outil pour faire le <code>group by</code> sur un ensemble d’enregistrements et les compter correctement (ex: plusieurs saisons pour une seule série).</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="711c2bb6-4978-484e-8380-433a1cf043a3"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Avec le <code>setMaxResults()</code>, on obtient le nombre de lignes (et pas le nombre de séries !!).</div></figure><p id="08463b23-d038-43f7-9827-9435771d2a23" class="">On ajoute le paginator à la fin et c’est lui qu’on retourne.</p><pre id="95708e0f-8e89-47e8-88f5-935db439ec7f" class="code"><code>public function findAllWithSeasons() {
+	$queryBuilder = ($this-&gt;createQueryBuilder(&#x27;s&#x27;))
+		-&gt;leftJoin(&#x27;s.seasons&#x27;, &#x27;seasons&#x27;); // pour aussi avoir les series sans saison
+		-&gt;addSelect(&#x27;seasons&#x27;)
+		-&gt;addOrderBy(&#x27;s.popularity&#x27;, &#x27;DESC&#x27;);
+	$query = $queryBuilder-&gt;getQuery();
+	$query-&gt;setMaxResults(10);
+	$paginator = new Paginator($query);
+	return $paginator;
+}</code></pre><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="419bf9de-6280-4e67-8f9d-b1a0af37a13b"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://www.doctrine-project.org/projects/doctrine-orm/en/2.14/tutorials/pagination.html">https://www.doctrine-project.org/projects/doctrine-orm/en/2.14/tutorials/pagination.html</a></div></figure><p id="1f82464d-09b2-48d8-acf8-a9c37aea09d0" class="">
+</p><h3 id="48235ddd-eb73-4d99-8349-2a0cdc7274d7" class="">Afficher un champ objet dans un formulaire</h3><p id="e182a21a-bbdb-4bde-8dea-04ca24817112" class="">Dans la classe du formulaire, </p><ul id="7bbf1676-e3f7-45b6-b0d5-9d127fb80e2a" class="bulleted-list"><li style="list-style-type:disc">on précise que le type du champ est une entité : <code>EntityType::class</code></li></ul><ul id="6baf4f17-2231-418b-8440-54cb06e664c1" class="bulleted-list"><li style="list-style-type:disc">on lie l’entité concernée : <code>&quot;class&quot; =&gt; Serie::class</code></li></ul><ul id="215e27c8-6a29-459f-89fd-8a014b3d859b" class="bulleted-list"><li style="list-style-type:disc">on choisit l’attribut à afficher : “<code>choice_label&quot; =&gt; &quot;name&quot;</code></li></ul><pre id="724e98ff-7aa4-4870-ba84-ebc310bb6e82" class="code"><code>// MovieFormType (relation avec Country)
+&lt;?php
+
+namespace App\Form;
+
+use App\Entity\Country;
+use App\Entity\Movie;
+use App\Repository\CountryRepository;
+use Doctrine\Migrations\Tests\Provider\C;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class MovieFormType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            -&gt;add(&#x27;title&#x27;, TextType::class, [
+                &quot;label&quot; =&gt; &quot;Titre &quot;,
+                &quot;required&quot; =&gt; true
+            ])
+            -&gt;add(&#x27;releaseYear&#x27;, IntegerType::class, [&quot;label&quot; =&gt; &quot;Année de sortie &quot;])
+            -&gt;add(&#x27;country&#x27;, EntityType::class, [
+                &quot;class&quot; =&gt; Country::class,
+                &quot;choice_label&quot; =&gt; &quot;nameFrench&quot;,
+                &quot;label&quot; =&gt; &quot;Pays &quot;
+            ])
+            -&gt;add(&#x27;wasSeen&#x27;, CheckboxType::class, [
+                &quot;label&quot; =&gt; &quot;Déjà vu ?&quot;,
+                &quot;required&quot; =&gt; false
+            ])
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver-&gt;setDefaults([
+            &#x27;data_class&#x27; =&gt; Movie::class,
+        ]);
+    }
+}</code></pre><p id="02b9f539-e4ac-4b93-921f-8451465d55c8" class="">
+</p><h2 id="d8670e6e-e0da-4129-b9e8-9af79b121fe7" class="">Enregistrer, supprimer et automatiser</h2><hr id="6da0217b-eef2-4a1d-bb17-3c84dde03778"/><p id="bdebf499-0297-410f-8138-0462b5150405" class="">Pour enregistrer une entité associée à une autre, il faut faire attention à l’ordre : on crée d’abord l’instance de l’entité à associer puis l’entité qui la contiendra et on lie les deux grâce au setter dédié.</p><p id="3980b894-2dbe-4a43-ab65-68bc713a0a8a" class="">Exemple : enregistrer un article avec ses commentaires</p><p id="f2c33a50-c94f-4146-b0c0-a858bf25eee9" class="">Dans le SerieController,</p><ul id="97a5c76a-fa1e-4838-8d5f-47d9863edfc2" class="bulleted-list"><li style="list-style-type:disc">on crée une instance de commentaire, on complète ses attributs</li></ul><ul id="ba9ac72b-39c8-435a-9c78-2a342eaee056" class="bulleted-list"><li style="list-style-type:disc">on crée une instance d’article, on complète ses attributs — dont l’attribut objet commentaire</li></ul><ul id="d734377a-972c-419e-b922-550cd3c9d9f3" class="bulleted-list"><li style="list-style-type:disc">on enregistre les deux instances</li></ul><ul id="1ab1c8f6-2366-4c17-8747-5fcedb6f1fb8" class="bulleted-list"><li style="list-style-type:disc">on envoie les modifications en base de données</li></ul><pre id="4c8d8626-1bb2-4527-a2c5-53578ca982df" class="code"><code>public function enregistrerArticleAvecCommentaires(
+	EntityManagerInterface $em
+){
+	$commentaire = (new Commentaire())
+		-&gt;setContent(&quot;Un super commentaire gentil pour une fois&quot;);
+	$article = (new Article())
+		-&gt;setTitle(&quot;Un article sur la zététique&quot;
+		-&gt;setCommentaire($commentaire); //associe le commentaire avec l&#x27;article
+	$em-&gt;persist($commentaire);
+	$em-&gt;persist($article);
+	$em-&gt;flush();
+	return $this-&gt;render(&#x27;unTwig.html.twig&#x27;);
+}</code></pre><p id="76e0b5ae-d166-4ea1-97d6-8b6a104d6b0b" class="">
+</p><p id="b505798f-3596-4af8-a888-17ef0210caed" class="">Pour supprimer une entité associée à une autre, il faut faire attention à l’ordre : on supprime d’abord l’entité liée puis l’entité principale (qui contient l’autre).</p><p id="2b691a39-fb8d-49b0-a2ea-5fd32cc64d65" class="">Exemple : supprimer un article avec ses commentaires</p><p id="e3778583-8a0c-4178-a9f9-f50f9c94a962" class="">Dans le SerieController,</p><ul id="c150d978-14e1-46ce-8351-eb5f0c852bdf" class="bulleted-list"><li style="list-style-type:disc">on récupère l’instance d’article avec une méthode du Repository</li></ul><ul id="ac8abbf4-c28d-4006-a460-68a7f90aad51" class="bulleted-list"><li style="list-style-type:disc">on supprime l’instance de commentaire</li></ul><ul id="58092a8b-9be7-430b-b885-c2c311e20b8c" class="bulleted-list"><li style="list-style-type:disc">on supprime l’instance d’article</li></ul><ul id="914df587-b2a7-4dee-9b4f-2b6b45a75257" class="bulleted-list"><li style="list-style-type:disc">on envoie les modifications en base de données</li></ul><pre id="643a6678-59ff-48b4-8709-666fba92a1cd" class="code"><code>public function supprimerArticleAvecCommentaires(
+	EntityManagerInterface $em
+){
+	$em-&gt;remove($commentaire);
+	$em-&gt;remove($article);
+	$em-&gt;flush();
+	return $this-&gt;render(&#x27;unTwig.html.twig&#x27;);
+}</code></pre><p id="6bf74720-10ba-4d6b-a977-1d2b110828ac" class="">
+</p><p id="d09b3ec3-458f-4677-be76-936dcc2f2e90" class="">Pour automatiser ces processus, on peut utiliser l’option <code>cascade</code> dans l’attribut <code>#[ORM\...]</code> : <code>persist | remove | merge | detach | refresh | all</code>.</p><pre id="65bee944-973b-4ee7-b777-d6073de41c8e" class="code"><code>#[ORM\OneToMany(mappedBy: &#x27;country&#x27;, targetEntity: Movie::class, cascade:[&#x27;persist&#x27;, &#x27;remove&#x27;])]</code></pre><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="d3df4468-918c-49bc-86a5-89ca45c81e8e"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+- <a href="https://www.doctrine-project.org/projects/doctrine-orm/en/2.14/reference/working-with-associations.html#transitive-persistence-cascade-operations">https://www.doctrine-project.org/projects/doctrine-orm/en/2.14/reference/working-with-associations.html#transitive-persistence-cascade-operations</a>
+- <a href="https://yusufbiberoglu.medium.com/cascade-persist-remove-in-doctrine-559ac967e451">https://yusufbiberoglu.medium.com/cascade-persist-remove-in-doctrine-559ac967e451</a></div></figure><p id="329f6fae-3bb9-4af7-b6d3-88a89d86aba0" class="">
+</p></div></article></body></html>
