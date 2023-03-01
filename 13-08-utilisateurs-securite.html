@@ -1,0 +1,744 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Utilisateurs et  sécurité</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8d59f3ea-fc3f-4f9d-aaca-18e79446363b" class="page sans"><header><img class="page-cover-image" src="media/13-08-utilisateurs-securite/2023-02-16_21_35_10-pexels-nirav-shah-10303342.jpg_-_Photos.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Utilisateurs et  sécurité</h1></header><div class="page-body"><blockquote id="d419ddb2-41a2-4fa6-b2de-4e1c5f24dd51" class="">Très souple donc assez complexe.</blockquote><p id="68e49ce3-6ad5-4a16-83c0-c0e4551a5aff" class="">
+</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="4f0c6002-1b2c-45f7-b143-54fff9fb911b"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Authentification : je dis qui je suis et je le prouve.
+Identification : je dis qui je suis.
+Autorisation : j’ai les droits.</div></figure><p id="feb6ab9c-ce99-487f-bbfb-8dc425af743f" class="">
+</p><h2 id="07b87e44-6589-419f-adce-63437b880b10" class="">Créer un système d’authentification</h2><hr id="50a0a416-9d19-4328-8b3e-2644f70a1975"/><ol type="1" id="acc46f52-6cf7-4b18-ae16-3226b752be55" class="numbered-list" start="1"><li>Créer l’entité utilisateur</li></ol><ol type="1" id="2873795a-314b-4155-8809-ff37ee27f893" class="numbered-list" start="2"><li>Créer le système d’authentification</li></ol><ol type="1" id="292d3546-2f8e-4617-ab5f-d9c18fca893c" class="numbered-list" start="3"><li>Créer le formulaire d’inscription</li></ol><ol type="1" id="c3a26ba8-cb0a-43b1-998e-9c0e601f17f3" class="numbered-list" start="4"><li>Autres : <ul id="a418edd2-15f7-4059-8e53-94e91bfa7638" class="bulleted-list"><li style="list-style-type:disc">“se souvenir de moi”</li></ul><ul id="2de84f6d-f0c9-4f8a-b99c-1b69480c5a9b" class="bulleted-list"><li style="list-style-type:disc">“mot de passe oublié” (mail)</li></ul><ul id="08dec62c-a194-4bd4-a6a5-7a57dd384280" class="bulleted-list"><li style="list-style-type:disc">lien de connexion magique (mail)</li></ul></li></ol><p id="e73c732c-a6e4-4304-ad9f-2f412a197973" class="">
+</p><h3 id="e09ebd5c-fef1-449f-bdbc-72248f83b347" class="">Etape 1 : entité utilisateur</h3><ul id="f4d71822-55bc-4d0f-a0b2-ae596c33c0bf" class="bulleted-list"><li style="list-style-type:disc">installer le paquet : <code>composer require security</code></li></ul><ul id="39721f2b-6f6a-4908-b89b-192973e24503" class="bulleted-list"><li style="list-style-type:disc">créer l’entité utilisateur : <code>symfony console make:user</code>  <p id="0b893512-3693-4d59-8137-ba7d52f0e547" class="">&gt; choix du nom de l’entité :  <code>User</code> </p><p id="0b666938-b885-4e67-94ee-91d1aef4de18" class="">&gt; stockage des informations utilisateurs dans la base de données (ou en dehors avec Google par exemple)  <code>yes || no</code> </p><p id="f3c161ac-01cf-4ff7-9746-2e256adf16f3" class="">&gt; propriété unique <code>email || username || uuid</code> </p><p id="5ff16830-5e3c-4b30-bc63-eef176c26438" class="">&gt; ❗<code>YES</code> ❗pour hash/check les mots de passe</p></li></ul><ul id="f0857eb8-1dd7-4460-826f-d53b0b52ed20" class="bulleted-list"><li style="list-style-type:disc">ajouter des propriétés à l’entité <em>User</em> : <code>symfony console make:entity</code> &gt; <code>User</code><p id="1ca03dbc-9974-4e1a-8fc6-18e6f4cc92f1" class="">(comme d’habitude)</p><ul id="ff338add-95c1-48ff-8e5d-6b156291e9f5" class="bulleted-list"><li style="list-style-type:circle">mettre à jour la base de données car on a joué avec des entités : <code>symfony console d:s:u --force</code></li></ul></li></ul><p id="48efac2f-d21b-483a-9090-edf0c9bc9c8c" class="">L’entité <em><em><em><em>User</em></em></em></em> est créée, avec le <em>UserRepository</em>. Elle est particulière car elle implémente deux interfaces supplémentaires, <code>UserInterface</code> et <code>PasswordAuthenticatedUserInterface</code>, qui lui donnent accès à des méthodes comme <code>getUserIdentifier()</code>, <code>getRoles()</code>, <code>setRoles()</code>, <code>eraseCredentials()</code>.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="311ae3e4-c6f3-4a63-b235-75fb52e5f096"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Par défaut, tous les utilisateurs ont le rôle <code>ROLE_USER</code>.</div></figure><p id="780bbe4e-3fd7-4de3-83d6-ee2ea8f6277a" class="">La configuration du <em><em><em><em><em><em><em><em><em><em><em><em><em>security.yaml</em></em></em></em></em></em></em></em></em></em></em></em></em> dans <em>config/packages</em> a été mise à jour selon les réponses que l’on a données, avec notamment l’entité et la propriété utilisées pour l’authentification et la méthode pour hasher les mots de passe.</p><pre id="85a4d97a-aad6-4c45-adb7-6b7109ece4b9" class="code"><code>security:
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: &#x27;auto&#x27;
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        # used to reload user from session &amp; other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email</code></pre><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="b80e6397-ee05-4de2-9cd4-bea00355b881"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+Il est possible de changer la propriété unique d’authentification, notamment pour en avoir plusieurs.
+<a href="https://symfony.com/doc/current/security/user_providers.html#using-a-custom-query-to-load-the-user">https://symfony.com/doc/current/security/user_providers.html#using-a-custom-query-to-load-the-user</a></div></figure><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="0661fc70-bbca-4470-b5d8-ac69ac934d3e"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Un mot de passe hashé ne peut pas être déhashé : pour savoir si le mot de passe hashé  est le bon, on utilise le même processus de hash et on vérifie si on obtient le même résultat hashé.
+Un mot de passe chiffré peut être déchiffré : méthode moins sécurisée et donc déconseillée.</div></figure><p id="1912bebb-d8ba-42fd-b4be-38c5c632ac58" class="">
+</p><h3 id="b972823b-fbdb-46b5-b5bf-b4ac1b1e4b44" class="">Etape 2 : système d’authentification</h3><ul id="b38d2832-3eb3-40d0-b5ce-cfa77298f75d" class="bulleted-list"><li style="list-style-type:disc">créer le système d’authentification : <code>symfony console make:auth</code><p id="d33f462c-e843-4fde-8f4a-af40f7eaa50e" class="">&gt; soit <code>0</code> (vide), on fait tout à la main (rare) ; soit <code>1</code>, il fait pour nous (souvent)</p><p id="5365cac0-ef1c-46ea-9886-7c4b11da07a5" class="">&gt; nom de la classe = <code>AppAuthenticator</code> (BP)</p><p id="2d5b1a30-0fbe-4c2d-a481-48bd5f54c1d6" class="">&gt; nom du contrôleur = <code>SecurityController</code> (BP)</p><p id="0c4be5f2-fea7-46d9-9daf-33dbd070aba3" class="">&gt; générer une url ‘/logout’ pour déconnecter l’user : <code>yes</code></p></li></ul><ul id="0191f66e-1262-49f6-9b67-6c817443a920" class="bulleted-list"><li style="list-style-type:disc"><em>TODO =</em> finir la redirection dans AppAuthenticator :<p id="9c67d9b1-3ad8-48b5-b5a6-05fb960291d8" class="">&gt; classe pré-faite, on ne touche pas</p><p id="0068d388-3a57-440b-ac5a-4a7739a92063" class="">&gt; méthode <code>onAuthenticationSuccess()</code> : c’est ici qu’on lui dit où rediriger l’utilisateur qui a réussi à se connecter</p><ul id="5bce484b-6a91-42c2-bcb9-d380ab503e29" class="bulleted-list"><li style="list-style-type:circle">on commente le <code>throw new \Exception</code> (ou on le supprime)</li></ul><ul id="1e7d5a2f-7666-4e86-bff0-ebc1933adc8b" class="bulleted-list"><li style="list-style-type:circle">on décommente le <code>return new RedirectResponse</code> juste au dessus et dans le <code>generate()</code>, on lui donne le nom de la route (ex : ‘serie_list’)</li></ul></li></ul><p id="bf793323-2926-49a0-af02-e626c46b9bf3" class="">La classe <em>AppAuthenticator </em>est créée, dans un nouveau dossier <em>Security</em>. Elle hérite de la classe <code>AbstractLoginFormAuthenticator</code> et définit les méthodes <code>authenticate()</code>, <code>onAuthenticationSuccess()</code> et <code>getLoginUrl()</code>. Elle permet de s’authentifier.</p><p id="58ce3df0-2819-4337-958e-5c16583ec5e7" class="">Le contrôleur <em><em><em><em><em>SecurityController</em></em></em></em></em> est créé, qui définit les routes de ‘/login’ et ‘/logout’.</p><p id="4c1f797c-096a-4160-a6a4-9cfcd73a5ba6" class="">Le Twig <em><em><em><em><em>login</em></em></em></em></em> est créé afin de pouvoir se connecter. </p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="1e45cdbe-3648-4745-b610-03d910890eb6"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Penser à le traduire au besoin et à l’intégrer aux autres pages.</div></figure><p id="fe942bd4-c71e-4634-b27c-6dd95a64002d" class="">
+</p><h3 id="7686e100-5996-43df-bb1e-1ecabf4ee6c1" class="">Etape 3 : formulaire d’inscription</h3><ul id="76a1f696-be6d-4f76-b2d8-3e2c1e7bd9a9" class="bulleted-list"><li style="list-style-type:disc">installer le paquet : <code>composer require doctrine/annotations</code></li></ul><ul id="2730ef89-5e0d-436f-9627-5a24c95f7ee7" class="bulleted-list"><li style="list-style-type:disc">potentiellement : <code>composer require form validator</code></li></ul><ul id="56e1969e-0924-4d58-8bc5-136b199a1b37" class="bulleted-list"><li style="list-style-type:disc">on propose à l’utilisateur un moyen de s’enregistrer : <code>symfony console make:registration-form</code><p id="31f6f392-3302-40a7-97d6-efac67eb0342" class="">&gt; ajouter un Assert sur l’entité pour limiter les doublons ? <code>yes</code></p><p id="62537d4f-6d74-43b4-8b77-24959329cd29" class="">&gt; envoyer un email à l’utilisateur pour vérifier son email ? <code>no</code> pour l’instant (mais oui on va l’utiliser)</p><p id="c3fc842a-8ee3-42ea-b6a0-63413d0c54cb" class="">&gt; authentifier la personne quand elle s’enregistre ? <code>yes</code></p></li></ul><ul id="229ab0b5-48c9-4421-84c3-f834c8b1b30b" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>avant toute chose</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>, on met à jour la base de données car on a joué avec des entités : <code>symfony console d:s:u --force</code></li></ul><p id="d9a2ad40-08b0-4b51-9720-7a9ba4d5b50a" class="">L&#x27;entité <em>User </em>est mise à jour, une contrainte “front” sur la propriété unique de l’utilisateur est ajoutée au-dessus de la classe.</p><pre id="d7bf78e5-8ffb-4d42-83c7-cb1b9ec89d6d" class="code"><code>#[UniqueEntity(fields: [&#x27;email&#x27;], message: &#x27;Un compte existe déjà avec cet email.&#x27;)]</code></pre><p id="cf66e758-be2a-4519-bd99-defec1144ada" class="">Le formulaire d’inscription <em>RegistrationFormType</em> est créé, avec son contrôleur <em>RegistrationController</em>. La route ‘/register’ est définie. Le mot de passe saisi par l’utilisateur est récupéré dans le formulaire, hashé dans le contrôleur, avant d’être stocké en base de données. L’utilisateur est immédiatement connecté après inscription.</p><p id="6405146d-a1fc-4335-b11c-afa418ad99af" class="">Le Twig <em>register</em> est créé afin de pouvoir se connecter. </p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="177fdfeb-138b-451f-b42d-4620dce35585"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Penser à le traduire au besoin et à l’intégrer aux autres pages.</div></figure><p id="d38f2de8-3ba9-4ef2-a592-da4b96cefcf1" class="">
+</p><h2 id="48eca548-cd07-4329-8538-331ef9ad5e9c" class="">Gérer un système d’authentification</h2><hr id="e0f72f52-93c7-4559-990f-1e0effa9ef04"/><h3 id="e3367298-d6af-48d1-9074-58ee68a37322" class="">Récupérer les informations de l’utilisateur connecté</h3><p id="d3793b87-293f-417e-8704-25a8c9e8c27a" class="">Dans un Twig, on a accès à l’objet <em><em><em><em><em><em><em><em>app.user</em></em></em></em></em></em></em></em> et toutes les propriétés d’un utilisateur :</p><pre id="f1beb855-0819-4e06-b29e-ed4c8bb8be22" class="code"><code>{% if app.user %}
+	&lt;spa&gt;Bienvenue à toi : {{ app.user.email }}&lt;/span&gt;
+{% endif %}</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="091b18b0-a80a-4b3e-af0f-4be3dbd94df9"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Dans <em><em><em>app</em></em></em>, il y a beaucoup d’informations, comme les sessions et cookies.</div></figure><p id="80d001bf-8b14-4a74-88e1-b0efa194c1a7" class="">Dans un contrôleur, on peut récupérer l’utilisateur actuellement connecté avec :</p><pre id="d5624f75-d5ff-4326-bf08-a3688c9f63c4" class="code"><code>$userCo = $this-&gt;getUser();</code></pre><p id="2eb3979a-aac6-462d-8be8-7dc2e0f8722b" class="">
+</p><h3 id="a5c6c400-ccad-4683-897a-0d62e505920d" class="">Définir les rôles</h3><p id="c092b20c-8b31-490f-af59-dc84e5a3a8ea" class="">Les rôles sont stockées dans la table <em>User</em>, sous la forme d’un tableau (sauf le <code>ROLE_USER</code> qui est dans le getter). Un utilisateur peut donc avoir plusieurs rôles. La seule obligation est qu’un rôle doit commencer par <code>ROLE_</code>.<div class="indented"><p id="962a790d-4f31-498d-8b17-06dc73ce8528" class="">ex: blog avec auteur, modérateur, lecteur…</p></div></p><p id="efb03c99-39b3-4c4c-98e9-83cdd2720ab7" class="">
+</p><h3 id="e3575a09-c898-40d5-877f-bbf822b08c9f" class="">Restreindre l’accès</h3><p id="7488f71a-882c-4438-ae58-4a693bb0cbe0" class="">Pour restreindre l’accès à une page pour certains rôles, on utilise l’attribut <code>#[isGranted(&#x27;ROLE_UNTEL&#x27;)]</code> au-dessus de la méthode souhaitée dans son contrôleur. La classe nécessite l’import de <code>use Symfony\Component\Security\Http\Attribute\IsGranted;</code>. </p><pre id="700989a8-6914-45cb-85ef-5675671230a5" class="code"><code>#[Route(&#x27;/movie&#x27;, name: &#x27;movie&#x27;)]
+class MovieController extends AbstractController
+{
+    #[isGranted(&#x27;ROLE_USER&#x27;)]
+    #[Route(&#x27;/create&#x27;, name: &#x27;_create&#x27;)]
+    public function create(
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response
+    {...}</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="1eb5ec16-fa42-476f-a6fc-99fdc9a2aae6"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">La page de création de films est restreinte aux utilisateurs connectés. Si un utilisateur non connecté clique sur le bouton de redirection vers la route ‘/movie/create’, il est alors redirigé vers la page de connexion.</div></figure><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="1e797fe2-2b9e-4a54-a250-0ee3ffa27779"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+Dans ce cas, il n’est pas possible de savoir si l’utilisateur a le bon rôle, d’où la redirection vers ‘/login’. 
+Si l’utilisateur n’a effectivement pas le bon rôle, la redirection est faite vers un statut HTTP <strong>403</strong>, qui signifie qu&#x27;un client n&#x27;a pas le droit d&#x27;accéder à une URL valide.
+<a href="https://symfony.com/doc/current/security/access_denied_handler.html">https://symfony.com/doc/current/security/access_denied_handler.html</a></div></figure><p id="98c39f94-dd95-46e2-97d0-2584c804aa52" class="">
+</p><p id="d6c4a9ed-fe07-41c5-ac28-d4d93638a7ec" class="">Pour restreindre l’accès à de multiples pages, on utilise le <code>access_control</code> dans <em><em><em><em>config/packages/security.yaml.</em></em></em></em></p><pre id="f9c42177-050c-41ec-a1a9-486cf8487f42" class="code"><code>security:
+	...
+	access_control:
+	         - { path: ^/admin, roles: ROLE_ADMIN }
+	         - { path: ^/profile, roles: ROLE_USER }</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="a6940957-dd6a-4140-aba3-82dd2519dde9"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Les URL sont des REGEX, on peut y mettre ce que l’on veut avec notamment <code>^</code> pour début de chaine et <code>$</code> pour fin de chaine.</div></figure><blockquote id="638395bd-ca50-4e1e-be50-96d00acbaca8" class="">BP : Cette méthode ne peut fonctionner que si les routes sont bien organisées, ce qui se réfléchit en amont.</blockquote><p id="a0a1c434-61b6-4ec8-9316-763d9200bc0b" class="">
+</p><h3 id="3ed10ef3-2aef-436a-8c2b-95ee47438125" class="">Vérifier un rôle dans un Twig</h3><p id="d6aeeb73-90d8-4968-ba45-50d5aa371c39" class="">On utilise la méthode <code>is_granted()</code>.</p><pre id="227619f4-5a8e-4538-8d2a-b8c036836116" class="code"><code>{% if is_granted(&#x27;ROLE_USER&#x27;) %}
+  &lt;h3&gt;&lt;a href=&quot;{{ path(&#x27;movie_create&#x27;) }}&quot; class=&quot;bt&quot;&gt;Ajouter un film&lt;/a&gt;&lt;/h3&gt;
+{% endif %}</code></pre><p id="e4fe5fd1-c41a-425b-9ba1-98e0439f2741" class="">
+</p><h3 id="3ac5360e-255b-4f10-9ba1-e33eacf24cb7" class="">Hiérarchiser les rôles</h3><p id="a24d3624-aa4f-4d00-b9b4-095c24b2f041" class="">Un rôle peut hériter d’un autre, et donc de toutes ses permissions.</p><p id="b94847b4-f0af-4c9b-b9ac-2b9d55c5e898" class="">Dans le fichier <em>security.yaml</em>, c’est là qu’on donne l’ordre de hiérarchie : du bas vers le haut (celui du haut a son rôle et tout ceux dessous). </p><pre id="1776c8a9-031e-41ba-b6b7-3b57e49e6288" class="code"><code>role_hierarchy:
+	ROLE_PRINCE: ROLE_USER // ici le prince a son role et le user
+	ROLE_PRINCESSE: ROLE_USER
+	ROLE_REINE: ROLE_PRINCESSE // ici la reine a son rôle et celui de princesse et user
+	ROLE_ROI: ROLE_PRINCE</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="802f3e54-4a9e-4ed9-8a70-4dee6b2ab06f"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">La hiérarchie n’est pas obligatoire. Elle permet juste de pas répéter les #[isGranted(role1, role2…)].</div></figure><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="3490df7b-1839-4be4-88ac-c3ec35015a6d"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">On lit du bas vers le haut : comme ROI a le rôle PRINCE, on doit définir PRINCE au dessus, par contre le roi et la reine n’ont pas de lien de hiérarchie.</div></figure><p id="66d4db09-c340-4f59-a05e-fd873497e206" class="">
+</p><h2 id="49da9781-388a-4ab3-a1d5-24647f652f06" class="">Autres fonctionnalités</h2><hr id="34552bb9-f084-4e37-a382-85df685e425e"/><h3 id="273c5d80-a88e-4304-8259-fe6b3f1e6daa" class="">Mot de passe oublié</h3><blockquote id="15b8c4f2-1d18-4a70-9d86-aa3ab26b5350" class="">Principe : permettre à l’utilisateur de réinitialiser son mot de passe grâce à un mail.</blockquote><p id="5c0a3b4e-4a33-46cb-b91a-2de34abda8a7" class="">Il faut un serveur de mails : il est possible de simuler avec l’outil Papercut SMTP qui intercepte les mails rentrants et sortants.</p><p id="fadebddf-6701-4f67-bece-e0d7fee5ca49" class="">- <a href="https://github.com/ChangemakerStudios/Papercut-SMTP/">https://github.com/ChangemakerStudios/Papercut-SMTP/</a> (le Papercut.setup.exe en 5.8)</p><p id="87eea69f-b0fc-4e2f-b1e7-ef8fb2ca4446" class="">(dans la vraie vie on utilise un vrai serveur de mails…)</p><p id="90a368ff-3311-4b94-aacb-55d10219b56c" class="">
+</p><ul id="02408f13-8c8a-4037-9702-06b3abf35510" class="bulleted-list"><li style="list-style-type:disc">On installe un paquet : <code>composer require symfonycasts/reset-password-bundle</code><p id="bb3aa169-9cbf-4d61-8c65-6bf7603f9add" class="">et le paquet pour envoyer les mails : <code>composer require symfony/mailer</code></p></li></ul><ul id="64714487-a632-4190-8cca-06d1b8559f3a" class="bulleted-list"><li style="list-style-type:disc">On a maintenant accès à : <code>symfony console make:reset-password</code><ul id="48375d99-3b27-4993-b8f3-222d186e44fa" class="bulleted-list"><li style="list-style-type:circle">on choisit la route pour rediriger le user une fois son mdp reset : <code>app_login</code></li></ul><ul id="98786828-493a-4a47-9db0-1ba0a0149914" class="bulleted-list"><li style="list-style-type:circle">quel mail utilisé pour envoyer l’email reset : <code>administration@mail.fr</code></li></ul><ul id="93b57904-74e1-45b8-a607-6a6d9d3780fd" class="bulleted-list"><li style="list-style-type:circle">nom associé à l’adresse : <code>Team Admin</code></li></ul></li></ul><ul id="8858c152-b5b1-47c8-927f-ba9fdfaf3d29" class="bulleted-list"><li style="list-style-type:disc">On a modifié une entité (reset_password_request), on <code>symfony console d:s:u --force</code> et ça nous crée la table.</li></ul><p id="59efbf69-9bb4-4a0d-97a0-a17ae3a3596e" class="">L’entité <em><em>ResetPasswordRequest</em></em> est créée, avec son contrôleur <em><em>ResetPasswordController</em></em> et son repository <em><em>ResetPasswordRequestRepository</em></em>. Ils gèrent le formulaire de demande de réinitialisation <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>ResetPasswordRequestFormType</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em>, l’envoi du mail de réinitialisation avec le token, le formulaire de changement de mot de passe <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>ChangePassewordFormType</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em> et le hashage du nouveau mot de passe.</p><p id="ed315085-037d-4e29-9ac5-872a6e47d831" class="">Un fichier <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>reset_password.yaml</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em> est créé dans <em>config/packages</em> . </p><p id="f1c38007-e1c8-44e5-83c8-2d4b049a6d86" class="">Les Twigs <em>reset</em>, <em>request</em>, <em>check_email</em> et <em>email</em> sont créés.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="07711bf6-b695-4618-908d-b3de77068ddb"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Penser à les traduire au besoin et à les intégrer aux autres pages.</div></figure><ul id="2b76d869-4850-4c18-bbf9-95de78e9e8f8" class="bulleted-list"><li style="list-style-type:disc">Dans le <em>.env</em> du projet, des choses ont changé : le <code>MAILER_DSN</code> est apparu, on le décommente.<ul id="e31d8e9b-27df-43c3-827c-b29228550b78" class="bulleted-list"><li style="list-style-type:circle">pour Papercut SMTP : <code>MAILER_DSN=smtp://localhost</code></li></ul></li></ul><blockquote id="e897b455-217a-4184-91e9-17bbcd9bd313" class="">BP : Le <code>APP_SECRET</code> est une variable hyper secrète qui devrait être dans le <em>.env.local</em> puisqu’elle est utilisée dans le chiffrement et sert aussi pour le mot de passe oublié. Le <code>MAILER_DSN</code> aussi devrait être dans le <em>.env.local</em>.</blockquote><p id="a7e94c2b-cd4c-4acb-9008-d4fa7152c254" class="">
+</p><h3 id="800517c0-12ab-41e5-9677-dd0efbe23517" class="">Se souvenir de moi</h3><p id="ee76ba0e-66f2-4d74-8f55-0eb3643a2d99" class="">Dans le <em><em><em><em><em><em><em><em><em>security.yaml</em></em></em></em></em></em></em></em></em>, on active le système <code>remember_me</code>.</p><pre id="c17fe889-28e9-42df-a630-a25370a7020b" class="code"><code>security:
+    # ...
+
+    firewalls:
+        main:
+            # ...
+            remember_me:
+                secret:   &#x27;%kernel.secret%&#x27; # required
+                lifetime: 604800 # 1 week in seconds
+                # by default, the feature is enabled by checking a
+                # checkbox in the login form (see below), uncomment the
+                # following line to always enable it.
+                #always_remember_me: true</code></pre><p id="f3a00de8-82d1-4f1e-b2e4-5158b57f5a9f" class="">Dans le Twig <em><em><em><em><em>login</em></em></em></em></em>, on décommente les lignes correspondantes et on les modifie à façon.</p><pre id="fc7fe1aa-09c8-4001-8bdc-030961fb8ff1" class="code"><code>&lt;div class=&quot;checkbox mb-3&quot;&gt;
+    &lt;label&gt;
+        &lt;input type=&quot;checkbox&quot; name=&quot;_remember_me&quot;&gt; Se souvenir de moi
+    &lt;/label&gt;
+&lt;/div&gt;</code></pre><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="79fe3400-b1cf-4e15-9636-a1deb3561776"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Le <em><em><em><em>name</em></em></em></em> doit être <code>_remember_me</code>.</div></figure><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="3df54f54-a0c1-406f-adc3-47610206f731"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://symfony.com/doc/current/security/remember_me.html">https://symfony.com/doc/current/security/remember_me.html</a></div></figure><p id="9030a841-8b2e-442d-a138-83fac5b6c0e9" class="">
+</p><h3 id="83d7f526-b72e-4a6e-a530-8fe349ffba69" class="">EasyAdmin</h3><blockquote id="bb63665e-a1da-4c32-8cf2-313ff9afe27e" class="">Hors programme.</blockquote><p id="01cfcfd8-f683-4245-b4d2-5a39e91f58e3" class="">EasyAdmin est un paquet qui permet de créer un beau panneau d’administration (<em><em><em><em><em><em><em><em><em>dashboard</em></em></em></em></em></em></em></em></em>).</p><ul id="ad59bb77-80bc-4710-adaa-1829d7d36379" class="bulleted-list"><li style="list-style-type:disc">installer le paquet : <code>composer require easycorp/easyadmin-bundle</code></li></ul><ul id="7372d91d-6b32-4b71-bcf8-e6934551c585" class="bulleted-list"><li style="list-style-type:disc">créer le panneau d’administration : <code>symfony console make:admin:dashboard</code><p id="4d630f6d-71c7-499c-bbfa-83d4ee06d073" class="">&gt; <code>DashboardController</code></p><p id="b2bd4782-4da0-424f-9d45-3844909cb008" class="">&gt; où le générer ? <code>src/Controller/Admin/</code></p></li></ul><ul id="e2a1be11-ce5d-44d0-a3e1-740498332545" class="bulleted-list"><li style="list-style-type:disc">configurer le <em>dashboard </em>dans le contrôleur :<ul id="b4b51a09-f522-4cb5-bf71-6d3ec34127e5" class="bulleted-list"><li style="list-style-type:circle">dans <code>index()</code>, plein d’options commentées : on veut la <em>easier </em>(3) et on décommente le <code>return</code> (on commente le <code>return</code> parent du dessus)</li></ul></li></ul><ul id="3669d11e-2a44-4a58-9e4c-5ac26b480283" class="bulleted-list"><li style="list-style-type:disc">créer un nouveau Twig :  <code>admin/dashboard.html.twig</code><ul id="c7fed9e3-1d69-46ab-bb03-c55e1ce7bf8d" class="bulleted-list"><li style="list-style-type:circle">on fait hériter le Twig comme conseillé : <code>{% extends &#x27;@EasyAdmin/page/content.html.twig %}</code></li></ul></li></ul><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="542fdab6-488a-4493-b0f6-acf915ece298"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Pour l’instant la page <em>/admin</em> est jolie mais vide…</div></figure><ul id="fa337e48-bf3d-4231-9c8f-e9b8dd936453" class="bulleted-list"><li style="list-style-type:disc">créer un CRUD pour chaque entité qu’on veut dans le <em>dashboard</em> : <code>symfony console make:admin:crud</code> </li></ul><ul id="4bcb0d50-9f09-4c66-a753-945650661880" class="bulleted-list"><li style="list-style-type:disc">dans le <em>DashboardController</em>, dans la méthode <code>configureMenuItems()</code>, ajouter un lien vers chacun des CRUD<figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="95c1984f-8efb-40d8-9e2f-d2285b7e8b54"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Il y a un exemple commenté qu’on utilise et complète.</div></figure><pre id="3b911579-b2a0-44be-9eea-96563ca1277b" class="code"><code>yield MenuItem::linkToCrud(&#x27;Serie&#x27;,&#x27;fas fa-list&#x27;, Serie::class);</code></pre></li></ul><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="8c65573c-2850-4e81-9402-dbe8be2ea8cb"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Le <em>configureDashboard</em> sert pour les configurations.</div></figure><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="76dd0f4e-da22-4935-8736-78d1ab63287c"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Si erreur avec PHP Intl, il faut le décommenter de <em>php.ini</em>.</div></figure><p id="ca85af87-27d9-4368-b318-0b4835757626" class="">
+</p><p id="4f97c48d-b929-49b2-9b1f-efeb129e7305" class="">On laisse le panneau d’administration en production. Comme les URL commencent par ‘/admin’, seuls les rôles sélectionnés y auront accès.</p><p id="db19b36e-5d0d-4e10-a224-0ce20905b544" class="">
+</p><blockquote id="b43c9529-3bce-4387-8b99-36f4e4311a12" class="">BP : quand on fait un projet pour un client, on fait un <em>EasyAdmin</em> qui n’est accessible qu’à nous, ça peut simplifier la gestion et la maintenance (à préciser dans le cahier des charges).</blockquote><p id="569df954-61a0-4a51-9011-944d4f29242c" class="">
+</p><h2 id="06813188-d8ab-4e31-abe6-e02cf1b8bdbc" class="">En vrac</h2><hr id="2dc9701f-7c1e-4d7e-9177-aa24e371c214"/><ul id="cd3e34ea-a879-4d66-9877-3e0e50747f33" class="bulleted-list"><li style="list-style-type:disc">Dans la barre de débogage, on voit l’utilisateur connecté et ses informations.</li></ul><ul id="31fccad6-5fa9-4ae3-b03f-5f85d11fcf12" class="bulleted-list"><li style="list-style-type:disc">Dans la base de données, on a la table <em>User</em> où le champ des rôles est un tableau. Si l’unique rôle est celui par défaut <code>ROLE_USER</code>, alors le tableau apparaît vide.</li></ul><ul id="9d6605da-8312-4e94-9400-c80d67171d66" class="bulleted-list"><li style="list-style-type:disc">Le maker-bundle n’est pas fait par les gars de Symfony, ils n’ont donc pas forcément les mêmes BP.</li></ul><ul id="e2664a7a-bb02-4599-9eeb-ea58a9ea733e" class="bulleted-list"><li style="list-style-type:disc">Il y a de nombreux bundles, pour un peu tout, mais en mobile, Symfony n’est pas au top : <a href="https://flutter.dev/"><strong>Flutter </strong></a>est mieux pour le mobile —&gt; tous les devs sont d’accord pour dire que c’est le meilleur.</li></ul><ul id="cc8c08fd-8ef2-48a9-a342-c351045a2844" class="bulleted-list"><li style="list-style-type:disc"><a href="http://fontawesome.com">fontawesome.com</a> propose plein d’icônes (toutes celles qui sont gratuites sont déjà accessibles).</li></ul><ul id="360ce7a7-021d-4a4e-a7dd-50bfaed72a02" class="bulleted-list"><li style="list-style-type:disc">On peut avoir des php.ini par projet avec des interpréteurs différents.</li></ul><ul id="c005dad2-2fa2-45d5-90ec-967df36dcea2" class="bulleted-list"><li style="list-style-type:disc">Un exemple de <em>easter egg</em> avec le code konami HHBBGDGDBA.</li></ul><ul id="adbe4316-f4f9-41ff-81c7-3c0e170ed300" class="bulleted-list"><li style="list-style-type:disc">GitHub Actions = intégration continue (normalement ça finit par la mise en prod)</li></ul><p id="19c12acb-11c2-4f45-9560-924f1e1354d6" class="">
+</p></div></article></body></html>
