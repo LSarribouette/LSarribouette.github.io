@@ -1,0 +1,704 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Mise en production</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8e8a623f-2b0a-4d05-b7f0-403bbba98edb" class="page sans"><header><img class="page-cover-image" src="media/13-10-mise-production/2023-03-06_22_00_45-pexels-anca-dorneanu-7159696.jpg_-_Photos.png" style="object-position:center 46.209999999999994%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Mise en production</h1></header><div class="page-body"><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="25bd5e18-c1c6-430e-af13-83aa3e8e6a0d"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Il a recréé un serveur OVH pour la démonstration (accessible dans la salle).</div></figure><h3 id="3e0f61bd-4e6a-4dba-8646-d44a018df65d" class="">Les environnements Symfony</h3><p id="1bcfa537-04fe-49e0-b4f4-d8553c679652" class="">Dans le .env, on a une variable qui détermine l’environnement dans lequel on se trouve : <code>APP_ENV=DEV</code>. Il existe aussi <code>PROD</code> et <code>TEST</code>.</p><p id="57aae6ce-a19e-4c44-9b72-d20533eef13e" class="">
+</p><p id="77a25adc-a297-49a0-9bb5-1151d3e49d78" class="">Le code est le même mais les configurations diffèrent entre environnements de travail. On voit dans le index.php quel Kernel est instancié.</p><p id="f1e4c983-ce6d-4acf-8f74-3967c3eaa227" class="">Par exemple, les erreurs entre <code>PROD</code> et <code>DEV</code> s’affichent différement (en <code>PROD</code> on enlève les informations utiles aux développeurs mais sensibles). </p><p id="39ad9509-564f-4d39-90c3-614adfcba43c" class="">Souvent on a une base de données par environnement : on garde la même structure mais on recrée la base de données en <code>PROD</code> (souvent celle que fournit l’hébergeur).</p><p id="b148e06b-c855-414b-9168-6096d186c101" class="">Le cache aussi diffère, en <code>DEV</code> il recharge à chaque <em>refresh</em> alors qu’en <code>PROD</code> il garde le cache (gain de rapidité).</p><p id="a814ad5c-60ec-4e58-addc-ebed88a2c146" class="">Les paquets disponibles peuvent aussi différer, notamment la barre de déboguage qui n’est pas accessible en <code>PROD</code>.</p><p id="99f22b4c-6c54-4217-9bbd-459a8fa47830" class="">
+</p><p id="bf6e34a5-8963-469d-a349-4f85b51b3c7a" class=""><strong>Grossièrement, pour passer en </strong><strong><code>PROD</code></strong><strong>, on prend le code source, on le met dans le serveur OVH, on remplace la valeur de </strong><strong><code>APP_ENV=PROD</code></strong><strong>.</strong></p><p id="624b17b5-b147-4dd7-b19d-4f90863bb20a" class="">
+</p><h3 id="f9cc853b-be0b-4fb6-8083-f71ddc9c9440" class="">On personnalise les pages d’erreur</h3><blockquote id="224003d7-66b4-4319-8028-77d95f369e97" class="">On est donc en <code>PROD</code> sur le projet, on lance le serveur, on check la page d’erreur (on va sur une url qui existe pas) et c’est moche.</blockquote><p id="eaae2d9a-499d-40df-97ae-903d240c50a9" class="">Si on crée le bon twig qu’on met au bon endroit, alors c’est lui qui sera affiché : <em>templates/bundles/TwigBundle/Exception </em>(que l’on crée à la main).</p><p id="b5f7f9a9-ea25-4aa4-bb3f-6ae62aba941e" class="">On peut faire une page générale pour toutes les erreurs : <code>error.html.twig</code></p><p id="4e9b23c3-474f-4a0b-9780-8fb0fe75fe6b" class="">On peut ajouter des fichiers selon les erreurs : <code>error404.html.twig</code></p><pre id="352323fa-7cdc-4050-bce0-5754c7be419d" class="code"><code>{% extends base.html.twig %}
+
+{% block body %}
+	&lt;p&gt; Erreur 404 - La page demandée n&#x27;a pas été trouvée.
+{% endblock %}</code></pre><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="8671af1c-7976-4a52-a14f-db56d623a905"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Quand on est en <code>PROD</code>, on charge le cache une seule fois.
+Si on fait une modification, on doit penser à vider le cache : <code>symfony console cache:clear</code>.</div></figure><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="b18ce29a-0a6e-459b-a6ad-a5b6793482fa"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%"><em>.env</em> = part sur git (ex: même environnement pour tous les développeurs)
+   ≠
+<em>.env.local</em> = part pas sur git (ex: base de données différente entre développeurs)</div></figure><p id="0c3539c4-4cbd-48c1-8791-8392118f4274" class="">
+</p><h3 id="69e86131-c98f-4413-afb0-a00609545c09" class="">On doit parler de SQL</h3><p id="eb836d3d-3d29-4958-bb6e-ebee47307dfa" class="">En environnement de <code>DEV</code>, on faisait des <code>symfony console doctrine:schema:update --force</code>, sauf qu’il n’est pas possible de revenir en arrière.</p><p id="e1481ef0-2400-48df-b5ed-3a447a5fd1dd" class="">C’est fini tout ça en <code>PROD</code>. On fait des <strong>migrations </strong>: <code>symfony console make:migration</code>. <div class="indented"><p id="d319e476-6626-463f-8e61-2b9c8d7ff703" class="">Un script SQL est créé, il permet d’aller en avant ou en arrière. </p><p id="e122444c-a3c8-4da7-be77-9e5a58a9e4ba" class="">Une table des migrations est créée dans la base de données, pour garder une trace de qui a migré et quand.</p></div></p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="26a07836-5338-40f2-9bdd-1b15eb465fa0"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Le schéma est modifié mais pas les données (il ne touche pas aux données).</div></figure><p id="8d8fa748-5bb3-47d9-9fcd-80c358c57747" class="">
+</p><h3 id="294757b6-1c2d-4b66-b3cf-18b948803cff" class="">Le déploiement</h3><p id="1fe8dcef-718f-401a-8f0a-d67e148ee928" class="">Etapes listées sur Symfony :</p><ol type="1" id="8f99fb88-3b5e-4832-abad-b0ae42f3a9b3" class="numbered-list" start="1"><li>on transfère le code source sur le serveur web</li></ol><ol type="1" id="f15f4220-871f-48fd-b88e-aa1ee33dcfc8" class="numbered-list" start="2"><li>on le passe en <code>PROD</code>, on gère les variables d’environnement</li></ol><ol type="1" id="a7a73773-b0bb-4098-8a84-d71aaf84bae6" class="numbered-list" start="3"><li>on installe les dépendances avec composer</li></ol><ol type="1" id="2624559f-c8b0-44d7-b1bd-33923c6b5b29" class="numbered-list" start="4"><li>on vide le cache</li></ol><p id="b13254f6-810f-4451-ba71-16f3cf9d27f8" class="">
+</p><p id="85702575-a633-4ca0-a1af-46ec38de2d6c" class="">Il faut faire du SSH pour se connecter au serveur OVH.</p><p id="e500d7c6-3f8b-40e9-b9f5-cddd6bfab473" class="">Dans un terminal, on se connecte au serveur avec login@adresse : <code>ssh ovh@10.22.200.32</code> &gt; le mot de passe : <code>ovh</code>.</p><p id="6088ae01-8792-41dd-a1fe-8670a6501775" class="">OVH c’est linux, on doit copier le projet en choisissant une méthode :</p><ol type="1" id="997057eb-33a8-4a41-b6e5-50255889a383" class="numbered-list" start="1"><li>FTP (non) / SFTP (mouais) / SCP (pour copier d’un ordi à un autre via le protocole SSH) (rare)</li></ol><ol type="1" id="7fb24cb1-4244-45d2-91e7-b810c9dbe2d9" class="numbered-list" start="2"><li>git (le + utilisé) : git clone URL et on récupère le projet</li></ol><ol type="1" id="3033c0ac-6b50-4400-a95d-271ff15efd37" class="numbered-list" start="3"><li>Docker, { Jenkins, Travis CI } (forge logicielle d’intégration continue : à chaque commit, il compacte dans un docker qu’il met dans OVH et démarre et plein d’autres trucs…), GitHub, GitLab</li></ol><p id="83a5c7d1-3358-4e84-814c-91dfbdeb8451" class="">
+</p><p id="8ca9d257-dc4e-4dce-885a-3cd38857ab63" class="">Se connecter à la base de données :</p><ul id="229dbfe5-c678-4de4-a846-f159aabdca1b" class="bulleted-list"><li style="list-style-type:disc">dev : onglet <em>Database</em> à droite</li></ul><ul id="c1b7ecaa-ff79-414c-95cf-5d6f7f90d447" class="bulleted-list"><li style="list-style-type:disc">prod : pareil mais on met le serveur OVH (10.22.200.32) en <em><em><em><em>host </em></em></em></em>(l’hébergeur nous donne les identifiants)<p id="e12533ed-d629-4cfa-84ea-fd434806f0d9" class="">dans le <em>.env</em>, on met la <code>DATABSE_URL</code> avec le 127.0.0.1 (car quand on le mettra sur le serveur, ce sera aussi le local) et les bons identifiants</p></li></ul><p id="2233b369-789a-42e6-9c20-19a31a49b8b1" class="">
+</p><p id="23f312e8-7ec3-494b-becc-ccf33137f24f" class="">Cloner le repository git :</p><ul id="8ee0b93b-625b-4ed8-a4b1-a2e9f52f5912" class="bulleted-list"><li style="list-style-type:disc">c’est l’hébergeur qui démarre le service : <code>/etc/init.d/apache2 restart</code></li></ul><ul id="8816ee4a-d004-44dc-85ce-5db31c4aabb1" class="bulleted-list"><li style="list-style-type:disc">pour que l’application soit en <code>PROD</code>, on la met dans <em>/var/www/html</em> (souvent on a accès qu’à ce répertoire) parce que c’est le dossier <em>root</em></li></ul><ul id="0d327847-a6ca-4d72-8b6c-dbe5c1af693e" class="bulleted-list"><li style="list-style-type:disc">on clone le projet : <code>git clone </code><code><a href="https://github.com/LSarribouette/hello-symfony">https://github.com/LSarribouette/hello-symfony</a></code><code> </code><p id="49444606-9d5c-4e76-a0c3-30852bdf8c54" class="">(je vérifie avec <code>ls</code> que j’ai bien la liste des documents)</p><p id="f9159dd5-9664-49b7-9eac-1456b0932ec8" class="">
+</p></li></ul><p id="93ff095e-bd41-44a3-a449-969356c6cb55" class="">Passer le projet en <code>PROD</code> : </p><ul id="3d5f27c4-37b3-4794-a8e6-b991dac53314" class="bulleted-list"><li style="list-style-type:disc">on utilise vi pour changer la valeur de <code>APP_ENV</code></li></ul><p id="531afcc9-546b-40a2-8d01-260da17849dc" class="">
+</p><p id="29f8441e-a8cb-45d8-86e6-a9fb9967547a" class="">Installer les dépendances : <code>/usr/local/bin/composer install</code></p><p id="4b75998b-9d41-4658-b646-54b527940d03" class="">
+</p><p id="2d8f67d5-9231-4578-a0c6-9181f97a82a0" class="">Si on va sur l’adresse IP du serveur, on voit la page par défaut. Si on rajoute ‘/nom-du-projet’, on accède bien au projet.</p><p id="8cf3a0ab-f3ee-4afb-b786-8f3815ea91cd" class="">
+</p><h2 id="f92097b7-532f-4c75-b4cc-fa696f789143" class="">En vrac</h2><hr id="aded567b-2799-4fa2-ae6e-39bf5c0fdc59"/><ul id="3b185908-31ac-4b28-bdff-79fb2e0a8d8d" class="bulleted-list"><li style="list-style-type:disc">Utilisation d’un VPS (serveur privé virtuel) : accessible dans la salle, en public avec l’adresse iPv4. C’est comme un ordinateur dans le nuage d’internet (on peut faire ce qu’on veut : installer des trucs, mettre des fichiers, créer un site web… On peut acheter un nom de domaine qui mène à cette iPv4…). </li></ul><ul id="82e0d035-1588-41ee-b369-78e40e0200d8" class="bulleted-list"><li style="list-style-type:disc">Choix d’hébergement : selon le nombre de sites (un domaine peut avoir plein de sous-domaines)<blockquote id="ada055fd-a31c-43d4-8505-8ce39c38734a" class="">BP : <a href="https://www.o2switch.fr/">o2switch</a> (avec nom de domaine offert)</blockquote></li></ul><ul id="12848e60-0a7c-424b-8d69-63bcda985991" class="bulleted-list"><li style="list-style-type:disc"><em>git workflow </em>: ce qui se passe dans la vraie vie<p id="0e9f33d2-3c46-4d34-a55a-168afabbd73a" class="">Les développeurs commitent ; le lead développeur se connecte en SSH sur le serveur web, il pull la branche main (taguée) —&gt; en vérité, on automatise ce processus avec de l’intégration continue.<div class="indented"><p id="d85578f0-ee4d-48fd-8c3e-0d45012c1186" class="">on touche quasi jamais à la branche <em>main</em> (sauf lead dev)</p><p id="93dac1b7-037a-4cf1-962e-8d397233a924" class="">on a une branche <em>dev</em></p><p id="3b41d9bc-dfd7-4891-9971-b8579c678f00" class="">chaque développeur a sa branche à lui et merge dans <em>dev</em></p><p id="2d5b1c0c-bb8c-4b25-9ba9-538fb9565d9e" class="">on a autant de merge sur la branche <em>main</em> que de tags (version V.0.2….) </p></div></p><p id="98bf3322-b630-44ad-988c-46c7c192fbed" class="">Exemple d’intégration continue avec GitHub Action : un symfony.yaml qui lance des jobs qui crée des dockers, fait un github checkout, installe des machins,…. —&gt; principe = on dit qu’est ce qu’on lance et quand.</p><p id="48b3bbcd-0ea9-404a-a4e5-8fd89dd753c9" class="">Le changement de base de données aussi est géré par l’intégration continue.</p><p id="f7f563f3-82a8-4eba-a001-1bc69ca2a5ed" class="">
+</p><h2 id="c6377040-e9ee-4547-80b1-f945b51f122a" class="">Le reste à voir en Symfony</h2><p id="adbd247e-e2cb-4694-8474-a8096645e427" class="">Symfony : mais encore ?
+• Webpack Encore
+• Symfony UX
+• Fixtures
+• Commandes de console
+• Traduction
+• EventDispatcher
+• BrowserKit
+• Tests
+• API REST, APIPlatform
+• Cache
+• Logs
+• Workflow
+• Voters
+• Les bundles de la communauté
+• Et encore plein d&#x27;autres merveilles</p></li></ul></div></article></body></html>
