@@ -1,0 +1,756 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>API</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e5717902-9b39-4f2a-807e-42ab83a52330" class="page sans"><header><img class="page-cover-image" src="media/13-bonus-api/2023-03-07_12_08_31-pexels-pascal-ingelrest-10377019.jpg_(Image_JPEG_1755__1167_pixels)_-_Redimens.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">💯</span></div><h1 class="page-title">API</h1></header><div class="page-body"><blockquote id="6bb576b9-c00d-4cb5-8cd2-978f4d5e0dd5" class="">Interfaces de programmation d&#x27;application ou <em>Application Programming Interfaces</em>.</blockquote><p id="8f256722-9901-4213-90a8-a481d4d9b510" class="">
+Une API est une application.</p><p id="4900e08f-c2d8-4ac8-b031-e841bdfab50d" class="">Quand on parle d’application, on sous-entend souvent une application monolithique (un seul bloc). Depuis 15 ans, on sépare les modules pour que <em>back</em> et <em>front</em> puissent fonctionner séparément. Notamment parce qu’on est dans une ère de micro-services. </p><p id="78709404-a5bf-45e8-9673-74600c2d88e8" class="">Une API est une application sans front (ou peu) qui permet de répondre à une question. C’est une interface qui rend un service. Elle retourne souvent du JSON.<div class="indented"><p id="3794032a-3ba7-4856-a6b3-1776147e6605" class="">Ex: <a href="https://api-adresse.data.gouv.fr/search/?q=8+bd+du+port">https://api-adresse.data.gouv.fr/search/?q=8+bd+du+port</a> </p></div></p><p id="b72f1f17-4647-4066-92a2-017331c43c72" class="">Un micro-service est une API dans sa forme minimale (par exemple, un pour la base de données, un pour le front, etc…).</p><p id="33527623-ca17-4a78-a4f0-4141c0189e5f" class="">
+</p><p id="e73162db-8634-4759-a756-6be3c72354da" class="">On trouve de nombreuses API gratuites :</p><ul id="2ff3da65-4a56-4b5d-99e2-a3a3b52e0f05" class="bulleted-list"><li style="list-style-type:disc"><a href="http://api.gouv.fr">api.gouv.fr</a> : toutes les API du domaine public</li></ul><ul id="58227f65-f880-4835-b774-091b38dd510c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/public-apis/public-apis">https://github.com/public-apis/public-apis</a></li></ul><ul id="7c169201-d6da-43ba-bdd5-ca3070c4a84c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://api.chucknorris.io/">chuck noris api</a></li></ul><p id="618747a4-8af6-42b8-a311-37b5233cd065" class="">
+</p><p id="3dcf9277-a759-4f71-8288-ff33365b0892" class="">JSON est utilisé parce qu’on fait de l’asynchrone et on affiche la réponse seulement quand elle arrive.</p><p id="e65183dd-e9e5-42c7-977b-1d2cf39aed7f" class="">
+</p><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="879ba605-1a8d-44d0-b999-3688791a55af"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Outils :
+API Platform (par <a href="https://les-tilleuls.coop/">Les-Tilleuls</a>) : <a href="https://api-platform.com/">https://api-platform.com/</a></div></figure><p id="e7968a5b-b8cc-463f-b0b8-0af4237e2795" class="">
+</p><h2 id="b1a620b2-f26a-4ca3-9307-6946a602279c" class="">Créer une API avec Symfony et API Platform</h2><hr id="5d19d472-26e9-49e0-af1f-fd13c9769b6c"/><blockquote id="1e6e43ce-293c-4fd8-97cf-e01d732b1fc1" class="">Projet Github : <a href="https://github.com/LSarribouette/mumbling-with-api-platform">https://github.com/LSarribouette/mumbling-with-api-platform</a></blockquote><p id="e2a8e80e-3950-4334-bd15-4c6fba02f69f" class="">
+</p><p id="151a3308-7d57-4df6-9e8e-98ba43eca94d" class="">Dans un terminal,</p><ul id="9b5926a0-5eea-4e97-bfb7-243f241ab925" class="bulleted-list"><li style="list-style-type:disc">se placer dans le bon dossier : <code>cd mon-repertoire</code></li></ul><ul id="3bc3f313-a54b-4d06-95ff-30b6f3b34014" class="bulleted-list"><li style="list-style-type:disc">créer un nouveau projet Symfony : <code>symfony new monApi</code></li></ul><ul id="db185030-1e2a-41e0-8003-f8845cbb39dc" class="bulleted-list"><li style="list-style-type:disc">se placer dans le projet : <code>cd monApi</code></li></ul><ul id="c9f2023a-483f-4dff-b47f-a49275998f81" class="bulleted-list"><li style="list-style-type:disc">installer le paquet : <code>composer require api</code> (alias pour API Platform)</li></ul><ul id="e2c50331-f9b6-44a1-89bc-a3efdc6219d6" class="bulleted-list"><li style="list-style-type:disc">lancer le projet : <code>symfony server:start</code> —&gt; l’API fonctionne sur le ‘localhost/api’ (vide pour l’instant)</li></ul><p id="d1069529-ec13-4e09-b733-d0ef86800293" class="">
+</p><p id="999284f4-2475-417b-bd70-6bc9fa697587" class="">Dans PhpStorm,</p><ul id="beaa9666-b6a0-4d94-91f5-17eed366105d" class="bulleted-list"><li style="list-style-type:disc">ajouter une base de données de notre choix (ici, PostgreSQL avec Docker), en spécifiant <code>DATABASE_URL</code> dans le <em>.env.local</em></li></ul><ul id="02df1a7e-1687-4749-9045-c9297ce130c0" class="bulleted-list"><li style="list-style-type:disc">créer la base de données : <code>symfony console doctrine:database:create</code></li></ul><ul id="9a2aa338-4249-4a5f-8ed4-b62cfae75429" class="bulleted-list"><li style="list-style-type:disc">créer une entité :<ul id="eb27db22-6cb1-49d5-88a2-9e77e8eb2963" class="bulleted-list"><li style="list-style-type:circle">installer le paquet : <code>composer require symfony/maker-bundle</code></li></ul><ul id="d7839b92-27ae-4eb1-bff6-8ac58ed4791a" class="bulleted-list"><li style="list-style-type:circle">créer l’entité : <code>symfony console make:entity</code><ul id="ec89b1d6-a8f3-45d3-8a3d-ee934ef0bcd4" class="bulleted-list"><li style="list-style-type:square">choix du nom : <code>XMen</code></li></ul><ul id="a1dbf785-fd49-4cef-83de-03f3ebb9eebe" class="bulleted-list"><li style="list-style-type:square">choix si l’on veut la mettre en ressource de l’API (si oui, il crée tout pour nous) : <code>yes</code><p id="60890452-6cd3-4f85-9500-08df34e91330" class="">(ici, on dit oui uniquement si on veut mettre l’entité en public ; on dit non pour les utilisateur, par exemple)</p></li></ul><ul id="27acc44d-86ca-4391-a5e5-4bbbd1d9c536" class="bulleted-list"><li style="list-style-type:square">choix des propriétés…</li></ul><p id="b5b34867-68d6-49c7-a00a-1a0b804218f2" class="">L’entité <em>XMen</em> est créée ainsi que son repository <em>XMenRepository</em>. </p></li></ul></li></ul><ul id="0de46a09-5b8c-47bd-9b87-1c193128b2a8" class="bulleted-list"><li style="list-style-type:disc">mettre à jour la structure de la base de données : <code>symfony console doctrine:schema:update --force</code></li></ul><ul id="224d445a-c0ba-4706-b49d-e56f322267c3" class="bulleted-list"><li style="list-style-type:disc">ajouter éventuellement des données <em><em><em>via</em></em></em> un script SQL</li></ul><p id="c2fe750d-03db-4c1f-b7b5-8135f4e58402" class="">
+</p><p id="db40e0a9-a7d9-45fd-9bc3-17b1b2834cbe" class="">Sur ‘localhost/api’, on voit maintenant l’entité avec :</p><ul id="2bb6f618-54eb-4631-b59a-7bfa27b8653e" class="bulleted-list"><li style="list-style-type:disc">une documentation générée automatiquement</li></ul><ul id="46f2748f-5097-47d3-8d88-efbcbce59d28" class="bulleted-list"><li style="list-style-type:disc">les routes REST typiques (pour les collections et les items)</li></ul><ul id="d214ed18-1ff6-4c37-9aee-6cf27e18e3d7" class="bulleted-list"><li style="list-style-type:disc">les schémas de l’entité aux format .json et .jsonId</li></ul><figure id="7d53680d-3ebd-421c-b6e5-d4ca7513c88d" class="image"><a href="media/13-bonus-api/Untitled.png"><img style="width:384px" src="media/13-bonus-api/Untitled.png"/></a></figure><p id="eea5eb86-9c71-4625-89a2-4c2c46d0618f" class="">
+</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="993c0596-b7ee-458a-a57b-5bea9a5b6051"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : <mark class="highlight-gray">
+</mark><a href="https://api-platform.com/docs/distribution/">https://api-platform.com/docs/distribution/</a>
+<a href="https://api-platform.com/docs/core/operations/">https://api-platform.com/docs/core/operations/</a></div></figure><p id="51093c58-ef43-43ed-803f-9845a8a3fd77" class="">
+</p><h2 id="41d18675-56fc-4291-94f6-cf7f0e1ef1fe" class="">Sécurité : restreindre l’accès aux méthodes HTTP</h2><hr id="27771df9-d847-4e1d-ab3e-f6385db4eef8"/><p id="d4f187a4-5990-4f84-8d8c-02557b587b1e" class="">Il est possible de restreindre l’accès à certaines méthodes HTTP comme DELETE, soit aux utilisateurs ayant un certain rôle, soit complètement.</p><p id="2b834858-7a6c-40ef-b1b0-927a2ce43910" class="">
+</p><p id="045ff760-c766-4835-83bf-598ec0c95f6a" class="">Lors de la création de l’entité, on a choisi de la mettre en ressource de l’API. Un attribut <code>#[ApiResource]</code> a été ajouté à la classe :</p><pre id="4022ed73-bde4-4719-a8b5-265ee9bccf19" class="code"><code>namespace App\Entity;
+
+use ApiPlatform\Metadata\ApiResource;
+use App\Repository\XMenRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: XMenRepository::class)]
+#[ApiResource]
+class XMen
+{...}</code></pre><p id="e8eab8a2-04a8-4ade-bf68-46ff7d26cdda" class="">
+</p><p id="8bb8fbe9-9401-49cf-b6d9-e61709aa5879" class="">On peut choisir de donner accès uniquement à la méthode GET en ajoutant un attribut <code>#[Get]</code> (ou plusieurs <code>#[Get, Post]</code>) en dessous du précédent :</p><pre id="e8aeef0a-2430-4529-8fbe-db741c0627ea" class="code"><code>#[ORM\Entity(repositoryClass: XMenRepository::class)]
+#[ApiResource]
+#[Get]
+class XMen
+{...}</code></pre><figure id="ffd2d32b-077a-4c33-aa2a-bc75e9da057d" class="image"><a href="media/13-bonus-api/Untitled%201.png"><img style="width:288px" src="media/13-bonus-api/Untitled%201.png"/></a></figure><p id="e132dc28-fe1c-4c63-a66d-47768180c111" class="">
+</p><p id="b399cb7b-55f2-4622-b4bc-867bbf7246aa" class="">De nombreux attributs sont disponibles : <code>#[Get]</code>, <code>#[GetCollection]</code>, <code>#[Post]</code>, <code>#[Put]</code>, <code>#[Delete]</code>, <code>#[Patch]</code>…</p><p id="e687605e-688c-4079-888a-6dfc1b817b2f" class="">
+</p><p id="7131af6f-2d87-45bc-aa72-d3d41e59b7df" class="">On peut également choisir de donner accès aux méthodes selon le rôle de l’utilisateur en ajoutant un attribut <code>#[IsGranted]</code>.</p><p id="93981f3e-570a-46b8-bb77-56b91a939d29" class="">
+</p><h2 id="cfa060b2-6c44-4c0f-bdba-f0e9d1db4c3e" class="">Interroger une API</h2><hr id="ae5831af-b65f-4ab5-973f-9077888067e6"/><blockquote id="72613038-4d89-4071-bcbe-209f0308f4d5" class="">Objectif : récupérer la liste des X-Men en JSON et remplir la liste dans la page HTML.</blockquote><p id="ac9be8c2-cde1-4764-99b8-ed8c0c97fd6d" class="">
+</p><p id="d9d05b4a-012a-46a9-9a0b-151c7030e2ab" class="">Dans un IDE (ici VSCode), </p><ul id="a2070b70-4d44-4e87-95b9-53b2efe66b4d" class="bulleted-list"><li style="list-style-type:disc">créer une page HTML avec un titre, une liste, une balise <code>&lt;script&gt;</code> pour JavaScript</li></ul><pre id="64f7dee8-f2ec-47aa-a91b-5f24e950c36d" class="code"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+    &lt;title&gt;Interroger mon API&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Liste des X-Men&lt;/h1&gt;
+    &lt;ul id=&quot;maListe&quot;&gt;&lt;/ul&gt;
+    &lt;script&gt;
+        // a completer
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p id="c5b10a5e-952e-4c06-8d2f-c9a91827acc7" class="">
+</p><p id="59222167-f863-4af9-a731-faf25e435042" class="">Pour récupérer la liste des X-Men en JSON, trois options sont possibles :</p><ol type="1" id="c7c15272-3cb4-44f1-8976-559313c72848" class="numbered-list" start="1"><li>XML HTTP Request (non)</li></ol><ol type="1" id="5c1a0980-f943-4341-ab34-771dbec3ca84" class="numbered-list" start="2"><li>AJAX avec jQuery (non)</li></ol><ol type="1" id="4049ca3c-4b03-49f1-99a0-527d4e73ce09" class="numbered-list" start="3"><li>Fetch avec en paramètre l’URL de l’API que l’on veut joindre (oui)</li></ol><p id="dcfe8c2a-8f8c-4767-b1ce-ac6c5a1b7da1" class="">
+</p><p id="e8f2fc9f-a989-4919-8d76-84294ac21d54" class="">Dans la balise <code>&lt;script&gt;</code>,</p><ul id="320e55d6-6f1a-44ca-aa8e-a091da5f07d0" class="bulleted-list"><li style="list-style-type:disc">récupérer la liste en JSON : <ul id="b4bbf159-d2ed-47f4-900d-648aef8082c5" class="bulleted-list"><li style="list-style-type:circle">méthode <code>fetch()</code> avec en paramètre l’URL de la méthode souhaitée (ici, la GET pour la collection) finissant par .json</li></ul><ul id="27f85d44-2fc8-4c15-b2cb-3f77675b0e4e" class="bulleted-list"><li style="list-style-type:circle">un <em>call back</em> asynchrone avec <code>.then</code> pour transformer la chaîne de texte en JSON<p id="4c9a8b90-7d2e-4d89-a5e6-eecc9022168c" class="">(une méthode anonyme où on met dans la parenthèse avant la flèche le retour de la commande précédente et après la flèche on met la fonction à exécuter — si on met rien, ce sera un <em><em><em><em><em><em>return</em></em></em></em></em></em>)</p></li></ul><ul id="5c7a98f7-48f0-44cc-8d2f-60f2f00f790c" class="bulleted-list"><li style="list-style-type:circle">un autre <code>.then</code> pour afficher le résultat</li></ul></li></ul><pre id="11e809df-8de6-4b24-9d2d-f6c307a8be02" class="code"><code>&lt;script&gt;
+  fetch(&#x27;http://127.0.0.1:8000/api/x_mens.json&#x27;) 
+  .then((reponse) =&gt; reponse.json())
+  .then((json) =&gt; console.log(json));
+&lt;/script&gt;</code></pre><p id="ff9de5d1-f80c-4f57-a589-c742f073d48a" class="block-color-teal_background">Lorsqu’on lance le Live Server, la liste est visible dans l’inspecteur, onglet Console.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="c0a96bcb-36cf-43f8-bc79-f8cb81fb26e8"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">S’il y a un problème avec l’API, on peut le voir dans l’inspecteur, onglet Réseau.</div></figure><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="d4a46d3f-29dd-4cd3-b406-e03afb0ebc92"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Si erreur de <em>cross-origin</em>, on peut modifier le <em>.env</em> à la dernière ligne <code>CORS_ALLOW_ORIGIN</code> et on lui rajouter une condition <code>*|local</code>.</div></figure><p id="8cc8849b-79ad-438f-a490-60511cc283e7" class="">
+</p><p id="f250e94b-05d7-44d6-8c9e-5441217f29b3" class="">Pour remplir la liste dans la page HTML, on complète le script JavaScript :</p><ul id="98568113-03a7-4a41-ba20-14ccaeb5df53" class="bulleted-list"><li style="list-style-type:disc">faire une boucle sur le JSON où à chaque objet trouvé, on crée une <code>&lt;li&gt;</code><ol type="1" id="8f139173-df76-4a4c-ad04-02c5b41b0652" class="numbered-list" start="1"><li>on récupère l’<code>&lt;ul&gt;</code> avec son id</li></ol><ol type="1" id="0e130bf8-43e5-4521-b267-357aafb0475c" class="numbered-list" start="2"><li>on boucle sur le tableau</li></ol><ol type="1" id="7f5b3c05-5541-4e86-b1e4-944ca22e67aa" class="numbered-list" start="3"><li>pour chaque ligne, on crée une <code>&lt;li&gt;</code></li></ol><ol type="1" id="9e833579-d5ae-42ec-99f6-c16b91344ef3" class="numbered-list" start="4"><li>on remplit le texte de la <code>&lt;li&gt;</code> avec le pseudo</li></ol><ol type="1" id="ee7947fd-70d1-4c7e-899a-997dc91d0536" class="numbered-list" start="5"><li>on accroche la <code>&lt;li&gt;</code> à la <code>&lt;ul&gt;</code> <p id="741c8f88-92f9-4e4e-9590-973231ec61e3" class="">(quelque chose qui n’est raccroché à rien n’est pas visible)</p></li></ol></li></ul><pre id="c38bf983-8a08-4879-a0ae-106b34a443c1" class="code"><code>&lt;script&gt;
+    fetch(&#x27;http://127.0.0.1:8000/api/x_mens.json&#x27;) 
+    .then((reponse) =&gt; reponse.json())
+    .then((json) =&gt; {
+        let monUl = document.getElementById(&quot;maListe&quot;);
+        for (const uneXMen of json) {
+        let monLi = document.createElement(&#x27;li&#x27;);
+        monLi.innerText = uneXMen.pseudo;
+        monUl.appendChild(monLi);
+        }
+    })
+&lt;/script&gt;</code></pre><p id="ab5059f7-df28-4326-8ef3-50f70f0e1015" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="cb8f76cb-a23f-48d9-8321-e39a45852cb8"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Pareil mais avec un Twig ?
+&gt; Après avoir ajouter les paquets nécessaires (<em>twig</em> et <em>symfony/asset</em>),
+&gt; créer un contrôleur <em><em><em><em><em><em><em><em><em><em><em><em><em><em>MainController</em></em></em></em></em></em></em></em></em></em></em></em></em></em> avec une méthode <code>index()</code> qui retourne le Twig <em><em><em><em><em><em>index.html.twig</em></em></em></em></em></em>,
+&gt; et ajouter le bout de code correspondant dans le <code>{% block body %}</code>.</div></figure><p id="04026bf8-51d2-408e-8a74-71b35fc592c7" class="">
+</p><h2 id="b7f20a19-32f0-44c1-9655-7f083c90e8a4" class="">Format Hydra</h2><hr id="63d13c44-add3-4789-8276-db70e7e6ead0"/><p id="2c0bc5a7-cefe-40da-8bb2-43533871705e" class=""><a href="https://api-platform.com/docs/core/extending-jsonld-context/">https://api-platform.com/docs/core/extending-jsonld-context/</a></p><p id="9dea711e-63b3-4bea-bdf9-547239a26480" class=""><a href="https://www.hydra-cg.com/">https://www.hydra-cg.com/</a></p><p id="a8b853e7-24eb-40d8-8ca2-e13029e03920" class="">
+</p><p id="dd221954-cdfa-4422-979c-6723c2485bf7" class="">Un Hydra est un autre format qui contient tout ce qu’il y avait dans le fichier JSON, avec en plus d’autres informations comme le nombre d’éléments. </p><p id="9bc6f136-ef81-4b15-8c01-ca7261935e0f" class="">Si ce nombre est supérieur à 20, on a un URL qui permet d’avoir accès aux 20 éléments suivants.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="38d17952-8c0d-4cbf-ab1c-9c8be864f5a9"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Par défaut, le format de notre API est Hydra donc on n’a pas besoin d’ajouter l’extension à la fin de l’URL : on avait précisé “.json” pour spécifier le format JSON.</div></figure><p id="4bdca4c2-7a62-44f4-b669-ea001e1d5bd0" class="">
+</p><p id="3d736504-5c2a-4056-b2a2-e652af455ffb" class="">On peut également boucler sur un Hydra en utilisant <code>member</code>.</p><pre id="2988d30e-c975-42ea-b32b-c4cc3c7e210e" class="code"><code>&lt;script&gt;
+  fetch(&#x27;http://10.22.0.254:8002/api/superheroes&#x27;) 
+  .then((reponse) =&gt; reponse.json())
+  .then((json) =&gt; {
+    let monUl = document.getElementById(&quot;maListe&quot;);
+    for (const uneXMen of json[&quot;hydra:member&quot;]) {
+      let monLi = document.createElement(&#x27;li&#x27;);
+      monLi.innerText = uneXMen.pseudo;
+      monUl.appendChild(monLi);
+    }
+  })
+&lt;/script&gt;</code></pre><p id="11db917f-8da3-40c9-9c97-371a174bde42" class="">
+</p><h2 id="b67af2a6-f961-4d4f-bd24-68a9521589eb" class="">Authentification</h2><hr id="7bcaa698-38bf-459c-86f9-e750a1dbb0dc"/><p id="04edd7ee-d8c8-48ee-8d64-ef9450675841" class="">Il est possible de limiter l’accès à une API à des utilisateurs ayant certains droits.</p><p id="23f27107-a970-4761-872d-f980514da75f" class="">Pour cela, on utilise des <em>JSON Web Token</em> (JWT) grâce au paquet <em>LexikJWTAuthenticationBundle</em>.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="34328926-e03c-4049-91bd-39569a6a7cf0"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">On crée un utilisateur avec <code>make:user</code> (et non pas <code>make:auth</code>).</div></figure><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="6d7abc86-f0c2-4321-907b-3ff91d1e3944"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://jwt.io/">https://jwt.io/</a><mark class="highlight-gray">
+</mark><a href="https://api-platform.com/docs/core/jwt/#jwt-authentication">https://api-platform.com/docs/core/jwt/#jwt-authentication</a></div></figure><p id="2bea1da6-ce69-49a0-bc90-2f5037f739a4" class="">
+</p><p id="da75e38d-fb0c-4f3e-93b9-202ece16063d" class="">
+</p><p id="29b6e573-24e8-44e5-bbfb-26fae1f4870f" class="">
+</p><p id="1a0d9a5c-d2af-487e-bcf0-a33598f15fc9" class="">
+</p></div></article></body></html>
