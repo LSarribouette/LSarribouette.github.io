@@ -1,0 +1,686 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Introduction à Android</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="db914813-d3e8-4db4-b216-ef22a5c0ccc1" class="page sans"><header><img class="page-cover-image" src="media/16-01-introduction/2023-03-10_21_52_04-pexels-quang-nguyen-vinh-5116377.jpg_-_Photos.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Introduction à Android</h1></header><div class="page-body"><p id="3eae33c0-6361-443b-b0f5-3e6dfb9be94b" class="">
+</p><p id="bde48880-39cd-4cc0-aab7-9426c9bbd58c" class="">Mise en place</p><ul id="0bafb492-df55-4a3b-a381-741743a0849f" class="bulleted-list"><li style="list-style-type:disc">télécharger et installer Android Studio : <a href="https://developer.android.com/studio/">https://developer.android.com/studio/</a></li></ul><p id="5148bd23-1cf7-4bc4-a27e-926fc1f13b0f" class="">
+</p><p id="794c1872-d33c-49a0-a056-76e5d0f0b780" class="">Systèmes d’exploitation : </p><p id="d49c4535-8158-4e70-96b7-3c0da7d19686" class="">Android est présent sous mobile, dans les montres connectées, les tablettes, les smart TV, les voitures (Android auto et CarPlay).</p><p id="2b31b701-55b1-4943-91c1-2dcfcfb875df" class="">
+</p><p id="35541139-e050-4343-a4b2-63788299a2bb" class="">Architecture : </p><div id="bb781061-851f-4a36-b869-a48ba550ae8f" class="column-list"><div id="371c333f-d42c-406e-8095-70d24a775427" style="width:106.25%" class="column"><figure id="fad2cfdc-cbd2-4805-b39e-7e641ec5aada" class="image" style="text-align:left"><a href="media/16-01-introduction/Untitled.png"><img style="width:336px" src="media/16-01-introduction/Untitled.png"/></a><figcaption><a href="https://developer.android.com/guide/platform/">https://developer.android.com/guide/platform/</a></figcaption></figure></div><div id="d28844df-493c-4c88-83b5-9a1d53f9ec3b" style="width:93.75000000000001%" class="column"><p id="f464fc7f-baa2-4ba1-9171-62b1cdb7d3b4" class="">Le Kernel Linux tout en bas s’occupe de la gestion de l’énergie du téléphone, des drivers…</p><p id="7ab86a67-3b17-46e7-9b60-f6405069ff7c" class="">&gt; La couche au-dessus <em>hardware abstraction layer</em> permet de ne pas avoir à spécifier le modèle de l’appareil.</p><p id="72491442-357f-4acb-80b8-cd4b950aaffa" class="">&gt; Les couches suivantes sont <em>Android Runtime</em> (machine virtuelle) &amp;&amp; les librairies natives (C/C++) </p><p id="b22d2a22-ce8a-47f6-b68f-d0016c23223e" class="">&gt; La couche qui nous concerne est le <em>framework Java API</em> (interface de programmation, SDK pour <em>software development kit</em>) </p><p id="9b13c7d1-d23d-4d68-816b-1e0318757fa3" class="">&gt; En haut du schéma se trouvent les applications (email, calendrier, caméra…).</p><p id="e5ffb2d3-f4db-49e4-a73e-8b1426500b16" class="">
+</p></div></div><p id="067ff3d0-083f-42d2-a9ad-388e1cf0ec88" class="">
+</p><p id="3af05ea4-cdd5-4c63-a482-6ee66f31732f" class=""><a href="https://developer.android.com/jetpack?hl=fr">JetPack</a> : </p><p id="4ab1db48-b44a-4289-91dd-b1fcda24f57b" class="">C’est une suite de bibliothèques qui permet aux développeurs de suivre les bonnes pratiques, de réduire le code récurrent et d&#x27;écrire du code qui fonctionne de manière cohérente sur toutes les versions d&#x27;Android et sur tous les appareils. </p><p id="7295d7be-f385-42a9-8a41-00ce11ef644b" class="">
+</p><p id="8e42ac8d-0767-409e-8e3e-91e4a0b3bcc3" class="">Versions d’Android :</p><ul id="0037a52f-a69d-46f7-afc4-1b5c74701eed" class="bulleted-list"><li style="list-style-type:disc">passage à <a href="https://developer.android.com/jetpack/androidx?hl=fr">AndroidX</a> (amélioration majeure de la bibliothèque de support Android d&#x27;origine, qui n&#x27;est plus conservée)</li></ul><ul id="e01e4344-7690-4781-91aa-020e7c971bdd" class="bulleted-list"><li style="list-style-type:disc">version actuelle du SDK : 13 (14 en bêta)</li></ul><ul id="d19e89e5-6314-46ee-a036-a9d5e20b7c1b" class="bulleted-list"><li style="list-style-type:disc">associée à la version 33 de l’API (un entier qui incrémente à chaque version du SDK)</li></ul><ul id="3269d415-5f6b-4e9c-b01c-1e6604dad956" class="bulleted-list"><li style="list-style-type:disc">version minimum du sdk : généralement API 21-24 (”ancienneté”)</li></ul><blockquote id="3ba85a20-82cd-48c1-a88a-83bd404e6d07" class="">BP : on évite l’obsolescence programmée en essayant de garder une bonne ancienneté.</blockquote><p id="b2e6a0c9-5d76-4d90-bf6b-3d0ea8a8d6ae" class="">
+</p><p id="c453573a-3e35-4629-9c42-421a926fcf99" class="">Compilation d’une application : <div class="indented"><p id="aa7ded35-8950-49df-a2ea-1d45f919dec5" class=""><strong><strong><strong><strong><strong><strong><strong>En APK (</strong></strong></strong></strong></strong></strong></strong><em><strong><strong><strong><strong><strong><strong><strong>Android Package Kit</strong></strong></strong></strong></strong></strong></strong></em><strong><strong><strong><strong><strong><strong><strong>) [désuet]</strong></strong></strong></strong></strong></strong></strong></p></div></p><p id="65ce8f2f-ab65-4115-83dd-d47677d83020" class="">D’une part, il y a le module application, avec le code source, les ressources et autres fichiers. D’autre part, il y a les dépendances, avec les codes sources et les ressources de toutes les librairies.</p><p id="019b2eb1-51a2-4c27-b479-e142756d0af3" class="">Les codes sources sont compilés et des fichiers DEX (<em>Dalvik Executable</em>) sont créés. Les ressources sont compilées à part.</p><p id="c34be1da-54f0-4015-b2cc-c3d09d574fbc" class="">A l’aide d’une clé (identifiant unique au projet), un exécutable .apk est créé : il peut être directement utilisé sur un mobile.</p><p id="7c165c06-3b3e-4af2-b280-e4ce90c1fbb3" class=""><div class="indented"><p id="0cc5b932-0cdc-4092-9374-3109fd4d2a50" class=""><strong>En AAB (Android App Bundle)</strong></p></div></p><p id="c2c1ab00-c572-4e94-ab36-7556d0bee23c" class="">Format recommandé par Google pour remplacer l’APK, il nécessite de passer par un store pour être installer sur un mobile (<a href="https://f-droid.org/fr/">F-Droid</a> est gratuit, par exemple).</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="1adad0c2-3251-444a-8c3a-3f0cde1a8b20"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://www.phonandroid.com/tout-savoir-sur-format-aab-android-app-bundles-google-play-store.html">https://www.phonandroid.com/tout-savoir-sur-format-aab-android-app-bundles-google-play-store.html</a></div></figure><p id="c49a3abf-ce9d-494f-8446-9e3ec3fa5949" class="">
+</p><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="e8d1a959-aad7-415c-9aa3-d4a9ec4b92d8"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Outils :
+Kotlin 
+Java 
+Android Studio (issu du moteur IntelliJ)
+Gradle (gestionnaire de dépendances, qui vient de Maven)</div></figure><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="eb37d20f-6e1a-45a4-9b5d-e059e6c2b292"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Ce cours est en Kotlin mais il est interopérable avec Java puisque Kotlin est issu de Java, en plus simple et moins verbeux.</div></figure><p id="4fe10a50-d1d1-40da-bbc9-8721d92d8499" class="">
+</p><h2 id="ab8ad038-94d0-4584-8f61-a2c195b7ae29" class="">Hello World</h2><hr id="b058184b-c9fc-451b-9cab-f38e483e9bc4"/><blockquote id="1fc0ec9c-9ad2-4e6f-b45d-ff1a4f9d045b" class="">Projet GitHub : <a href="https://github.com/LSarribouette/MumblingInKotlin">https://github.com/LSarribouette/MumblingInKotlin</a></blockquote><p id="64d58ca3-33c3-4a06-8339-38cd505216ad" class="">
+</p><p id="5af42d2b-bdcc-43c7-8401-1246dbf7483a" class="">Dans Android Studio,</p><ul id="444f24a5-55bb-4055-bf10-91a21b92909b" class="bulleted-list"><li style="list-style-type:disc">créer un nouveau projet &gt; choisir le template <em><em><em><em><em><em><em><em><em><em><em><em><em><em>empty activity</em></em></em></em></em></em></em></em></em></em></em></em></em></em> :<ul id="1da86757-fc6c-4eef-91e8-cc78f32ba385" class="bulleted-list"><li style="list-style-type:circle">Name : MumblingInKotlin</li></ul><ul id="cbed50d8-9087-4c90-ad3a-9244f0bbcc96" class="bulleted-list"><li style="list-style-type:circle">Package name : com.lsarribouette.mumblinginkotlin</li></ul><ul id="b4bcca20-f19e-48ba-a336-8a8bcd90b41c" class="bulleted-list"><li style="list-style-type:circle">Language : Kotlin</li></ul><ul id="1e72b267-5826-4d90-8474-493a303f1f50" class="bulleted-list"><li style="list-style-type:circle">Minimum SDK : API 24: Android 7.0 (Nougat)<p id="eed7b124-1d94-4e35-9e94-1b8bf73bb42b" class="">(la plus ancienne possible, ici API 24 à cause des SVG)</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="0f57f44f-436a-4013-818c-4349dcd62880"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Le format SVG décrit les images non pas avec des pixels mais avec des formules mathématiques.</div></figure><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="6147a38a-aaf1-4851-a968-2210a8a388e5"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Selon le minimum SDK sélectionné, le pourcentage d’appareils actifs compatibles est donnée. Un appareil est considéré actif s’il se connecte au moins une fois par mois aux services Google.</div></figure></li></ul></li></ul><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="37820cfe-21df-48ac-b120-eda7c2b8a3d3"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">A l’ouverture du projet, il y a des téléchargements comme Gradle et le compilateur.</div></figure><ul id="5aae32df-eb10-4d0a-b3cf-f1047f3010bb" class="bulleted-list"><li style="list-style-type:disc">ajouter un appareil, ici virtuel, depuis le <em>Device Manager</em> (téléphone avec un petit Android) <p id="bb15d62a-896e-4d24-a025-834892573b14" class="">&gt; Virtual &gt; create device </p><p id="50f76127-4167-4d88-a2f3-7c222aed7db3" class="">&gt; Select Hardware : Pixel 6 Pro </p><p id="041ad077-aa93-4f6f-be58-e4f026031435" class="">&gt; System Image : Tiramisu (33) (<em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>télécharger au besoin</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em>) </p><p id="86d469ed-566f-4964-a0ca-a6dcde57b131" class="">&gt; Finish</p></li></ul><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="f48cd685-d560-47f9-b5d5-46e872c03464"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Un <em>device</em> n’est pas propre à un projet, donc on ne le refait pas à chaque fois. 
+Par contre, on peut avoir plusieurs <em>devices</em> pour tester différentes tailles d’écran.</div></figure><ul id="adf36cfe-d7eb-4fb9-9ab7-4ccfbcfe062c" class="bulleted-list"><li style="list-style-type:disc">lancer l’application : flèche verte</li></ul><p id="73325efb-f3a3-47c8-9cca-8bb0addd2f6d" class="block-color-teal_background">On voit l’application qui s’ouvre sur le mobile et affiche “Hello World”.</p><p id="389ff5f9-2a6e-405e-a4e7-4919023878a1" class="">
+</p></div></article></body></html>
