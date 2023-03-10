@@ -1,0 +1,839 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Kotlin</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="cb8d5799-cda5-41e0-ad38-a06b244f6d89" class="page sans"><header><img class="page-cover-image" src="media/16-03-kotlin/2023-03-10_21_41_57-pexels-arunkumar-govindasamy-4119662.jpg_-_Photos.png" style="object-position:center 17.65%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Kotlin</h1></header><div class="page-body"><blockquote id="1069facc-beef-403f-920f-2d7e4a1a9f5d" class="">Un langage issu de Java, open source, interopérable.</blockquote><p id="9317afba-ec9e-4f28-916e-8f4c8439e4a9" class="">On estime qu’au fil des années, Java va se perdre au profit de Kotlin. En sachant qu’un projet Kotlin peut contenir des fichiers à la fois de Java et de Kotlin, la migration est en cours.</p><p id="5d0d701a-b7f0-4c5e-b41f-724e47f3ae18" class="">En 2018, Google le considère comme une langage officiel, ce qui enclenche sa popularisation.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="b2e19a28-00e8-484d-bb5b-5a0599b7dcdf"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Langage similaire : Dart (Flutter)
+<a href="https://dart.dev/">https://dart.dev/</a></div></figure><p id="8e41c3bb-e0db-44e5-a8e2-313f4765c8b7" class="">
+</p><p id="a3c7b0e7-d3b9-47d7-b4b0-172aa293369e" class="">Utilisations : mobile cross-platform, code natif pour Mac et Windows, Data Science, développement <em>back end</em> (Java EE), JavaScript, Android</p><p id="96ec46cf-3b32-42a2-913f-5f0e955337e1" class="">
+</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="076f8b0d-d390-43aa-b755-67c404fa9d00"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://kotlinlang.org/">https://kotlinlang.org/</a>
+et même un <a href="https://play.kotlinlang.org/#eyJ2ZXJzaW9uIjoiMS44LjEwIiwicGxhdGZvcm0iOiJqYXZhIiwiYXJncyI6IiIsIm5vbmVNYXJrZXJzIjp0cnVlLCJ0aGVtZSI6ImlkZWEiLCJjb2RlIjoiaW1wb3J0IGphdmEudXRpbC5EYXRlO1xuaW1wb3J0IGphdmEudGltZS5Mb2NhbERhdGU7XG5cbmZ1biBEYXRlLmFmZmljaGVySG0oKSA9XG5cdHByaW50bG4oXCIke3RoaXMuaG91cnN9aCR7dGhpcy5taW51dGVzfVwiKVxuXG5mdW4gbWFpbigpIHtcblx0RGF0ZSgpLmFmZmljaGVySG0oKVxufSJ9">playground</a></div></figure><p id="219d627a-d084-4bfa-aae0-854ea75b0604" class="">
+</p><h2 id="06d2ac2d-2d72-409d-85ae-279f0270f888" class="">Les fondamentaux</h2><hr id="3bd10ff4-fb35-4f3d-b179-152f264c48a8"/><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="c6bd17f6-371c-4e26-a251-af293ac42c16"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://kotlinlang.org/">https://kotlinlang.org/</a></div></figure><h3 id="07bd3d7b-a1ec-4504-b794-3d3c9d18899c" class="">Main</h3><p id="48609ff5-030d-4a77-a10e-12fdef7cf05e" class="">A l’image de Java, toute opération doit être contenue dans la fonction <em><em><em><em>Main</em></em></em></em> pour être exécutée.</p><pre id="019a645e-1ba7-4652-b514-bb1ccf0981e1" class="code"><code>var phrase = &quot;hello world !&quot;
+fun main(args: Array&lt;String&gt;) {
+	println(&quot;Plus besoin du System.out.println, mais surtout : $phrase&quot;)
+}</code></pre><p id="0080df8f-abd2-4b93-afd8-7848300c7fdf" class="">On remarque :</p><ul id="14d6d059-ba8c-4b47-afe2-69a099e435a3" class="bulleted-list"><li style="list-style-type:disc">une fonction est déclarée avec <code>fun</code></li></ul><ul id="eb3c1daa-a28e-4bea-9b66-ecfd2b04bb4d" class="bulleted-list"><li style="list-style-type:disc">les points virgules ne sont pas nécessaires (voire même obsolètes)</li></ul><ul id="a86e1dd5-e80e-4312-992f-7e6732e9465e" class="bulleted-list"><li style="list-style-type:disc">les paramètres d’une fonction sont déclarés avec <code>args: type</code></li></ul><ul id="9fc3bcfc-1594-4429-8846-47c8733aa179" class="bulleted-list"><li style="list-style-type:disc">une variable est déclarée avec <code>var</code> </li></ul><ul id="ba3a0047-df40-47cd-9e3d-e881e054df70" class="bulleted-list"><li style="list-style-type:disc">il est possible de déclarer une variable en dehors d’une fonction ou d’une classe</li></ul><ul id="019d129d-d941-41b3-943e-9c623caee3aa" class="bulleted-list"><li style="list-style-type:disc">Kotlin fait de l’inférence de type : le type est déterminé dynamiquement </li></ul><ul id="e77bcca1-4b0d-4893-b8e6-f53a9fa2508a" class="bulleted-list"><li style="list-style-type:disc">Kotlin fait de la <em>String interpolation</em> : il est possible de mettre une variable dans une chaine de caractères </li></ul><p id="59d5c117-802c-4a34-96cd-7b9173396c0b" class="">
+</p><h3 id="05d0d29f-cc31-4e8d-ac5a-f297f4953fd5" class="">Types</h3><blockquote id="e669c540-1cc2-450c-9d95-a8b4e4df8ee0" class="">En Kotlin, <strong>“tout est objet”</strong> : les types commencent donc tous par une majuscule.</blockquote><p id="6d0e0f1f-c19f-4e29-bd92-0b2723a909b7" class="">Types de variables :  Byte, Short, Int, Long, Float, Double, Char, Boolean, String, Array (pas de tableau avec les crochets).</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="bd70d6be-89aa-4783-ab8c-b65eb87ca1c9"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Il existe également le type <code>Any</code>. </div></figure><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="6509c78d-5765-44c3-9387-297df0419d4e"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Il est également possible d’utiliser tous les types Java (interopérabilité).</div></figure><p id="adfbc8db-bbc5-45cc-8781-0bd9b732becd" class="">A noter : toutes les Strings sont itérables.</p><p id="52ce8fed-abc1-4a82-8539-4b16ee6ba9f0" class="">
+</p><h3 id="31123cff-c9ba-428f-90e9-4eeb499c7a17" class="">Variables</h3><p id="f329faa4-c21e-4b62-b6dc-5ca2c0a423c9" class="">Une variable peut être déclarée de différentes façons :</p><ul id="89a0e25b-5745-423d-b7cb-086fac8c7caf" class="bulleted-list"><li style="list-style-type:disc"><code>var</code> pour une variable dont la valeur est modifiable</li></ul><ul id="efae6868-5590-49c6-b14d-fb17c49d1dd8" class="bulleted-list"><li style="list-style-type:disc"><code>val</code> pour une variable dont la valeur est attribuée au moment du <em><em><em><em><em><em><em>runtime</em></em></em></em></em></em></em> et qui ne peut plus être modifiée ensuite</li></ul><ul id="0a8ff5ef-c132-443b-a2f0-e34aa356015f" class="bulleted-list"><li style="list-style-type:disc"><code>const var</code> pour une variable dont la valeur est attribuée à la compilation et qui ne peut plus être modifiée ensuite</li></ul><p id="aa48f55c-2ba8-4538-aaed-e52f425138a9" class="">
+</p><p id="ddb602a7-bb9e-4cc6-b862-7948702cf2f5" class="">Afin de <strong>différer</strong> l’affectation d’une variable, on utilise la propriété déléguée <code>by</code> avec <code>lazy</code> : l’affectation ne sera faite qu’au moment où la lecture de cette variable est demandée. Concrètement, le bout de code (appelé <em><em><em><em><em><em>lambda</em></em></em></em></em></em>) sera exécuté et la valeur résultante sera utilisée.</p><pre id="2bdc743d-ca6e-44d4-9eb6-5bcb10bedebd" class="code"><code>fun main(args: Array&lt;String&gt;) {
+	var mot = &quot;nope.&quot;
+	val info: String by lazy { &quot;Le mot magique est $mot.&quot; }
+  mot = &quot;merciiiii&quot;
+	println(info) //Le mot magique est merciiiii.
+}</code></pre><p id="dcd6bfb9-daa1-4f9b-b527-f522f33397a6" class="">
+</p><p id="b6b24de3-48b2-4bda-a102-d81376c9d6d2" class="">Par défaut, un objet ne peut pas être nul : <a href="https://kotlinlang.org/docs/null-safety.html">null safety</a>.</p><p id="cfcdbf94-473e-46f4-870b-4297421d2f90" class="">Il est possible de rendre un objet nullable en le précisant au moment de la déclaration avec <code>Type?</code>. Dans ce cas, il faudra tester la nullité à chaque utilisation de la variable avec l’opérateur <code>?.</code>.</p><pre id="71f78ae4-17b7-46a3-ad24-e8e2974a915a" class="code"><code>var prenom: String?
+var nbCaracteres: Int? = prenom?.length
+//on obtient la longueur de la variable prenom 
+//  ou &quot;null&quot; si la variable prenom est nulle</code></pre><p id="46ae48db-bc7a-44bb-96ea-c546a1f062d0" class="">A noter : </p><ul id="02d98137-28e2-4014-9da3-86b6abba8439" class="bulleted-list"><li style="list-style-type:disc">il n’y a pas d’opérateur ternaire mais certains équivalents (vus plus loin)</li></ul><ul id="699a933a-e6b3-4de8-a54a-9d5aed99df2e" class="bulleted-list"><li style="list-style-type:disc">un intervalle (<em><em><em><em><em>range</em></em></em></em></em>) peut être défini avec <code>..</code> (ou <code>downTo</code> en décroissant)</li></ul><p id="ef4ce6c1-bafd-458f-85f4-d2d9d2a2168c" class="">
+</p><h3 id="80619a09-fa0b-4d3d-8ea2-ace261acc60e" class="">Structures de contrôle</h3><blockquote id="82d43383-8abc-433c-b7a4-5f04f2d17c44" class="">Exemples issus de la <a href="https://kotlinlang.org/docs/basic-syntax.html#conditional-expressions">documentation Kotlin</a>.</blockquote><ul id="5cd3a5bc-86b3-4533-a842-47084e20e722" class="bulleted-list"><li style="list-style-type:disc">if</li></ul><pre id="e220de78-7af4-4bab-9cd2-38ccaba8b647" class="code"><code>fun maxOf(a: Int, b: Int): Int {
+    if (a &gt; b) {
+        return a
+    } else {
+        return b
+    }
+}
+
+// equivaut a l&#x27;expression
+fun maxOf(a: Int, b: Int) = if (a &gt; b) a else b</code></pre><ul id="1d6e6d90-dfa3-4bf7-b8c7-4bede4229183" class="bulleted-list"><li style="list-style-type:disc">when</li></ul><pre id="d9edc3ff-33d9-45d1-972b-7bb21931c002" class="code"><code>fun describe(obj: Any): String =
+    when (obj) {
+        1          -&gt; &quot;One&quot;
+        &quot;Hello&quot;    -&gt; &quot;Greeting&quot;
+        is Long    -&gt; &quot;Long&quot; //check du type
+        !is String -&gt; &quot;Not a string&quot;
+        else       -&gt; &quot;Unknown&quot;
+    }
+
+// avec in
+when {
+    &quot;orange&quot; in items -&gt; println(&quot;juicy&quot;)
+    &quot;apple&quot; in items -&gt; println(&quot;apple is fine too&quot;)
+}</code></pre><p id="11007802-f424-4c9d-afc6-e91e0e249777" class="">A noter : super <em>switch</em> (il <em><em><em><em>break</em></em></em></em> dès qu’il trouve)</p><ul id="d557a555-b6bb-4ec4-9a25-cf635c0d9a09" class="bulleted-list"><li style="list-style-type:disc">for</li></ul><pre id="805d98d2-6089-4f78-a2cb-5715c30d775c" class="code"><code>val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwifruit&quot;)
+for (item in items) {
+    println(item)
+}
+
+// possible d&#x27;appeler l&#x27;indice
+for (index in items.indices) {
+    println(&quot;item at $index is ${items[index]}&quot;)
+}
+
+// possible d&#x27;appeler cle/valeur
+for ((key,value) in items.withIndex()) {
+	println(&quot;index at $index is $value&quot;)
+}</code></pre><ul id="d27f6e83-2c76-44d3-a1be-8a5d5dfaf785" class="bulleted-list"><li style="list-style-type:disc">while (et do while)</li></ul><pre id="d745f462-379e-44d1-8d3c-c39b2f18f8da" class="code"><code>val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwifruit&quot;)
+var index = 0
+while (index &lt; items.size) {
+    println(&quot;item at $index is ${items[index]}&quot;)
+    index++
+}</code></pre><p id="d178ec8f-5524-473d-a5b9-92cffd2496a7" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="1d4cd648-4d51-45b9-aebe-c3d891c42b7d"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Les fonctions <code>arrayOf()</code> et <code>mutableListOf()</code> créent toutes les deux un tableau, en appelant <code>ArrayList</code> en Java.</div></figure><p id="ca8b1aeb-df4d-4541-b763-df624a705363" class="">
+</p><h3 id="1365a6a3-34ed-429f-ac7c-8fbabeab956f" class="">Conversions de type</h3><p id="a84f56d8-10fe-48d1-88ff-9eabe56addb7" class="">La conversion est implicite et comme les types sont des objets, on peut utiliser des fonctions de conversion (ex : <code>unEntier.toLong()</code>).</p><p id="a6726e3b-f424-4303-939b-4f0386e53e42" class="">
+</p><h2 id="67246bc1-2b83-4068-bfb1-6f34aa081be5" class="">Les fonctions</h2><hr id="86b566a9-3c14-4644-a747-ab9a807b623c"/><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="2e6d8c31-e85b-4065-8203-8b6abe6cded3"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://kotlinlang.org/docs/functions.html">https://kotlinlang.org/docs/functions.html</a></div></figure><p id="b3db7303-4eb3-4bed-99ab-3090fa475281" class="">
+</p><p id="2725a399-3edf-4186-a62c-7ed5e02efd2e" class="">Une fonction est définie avec <code>fun</code>. </p><p id="1ff28060-33a2-4bf1-9489-4e24a6e2b331" class="">On spécifie les paramètres avec leur nom, leur type et éventuellement une valeur par défaut : <code>(x:Int=0)</code>. </p><p id="b06a8291-b7ec-4f84-9290-ff7471090364" class="">On spécifie le type de la valeur retournée après les deux-points <code>: String</code>, qui peut être vide <code>Unit</code> <em>(void en Java)</em>.</p><pre id="367cba0e-08a1-48af-8aea-8df9e61defc0" class="code"><code>fun afficherBonjour() : Unit {
+	println(&quot;Bien le bonjour&quot;)
+}
+
+fun additionner(x:Int=0, y:Int=0) : Int {
+	return x+y
+}</code></pre><p id="478f0743-1600-4592-a42b-0057d116f7f5" class="">
+</p><p id="dc98bcba-b4b2-425e-b81b-32490896def3" class=""><em><em><em><em><em><em><em>Single-expression functions</em></em></em></em></em></em></em> : </p><p id="e5dfaa02-04b1-4ddc-851f-72819706bfc0" class="">Si la fonction ne retourne qu’une expression simple, il est possible de raccourcir l’écriture avec un <code>=</code> qui remplace les accolades :</p><pre id="dcf0d2bf-bd86-447c-a432-2f240f50ff6f" class="code"><code>fun afficherBonjour() = println(&quot;Bien le bonjour&quot;)
+
+fun additionner(x:Int=0, y:Int=0) = return x+y</code></pre><p id="cbf10dd4-d008-40f1-9920-e39620e34495" class="">
+</p><p id="b207fc9e-1cdc-4792-8073-c58fc3fd1440" class=""><em><em><em><em><em><em>vararg</em></em></em></em></em></em> : </p><p id="3edcff05-ec4a-4049-af24-9d9e52644186" class="">Il est possible de passer <em>n</em> paramètres à une variable <code>vararg</code> pour un même type défini ou même générique.</p><pre id="37540951-eb80-4428-9133-ca7bac5a6bd3" class="code"><code>fun multiplier(vararg nombre: Float): Float {
+    var res = 1.0f
+    for (item in nombre) {
+        res *= item
+    }
+    return res
+}
+println(multiplier(4.0f, 2.0f, 3.0f)) //24.0
+println(multiplier(6.7f, 2.5f)) //16.75</code></pre><p id="fcec1d65-9f7e-468b-a11f-ccc99b2a9b38" class="">
+</p><p id="7ab0ec33-dd9c-4eb8-86cb-33b7a0846281" class=""><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>Fonctions génériques</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em> :</p><p id="edf94530-b279-4256-9278-17f294e97a75" class="">Une fonction peut prendre un paramètre générique indiqué avec la notation diamant : <code>fun &lt;T&gt;</code>.</p><pre id="6a314fac-a1ae-4be8-bc9d-0cd58f810f9a" class="code"><code>fun &lt;T&gt; creerUneListe(vararg valeurs:T): List&lt;T&gt; {
+	var liste = ArrayList&lt;T&gt;()
+	for(item in valeurs) {
+		liste.add(item)
+	}
+	return liste
+}
+println(creerUneListe(&quot;vinaigre&quot;, &quot;beurre&quot;, &quot;chaussettes&quot;)) //[vinaigre, beurre, chaussettes]
+println(creerUneListe(18, 96.3, &quot;blop&quot;)) //[18, 96.3, blop]
+</code></pre><p id="a9711e2e-4b8c-4b46-99b3-2bb7ecd7a7b9" class="">
+</p><h3 id="4580cc12-f03b-4156-913a-d71db94cfa86" class="">Extensions</h3><p id="0c4c85d0-4d42-43dc-a9a8-52a8025a9d89" class="">On peut étendre une classe ou interface avec une nouvelle fonctionnalité sans avoir à en hériter, grâce aux extensions : <code>fun Class.fonctionDExtension(params) { … }</code>.</p><p id="9571fb50-1ec9-4e6b-b292-01f20bca0393" class="">Par exemple, pour ajouter une fonction d’extension à la classe <code>Date</code> pour afficher la date et l’heure :</p><pre id="30c207bc-185e-4f0f-8ccd-ba3b2aaba19e" class="code"><code>import java.util.Date;
+
+fun Date.afficherHm() =
+	println(&quot;${this.hours}h${this.minutes}&quot;)
+
+fun main() {
+	Date().afficherHm()
+}</code></pre><p id="bf9056e8-098a-4bac-b224-dec831c48f94" class="">A noter : <code>this</code> réfère à l’instance</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="4fbced61-88e7-4d0a-9c7f-1ff934eb64fc"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://kotlinlang.org/docs/extensions.html">https://kotlinlang.org/docs/extensions.html</a></div></figure><p id="05b06e83-a988-40a8-86dc-6195e861c6fd" class="">
+</p><h3 id="e2e3fe95-890d-4dc1-92d3-f0cb2fdb56c8" class="">Opérateur Elvis</h3><p id="c3e13562-b96a-40c9-a2db-154553fffc72" class="">L’opérateur Elvis <code>?:</code> est utilisé pour retourner une valeur même si l’expression est nulle.</p><pre id="e349b1d1-a3e3-4325-8ed3-f31a2cded1b6" class="code"><code>var unMot: String? = null
+val tailleMot = unMot?.length?:-1
+println(&quot;La longueur du mot est $tailleMot&quot;)
+//La longueur du mot est -1</code></pre><p id="88c4bc65-9f98-4b38-a350-90889443b003" class="">
+</p><h3 id="db56f8ea-d350-414f-8078-cd16ed1a78d2" class="">Collections</h3><p id="1cb1a9c9-264e-434e-9eed-63d71f20b3dc" class="">Une collection est un groupe d’éléments de nombre variable. </p><p id="37916707-8cea-40f4-b366-c30b9e7d42d1" class="">Les principales collections de Kotlin sont <code>List</code>, <code>Set</code> et <code>Map</code>.</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="a65f4e11-b304-4750-b719-1f2cae626603"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://developer.android.com/codelabs/basic-android-kotlin-collections?hl=fr#0">https://developer.android.com/codelabs/basic-android-kotlin-collections?hl=fr#0</a>
+<a href="https://kotlinlang.org/docs/collections-overview.html">https://kotlinlang.org/docs/collections-overview.html</a></div></figure><p id="f4a6efce-da62-41ab-b626-0b5a78b9ec61" class="">
+</p><h3 id="f7ce026b-be26-4f30-a81c-9f00c3c24e31" class="">Lambdas</h3><p id="21f57490-4192-48ae-ba3e-3d9b81b9c863" class="">Grossièrement, une expression lambda est une fonction non déclarée, passée directement en paramètre à une fonction entre accolades : <code>{ expression }</code>.</p><pre id="1282ba5e-1bfd-454a-8b9d-367c0571e777" class="code"><code>val fruits = listOf(&quot;banana&quot;, &quot;avocado&quot;, &quot;apple&quot;, &quot;kiwifruit&quot;)
+fruits
+    .filter { it.startsWith(&quot;a&quot;) }
+    .sortedBy { it }
+    .map { it.uppercase() }
+    .forEach { println(it) }</code></pre><p id="e204868c-4dfc-4bc4-b7bf-cee63a5c8c8d" class="">A noter : <code>it</code> fait référence à l’élément en train d’être testé</p><p id="75bf6204-c1b7-4ae6-a6c3-19678055a6fc" class="">
+</p><p id="6c985275-2e3f-4906-af73-a446943962b7" class="">Une fonction anonyme (sans nom) est une alternative qui permet de spécifier le type de retour, elle peut également être placée en paramètre d’une fonction : <code>fun(param):Type = expression</code>.</p><pre id="da121c45-a43b-430f-b443-76132cb7f30a" class="code"><code>exemple.filter(fun(item) = item &gt; 0)</code></pre><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="3214ad4d-c854-4dbf-aa0a-18d50fff0d0b"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://kotlinlang.org/docs/functions.html">https://kotlinlang.org/docs/functions.html</a></div></figure><p id="c5832561-205f-4c41-8b1e-4d849b9ea78f" class="">
+</p><h3 id="ef1f94bc-eec9-422b-948d-b9ee9d4d74e0" class="">Try / Catch</h3><blockquote id="c7292cdb-d224-40ea-bed3-81d01311fc1c" class="">Classique.</blockquote><pre id="71ce006b-d81a-4c2d-b12c-1c3096d8670a" class="code"><code>var aTester: Int = try {
+	// expression
+} catch (e: Exception) {
+	throw Exception(e)
+}</code></pre><p id="f2c63974-7b1b-4be3-af5d-0418ddd57cbe" class="">
+</p><h2 id="f4858c9c-fb65-459f-bd8e-55e1c2fb44fe" class="">Les classes</h2><hr id="f9e5048a-b462-4be1-9895-98fa1da40fdb"/><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="1290fe61-88da-451c-a10c-1d3d92e1523e"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Pour aller plus loin : 
+<a href="https://kotlinlang.org/docs/classes.html">https://kotlinlang.org/docs/classes.html</a></div></figure><p id="3d4b51ea-9e7c-419f-abb9-51f3f9dd9de4" class="">
+</p><p id="5d35e315-593d-4954-bc05-fb14c039b696" class="">Une classe est définie avec <code>class</code> et éventuellement d’autres mots-clés.</p><p id="b638adc4-76b4-4f5a-ad69-186e409ac9c2" class="">Une simple <code>class</code> aura un constructeur, les getter/setter pour chaque attribut, sauf un attribut <code>val</code> qui n’est pas modifiable donc n’aura pas de setter.</p><p id="1ba12b63-b628-43a9-8f31-ad8665c27d8c" class="">Une <code>data class</code> aura, en plus, les méthodes <code>toString()</code>, <code>equals()</code>, <code>hashcode()</code> et <code>copy()</code>.</p><pre id="a2575dc5-a785-4ecf-88a2-34721aaac82a" class="code"><code>data class Personne(
+		val id: Int,
+		val nom: String,
+		val prenom: String,
+		val dateDeNaissance: Date? = null
+)</code></pre><p id="949cb075-9c19-4a1d-9b5f-9b23927dd8de" class="">Une classe abstraite est déclarée avec <code>abstract class</code>.</p><p id="2b6908aa-39f7-438c-9d7b-f85d1fbae309" class="">Une instance est crée sans le <code>new</code> de Java, simplement en appelant la classe et en renseignant les paramètres éventuels : <code>var bob = Personne(1, &quot;Dylan&quot;, &quot;Bob&quot;, 24/05/1941)</code>.</p><p id="4b3f1bb2-34c1-40ea-abca-5cba08df8aa0" class="">
+</p><h3 id="e703ce5d-2d3d-4684-b380-3db1da396a87" class="">Héritage</h3><p id="8e4c743e-0dd2-4bcf-ac8e-bfd98550cc29" class="">Par défaut, toutes les classes sont <code>final</code> et donc fermées à l’héritage.</p><p id="f75ba33a-4885-4035-b68d-0acce692d00e" class="">On rend une classe ouverte à l’héritage avec <code>open</code> : <code>open data class MaClasseMere(...)</code>. </p><p id="33780dfc-e3f8-43b8-9b0c-96b2f0e58994" class="">Pour qu’une méthode de cette classe soit ouverte à la surcharge (<em><em><em><em><em><em><em><em>override</em></em></em></em></em></em></em></em>), elle doit être <code>open</code> également.</p><p id="003f8fe2-3d77-481b-9743-5209c5cd6442" class="">Une classe qui hérite d’une autre est déclarée avec les deux-points <code>:</code> (<em><em><em><em><em><em><em>extends</em></em></em></em></em></em></em>) : <code>class MaClasseFille (...) : MaClasseMere</code>. Les méthodes surchargées sont déclarées avec <code>override</code>.</p><pre id="2f4151e9-4111-4e6c-8b9c-6d604b61400f" class="code"><code>open class UneClasseMere {
+	open fun uneMethodeSurchargeable...
+	fun uneMethodeNonSurchargeable...
+}
+
+class UneClasseFille : UneClasseMere {
+	override fun uneMethodeSurchargeable...
+	fun uneMethodeDeFille....
+}</code></pre><p id="8e30ca22-3ff6-4f2f-b9d2-1165087349c8" class="">
+</p><h3 id="00dc195e-94a0-4155-8c0c-6577a4adaadf" class="">Champ et propriété</h3><p id="be0ca967-a233-47c9-bb81-fb1f8766f999" class="">Les getter/setter peuvent être définis manuellement.</p><pre id="8fddc1d9-d7e5-44bd-824b-313063dcd1fa" class="code"><code>var stringRepresentation: String
+    get() = this.toString()
+    set(value) {
+        setDataFromString(value) // parses the string and assigns values to other properties
+    }</code></pre><p id="20228966-6435-48de-afa1-6bb70db5efce" class="">
+</p><h3 id="cef6debe-e3c2-440e-8d99-40e06cc2099e" class="">Interface</h3><blockquote id="4adf7b78-d365-4ba2-a375-8f9cd35aafd2" class="">“Contrat”.</blockquote><p id="ab3b2fd0-c38f-4668-9361-8556f0257a71" class="">Une interface est déclarée avec <code>interface</code>.</p><p id="a01f3e89-d736-4edd-90a2-ab98c23074f0" class="">Une classe qui implémente une interface est également déclarée avec les deux-points <code>:</code> (<em>implements</em>). Les méthodes surchargées sont déclarées avec <code>override</code>.</p><pre id="9b060a5d-6850-461c-9ab1-5c4a425bac0a" class="code"><code>interface UneInterface {
+	val UneConstante
+	fun uneMethode
+	fun uneAutreMethode
+}
+
+class UneClasse : UneInterface {
+	override val UneConstante = &quot;une valeur&quot;
+	override fun uneMethode...
+	override fun uneAutreMethode...
+}</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="72eb869e-c0af-4c50-b1f0-847183914759"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Les méthodes décrites dans une interface sont forcément surchargeables donc il n’est pas nécessaire de préciser <code>open</code>.</div></figure><p id="fc2c5390-d67b-4e87-aef8-9132c235f745" class="">
+</p><h3 id="6220a6a6-e7b5-4420-8ed8-dd1c5b75e031" class="">Classe Enum</h3><blockquote id="38ecbba2-5554-414c-9a96-476a6532fb76" class="">Liste de constantes de même type.</blockquote><p id="624a9db6-b05f-4a0f-8c86-412b6359e64f" class="">Une énumération est déclarée avec <code>enum class</code>.</p><p id="e669e64c-c9ad-4a08-b074-dc1fe52404f9" class="">Chaque constante est un objet qui peut être initialisé.</p><pre id="4a127c59-82ae-412e-993b-5676368f20bb" class="code"><code>enum class JourOuvre {
+	LUNDI, MARDI, MERCREDI, JEUDI, VENDREDI
+}</code></pre><p id="c97eaae4-51dc-4b69-a897-e9d632fc54cc" class="">
+</p><h3 id="8d9e37e7-31f0-42b3-a0ad-6aaebcae74ac" class="">Classe Objet</h3><p id="9ee6455d-1678-4cf3-b1c2-983921d68e32" class="">Un singleton peut être créé avec une classe objet (ou <em>companion object</em>) déclarée avec <code>object</code> (tout ce qu’il y a dedans est <em>static</em>).</p><pre id="87a646e4-aac6-47fd-9f8c-dd00733b3af0" class="code code-wrap"><code>object DAOFactory {
+	fun getDao(type: DAOType) =
+	when(type) {
+            DAOType.MEMORY-&gt; ArticleDAOMemoryImpl()
+//            DAOType.INTERNET -&gt; ArticleDAOMemoryImpl()
+//            DAOType.DB -&gt; ArticleDAOMemoryImpl()
+		}
+}</code></pre><p id="b56408b2-33f8-4f15-989e-6b4084792f94" class="">
+</p></div></article></body></html>
