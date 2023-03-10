@@ -1,0 +1,689 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>WordPress en bref</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="403bf145-05bb-4513-aa69-32e064d6eb86" class="page sans"><header><img class="page-cover-image" src="media/15-01-wordpress-bref/2023-03-06_22_04_30-pexels-egor-kamelev-7987535.jpg_-_Photos.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">WordPress en bref</h1></header><div class="page-body"><h2 id="792eb4ec-2758-45ff-9d62-5f0775456d81" class="">1. Présentation CMS</h2><hr id="258754fc-5cf8-4eb8-ae08-405edc1942b7"/><p id="04f25d76-72d7-4653-9bd6-a9a3134f38e6" class="">Content Management System (Système de gestion de contenu).</p><p id="dbba4904-527b-4d98-80bd-0f632950d441" class="">= Un CMS est une application Web qui permet de créer et gérer des sites Web sans aucune connaissance technique et qui est indépendante de tout prestataire.</p><p id="fd7e8708-0e62-4520-bab6-0c70604d0437" class="">—&gt; un bon CMS : facilité, flexibilité, scalabilité</p><p id="d61d2f32-7d30-4a39-be69-a19f86affd95" class="">
+</p><p id="af60ea11-3108-4802-ab40-89b222d270f5" class="">Quelques CMS : WordPress &gt; Joomla, Magento &gt; Shopify, Drupal, E-majine, Ez, Prestashop, Typo3, Dotclear, Spip…</p><p id="33599d0a-30b0-4203-bc30-e39233f5e592" class="">
+</p><p id="786f728d-d11f-4e42-87a3-f744b4f0dfc0" class="">2 côtés d&#x27;un CMS :</p><ul id="670a98c5-4c83-4bea-a285-c44cdfd0c2c3" class="bulleted-list"><li style="list-style-type:disc">Le Front-end = face publique.</li></ul><ul id="c48b9815-5880-444b-beea-c224ec1dc6fc" class="bulleted-list"><li style="list-style-type:disc">Le Back-end = face cachée du site.</li></ul><p id="912c090d-f9bb-43a5-8713-4c9e282d5067" class="">
+</p><h2 id="e2763e42-2f7d-4571-9eb2-26cb34a9e9cc" class="">2. Installation du CMS WordPress</h2><hr id="7a011e05-7a85-4888-b0e7-a0f7b5f1c382"/><h3 id="0cd085f5-48d7-4319-a076-151cd308270c" class="">Présentation de WordPress</h3><ul id="cdbd84c4-d083-4f74-be8f-36bd8af951b8" class="bulleted-list"><li style="list-style-type:disc">WordPress est un système de gestion de contenu gratuit (SGC ou content management system (CMS) en anglais) et open-source.</li></ul><ul id="6f988adc-20c4-4cb5-a41f-a9611fd9dbb3" class="bulleted-list"><li style="list-style-type:disc">Ce logiciel libre écrit en PHP repose sur une base de données MySQL et est distribué par l&#x27;entreprise Américaine Automattic.</li></ul><ul id="56fe7cc5-73b4-4e97-aa1b-035afed2d115" class="bulleted-list"><li style="list-style-type:disc">Les fonctionnalités de WordPress lui permettent de créer et gérer différents types de sites Internet : Blog, site e-commerce, site vitrine ou encore portfolio.</li></ul><ul id="2e049482-6440-4762-8464-d5f9dc76c3b4" class="bulleted-list"><li style="list-style-type:disc">Il est distribué selon les termes de la licence GNU GPL version 2.</li></ul><ul id="3dc29b3f-f0a2-4492-9ae2-860cce564299" class="bulleted-list"><li style="list-style-type:disc">Le logiciel est aussi à l&#x27;origine du service WordPress.com.</li></ul><p id="13b71f0e-1c14-4dfe-b35e-a62093c4742c" class="">
+</p><p id="afdf0f1f-bb1e-46cd-8178-2c48db4af40c" class="">Différence entre WordPress.org et WordPress.com</p><p id="3e36214c-dfd1-410a-baaa-32cfa5bec1ea" class=""><em>wordpress.org</em></p><ul id="c5fe3c23-eff3-4ae2-a857-50a1158a41d0" class="bulleted-list"><li style="list-style-type:disc">Site officiel du CMS</li></ul><ul id="f84bd795-8b7b-4a2f-bcaa-a7c485945a7e" class="bulleted-list"><li style="list-style-type:disc">Téléchargement de la version open source</li></ul><ul id="52c63299-32f3-4fd6-89a1-acdec05d1d99" class="bulleted-list"><li style="list-style-type:disc">Thèmes</li></ul><ul id="dfacf836-7a99-40e8-afb1-a1835202d1f0" class="bulleted-list"><li style="list-style-type:disc">Extensions</li></ul><ul id="2f648ca4-b0bb-4beb-a1b9-68561fa3e9f2" class="bulleted-list"><li style="list-style-type:disc">Documentation</li></ul><ul id="76d90f06-d1a7-4791-bb05-28c43efa58ff" class="bulleted-list"><li style="list-style-type:disc">Besoin d&#x27;avoir son propre hébergeur et son nom de domaine</li></ul><p id="474a1105-3b9f-4b8a-8120-89432ce583ed" class=""><em>wordpress.com</em></p><ul id="269fdacb-c638-414b-b244-f1afae57128e" class="bulleted-list"><li style="list-style-type:disc">Plateforme d&#x27;hébergement gratuite pour les sites WordPress</li></ul><ul id="d091dfcc-652c-4245-ae52-62e1f3d601aa" class="bulleted-list"><li style="list-style-type:disc">Créée, hébergée et maintenue par la société Automattic.</li></ul><ul id="912f78de-72aa-4436-8211-49d399718971" class="bulleted-list"><li style="list-style-type:disc">Service de base gratuit puis extensions payantes</li></ul><ul id="a8df1700-f727-4b22-b1ab-cb1ba1f64e93" class="bulleted-list"><li style="list-style-type:disc">Différentes offres: personnel, prémium et entreprise</li></ul><ul id="b8a6f853-8a76-4bd7-b2c2-c1e180dbbffe" class="bulleted-list"><li style="list-style-type:disc">Maintenance réalisée par Automattic.</li></ul><ul id="aa52a6ef-3919-47fc-af2e-2b493b532e05" class="bulleted-list"><li style="list-style-type:disc">Pas d&#x27;accès au FTP</li></ul><ul id="3b771d06-8219-4b2b-9b25-f214afeb236c" class="bulleted-list"><li style="list-style-type:disc">Publicité</li></ul><ul id="eb175b4f-c1fc-4ee8-bfee-6b87887484bf" class="bulleted-list"><li style="list-style-type:disc">Personnalisation limitée</li></ul><p id="970e1b3c-6d15-4078-8e69-40ab8dd32592" class="">
+</p><p id="3ef65682-10e4-452c-9fdc-562ac6383fb3" class="">La plupart des CMS fonctionnent avec un système de trois serveurs, chacun d’entre eux ayant un rôle dédié :</p><ul id="3f268601-4fbb-4664-aab1-12b5b8c9ad17" class="bulleted-list"><li style="list-style-type:disc">Le serveur Web : Exemple(Apache, Nginx, IIS)</li></ul><ul id="04b869a3-dcf4-4cb7-8812-6b7e6c7b6c95" class="bulleted-list"><li style="list-style-type:disc">Le serveur de base de données (MySQL, MariaDB, Oracle, Informix, SQL Server).</li></ul><ul id="f4a565ab-16bf-45d0-a428-7456cf0cf2b8" class="bulleted-list"><li style="list-style-type:disc">Le serveur d’application. Le serveur le plus utilisé s’appelle Apache avec le module PHP.</li></ul><p id="05871567-1330-4230-afca-f2053c633e2b" class="">
+</p><h3 id="32ddfaa6-3b6e-4c1e-b487-6135e3e2ff8c" class="">WAMP (ou LAMP)</h3><p id="94312809-7a5b-4855-9903-551096a6167d" class="">Les rôles de ces quatre composants sont les suivants :</p><ul id="2b5c8bb6-c321-4142-89b5-f6bd5be7ae7b" class="bulleted-list"><li style="list-style-type:disc">Linux ou Windows assure l&#x27;attribution des ressources aux autres composants (Rôle d&#x27;un Système d&#x27;exploitation ou OS pour Operating System) ;</li></ul><ul id="70041608-1986-4efc-a6f0-53a69091be70" class="bulleted-list"><li style="list-style-type:disc">Apache est le serveur web « frontal » : il est « devant » tous les autres et répond directement aux requêtes du client web (navigateur) ;</li></ul><ul id="f50a3f41-d192-468f-9dfd-06afee4da05b" class="bulleted-list"><li style="list-style-type:disc">MySQL est un système de gestion de bases de données (SGBD). Il permet de stocker et d&#x27;organiser des données ;</li></ul><ul id="b9a6b1a7-8eb2-4b11-808d-1e7af9d5421c" class="bulleted-list"><li style="list-style-type:disc">Le langage de script PHP permet la génération de pages web dynamiques et la communication avec le serveur MySQL</li></ul><p id="f68c72d9-5672-4846-b429-f94765acfc8e" class="">Il existe plusieurs packaging qui permettent de configurer un WAMP :</p><ul id="5977cc8a-ecd0-4c74-8bd8-c4964751a455" class="bulleted-list"><li style="list-style-type:disc">EasyPHP : http://www.easyphp.org/</li></ul><ul id="87948e9f-bdef-4551-b8c6-2505e5cef840" class="bulleted-list"><li style="list-style-type:disc">WampServer : http://www.wampserver.com/</li></ul><ul id="5cf2e4c8-c470-43e2-9272-628c7397644d" class="bulleted-list"><li style="list-style-type:disc">Xampp : https://www.apachefriends.org/fr/index.htm</li></ul><p id="9f470302-502f-4749-9ff4-5b0c064bec8d" class="">
+</p><h3 id="7538a05f-124e-4c09-8f52-8e68e21131b9" class="">Installation</h3><p id="83202425-1e47-431b-b34d-b13b8dbb5cea" class="">Télécharger et installer WampServer : <a href="https://sourceforge.net/projects/wampserver/">https://sourceforge.net/projects/wampserver/</a><div class="indented"><p id="86129c9c-82ec-4134-b187-77cefbf42deb" class="">On choisit la racine d’un disque (ex : C:\wamp64).</p><p id="5cc54c49-8f94-4956-af53-509dd912575c" class="">(si problèmes à la maison : <a href="https://wampserver.aviatechno.net/?lang=fr&amp;prerequis=afficher">https://wampserver.aviatechno.net/?lang=fr&amp;prerequis=afficher</a>)</p></div></p><p id="a2184476-ecfa-49a3-b1f0-e76425ef22f9" class="">—&gt; On a accès à <a href="http://localhost/phpmyadmin/">localhost/phpmyadmin/</a> pour gérer les bases de données (MySQL ou MariaDB).</p><p id="8b99eb36-fc67-4e00-bed9-483c39035ff6" class="">Dans PhpMyAdmin, on se connecte à MySQL et on crée une base de données vide (ex : hello-world-db).</p><p id="0808a6c2-d85d-47cf-bf47-bb1d9597e264" class="">
+</p><p id="63d714ec-c486-499e-9589-0c5b21377790" class="">Télécharger WordPress : <a href="https://fr.wordpress.org/download/#download-install">https://fr.wordpress.org/download/#download-install</a><div class="indented"><p id="5a5b20f3-3606-4f0d-a30b-44659e6855ad" class="">On garde le zip qui sera réutiliser à chaque nouveau projet WP.</p><p id="f720c886-0c6f-4f35-bedc-4be573870b37" class="">On dézippe dans un dossier qui porte le nom du site (ex : hello-world).</p><p id="754c0dda-f99f-4c96-be17-5d97d1ce18ac" class="">On copie ce dossier dans C:\wamp64\www.</p></div></p><p id="5f61930c-86c1-40b7-9f8c-c0e04baba710" class="">—&gt; On a accès en local au projet avec <a href="http://localhost/hello-world/">http://localhost/hello-world/</a>.</p><p id="a68b9abd-21a8-4279-adce-47ed8a6ea0a0" class="">On se connecte à la base de données précédemment créée.</p><p id="7fd4e7cc-0f75-4e1f-908e-c4303f114b42" class="">On lance “l’installation”.</p><figure id="3aef947d-89a0-4ed3-b473-79cabd20529f" class="image"><a href="media/15-01-wordpress-bref/Untitled.png"><img style="width:748px" src="media/15-01-wordpress-bref/Untitled.png"/></a></figure><p id="ca77edf2-a92c-4ea8-8ff8-7998ab21fffb" class="">On se connecte.</p><p id="df99024a-5d88-4115-8462-fed6da21d821" class="block-color-teal_background">On arrive bien sur le tableau de bord du site.</p><h2 id="28dbf04c-a7f8-4ca5-be65-701d035c90ea" class="">3. L’administration du site (back office)</h2><hr id="da30d6f1-8178-4e0e-8e8c-ed1bce819769"/><p id="3255ee53-a8b3-46ae-9872-dd1afb7760f0" class="">Tableau de bord = accueil de l’administration</p><p id="299563c2-0906-498d-a632-0705d2de93d3" class="">Barre d’outils</p><p id="2b6bfa4b-06e5-4975-8cec-0fa0efb36245" class="">Menus d’administration</p><p id="1f9dc717-be6e-4df6-8af1-0fffcb4dec51" class="">Ecrans d’administration (modules)</p><p id="6ae5b8b8-59cf-4008-9875-d88f984dfada" class="">Options de l’écran</p><p id="04320e0c-3976-42e7-8750-98228d58f133" class="">Réglages du site</p><h2 id="47f1afbe-099f-4535-bbcf-894794c93a79" class="">4. Les articles</h2><hr id="545fbc9d-503a-4820-ba9d-6b18a8385662"/><blockquote id="5c0a41ab-7289-4467-963d-52957ac6beee" class="">Actualité chaude.</blockquote><p id="89e188fa-6ab5-4a43-867c-22812e01d354" class="">Notion d&#x27;article</p><p id="66f43b4a-2a92-4867-924c-8bd4595d8ace" class="">Créer un article<div class="indented"><p id="38f839ef-a325-4734-8b4b-f96cb014fd50" class="">+ possible par mail</p></div></p><p id="8a85b618-b6e1-4998-afd3-c7dabcb24658" class="">Administrer un article<div class="indented"><p id="85ad115b-8a13-4f37-80f6-5e184cfa800e" class="">+ états de publication (brouillon, en attente de relecture, publié…)</p></div></p><p id="8c989e21-664a-448a-a592-d0884e4f78c5" class="">Connaître son workflow de publication</p><p id="f7337b04-6fd2-4abb-83f6-2484ae5b6c65" class="">Classer les articles dans des catégories <strong>= obligatoire</strong></p><p id="ba349b5b-a962-43f4-8339-f3e366f799fa" class="">Associer des mots-clés<div class="indented"><p id="83ed468b-9629-4d85-b2ed-b5c6437c315b" class="">+  convertir des étiquettes en mots-clés</p></div></p><p id="0747bfcc-40f0-4a13-a0ed-57ab811deec9" class="">Afficher les articles ~ selon le thème choisi</p><p id="a0dcf861-2991-4538-9294-f545d927ce40" class="">Gérer les permaliens</p><p id="ea69422f-1dde-45ec-8dda-175d28ef9586" class="">Gérer les widgets</p><p id="47033a0a-5a08-4a60-a0da-f2e7ccae4254" class="">S’abonner au flux RSS </p><h2 id="98ca5412-c54e-42a6-8f7e-bc01ac4ab648" class="">5. Les pages</h2><hr id="002fdc16-43b1-44dc-8a28-92bc628b7458"/><blockquote id="7e834037-2054-4e13-9f39-ca5b68c5b9dc" class="">Actualité froide.</blockquote><p id="95635658-b72e-4572-81b2-c73c556eadfe" class="">Notion de page</p><p id="b9861e29-95ea-4cca-8d74-56fe0aba094d" class="">Créer une page </p><p id="f12b9f20-98dc-4967-a1fe-7b1f7489fe61" class="">Administrer une page</p><p id="54f1d1d0-5a0a-4b3b-9f8e-e2b4a26aefbf" class="">Gérer les menus</p><p id="10060c8d-e5ca-4010-b844-73db8c88becf" class="">Gérer les widgets</p><h2 id="704b1e0c-1353-44a5-8868-05581dfbd232" class="">6. Les medias</h2><hr id="54965e75-d588-4686-a95f-604ceb8c30cc"/><p id="c30ff9c3-b8ee-494a-a6e6-77fd020ef709" class="">Notion de média</p><p id="c7a1c025-9ad9-480b-a1e2-a78fde89cc68" class="">Gérer les médias</p><p id="0f33fc04-3d3a-44f9-a660-75921a1e5618" class="">Définir des tailles de médias</p><p id="b58a0e35-023c-443c-bfb0-ec83682f1f5b" class="">Référencement du média</p><h2 id="38f27159-6111-489a-9c36-2bbf643991b6" class="">7. La mise en forme du contenu</h2><hr id="71d23623-1e3c-43f5-96dd-7fe2e50460be"/><p id="dc32a012-673e-4de6-a6e8-b587b37101da" class="">Mettre en forme le contenu des articles et des pages</p><p id="4c6b44ac-8305-4b11-af98-6b322791d5a0" class="">Mettre en forme du texte au niveau des caractères et des paragraphes</p><p id="708967a2-05a7-452a-9a93-c1f155681ef7" class="">Insérer des images simples</p><p id="f3d690d5-fcba-4bce-ae7f-f02222d4a6c9" class="">Insérer des galeries d’images</p><p id="f976de18-08ec-4060-8bc8-d0cfed1f7214" class="">Apercevoir les contenus</p><h2 id="a678315e-56d5-438d-8e21-cb45cf38abd8" class="">8. Les commentaires</h2><hr id="e7031278-4f0c-4c67-ba96-2ea35a74f617"/><p id="547ec848-d99e-4221-9bb2-0bec2cf3831f" class="">Notion de commentaire</p><p id="1b591c67-4351-4f1f-a151-3e09e6e21281" class="">Créer un commentaire</p><p id="93c829b3-bb92-4319-8f78-5a66f599f391" class="">Administrer les commentaires</p><h2 id="e1cefa5f-b66a-497d-baa5-d30073b00164" class="">9. Les utilisateurs</h2><hr id="9c08c751-b704-45cf-84fc-0c9e24a5575b"/><p id="fbfba752-6098-403f-ab09-a51cce5836f9" class="">Notion d&#x27;utilisateur</p><p id="b7ce30d0-25a4-4baa-baf0-059b78def831" class="">Créer un utilisateur</p><p id="205f7cb0-87a6-4a3f-963c-abe9d79b70bf" class="">Gérer l&#x27;utilisateur</p><p id="09a16793-2159-480a-b8bb-af393ec18f56" class="">Optimiser les droits des utilisateurs en fonction de leur rôle</p><h2 id="c0dbd653-fd53-4b40-8fd5-c09313a9213f" class="">10. Les extensions</h2><hr id="13373180-9b23-4f95-873c-d0a478f51457"/><blockquote id="71b3d763-5c02-4411-85b1-d66463619e8e" class=""><a href="https://wordpress.org/plugins/">https://wordpress.org/plugins/</a></blockquote><p id="74aeace7-fb02-4f65-a284-4159826c931e" class="">Découvrir les extensions</p><p id="8f78bca4-e96d-433f-aa25-7f5c3c4be454" class="">Utiliser les extensions</p><p id="c666e80c-e745-466a-8e40-0a481598f390" class="">Rechercher les extensions</p><p id="96a0a593-8bd3-417f-a734-aafbbd4a239b" class="">Choisir une extension en fonction de différents critères</p><h2 id="5338030b-8b76-4fd8-9b32-d3fe3059ea3f" class="">11. Les mises à jour</h2><hr id="f6868a3d-3820-4cd3-8b44-98aba6979c87"/><p id="5c032a23-64bc-47f1-bdba-7ed99d462a34" class="">Découvrir les mises à jour</p><p id="90e5c87c-596e-475b-8f2e-4fca06c12dc1" class="">Éviter les pièges</p><h2 id="31e0fb88-ea73-4306-93d9-7bac9792861d" class="">12. Les thèmes</h2><hr id="765da0dc-5084-484d-8699-15717f69d0b8"/><p id="5411977f-d092-449b-a729-511f89f49d84" class="">Découvrir les thèmes</p><p id="7c1a4722-c5b6-436b-8035-36846a20591c" class="">Utiliser les thèmes</p><p id="757aa00c-340f-4398-85f3-748c8aed052a" class="">Rechercher les thèmes</p><p id="1e664a65-29eb-4e21-bb3d-f23b0a8c57a8" class="">Choisir un thème en fonction de différents critères</p><p id="0d6885a6-45a9-4a00-b7a4-fe272e31778c" class="">Paramétrer un thème</p><h2 id="a08b8569-3871-4909-808f-7e1c3a330b5e" class="">13. La sauvegarde et la restauration</h2><hr id="66ce8762-c4ab-461b-83b9-72683581feb4"/><p id="16619b52-f7ae-4791-8838-06eaf75887f0" class="">Sauvegarder son site</p><p id="87df52b7-5857-4355-8e44-c99e34a186df" class="">Restaurer son site</p><p id="67f1f364-56e9-447b-8861-e6b6754b6c75" class="">Site local</p><p id="6b46874c-94c6-471f-adca-1b1e63d2423f" class="">Site distant<div class="indented"><p id="7a755de5-a462-4b45-bf47-b1290e9cca03" class="">extension UpdraftPlus WordPress Backup Plugin : <a href="https://wordpress.org/plugins/updraftplus/">https://wordpress.org/plugins/updraftplus/</a></p><p id="7bb97047-d911-41b1-b89f-0813468962e0" class="">remplacer le chemin d’accès au site lié à <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>localhost/mon-site</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em> par l’URL du site hébergé</p></div></p><h2 id="0244e465-7c3e-48fb-8988-49ee79703153" class="">14. Gutenberg</h2><hr id="153ff3b1-df88-4de4-8b3b-7d98021804e8"/><blockquote id="bfcb4096-2710-4c13-8a2c-f976c3006f35" class="">Désuet.</blockquote><h2 id="26f20a29-75ce-4f02-b263-209a907a205b" class="">15. WordPress et PHP</h2><hr id="9115892b-b1ac-41a8-9cf5-0783b9319791"/><p id="401383a7-fa4c-4709-ae90-30167e124ce1" class="">Découvrir l&#x27;interaction entre WordPress et PHP</p><p id="3f5fcba9-3c53-465d-8096-ad4ae37fb775" class="">Découvrir le codex</p><p id="815e8b6a-a8d9-4355-be2e-9b68df820d6d" class="">codex WordPress est le guide de référence officiel de WordPress</p><p id="c7763e8a-718c-4ce7-b21f-05531bb772a2" class="">Découvrir la boucle et ses fonctions</p><p id="f4b74f8b-47ce-4354-8b84-dfea2d240e25" class="">bloginfo()</p><p id="bcc25719-cefe-440a-a5be-4fd5c1bdeeaf" class="">wp_nav_menu()</p><p id="4621127a-9751-4c8e-8fea-226280f3d648" class="">Découvrir les filtres</p><p id="bf86b308-2663-4261-96c7-b92bb51cf681" class="">Découvrir les hooks</p><p id="aa3078c0-c8e9-4e3b-8dac-f8cb6bd5ddd0" class="">Découvrir les actions</p><p id="6028dab7-12e3-4985-8d62-9cced91d3e63" class="">Découvrir les globales</p><p id="c15787ea-b7b7-4aa0-b303-bd5de2ccc8f5" class="">Découvrir les classes</p><p id="04a2ded9-f5bf-470d-923f-15926ebca223" class="">Découvrir WP_Query</p><p id="18037402-d180-4cd9-aaf9-6772d96c7064" class="">Découvrir wpdb</p><p id="ae9cfd88-054c-4e35-9501-b2f77df18fe8" class="">Découvrir les principales méthodes de requêtes pour la base de données</p><h2 id="c0898f5d-8689-4c68-be5f-9f230f8842ab" class="">16. Les thèmes enfants</h2><p id="9800dcbe-ad49-4022-ab20-d04a2a55e9f4" class="">Découvrir les thèmes enfants</p><p id="74cf3d6f-1aa5-4b9a-bb04-ef2a43c6420a" class="">Créer un thème enfant</p><p id="92b151f6-b72a-4c9b-bcef-f75479d0608f" class="">Utiliser un thème enfant</p><p id="248dd9ce-a35a-4906-962e-d95fa3c4ede6" class="">Paramétrer un thème enfant</p><p id="3b4551e2-be76-4837-958e-669a21607bd4" class="">(+) Seul le fichier <em>functions.php</em> n’écrase pas le parent. Il est chargé en plus, et avant le fichier <em>functions.php</em> parent.</p><h2 id="051d9423-75d4-40b1-8576-2c1659d6592a" class="">17. La création de son propre thème</h2><p id="fb98681b-8848-4eaa-b1a6-a417ddf2ea13" class="">Principe des zones d’affichage</p><p id="10f76c5c-2d76-488c-9dc3-f46b26185160" class="">La structure des thèmes</p><p id="ca06e8aa-b4b3-49fd-99ed-d4ca5f95310d" class="">Les fichiers des thèmes</p><p id="a13d49e4-c44c-4e9d-a2b2-974d50fb64fb" class="">L’appel des fichiers</p><p id="89e2ee2e-7504-42a1-a9d0-62616afe8103" class="">Les templates</p><p id="aba702f6-2c5c-453b-834f-0ffa337c3f08" class="">Créer une boucle</p><p id="8de2ef46-a5ab-45dd-aff1-5ea81c2b3fdd" class="">Les marqueurs</p><h2 id="35d2e5cb-08e7-45ad-9fef-d118df25f474" class="">18. La création de sa propre extension</h2><p id="1d294e1b-207b-481d-8463-cd0dd75fff35" class="">Créer un fil d’Ariane dans <em><em><em><em><em><em><em><em><em><em><em><em><em>functions.php</em></em></em></em></em></em></em></em></em></em></em></em></em></p><p id="781182d5-5c78-4751-b62e-d8f77ee609f9" class="">Créer une extension Widget avec PHP</p><p id="932ca666-0ec4-4ae9-ab1e-bfa98de63ad3" class="">Créer une extension avec PHP/MySQL</p><h2 id="2343d023-02d2-4443-8b52-f6d592142015" class="">19. Sécuriser son site</h2><h2 id="0550140e-e054-4b4b-8f7d-d4573dbbc875" class="">20. Liens utiles</h2><p id="afe28ea9-277a-4786-8dc4-0c16d0f22f32" class="">
+</p><h2 id="d940c63a-d01b-435b-ada7-c2d06c44e5ef" class="">{Bonus} WordPress sans WampServer</h2><hr id="06e69a6c-2f67-43c5-b67b-df0d27410521"/><blockquote id="f28a0235-3f85-476f-9b5e-459eb55c2992" class="">Merci à <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>Pierrick Anceaux.</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></blockquote><p id="9f848c5a-b34c-43d3-bdc3-36cf2e4fe56c" class="">
+</p><p id="8e3741ac-191a-4018-9314-5bf5566e5df4" class="">L’objectif est de pouvoir utiliser WordPress sans WampServer, à travers un IDE (ici, PhpStorm).<strong>
+</strong>
+[créer la db]<div class="indented"><p id="42e684c8-1fe6-4a40-b58a-7a49e253770c" class="">-&gt;Lancer PHPStorm</p></div></p><p id="4fd11508-3653-4768-9371-feb87b6486cd" class="">Le plus simple a été d&#x27;avoir utilisé PhpStorm pour un projet &#x27;bidon&#x27; (Symfony par exemple):<div class="indented"><p id="7154f2b5-3830-4aa3-bff1-9c7ac488e7fb" class="">-&gt;composer req doctrine etc...</p><p id="e5ab2273-387f-4e0e-a4e4-09f92327e5cb" class="">(-&gt;make:entity placeholder  ? pas sûr du tout que ce soit nécessaire)</p><p id="342d32d1-7643-4ec1-8b28-3e04c70a114b" class="">-&gt; renseigner le <em>.env.local</em> avec DATABASE_URL</p></div></p><p id="a986d59f-a5fd-45dc-b8c9-93a64dd8c7ba" class="">Ainsi on aura une database avec le login/motdepasse et l&#x27;adresse ip<div class="indented"><p id="9d3347bc-fbc4-479a-ab68-6c1ce6f00756" class="">-&gt;faire un d:d:c (même pas besoin de d:s:u)</p><p id="126abe99-87c1-4dda-bd3a-595e5b582e61" class="">-&gt;Fermer PHPStorm</p></div></p><p id="0a3e4c07-4cf8-41a0-a57c-4721035b0bee" class="">
+[host phpmyadmin]<div class="indented"><p id="5ae8fdcd-c45e-4391-8edd-0ede92bea4b8" class="">-&gt;Télécharger et Dézipper https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-all-languages.zip</p><p id="7e31467e-5f8a-4e96-98c4-1f30b23bd12c" class="">-&gt;Lancer PHPStorm</p><p id="f2566ecf-5383-47dc-8bb0-1b8fd5d3f6d6" class="">-&gt;Fichier / Ouvrir le dossier</p><p id="2e4b5a56-126b-4b2b-bc11-2bd15f117eca" class="">-&gt;trouver dans l&#x27;arborescence racine le fichier config.sample.inc.php</p><p id="723afe04-6669-4e2e-9afa-082908678e57" class="">-&gt;en faire une copie au même endroit nommée config.inc.php</p><p id="9d6c5915-5b02-4420-8a23-b0709fbb01b8" class="">(-&gt;y trouver la ligne $cfg[&#x27;Servers&#x27;][$i][&#x27;host&#x27;] = &#x27;localhost&#x27;; pour renseigner une IP externe)</p><p id="3ec0b5f6-8c4d-4103-930e-8b641e9eb42e" class="">(-&gt;y trouver d&#x27;autres ligne comme allowNOpassword qui fait exactement ce qu&#x27;on pense)</p><p id="48a552f6-f574-45a1-be57-d195c8c6cbc2" class="">-&gt;&quot;symfony serve&quot; pour lancer le serveur, ou bien &quot;php -S localhost:8080&quot; marche aussi mais changer le 8080 (8001 ? 8002?..)</p></div></p><p id="afbd89ab-6624-4ec6-9a09-42b5aca7dc53" class="">
+</p><p id="0ff2927c-e358-466f-b643-246e62e721fc" class="">[host wordpress]<div class="indented"><p id="d91915a8-0781-48ec-bd8a-8b10adf02d0b" class="">-&gt;Télécharger et Dézipper https://fr.wordpress.org/download/#download-install</p><p id="4ea55022-5b1e-4317-952a-f1a266903527" class="">-&gt;Renommer toujours au nom du site/projet/whatever_not_&quot;wordpress&quot;</p><p id="b45e0eb2-af6f-4699-81d8-0d84502d6416" class="">-&gt;Fichier / Ouvrir le dossier</p><p id="0bc8424a-3fab-4709-a9cc-2b1ac2114f1e" class="">-&gt;symfony serve</p><p id="73e1aff2-3a74-45fc-8d9c-6c550e52af4d" class="">
+</p></div></p><p id="2c5aaac0-6ea0-49d8-870a-f86f2f9f6363" class="">[initialiser]<div class="indented"><p id="cc8c32c1-6244-4d2e-973b-eeacc9a49669" class="">-&gt;Ouvrir son navigateur phpmyadmin depuis le lien de la console phpstorm
+(exemple moi http://127.0.0.1:8001, pas de /phpmyadmin puisque le serveur créé plus haut se crois &quot;seul&quot; )</p><p id="ad0912c7-41b0-44ea-833a-1e6d2debed30" class="">-&gt;renseigner login/mot de passe saisis dans le .env.local de la première étape</p><p id="dad7be4a-051e-4196-86c9-a3e333711953" class="">-&gt;comme via WAMP, créer une database</p><p id="e366cbde-e86c-4f30-ac7f-f807f0c3c63c" class="">-&gt;Ouvrir son navigateur wordpress
+(idem c&#x27;est un second serveur &#x27;standalone&#x27;, par exemple http://127.0.0.1:8002 )</p><p id="7cf53728-f773-4526-9b5a-3124d46b3513" class="">-&gt;se laisser guider comme d&#x27;hab via WAMP</p></div></p><p id="1e332162-d001-45b1-b1a7-ac8c953cdee4" class="">
+</p><p id="973a9601-627f-4398-bfda-fdf62125bde8" class="">[epilogue]<div class="indented"><p id="a317cfca-1d03-4eeb-9008-0d2aa4bcc2c5" class="">-&gt;supprimer la database &quot;bidon&quot; qu&#x27;on avait fait au début ne devrait pas empêcher le bon fonctionnement par la suite 
+</p></div></p><p id="bd240f97-edb3-4484-b10c-d7310ce8a69b" class="">
+</p></div></article></body></html>
