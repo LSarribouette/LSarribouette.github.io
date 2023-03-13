@@ -1,0 +1,781 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Initialisation des couches</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5c37602a-e510-40ec-8c96-251c866eb9a2" class="page sans"><header><img class="page-cover-image" src="media/16-04-initialisation-couches/2023-03-13_16_05_44-pexels-quang-nguyen-vinh-5116280.jpg_-_Photos.png" style="object-position:center 0%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Initialisation des couches</h1></header><div class="page-body"><blockquote id="8f61f17d-7c0e-44ff-b903-e8f9222f9055" class="">Voir le cours 07 Développement en couches avec Java.</blockquote><p id="d2bff5ee-79d7-47e4-b240-b44765857fdf" class="">
+</p><p id="93282547-cbfa-4d9c-a4be-11a7f2005adc" class="">D’un point de vue développement en couches, il nous faut :</p><ul id="4b39e34f-229b-487e-98b3-aef46782d02f" class="bulleted-list"><li style="list-style-type:disc">un package <em><em>ui</em></em> pour les interfaces graphiques ~ <strong>IHM</strong></li></ul><ul id="a78594fc-9627-49b9-af1a-a21fcb8e5e03" class="bulleted-list"><li style="list-style-type:disc">un package <em><em>bo</em></em> pour les classes POJO ~ <strong>BO</strong></li></ul><ul id="a2006d21-5026-44f8-88dd-f242e546c925" class="bulleted-list"><li style="list-style-type:disc">un package <em><em><em>dao</em></em></em> pour la gestion des données ~ <strong>DAL</strong></li></ul><ul id="42b2cec8-7a97-4710-a00a-826b2162aac0" class="bulleted-list"><li style="list-style-type:disc">un package <em><em><em><em><em><em><em><em><em><em>repository</em></em></em></em></em></em></em></em></em></em> pour la gestion des règles métier (dont les requêtes CRUD) ~ <strong>BLL</strong></li></ul><p id="726804e3-f520-4878-a34a-935ff2b7a718" class="">
+</p><p id="a6042252-1b95-4609-8838-ea48900a0275" class="">On crée un package <em>ui.activity</em>, dans lequel on met l’activité.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="f48df1fe-3c93-4303-9dc0-7f1a1bdc73d3"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Pour l’instant, on a pas grand chose mais on pourra ajouter une liste d’articles, des liens vers d’autres pages pour la modification, la création, le détail…</div></figure><p id="7e55fc80-32b7-4e8c-ae49-55aa5fecb8d6" class="">
+</p><p id="cef62407-6ea6-43d8-8b34-bc6c03bf7e12" class="">On crée un package <em><em>bo</em></em> et la classe Produit avec ses attributs.</p><blockquote id="be49f373-17fb-430e-a6c3-9479d584434d" class="">BP : on met un maximum d’attributs en <code>val</code> afin de limiter le nombre de getter/setter.</blockquote><pre id="bc1abf25-1a91-4dbb-8f4c-6e22ba615e54" class="code"><code>package com.lsarribouette.mumblinginkotlin.bo
+
+data class Produit(
+    val id:Int,
+    var libelle:String,
+    var price:Float,
+    var photo:String? = null,
+    var estAchete:Boolean = false
+)</code></pre><p id="b8cbddf0-9d4a-40b4-94a3-fe69121bfabc" class="">
+</p><p id="dcbe2b97-1f21-4e47-a5f4-d6cca51fffe2" class="">On crée un package <em><em><em>dao</em></em></em> et l’interface IProduitDao avec la signature des méthodes voulues (souvent celles du CRUD).</p><blockquote id="7e5de9cd-618f-40b6-8f8e-7d1610aebb3c" class="">BP : on nomme une interface avec un <code>I</code> au début pour augmenter la lisibilité.</blockquote><pre id="aa8fe12e-9762-42ec-a952-2772a407a492" class="code"><code>package com.lsarribouette.mumblinginkotlin.dao
+
+import com.lsarribouette.mumblinginkotlin.bo.Produit
+
+interface IProduitDAO {
+    fun selectById(id: Int) : Produit?
+    fun getAll() : List&lt;Produit&gt;
+    fun deleteById(id:Int)
+    fun deleteAll()
+    fun insert(produit: Produit) : Produit
+}</code></pre><p id="468a50ce-fd54-4305-bbfb-fa38fe77c0e8" class="">
+</p><p id="210e861a-db1e-46d8-be81-a2b64a2a088f" class="">Dans <em><em><em>dao</em></em></em>, on crée l’énumération DaoType qui liste les différentes options pour récupérer les données des produits. </p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="cffe124d-7d67-4e75-a2f8-64b008d19da9"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Pour l’instant, on ne va utiliser que des données stockées en mémoire mais on pourrait en récupérer d’une base de données ou d’internet par exemple.</div></figure><pre id="9f4cb8f8-ced8-4667-a3d2-7eab824a278b" class="code"><code>package com.lsarribouette.mumblinginkotlin.dao
+
+enum class DaoType {
+    MEMOIRE, //BDD, INTERNET
+}</code></pre><p id="5ad40a22-e844-459b-b967-4012fbe3ff5f" class="">
+</p><p id="d969c6d3-b21f-4f86-a7da-aab4ed62c53d" class="">Dans <em><em><em>dao</em></em></em>, on crée l’objet DaoFactory (usine) qui a pour seul but de construire une instance unique de DAO en fonction du type lorsque j’appelle la méthode <code>getDao(type: DaoType)</code>.</p><pre id="f35e61e8-9fbe-47f5-953a-fde61db491d9" class="code"><code>package com.lsarribouette.mumblinginkotlin.dao
+
+import com.lsarribouette.mumblinginkotlin.dao.memoire.ProduitDaoMemoireImpl
+
+object DaoFactory {
+    fun getDao(type: DaoType) =
+        when(type){
+            DaoType.MEMOIRE -&gt; ProduitDaoMemoireImpl()
+            //DaoType.BDD -&gt; ProduitDaoBddImpl()
+            //DaoType.INTERNET -&gt; ProduitDaoInternetImpl()
+        }
+}</code></pre><p id="cf4ab4a4-3db7-4723-ba77-72f529119c59" class="">
+</p><p id="b7eaa52f-2144-4f5b-a724-8299ce7e671c" class="">On crée un package <em><em><em><em><em><em>memoire</em></em></em></em></em></em> dans <em><em><em>dao</em></em></em> et la classe ProduitDaoMemoireImpl, afin de mettre en place une DAO qui récupère les données stockées en mémoire. </p><p id="fa4b286b-18f3-4bd6-898c-3908ac55fcfb" class="">Elle contient une liste de produits et implémente l’interface IProduitDao donc les cinq méthodes du contrat.</p><pre id="c7ca44fa-6cad-4748-8065-1905dee5b4a9" class="code"><code>package com.lsarribouette.mumblinginkotlin.dao.memoire
+
+import com.lsarribouette.mumblinginkotlin.bo.Produit
+import com.lsarribouette.mumblinginkotlin.dao.IProduitDao
+
+class ProduitDaoMemoireImpl : IProduitDao {
+    val produitsEnMemoire: MutableList&lt;Produit&gt; = mutableListOf&lt;Produit&gt;(
+        Produit(1,&quot;Un premier produit&quot;, 42.0f),
+        Produit(2, &quot;Un second produit&quot;, 12.5f),
+        Produit(3, &quot;Un troisième produit&quot;, 78.6f)
+    )
+
+    override fun selectById(id: Int): Produit? =
+        produitsEnMemoire.filter { it.id == id }.firstOrNull()
+
+    override fun getAll(): List&lt;Produit&gt; = produitsEnMemoire
+
+    override fun deleteById(id: Int) {
+        produitsEnMemoire.remove(selectById(id))
+    }
+
+    override fun deleteAll() {
+        produitsEnMemoire.clear()
+    }
+
+    override fun insert(produit: Produit): Produit {
+        produitsEnMemoire.add(produit)
+        return produit
+    }
+
+}</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="489b7c15-2837-427b-afab-71c47eedfa2a"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">On aurait pu utiliser la map au lieu d’une liste : elle associe une clé/valeur et on serait sûr qu’il n’y a pas plusieurs articles.</div></figure><p id="6f62a650-cbe9-485a-bde5-f1bb6e25454a" class="">
+</p><p id="081c6197-9a51-4b3b-9da0-dcd41d8c97fd" class="">On crée le package <em><em><em><em><em><em><em><em><em><em>repository</em></em></em></em></em></em></em></em></em></em> et l’objet ProduitRepository, avec en attributs <strong><strong><strong><strong><strong><strong><strong>privés</strong></strong></strong></strong></strong></strong></strong> les différentes options de récupération de données et autant de méthodes que nécessaires.</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="fdbdfe6a-773a-43b7-be2c-9f5d11b33af2"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Dans le <em>repository</em>, on peut mixer les options de récupération des données.</div></figure><pre id="37fc1416-95d5-47b3-b6d9-fe9dd82037e7" class="code"><code>package com.lsarribouette.mumblinginkotlin.repository
+
+import com.lsarribouette.mumblinginkotlin.dao.DaoFactory
+import com.lsarribouette.mumblinginkotlin.dao.DaoType
+
+object ProduitRepository {
+    private var daoMemoire = DaoFactory.getDao(DaoType.MEMOIRE)
+    //private var daoInternet = DaoFactory.getDao(DaoType.INTERNET)
+    //private var daoBdd = DaoFactory.getDao(DaoType.BDD)
+
+    fun getProduit(id:Int)= daoMemoire.selectById(id)
+
+// Exemple avec plusieurs options de recuperation de donnees
+//    fun getAllProduit(): List&lt;Produit&gt; {
+//        var listeProduits : List&lt;Produit&gt; = daoBdd.getAllProduit()
+//        if(listeProduits.isEmpty()){
+//            listeProduits = daoInternet.getAllProduit()
+//        }
+//        return listeProduits
+//    }
+}</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="fb670669-47e9-4c55-9364-96823d1befc7"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">On aurait pu utiliser la map au lieu d’une liste : elle associe une clé/valeur et on serait sûr qu’il n’y a pas plusieurs articles.</div></figure><p id="4f22065f-a355-4fc4-8908-509d77a6ea0c" class="">
+</p><p id="4bcf3c56-08ce-465e-9f6c-0b3f32e760f3" class=""><strong><strong><strong><strong><strong><strong><strong><strong>Afficher un produit : </strong></strong></strong></strong></strong></strong></strong></strong></p><p id="6b147a6b-1a2b-463a-88eb-d6bb8da39da7" class="">Dans MainActivity.kt, on ajoute un Toast qui affiche un produit dans un message en bas qui s’efface ensuite.</p><pre id="02857a1d-8ee7-4888-9f1a-413548367e3b" class="code"><code>package com.lsarribouette.mumblinginkotlin.ui.activity
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Toast
+import com.lsarribouette.mumblinginkotlin.R
+import com.lsarribouette.mumblinginkotlin.repository.ProduitRepository
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        Toast.makeText(
+            this,
+            ProduitRepository.getProduit(1).toString(),
+            Toast.LENGTH_LONG).show()
+    }
+}</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="5fae5131-7b5d-4f27-b8e6-85a946f74393"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Oui, le Toast c’est illégal maintenant : on utilise les Snackbar.</div></figure><p id="7d4bbb1c-9f3b-4244-922c-7f00f28ae4e6" class="">
+</p><p id="771405c0-9bf0-45c7-8555-91172db8b651" class="">
+</p><p id="252a7a81-833c-4205-bb9e-3f2e528a82ef" class="">
+</p></div></article></body></html>
