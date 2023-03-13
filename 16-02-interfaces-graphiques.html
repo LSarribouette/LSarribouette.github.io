@@ -1,0 +1,755 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Structure d’une application</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e6564748-d56c-4883-8634-5176b9a9ddfb" class="page sans"><header><img class="page-cover-image" src="media/16-02-interfaces-graphiques/2023-03-11_11_56_25-pexels-kammeran-gonzalezkeola-7082123.jpg_-_Photos.png" style="object-position:center 0%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Structure d’une application</h1></header><div class="page-body"><p id="ab2a0278-a57c-4f3e-b5cb-af65f73be5db" class="">
+</p><h2 id="f8fa126a-00f7-48ca-8bed-d5022c6a7c99" class="">Composantes d’une application</h2><hr id="578ef0cd-ab8d-4805-b284-401b4a9e2615"/><p id="1bf88cf7-5d33-4e37-ba38-fac4b7cd7bfd" class="">Une application a pour composants généraux : un manifeste, un dossier java avec les fichiers kotlin des activités et un dossier ressources avec notamment les images et les layouts correspondants des activités (en XML).</p><p id="066f5884-11e1-458f-a5f7-356a15faba63" class="">Une page de l’application est une activité. Chaque activité possède un fichier de code (Kotlin, contrôleur graphique) et un fichier de vue ou <em><em><em><em><em><em>layout</em></em></em></em></em></em> (XML).</p><h3 id="24078cbd-c302-4f89-8c6b-afd3454cbcc9" class="">Manifest</h3><p id="5dd70519-ed2f-41f6-baf7-8f08acfd1699" class="">Le manifeste est la référence de l’application, obligatoire. Il donne le nom de l’application, les icônes, la liste des pages… Toutes les pages (= activités) doivent être inscrites dans le manifeste (ce qui est fait automatiquement). La balise <code>intent-filter</code> est le point d’entrée de l’application.</p><pre id="d89521b3-d16b-4f58-9368-a5f53d5e991a" class="code"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;&gt;
+
+    &lt;application
+        android:allowBackup=&quot;true&quot;
+        android:dataExtractionRules=&quot;@xml/data_extraction_rules&quot;
+        android:fullBackupContent=&quot;@xml/backup_rules&quot;
+        android:icon=&quot;@mipmap/ic_launcher&quot;
+        android:label=&quot;@string/app_name&quot;
+        android:supportsRtl=&quot;true&quot;
+        android:theme=&quot;@style/Theme.MumblingInKotlin&quot;
+        tools:targetApi=&quot;31&quot;&gt;
+        &lt;activity
+            android:name=&quot;.MainActivity&quot;
+            android:exported=&quot;true&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+    &lt;/application&gt;
+
+&lt;/manifest&gt;</code></pre><h3 id="b3c65635-97e3-49ba-a3a5-79c57fada61a" class="">Activités et layouts</h3><p id="98c58d63-264d-497d-a162-44ee7e885b39" class="">Une activité est un écran de l’application sous forme d’une classe Kotlin, stockées dans le dossier <em><em><em><em>java</em></em></em></em> dans des packages nommés par convention selon l’auteur et le nom du projet. </p><pre id="71a57ef1-9d48-4705-a54d-d442b0e09eaa" class="code"><code>package com.lsarribouette.mumblinginkotlin
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+}</code></pre><p id="2aaa9e0f-086e-470b-aae2-864a4c997ac2" class="">Une application est composée d’une ou plusieurs activités. Grâce au contrôleur graphique, on peut réagir aux actions de l’utilisateur.</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="4139468c-e547-48a4-854c-9cc21568edce"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Une activité est forcément liée à un fichier layout en XML dans le dossier <em>res/layout</em>. </div></figure><p id="da829940-4684-404e-9dbd-0c77fd0c7a95" class="">
+</p><p id="bb92ecf6-66fd-41a4-9711-e58584d0e3c7" class="">Dans Android Studio, un fichier layout s’affiche soit en mode <em><em><em><em><em><em>Design</em></em></em></em></em></em> (qui permet de choisir le layout, d’ajouter et modifier les vues et leurs attributs) soit en mode <em><em><em><em>Code</em></em></em></em> (qui traduit le résultat en code XML, bien sûr modifiable).</p><pre id="5a5ba030-8719-4bac-8eb7-275dbaa9c64b" class="code"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    tools:context=&quot;.MainActivity&quot;&gt;
+
+    &lt;TextView
+        android:id=&quot;@+id/textView&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;Hello World!&quot;
+        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
+        app:layout_constraintEnd_toEndOf=&quot;parent&quot;
+        app:layout_constraintStart_toStartOf=&quot;parent&quot;
+        app:layout_constraintTop_toTopOf=&quot;parent&quot; /&gt;
+
+&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</code></pre><p id="65835c1d-3cb8-4bf1-9139-bc556ac3e386" class="">
+</p><h3 id="ddd0668a-110b-4d73-b6ee-001da8142995" class="">Ressources</h3><p id="be90b2de-594a-4687-ab27-df81db2f574b" class="">La gestion des ressources est plus contraignante qu’en web : le nom des dossiers est fondamental.</p><p id="1d065166-a9c8-4f1c-9723-b30bd916f415" class="">Dans <em><em><em>res</em></em></em>, les ressources sont d’abord organisées par catégorie : <div class="indented"><ul id="f7a73323-0c3c-44a9-926e-d7238ec8e40e" class="bulleted-list"><li style="list-style-type:disc">drawable pour les “dessinables” donc les images</li></ul><ul id="566c1445-2af8-4a98-9aed-0d464e55c917" class="bulleted-list"><li style="list-style-type:disc">layout pour les vues des activités (XML)</li></ul><ul id="12363991-2b65-4630-892b-793b9fdaf5b0" class="bulleted-list"><li style="list-style-type:disc">mipmap pour les icônes</li></ul><ul id="403956d2-b462-4da1-b7e9-c181b2484429" class="bulleted-list"><li style="list-style-type:disc">values, xml, raw (pour les fonts)…</li></ul></div></p><p id="9bb5be35-e395-41dd-b690-39aea4e4b1fd" class="">Chacune de ces catégories peut être complétée avec un ou plusieurs <strong>qualificateurs</strong> : densité d’écran (mdpi à xxxhdpi), landscape, langue (en, fr…), nightmode. Il est possible de préciser la version d’Android utilisée.</p><p id="c694f7d9-89df-4612-9cca-076c325cce32" class="">Les informations sont séparées par un tiret <code>-</code>. Un dossier est donc nommé avec plus ou moins d’informations : <code>categorie</code>, <code>categorie-qualif</code>, <code>categorie-version</code>, <code>categorie-qualif1-qualif2-version</code>...</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="5c2fe7d7-75eb-477e-b40c-1ce63c6e991a"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Dans l’IDE, on voit les qualificateurs entre parenthèses par commodité. 
+Dans l’explorateur de fichiers, on voit bien un dossier par catégorie-qualificateur-version.</div></figure><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="4c79603e-f4b7-44b6-8061-ec013674b202"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">On ne peut pas créer de fichiers ressources à la racine, ils doivent obligatoirement se trouver dans des dossiers qui respectent la norme Android.</div></figure><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="715e1373-f887-4e87-aaa3-aa1e50174b4a"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Outils :
+<em><strong>Material Design</strong></em>, ensemble de règles et bonnes pratiques définies par Google afin d’harmoniser les applications Android : <a href="https://m3.material.io/">https://m3.material.io/</a>.
+<em><em><em>Human interface guidelines</em></em></em> est l’équivalent Apple : <a href="https://developer.apple.com/design/human-interface-guidelines/guidelines/overview">https://developer.apple.com/design/human-interface-guidelines/guidelines/overview</a>.</div></figure><p id="f3485f1f-11db-4746-9f9a-2d78ad1b10f0" class="">
+</p><p id="10b1a34c-337c-45f1-b49e-a3381d2c9141" class="">Pour ajouter une ressource :<div class="indented"><p id="a1e2849e-1fb2-42e0-825d-1a204b0ee2d3" class="">clique-droit sur un dossier </p><p id="20a8fca5-bcc7-46c9-8d58-818f9c5a1cff" class="">&gt; New </p><p id="b434aa6c-00c3-44c7-949a-998f4de044f4" class="">&gt; choix du type de ressource à ajouter, dont Image Asset et Vector Asset (icônes) </p></div></p><blockquote id="c908615e-a15a-44e8-806e-de2e0315a461" class="">BP : on préfère utiliser des formats vectoriels (XML sous forme d’une somme de couches SVG) qui sont plus légers, plus adaptables.</blockquote><p id="caa2ada5-49fb-44b3-b874-f577a30c7deb" class="">
+</p><p id="ca0f3119-2bf1-483e-92f6-e1fca99ff4a3" class="">Pour accéder à une ressource,</p><ul id="ba3324d7-c4a0-42d8-a6ec-9083bdf4d881" class="bulleted-list"><li style="list-style-type:disc">en Kotlin, on utilise <code>R.type.identifiant-ressource</code> (par exemple : <code>R.string.hello</code>, <code>R.layout.activity_main</code>)</li></ul><ul id="03e3bbee-8680-4b77-af47-4ff0e96785de" class="bulleted-list"><li style="list-style-type:disc">en XML, on utilise <code>@type/identifiant-ressource</code> (par exemple, <code>@string/hello</code>)</li></ul><p id="99c566aa-59c4-42b8-aed4-13923a25a443" class="">
+</p><p id="836d71d3-a802-4ea9-bd9b-9e01a65fcaae" class="">Exemple : afficher une icône<div class="indented"><p id="5b90e3dd-a467-403e-9768-b34394fdc558" class="">On ajoute la ressource de l’icône :<div class="indented"><p id="51f898a1-4f8c-447b-ba60-965e93b71d9c" class="">clique-droit sur <em>drawable</em> &gt; New &gt; Vector Asset : on retrouve la liste de toutes les icônes Google où on peut modifier le style, la couleur &gt; Confirm path</p><p id="451d9bb9-86f5-4f10-b62c-12f4133a3cb9" class="">L’icône apparait dans le dossier, en vectoriel.</p></div></p><p id="09822545-0b71-41f6-ae5c-157360655714" class="">On ouvre le layout <em>activity_main.xml</em>, on glisse-dépose une <em>ImageView</em>, on choisit une icône.<div class="indented"><p id="bcd525b0-f06c-49c6-987d-4d075a4a2245" class="">On vient d’ajouter une image sur la “vue” principale. On peut regarder la vue code où on retrouve une balise ImageView, où l’icône est bien appelée avec <code>@type/identifiant-ressource</code> : <code>@drawable/outline_local_florist_24</code>.</p></div></p></div></p><figure id="97c22491-8e86-46e1-b72d-fc376288d307" class="image"><a href="media/16-02-interfaces-graphiques/Untitled.png"><img style="width:288px" src="media/16-02-interfaces-graphiques/Untitled.png"/></a><figcaption>A gauche, le mode Design et à droite, le résultat sur l’application mobile.</figcaption></figure><pre id="6195248a-f106-4218-b3c7-b4464f3626a6" class="code"><code>&lt;ImageView
+        android:id=&quot;@+id/imageView&quot;
+        android:layout_width=&quot;75dp&quot;
+        android:layout_height=&quot;81dp&quot;
+        android:layout_marginBottom=&quot;48dp&quot;
+        android:contentDescription=&quot;Une jolie fleur pour mon Hello World&quot;
+        app:layout_constraintBottom_toTopOf=&quot;@+id/textView&quot;
+        app:layout_constraintEnd_toEndOf=&quot;parent&quot;
+        app:layout_constraintStart_toStartOf=&quot;parent&quot;
+        app:layout_constraintTop_toTopOf=&quot;parent&quot;
+        app:layout_constraintVertical_bias=&quot;1.0&quot;
+        app:srcCompat=&quot;@drawable/outline_local_florist_24&quot; /&gt;</code></pre><p id="91c44e41-54b4-4336-ae97-18373726b702" class="">
+</p><h2 id="ea742dc6-2b3b-47d5-ac3c-41deb33eeee0" class="">Interfaces graphiques</h2><hr id="b23fc5fa-a554-4ee7-8b3e-73b895015c1c"/><p id="24b39c19-72dc-4dee-b415-c6a5891aad1e" class="">Tout ce qui est graphique étend <code>View</code>. </p><p id="fa32201f-0710-497d-9ade-b17ee7905c97" class="">Il y a deux types de vues : les vues classiques <code>View</code> (textes, images, formulaires, boutons…) et les groupes de vues <code>ViewGroup</code> ou <em>layout</em> (qui organise les éléments entre eux).</p><blockquote id="4c1d4638-23e3-4166-9cff-7188970a44a8" class="">BP : On met les vues dans des layouts pour faciliter l’organisation dans la page (ce qui signifie que toute zone de texte ou bouton est contenue dans un layout et rien ne se balade tout seul).</blockquote><p id="41cdc248-bf4d-4075-9b99-23fafa9f34a3" class="">
+</p><h3 id="6262933c-384c-4a1e-aaf1-2ab5037f239d" class="">View</h3><blockquote id="fba9a263-82fb-437d-88da-40437985947f" class="">Quelques exemples de vues disponibles.</blockquote><div id="409e63a8-be39-4299-b899-cf4c2571a7ff" class="column-list"><div id="18c1003a-80f4-49b8-93d2-b9d60b346b51" style="width:104.16666666666666%" class="column"><p id="f4f41e99-e715-4990-a420-cdbd53a6283a" class="">Les vues les plus communes : </p><figure id="cae0610b-3c94-45b9-9887-ce9c3df177b7" class="image"><a href="media/16-02-interfaces-graphiques/Untitled%201.png"><img style="width:192px" src="media/16-02-interfaces-graphiques/Untitled%201.png"/></a></figure><p id="94eede78-d080-4b1d-a3aa-3ddb83008643" class="">Les boutons :</p><figure id="3b394ccc-5f0b-4380-a53a-c95f2f1d2171" class="image"><a href="media/16-02-interfaces-graphiques/Untitled%202.png"><img style="width:153px" src="media/16-02-interfaces-graphiques/Untitled%202.png"/></a></figure></div><div id="a1c52ff2-2811-4784-98cf-8fde98448b09" style="width:91.66666666666671%" class="column"><p id="a6d00523-e4a4-4b69-875b-d1e185ed09d4" class="">Les inputs (saisies par l’utilisateur) :</p><figure id="2e935278-5f99-4a95-a1ad-e7bd31eb35ce" class="image"><a href="media/16-02-interfaces-graphiques/Untitled%203.png"><img style="width:196px" src="media/16-02-interfaces-graphiques/Untitled%203.png"/></a></figure></div><div id="b90d199e-dd1d-464f-95aa-d99e54395d6b" style="width:100%" class="column"><p id="a942bdb3-0d66-4b4b-b58c-fd7ba12f6cbe" class="">Les widgets :</p><figure id="df13b651-b245-4f7b-9d82-7c78f029b062" class="image"><a href="media/16-02-interfaces-graphiques/Untitled%204.png"><img style="width:168px" src="media/16-02-interfaces-graphiques/Untitled%204.png"/></a></figure></div></div><p id="4adabb9c-b607-498f-b4a3-a623a47b3624" class="">
+</p><h3 id="33dd296c-98ec-4e73-af3f-82bc2fddde6f" class="">ViewGroup (ou Layout)</h3><div id="b621e9db-f6e7-4be6-b7f5-fded8e2fb80b" class="column-list"><div id="daa8dde2-7b84-4793-a2f7-928cfe4c7083" style="width:43.75%" class="column"><p id="c6703d28-3e62-4650-b1ff-821ffce74f1a" class="">Les layouts disponibles :</p><figure id="74840f9e-ccca-464a-87a4-778145206e68" class="image" style="text-align:left"><a href="media/16-02-interfaces-graphiques/Untitled%205.png"><img style="width:192px" src="media/16-02-interfaces-graphiques/Untitled%205.png"/></a></figure></div><div id="010870dd-9eee-40dc-a1de-7a0f38b87b3d" style="width:118.75%" class="column"><p id="4927f40e-2f92-428a-a03d-5c2546b8976e" class="">Un <em>LinearLayout</em> organise les vues horizontalement ou verticalement.</p><p id="fb57194f-af0d-4009-a2d7-e5446d83a863" class="">Un <em>FrameLayout</em> ne contient qu’une seule vue qui recouvre tout l’espace.</p><p id="7d63c597-e86a-407e-b6e1-0b6e912f8fbb" class="">Un <em>ConstraintLayout</em> permet de positionner les vues selon des contraintes et selon d’autres vues (par exemple, deux boutons que l’on chaine et qui se placent dynamiquement au centre — même leur taille est dynamique).</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="4a62313e-9806-4cdc-aba9-6e4a6abbd2fe"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">On est obligé de contraindre toutes les vues du ConstraintLayout.</div></figure></div></div><blockquote id="2df28664-ba56-431d-9f72-0bc91c005126" class="">BP : on n’utilise pas le GridLayout parce que c’est statique, on utilise plutôt une liste avec un affichage sous forme de grille.
+BP : on crée des layouts spécifiques pour les différentes tailles d’écran.</blockquote><p id="cda55f88-5ee1-4afd-a85d-4afa51609793" class="">
+</p><h3 id="3bfa4b6a-adc4-427f-957c-bd7019b29eff" class="">Dimensions</h3><p id="f2a9f73e-b549-4d1f-bca6-002c043ec4c7" class="">Deux unités de mesure : </p><ul id="4bb56fbf-8d7c-4d02-bde9-aafbe1f76e29" class="bulleted-list"><li style="list-style-type:disc">sp = scale-independent pixels —&gt; pour les polices d’écriture</li></ul><ul id="ac3d0b26-f252-44c3-b9b1-c6fa7ba50d61" class="bulleted-list"><li style="list-style-type:disc">dp = density-independent pixels —&gt; pour le reste</li></ul><p id="7ff006b8-0f2d-4f39-bc2c-430f2226b9e1" class="">Android gère déjà la police du téléphone (accessibilité) donc il faut utiliser le sp.</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="8f4de102-05d1-4455-8f96-6c60fe795ae0"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Les styles sont prédéfinis avec notamment une taille par <em>title</em>, <em>body </em>(souvent 12sp)…</div></figure><p id="89dedb3b-f796-4bf6-a962-d1fbdbb8da21" class="">
+</p><h3 id="bef3262b-e519-4d8c-a226-f95ba001803f" class="">Internationalisation</h3><p id="dcdd53c8-3d61-4245-abb8-4578487a3cda" class="">Pour un <em>TextView</em>, on n’écrit pas directement la valeur de la String à afficher mais la référence à une variable (constante) : <code>@string/id_string_a_afficher</code>. </p><p id="5ce683d5-7390-4b61-9083-940a8bd99c3a" class="">Les Strings sont stockées dans un fichier <em>strings.xml</em> dans <em>res/values</em>. </p><pre id="7aac839a-f86b-435f-9ea5-1af4fb459ac4" class="code"><code>&lt;resources&gt;
+    &lt;string name=&quot;app_name&quot; translatable=&quot;false&quot;&gt;MumblingInKotlin&lt;/string&gt;
+    &lt;string name=&quot;icon_flower_name&quot;&gt;Une jolie fleur pour mon Hello World&lt;/string&gt;
+&lt;/resources&gt;</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="1f717eea-3fff-4135-a70c-bc78f04770bc"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">On peut préciser que certaines Strings ne sont pas traduisibles avec <code>translatable=&quot;false&quot;</code>, souvent le nom de l’application par exemple.</div></figure><p id="7d18532c-e602-4cd0-9531-f635bcba4df0" class="">
+</p><p id="2b67fa59-4774-4353-a96c-e357b6fbf788" class="">Pour traduire l’application dans plusieurs langues, on crée un fichier par langue avec le qualificateur correspondant (-en, -fr, -de…).</p><ul id="f896b762-8133-4a1e-a254-29130d9e037e" class="bulleted-list"><li style="list-style-type:disc">clique-droit sur <em>values</em> &gt; New &gt; Values Resource File <p id="00e2f64e-dd14-46f2-b6f3-592c2b049608" class="">&gt; File name : toujours <code>strings</code> (il mettra le .xml), choix du qualificateur : <em>Locale</em> <code>en</code> </p><p id="def4d082-f245-4ddf-94da-37227e3e1338" class="">&gt; Finish</p></li></ul><ul id="a1b71dba-9e18-49f6-85d1-5a16b5ee59b6" class="bulleted-list"><li style="list-style-type:disc">on peut aussi créer le fichier depuis l’éditeur <em><em>Translations Editor</em></em></li></ul><p id="dc26e7ea-910e-4ec1-8f09-bc780917d79b" class="">On ajoute ensuite les Strings traduites, à la main dans le fichier ou depuis l’éditeur.</p><pre id="16a3af7c-5571-4972-9929-861fe5259fb4" class="code"><code>&lt;resources&gt;
+    &lt;string name=&quot;app_name&quot;&gt;MumblingInKotlin&lt;/string&gt;
+    &lt;string name=&quot;icon_flower_name&quot;&gt;A nice flower for my Hello World&lt;/string&gt;
+&lt;/resources&gt;</code></pre><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="3c067fbe-b51b-4ea5-af37-021350f01000"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">RTL (<em><em><em><em><em><em><em><em><em><em><em><em><em>right to left</em></em></em></em></em></em></em></em></em></em></em></em></em>) : 
+Dans un ConstraintLayout, on a <em>end</em> et <em>start</em> pour les contraintes de début et de fin du texte (et pas droite et gauche), comme ça c’est bon pour les langues qui se lisent de droite à gauche.</div></figure></div></article></body></html>
