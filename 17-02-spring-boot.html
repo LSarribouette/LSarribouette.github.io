@@ -1,0 +1,697 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Spring Boot</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="51b6d663-d53b-4c26-9ead-b054f1d0b9f2" class="page sans"><header><img class="page-cover-image" src="media/17-02-spring-boot/2023-03-22_21_26_32-pexels-francesco-ungaro-13610643.jpg_-_Photos.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Spring Boot</h1></header><div class="page-body"><p id="04cb8033-d079-4bbb-9936-d52f0d0a8e49" class="">Spring est un framework proposant de très nombreuses fonctionnalités (Web, Sécurité, batch, accès aux données…) mais sa configuration peut s’avérer complexe et fastidieuse.</p><p id="f0aaedbd-4778-4457-bade-05b1649d4fb2" class="">Sur le principe de “<em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>convention over configuration</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em>”, Spring Boot a été développé pour faciliter la configuration Spring grâce à :</p><ul id="ba78b5f8-1521-4e49-8a68-ab73ef69ab2e" class="bulleted-list"><li style="list-style-type:disc">l’auto-configuration</li></ul><ul id="162e082e-89d2-4558-b842-a12ac7f92e8c" class="bulleted-list"><li style="list-style-type:disc">les starters</li></ul><ul id="00bdef57-3b3f-4552-9f73-cc9f13ff6200" class="bulleted-list"><li style="list-style-type:disc">l’approche client lourd</li></ul><p id="582e0f37-0553-4470-b5b9-eac1f55776ad" class="">
+</p><p id="4415d7e6-e973-43ec-9e21-e4f63a4b431d" class="">On utilise des gestionnaires de dépendances (Gradle ou Maven). </p><p id="b48037e4-8970-41f1-bff3-743af35e8639" class="">On sélectionne des <strong><em><em><em><em><em><em><em><em>starters</em></em></em></em></em></em></em></em></strong> ou ensembles de dépendances regroupées par catégorie avec tout ce dont on a besoin : les dépendances (et leurs dépendances), la configuration par défaut, etc. Par exemple : Spring Web, Spring Boot Dev Tools, Jersey, Spring Data JPA…</p><p id="98163f2c-7935-4564-b109-423961ac4a83" class="">Les librairies nécessaires sont téléchargées et ajoutées au <em>classpath</em>. Selon ce qu’il y a dans le classpath, l’<strong>auto-configuration</strong> lance de manière automatisée les librairies présentes (Tomcat embarqué, bases de données…). </p><p id="108f04c4-7513-4b3b-b6a0-4737f6dcffda" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="8304023a-0b8f-4df1-9802-e631589d2657"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">On ne fait plus que du Spring Boot maintenant.</div></figure><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="1d442eeb-d8c0-4fc5-9eb2-a6b0f2ac86bf"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Outils :
+• Spring Tools : plugin pour les IDEs (Eclipse, Visual Studio, Atom IDE) 
+• Spring initializr : <a href="https://start.spring.io/">https://start.spring.io/</a>
+Ces deux outils sont déjà inclus dans IntelliJ Ultimate.</div></figure><p id="acf1b209-dc6f-4c98-b0a4-7d52bfff46ba" class="">
+</p><h2 id="8fc9cbaf-b9f0-4a59-963c-2e64e0cfad45" class="">Hello World</h2><hr id="34699ea0-2217-4daf-9ffe-2af135d5fedf"/><blockquote id="81875f06-b4b1-4929-bbb9-2c8f1db0a8ca" class="">Projet GitHub : <a href="https://github.com/LSarribouette/springboot-basics/">https://github.com/LSarribouette/springboot-basics/</a></blockquote><p id="182432b1-ef7b-403f-94cb-cef9e682a04a" class="">
+</p><p id="848e1d7e-5da4-48ec-a1bd-938bb76c8382" class="">Spring initializr = point d’entrée dans le projet, où on choisit ce dont on a besoin.</p><p id="363987ae-60a2-407e-8673-75df628765d5" class="">
+</p><ol type="1" id="72b39715-8ab3-4d56-86dd-437adbff57bd" class="numbered-list" start="1"><li>Depuis le site internet :<p id="d348ae8e-7796-4095-a1d0-d94413e70500" class="">&gt; Gestionnaire de dépendances ? ici, Gradle Groovy<div class="indented"><p id="3f9e4ead-3af1-486b-b282-ecfaaf0a41df" class="">(+) Pour l’instant, peu importe Gradle ou Maven ; peu importe Groovy ou Kotlin.</p></div></p><p id="dcbe46de-00e0-4997-930a-4f34b31abcfd" class="">&gt; Langage ? ici, Java</p><p id="58af991f-73c5-4604-a782-16adad31cef1" class="">&gt; Spring Boot ? ici, 2.7.9<div class="indented"><p id="ea76d1c8-5d49-4fbd-8331-453a1285e24e" class="">(+) La problématique des versions de dépendances est maintenant gérée par Spring Boot. On choisit une version de Spring Boot et il gère les versions des dépendances et leur migration potentielle.</p></div></p><p id="5d4477ba-e310-4301-9a2c-d0d5fa930143" class="">&gt; Métadonnées ? <div class="indented"><ul id="6f76065d-0c0c-4037-9021-927c6ef719a3" class="bulleted-list"><li style="list-style-type:disc">group (propriétaire du projet et nom de domaine inversé) = fr.lsarribouette</li></ul><ul id="5108fa89-a461-4507-adbe-e84ba0d7d248" class="bulleted-list"><li style="list-style-type:disc">artifact (nom du projet) = springbootbasics</li></ul><ul id="9c2f0e1c-5b86-442b-8c94-49d6972423ca" class="bulleted-list"><li style="list-style-type:disc">package name (un par défaut, que l’on peut changer) = fr.lsarribouette</li></ul><ul id="388c3ece-e69f-42bf-9041-2604b82d915f" class="bulleted-list"><li style="list-style-type:disc">packaging = jar<p id="76ca4bf9-571e-454c-b4d6-df94ee72967a" class="">(+) On n’utilise plus que le Tomcat intégré pour réaliser des applications web, donc on n’a plus besoin du war.</p></li></ul><ul id="22b179bb-143f-4bd4-9779-f2377593e94b" class="bulleted-list"><li style="list-style-type:disc">java version = ici, 11</li></ul></div></p><p id="c896f06c-dc50-48ae-b485-b8ca046cc525" class="">&gt; Dépendances ? ici, Spring Web, Thymeleaf, Spring Boot Dev Tools<div class="indented"><p id="7580d0e3-3b46-4e37-b628-f1d2ba609c5c" class="">(+) C’est ici que l’on choisit ses starters. On peut ajouter le starter Spring Data JPA et une base de données comme H2 database.</p></div></p><p id="9e228ae7-f17b-4690-895b-a5f23f6e3432" class="">&gt; Generate</p><p id="c52290bb-20f6-49a0-9267-62fe9accbf55" class="">On obtient un zip, que l’on importe dans notre IDE<strong>.</strong></p><p id="01344f1d-a512-4d41-bbd9-0487b022982a" class="">
+</p></li></ol><ol type="1" id="a67a3966-5709-4b39-8bff-e31977611bb5" class="numbered-list" start="2"><li>Dans IntelliJ, <p id="ca94199e-c5ac-4d2b-bd18-7b6fb4b15b63" class="">&gt; New project &gt; Spring initializr : même démarche qu’en 1.</p></li></ol><p id="fc137990-99bc-4d47-9a41-246f2bc4de75" class="">
+</p><figure class="block-color-blue callout" style="white-space:pre-wrap;display:flex" id="8174a693-d0b0-4061-a298-a37ca1344b12"><div style="font-size:1.5em"><span class="icon">⚙</span></div><div style="width:100%">Outils :
+Lombok est une librairie qui simplifie la création et la gestion de méthodes basiques grâce à des annotations (ex : @toString, @setter, @getter,…).
+—&gt; meilleure lisibilité, mieux pour les tests (pour 80% de couverture de code, on est content que la classe soit moins longue), tout se met à jour lors de l’ajout d’un attribut. Il faut rajouter le plugin spécifique.</div></figure><p id="9cbc4e9f-8c11-46e7-980b-52a01b321e81" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="6fadc71b-75d5-458e-8fe9-bf3fd861f70e"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Rappel : 
+Une classe de base = attributs privés + getter/setter + constructeurs (vide, full avec id, full sans id) + toString() + equals() + hashcode()</div></figure><p id="e8d47d33-a363-4274-ade8-03659c398f02" class="">
+</p><p id="f4cc31fc-c75a-43ef-aa8c-ca5f14308e4a" class="">Pour ajouter une dépendance : <a href="https://mvnrepository.com/">mvnrepository</a> (site central pour maven, gradle, Ivy…)</p><p id="7fd4c8fd-570c-4be0-b5f4-395db744f95d" class="">&gt; on cherche celle qu’on veut</p><p id="d15ac229-8df4-4576-81a3-e87b8dd82457" class="">&gt; on choisit sa version</p><p id="a65fa4ed-a01b-4fd8-951e-a209e8d0877e" class="">&gt; on choisit l’onglet de notre gestionnaire de dépendances</p><p id="96cd460a-7e87-43d2-8346-a635ac6f3b75" class="">&gt; on ajoute le code proposé dans le fichier de configuration approprié</p><p id="c9c9fee7-e42e-4f4d-9512-f7962c50e438" class="">&gt; on clique sur le bouton pour recharger le projet</p><p id="05f9f6b3-af4e-4830-a02b-a6dad1187b0e" class="">&gt; la dépendance est téléchargée, ainsi que toutes ses dépendances à elle (et les leurs également) </p><p id="4d195fee-6d23-441e-8444-709628131a3d" class="">
+</p><h2 id="8f899f97-9876-45d5-bdeb-a09b9aa389f7" class="">Architecture du projet</h2><hr id="5d018293-04f1-466b-9dd8-b533bc5071c7"/><p id="edce89de-4763-4680-8313-21ef3de18450" class="">On a maintenant un projet configuré selon les starters sélectionnés avec :</p><ul id="c897429f-2816-4fd9-b633-71d5b303a13a" class="bulleted-list"><li style="list-style-type:disc">un dossier <em><em><em>src</em></em></em> qui contient<ul id="1a396d43-4461-473e-9901-cf591ccf2c0c" class="bulleted-list"><li style="list-style-type:circle">un dossier <em><em><em><em>main</em></em></em></em> pour les fichiers de production</li></ul><ul id="3569f5ea-12fb-40a0-afe4-ca6a22d3f065" class="bulleted-list"><li style="list-style-type:circle">un dossier <em><em><em><em>test</em></em></em></em> pour … les tests</li></ul></li></ul><ul id="f6c79b52-a2f7-472d-94b9-04039dd90000" class="bulleted-list"><li style="list-style-type:disc">les fichiers de configuration <figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="1b87beeb-d780-43cc-840b-e1c6a47ca901"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Gradle : le fichier <em><em><em><em><em><em><em><em><em><em><em><em>build.gradle</em></em></em></em></em></em></em></em></em></em></em></em> contient la configuration du projet Gradle (avec les dépendances, leurs versions, etc).
+Maven : l’équivalent est le fichier <em><em><em><em><em><em><em><em>pom.xml</em></em></em></em></em></em></em></em>.</div></figure></li></ul><p id="af18e192-8503-4a36-a84e-16207572f0b9" class="">
+</p><p id="194f8bee-fe67-45ca-84e6-27e0609aa51f" class="">Le dossier <em><em><em><em>main</em></em></em></em> contient :</p><ul id="25b47d75-2906-43ae-a9e0-fa4501585d8b" class="bulleted-list"><li style="list-style-type:disc">un dossier <em><em><em><em>java</em></em></em></em> avec<ul id="c074e38d-9ba9-4cd8-a5bc-920f5000f794" class="bulleted-list"><li style="list-style-type:circle">la classe d’exécution (avec le main)</li></ul></li></ul><ul id="06ac677d-f4c7-4687-be5b-f730869f0cbf" class="bulleted-list"><li style="list-style-type:disc">un dossier <em><em><em><em><em><em><em><em><em>resources</em></em></em></em></em></em></em></em></em> avec<ul id="0ea607ce-cab1-4c1e-bc4d-8cf03ec628d6" class="bulleted-list"><li style="list-style-type:circle">un dossier <em><em><em><em><em><em>static</em></em></em></em></em></em> pour les fichiers CSS, JavaScript, les medias…</li></ul><ul id="450d468d-ebf0-4ee5-b4d8-e5499db3670c" class="bulleted-list"><li style="list-style-type:circle">un dossier <em><em><em><em><em><em><em><em><em>templates</em></em></em></em></em></em></em></em></em> pour les templates de page (Thymeleaf)</li></ul><ul id="a1348ccc-076a-4ff3-a723-2fa12a6be602" class="bulleted-list"><li style="list-style-type:circle">le fichier <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>application.properties</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em> pour configurer Spring (port, profil…)</li></ul></li></ul><p id="13b3f9f2-8660-43d7-be9d-5b06a50b01f4" class="">
+</p><p id="b654ae42-55dd-4e89-9160-582d4661a8ec" class="">La classe d’exécution porte par défaut l’annotation <code>@SpringBootApplication</code> et la méthode <code>run()</code> qui permet de faire l’auto-configuration : tout ce qu’il nous fait est lancé (comme le serveur Tomcat et une éventuelle base de données).</p><p id="9201ca95-5437-4f1d-bea5-36a581530d5c" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="f25bd24a-aea9-4bd5-889c-b3a337898b94"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Grâce aux starters, on a notamment les librairies :
+ - Jakson qui gère le mapping entre objets java et autres flux textes (json,xml…)
+ - HikariCP qui permet d’utiliser un pool de connexion (demande au serveur d’application ou à Spring de créer un conteneur avec des connexions vivantes vers la base)
+ - Jakarta Persistence API (JPA), Hibernate, Tomcat embed (embarqué), JAXB…
+ - plusieurs pour les tests</div></figure><p id="2d74859b-bd06-40b5-93f8-fdcce5655d77" class="">
+</p><p id="470f3981-f7e9-472b-a106-b89791771655" class="">L’annotation <code>@SpringBootApplication</code> correspond en fait aux annotations : <div class="indented"><p id="e26e2eaf-f461-4243-986c-1c21190018e7" class=""><code>@SpringBootConfiguration</code> —&gt; il indique que c’est une classe de configuration</p><p id="d83534f1-0361-4776-b207-d77148e1301a" class=""><code>@EnableAutoConfiguration</code> —&gt; il démarre ce qu’il faut en fonction de ce qui est fourni dans l’application</p><p id="faab4140-1f67-4bc4-82e2-e711ac51bb28" class=""><code>@ComponentScan</code> —&gt; (avec des paramètres) il indique à Spring qu’il faut aller voir dans ce package et tous les sous-packages s’il y a des annotations (et les prendre en compte)</p></div></p><p id="4bd64e77-cfc8-4935-9aff-d784969e70a9" class="">
+</p><h3 id="8d15b110-7e0b-4e76-bc62-25029ce6d77f" class="">Lancement d’une application web</h3><p id="f1c626a0-a8f3-4ab6-af4c-bfc54c03e3d4" class="">On lance l’application. </p><p id="12c03491-8be5-46cf-add4-720c62a156fc" class="">Sur un navigateur, on va sur <a href="http://localhost:8080/">http://localhost:8080/</a>. </p><p id="347b2606-7664-4a86-8fce-d2b44992ea38" class="block-color-teal_background">Ca fonctionne : on a une erreur 404 puisqu’on a pas de page, mais on se connecte bien à notre application.</p><p id="4daca273-d116-4fd6-a2ff-e730e255dcd6" class="">
+</p><p id="dff465e0-2985-41bc-b683-e5f60183deda" class="">Dans <em>resources/static</em>, on crée un fichier index.html statique que l’on complète.</p><p id="b0701de2-58cd-407b-8015-0ac32facb4f4" class="block-color-teal_background">Ca fonctionne : on voit maintenant le index.html.</p><p id="369bb67a-de85-4a07-90eb-740c8272805d" class="">
+</p></div></article></body></html>
