@@ -1,0 +1,840 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Spring Core</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="fa9499d2-7551-4e0a-aed0-4131c134e572" class="page sans"><header><img class="page-cover-image" src="media/17-03-spring-core/2023-03-29_16_26_27-pexels-ben-phillips-4781962.jpg_(Image_JPEG_1920__1280_pixels)_-_Redimensionn.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Spring Core</h1></header><div class="page-body"><blockquote id="559685c3-93a6-4cba-96f4-4fd73b4ca2aa" class="">Noyau de Spring.</blockquote><p id="5066fca4-e58d-4250-927b-84e7aceb2472" class="">
+</p><h3 id="1c7b90d2-c1a7-4fe3-afa9-c384aaa23d18" class="">Notion de couplage fort et couplage faible</h3><p id="d6de926a-330f-400e-b100-b12a1df5eea2" class="">Le couplage est une métrique indiquant le niveau d&#x27;interaction entre deux ou plusieurs composants logiciels : deux composants sont dits couplés s&#x27;ils échangent de l&#x27;information.<div class="indented"><p id="1eebbc51-96fe-4e92-9629-4a7aa0efc9ee" class="">Le couplage fort implique une dépendance forte entre deux composants : difficilement réutilisable et testable.</p><p id="47bc0868-77a8-49d8-8570-bf5e77c07651" class="">Le couplage faible favorise la faible dépendance entre les classes, la réduction de l&#x27;impact des changements dans une classe, la réutilisation des classes ou modules.</p></div></p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="24468531-2738-433c-bcd5-f41204032d8a"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">L’utilisation d’<strong>interfaces</strong> permet de limiter le couplage fort.</div></figure><p id="3aad8b58-d7c7-4cc0-b0e9-36f49b530aba" class="">
+</p><h2 id="8d3198b9-80f5-47f0-91f6-69bdb43f70eb" class="">Injection de dépendances et inversion de contrôle</h2><hr id="9c9936fd-d0f0-4bf6-a855-3c413de97206"/><p id="5cc06708-3401-4c8e-82cc-465402e556f0" class="">“Je ne crée pas un objet, je demande à ce qu’on me le fournisse.”, c’est ça l’inversion de contrôle. </p><p id="0647238e-66a0-4c78-8270-b73b476086da" class="">Le design pattern Singleton est l’exemple le plus simple : une seule instance autorisée (constructeur privé), qui nous est fournie. </p><p id="68cf6c86-0ce1-414b-a337-2153e55f5fab" class="">Le design pattern Factory en est un également : l’instance nous est fournie par une couche différente (DAO).</p><p id="0b87dd55-75c1-46f7-b017-ed87347870c4" class="">
+</p><h3 id="c6ee8172-5a9e-4cb6-aed3-774476464425" class="">Inversion de contrôle</h3><blockquote id="c1b4cdb2-a0d9-471e-97c4-094efa16c76d" class=""><em><em><em><em><em><em><em><em>Inversion of Control.</em></em></em></em></em></em></em></em></blockquote><p id="e89b5ffd-7c64-4aa4-a1eb-dffb93e80107" class="">Elle permet de réduire les dépendances (couplage) entre des objets dont l&#x27;implémentation peut varier.</p><p id="8f3adc6e-14ef-4fa0-a910-706538537f0f" class="">Elle diminue la complexité de gestion du cycle de vie de ces objets (design patterns Singleton et Factory). Le contrôle du flot d&#x27;exécution d&#x27;une application n&#x27;est plus géré par l&#x27;application elle-même mais par une structure externe (conteneur).</p><p id="6c6757a3-788f-4ed1-8c65-65008292d000" class="">—&gt; Mise en place : utilisation de l’injection de dépendances.</p><p id="e15f6922-1486-426e-8cb1-7eab92b9d875" class="">
+</p><h3 id="ecf5d538-c91d-4804-831d-d150877eb204" class="">Injection de dépendances</h3><blockquote id="b77ea9be-e706-453a-b773-305db57c0322" class=""><em>Dependency Injection</em>.</blockquote><p id="270653c5-3f28-440e-a655-097f1cd9298b" class="">C’est le mécanisme permettant d&#x27;implémenter le principe de l&#x27;inversion de contrôle.</p><p id="37a9fc96-b371-4a19-8845-d2c2d55b9b9b" class="">Il permet d&#x27;éviter une dépendance directe entre deux classes en définissant dynamiquement la
+dépendance plutôt que statiquement.</p><p id="3c7f2ac5-b63b-454a-9211-0f0718aedf61" class="">Il permet à une application de déléguer la gestion du cycle de vie de ses dépendances et leurs injections à une autre entité. </p><p id="6a45d31d-f5eb-41e7-85dd-672ab53a91ec" class="">L&#x27;application ne crée pas directement les instances des objets dont elle a besoin : les dépendances d&#x27;un objet ne sont pas gérées par l&#x27;objet lui-même mais sont gérées et injectées par une entité externe à l&#x27;objet.</p><p id="6082228c-e02f-4f43-b29f-9cc601d74ee7" class="">
+</p><h3 id="bc8e779e-7087-4828-b9b2-ac915449013a" class="">Implémentation Spring</h3><p id="c963f103-a50a-4625-8d71-4b08896ee07c" class="">Spring apporte le &quot;conteneur léger&quot;, nommé <code>ApplicationContext</code>, qui permet la prise en charge du cycle de vie des objets (<em>beans</em>) et leur mise en relation.</p><p id="9eb808dd-c862-4127-a809-e0d4707b013e" class="">
+</p><p id="a10a9a31-2bf0-4530-9f24-6087d6e3e50a" class="">En client lourd, on crée un environnement Spring en modifiant la classe d’exécution :</p><pre id="05cf5123-061f-433b-92d7-473e90be8b6e" class="code"><code>@SpringBootApplication
+public class Application {
+    public static void main(String[] args) {
+        ApplicationContext context = SpringApplication.run(Application.class, args);
+    }
+}</code></pre><p id="4b934f35-1f4e-414f-a1eb-43b10fc1b154" class="">En web, ce n’est pas nécessaire.</p><p id="0fcc38c0-b5c0-4a70-b7ec-8400c515dfed" class="">
+</p><h2 id="c3c77c30-312a-4978-82fa-5e88bbf8c75e" class="">Notion de Spring bean</h2><hr id="4e21202c-819e-4218-8898-47c47283eada"/><p id="6b221118-bd17-4103-9ba8-3045ca8100c1" class="">Un bean en Spring est un objet que Spring a créé et qui est disponible dans un conteneur pour une injection. </p><p id="ad6a40d7-da08-4f2c-9df4-6dd48c945657" class="">On peut créer un bean en utilisant des annotations spécifiques grâce auxquelles Spring crée les instances demandées. Si ce n’est pas suffisant (ex : un objet Personne pour le directeur de l’agence), on peut créer un bean par programmation.</p><p id="0cbabb77-6d2c-4318-9628-7c6afa39d14d" class="">On injecte le bean avec l’annotation <code>@Autowired</code> sur le constructeur ou une méthode.</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="a8121cac-d1a8-4a25-af3c-c9c6ea1c06c5"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Il n’est pas rare de voir l’annotation <code>@Autowired</code> sur un attribut privé. 
+C’est une pratique déconseillée puisqu’elle se base sur la <strong>réflexion </strong>qui charge la classe en entier et permet de modifier un attribut privé alors qu’il ne devrait être modifiable que par son setter.</div></figure><p id="8eba342e-7194-4086-985e-cd9afaca94d4" class="">
+</p><h3 id="80691060-f5b7-4462-a70f-6bee6f84ad86" class="">Scope des beans</h3><p id="e13372e2-986f-4b77-87eb-babcdf6e7030" class="">On définit le scope en annotant la classe qui crée le bean avec <code>@Scope(&quot;prototype&quot;)</code>.</p><ul id="3c067bfe-56b0-4831-bcd0-9ae18cc76ad3" class="bulleted-list"><li style="list-style-type:disc">singleton : scope par défaut</li></ul><ul id="50ee26cb-efce-4563-bfcd-986265cd6745" class="bulleted-list"><li style="list-style-type:disc">prototype : une nouvelle instance à chaque injection</li></ul><ul id="8303b10b-7efc-4d48-af37-962461fe0599" class="bulleted-list"><li style="list-style-type:disc">request (uniquement en environnement web) : une nouvelle instance pour chaque requête HTTP</li></ul><ul id="2c646c32-a7f2-4daa-89b1-cfc1371f3b8d" class="bulleted-list"><li style="list-style-type:disc">session (uniquement en environnement web) : une nouvelle instance pour chaque nouvelle session</li></ul><ul id="2207df14-abfd-45b8-9130-14aaa7b0f139" class="bulleted-list"><li style="list-style-type:disc">application (uniquement en environnement web) : instance liée à un servlet context (ie une application web)</li></ul><p id="71eb0e4a-e4ae-4ee0-b2d1-ef1b0f8222db" class="">
+</p><h3 id="b3ecee77-3064-48bc-9aa4-02f40bbf3147" class="">Beans par annotation</h3><p id="f00db9bc-af48-4846-b256-f9a051e53c8a" class="">Les beans définis par annotation doivent être placés au même niveau ou sous la classe d’application (classe annotée avec <code>@SpringBootApplication</code>).</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="47761666-3ae9-41c7-9d76-197b790ef769"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Les beans seront découverts lors d’un scan automatique des packages permis par l&#x27;annotation <code>@SpringBootApplication</code>.</div></figure><p id="9489c415-b1b8-4f24-8bab-f00b29755a92" class="">
+</p><p id="12ca564e-6b62-480b-a9fa-7a2f7ad244c0" class="">Annotations principales :<div class="indented"><p id="f57ca931-3d4a-43df-917a-f14597298359" class=""><code>@Component</code> = annotation de base — permet à Spring de comprendre qu’il faut prendre en compte cette classe</p><p id="2febda3e-d613-4b6b-96bb-2ae0da725506" class=""><code>@Controller</code> = annotation sur un contrôleur</p><p id="86dc9572-237b-4f46-b014-1cdd50a4b6c6" class=""><code>@Service</code> = annotation sur un service métier – permet la gestion des transactions sur cette couche</p><p id="8416737e-8925-42e5-b369-219e5cbfca5c" class=""><code>@Repository</code> = annotation sur une classe DAO – permet la gestion des exceptions et des transactions de cette couche</p><p id="ccef3729-e429-4b78-b554-104b9e105396" class=""><code>@Autowired</code> = annotation pour l’injection de dépendance — permet au conteneur Spring de rechercher un bean et de l’injecter<div class="indented"><p id="5c5cef22-e2a2-46ea-8469-c88e952fb646" class="">soit dans un attribut (déconseillé mais le plus utilisé)</p><p id="2ef823a4-09fa-45fa-8e55-fbc2d49efef4" class="">soit dans une méthode</p><p id="917baaf8-5afc-41ba-828e-fe8ae7b4292b" class="">soit dans le constructeur (par défaut pour Spring Boot)</p></div></p></div></p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="7cc54545-628e-4e53-85c3-e94d00f8b449"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">On ajoute les annotations @Service pour les classes qui implémentent les services et @Controller pour les contrôleurs. 
+On ne met pas d’annotation sur les interfaces.</div></figure><p id="6c8a02a2-9113-42cd-bada-56a9f16de0cb" class="">
+</p><h3 id="f43a82cb-b1a5-4eae-a0b5-1415bac67e7a" class="">Récupération d’un bean</h3><p id="f82e2a76-deb9-47a5-b99b-0b9e79b1ef69" class="">Un bean est récupéré dans la classe d’exécution grâce à la méthode <code>getBean()</code> rendue disponible par l’instance de <code>ApplicationContext</code>. </p><p id="025deff4-964a-4a13-8b2c-587c0154bb17" class="">Elle prend en argument le nom ou le type du bean.</p><ol type="1" id="2116f34b-f529-4474-8b2c-77509671391a" class="numbered-list" start="1"><li>on nomme le bean dans l’annotation de la classe concernée (<code>@Component(&quot;unBean&quot;)</code>) et à l’appel de <code>getBean()</code>, on caste le bean pour gérer le type de l’objet récupéré : <code>(MaClasseAnnotee) context.getBean(&quot;unBean&quot;)</code></li></ol><ol type="1" id="7af9ce5f-9f9d-42a1-9de2-d65df0d9e8d9" class="numbered-list" start="2"><li>on donne directement le type du bean en paramètre : <code>context.getBean(MaClasseAnnotee.class)</code></li></ol><ol type="1" id="ec972c6b-37d8-4f91-9746-e35480746978" class="numbered-list" start="3"><li>on peut faire les deux à la fois : <code>context.getBean(&quot;unBean&quot;, MaClasseAnnotee.class)</code></li></ol><p id="08af5e1e-a139-40e1-b383-e48b4d23b47a" class="">A l’exécution, Spring nous fournit une instance de notre classe <em><em><em>via</em></em></em> ce bean (dont il gère le stockage).</p><p id="75bc4351-9ad1-43be-b404-16f7c2917dd0" class="">
+</p><ul id="641679da-c65f-4bb7-a798-3426f08b8a89" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Exemple minimaliste</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></summary><p id="5916770f-8f07-43af-8487-beb966f733a3" class="">Créer un nouveau projet sans starters.</p><blockquote id="d47525bf-688a-4114-8c21-21c26dddb000" class="">On est dans un contexte de client lourd.</blockquote><p id="fcc41d32-b9c4-42a4-a50f-c5b0b0612008" class="">Modifier la classe d’exécution Application, annotée <code>@SpringBootApplication</code>, avec la méthode qui charge l’environnement Spring :</p><pre id="0ac96b5c-0b76-457b-bdb6-46218549f6f6" class="code"><code>@SpringBootApplication
+public class Application {
+  public static void main(String[] args) {
+      ApplicationContext context = SpringApplication.run(Application.class, args);
+  }
+}</code></pre><p id="393c8d3d-a7f5-489b-a0a3-3e6856377365" class="">
+</p><p id="3b1b9a72-eafc-48aa-af25-df6cc4cde5a0" class="">Dans le package <em><em><em><em><em><em><em><em><em><em>controller</em></em></em></em></em></em></em></em></em></em>, créer une classe HomeController annotée <code>@Controller(&quot;homeBean&quot;)</code> avec un constructeur vide et une méthode <code>sayHello()</code> :</p><pre id="1bf73ffa-6d67-42b5-a1e3-7b88dc7b8696" class="code"><code>@Controller(&quot;homeBean&quot;)
+public class HomeController {
+	@Autowired //optionnel, par defaut pour Spring Boot
+	public void HomeController() {
+		System.out.println(&quot;Constructeur de HomeController&quot;);
+	}
+	public void sayHello() {
+		System.out.println(&quot;Méthode du contrôleur qui dit bonjour&quot;);
+	}
+}</code></pre><p id="20703259-ec54-40f6-add2-dd436cf64cbe" class="">
+</p><p id="21ae8450-a7f7-42de-aa9c-686e8b01ef7a" class="">Dans la classe d’exécution, récupérer le bean du contrôleur et appeler sa méthode :</p><ul id="8c5c17af-5714-494c-a7f2-949d975cd934" class="bulleted-list"><li style="list-style-type:disc">on déclare une instance de HomeController à laquelle on passe le bean grâce à la méthode <code>getBean()</code> rendue disponible par l’instance de <code>ApplicationContext</code><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="f0a7646c-6a23-4019-a824-cc5670a7efa3"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Il faut caster le bean pour gérer le type de l’objet récupéré.</div></figure></li></ul><pre id="4061c5a7-d06d-4cdd-b796-c0d347b2f342" class="code"><code>@SpringBootApplication
+public class Application {
+  public static void main(String[] args) {
+    ApplicationContext context = SpringApplication.run(Application.class, args);
+
+		HomeController hc_nom = (HomeController) context.getBean(&quot;homeBean&quot;);
+		HomeController hc_type = context.getBean(HomeController.class);
+		HomeController hc_both = context.getBean(&quot;homeBean&quot;, HomeController.class);
+		hc_nom.sayHello(); //Méthode du contrôleur qui dit bonjour
+		hc_type.sayHello(); //Méthode du contrôleur qui dit bonjour
+		hc_both.sayHello(); //Méthode du contrôleur qui dit bonjour
+  }
+}</code></pre></details></li></ul><p id="68fdf0c8-b375-4e84-bce7-fdfd1b1d49cd" class="">
+</p><ul id="b964f5e9-9f4f-4aae-bdaf-bc88ce601f51" class="toggle"><li><details open=""><summary><strong>Exemple plus concret</strong></summary><blockquote id="47c98282-8269-40ec-9282-ac86b707044c" class="">On est en multicouches : model = bo, controller = ihm, service = bll, repository = dal (+ vue).</blockquote><p id="516b8931-3f64-41bc-b5e7-927c3d4c1926" class="">Suite du projet : <a href="https://github.com/LSarribouette/springboot-basics">springboot-basics</a>.</p><p id="d3c2bb08-ab61-4e0f-874e-db53c12fcbcc" class="">Classe d’exécution Application, annotée <code>@SpringBootApplication</code>, avec la méthode qui charge l’environnement Spring.</p><p id="85e28536-780c-4779-934b-4a8d119999b4" class="">
+</p><p id="2833ac16-d54f-49ca-b66c-747bf5ea0932" class="">Package <em>model</em> (bo), on crée :</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="1164e913-acf9-4b6e-a1b4-5071029359e3"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">Uniquement des relations unidirectionnelles.</div></figure><ul id="53c580bc-a249-4c9d-a1ce-26e6359493ef" class="bulleted-list"><li style="list-style-type:disc">une classe Person</li></ul><ul id="3b697c5c-3414-4a1e-a0ca-abdf34470274" class="bulleted-list"><li style="list-style-type:disc">une classe Genre</li></ul><ul id="0e8b9e31-bb1c-43d0-b986-4cab4ea2bcfb" class="bulleted-list"><li style="list-style-type:disc">une classe Movie</li></ul><blockquote id="b779481a-44ae-49b1-b89c-907fa15c913b" class="">Dans une POJO, on crée au minimum les attributs privés, les getters/setters, un constructeur vide, un constructeur avec tous les paramètres. 
+Dans la vraie vie, on ne met pas forcément l’identifiant dans le constructeur (souvent auto-généré). On ne met pas non plus la méthode <code>toString()</code>, qui sert à déboguer en console mais n’est plus utile en mode web.</blockquote><blockquote id="b76180ac-c8ab-4160-b184-0604479d85c8" class="">Dans un constructeur vide, on laisse tout par défaut <strong>sauf</strong> les listes que l’on doit toujours initialiser : “un conteneur peut être vide mais pas nul”.
+D’ailleurs dans le setter d’un attribut conteneur, on ajoute une condition qui vérifie si l’objet inséré est nul et l’initialise à vide au besoin.
+Dans un constructeur full, on appelle le setter pour une liste et pas le <code>this</code> pour passer à travers cette vérification.</blockquote><blockquote id="0df2d16d-06bc-4896-bd94-d43675b50d48" class="">Dans un constructeur, on utilise <code>this</code> sauf s’il y a une vérification faite dans le setter, dans ce cas on préfère appeler le setter. 
+Mais dans la vraie vie, la très grande majorité des vérifications se font dans la partie métier (bll, service). Il est possible de faire des vérifications “de bon sens” dans le controller.</blockquote><p id="1b1283ba-c8f5-4653-b504-2e4f769cfdef" class="">
+</p><p id="9868620e-9d5b-4514-afa2-9fe0f04bc704" class="">Package <em>service</em> (bll), on crée :</p><ul id="b74407af-883b-4801-b65e-200ebefe0a75" class="bulleted-list"><li style="list-style-type:disc">une interface MovieService avec les méthodes souhaitées</li></ul><blockquote id="b58be0dc-bfd0-4190-a487-a96702a96bbb" class="">BP : “on ne travaille jamais directement avec des classes, mais bien avec des interfaces”</blockquote><ul id="b7dbd939-3280-4120-bb04-96d6bf03a1e0" class="bulleted-list"><li style="list-style-type:disc">une classe bouchon MovieServiceMock <code>@Service</code> avec :<figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="fcd3746f-b712-4e74-86d0-4b897797582c"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">On pourra ajouter un profil « dev » afin qu’elle soit désactivée lors de la mise en place de la DAL.</div></figure><ul id="ee7cd182-c09c-43a2-a8db-61c4345cf897" class="bulleted-list"><li style="list-style-type:circle">les attributs privés <code>listMovies</code>, <code>listGenres</code>, <code>listPeople</code></li></ul><ul id="d578955e-1559-47b2-986d-566c7fcfb2a6" class="bulleted-list"><li style="list-style-type:circle">une méthode <strong><strong><strong><strong>privée </strong></strong></strong></strong>qui initialise la liste de genres</li></ul><ul id="4d0874f7-131a-42b3-b42b-deac3946b28a" class="bulleted-list"><li style="list-style-type:circle">une méthode <strong><strong><strong><strong>privée </strong></strong></strong></strong>qui initialise la liste des personnes (réalisateurs et acteurs)</li></ul><ul id="be4888d2-83c5-4379-b690-4b6df4b286ad" class="bulleted-list"><li style="list-style-type:circle">un constructeur vide qui récupère les deux listes et crée les films</li></ul><ul id="1a1e7b87-5dc3-46fa-abf4-aaf98038904e" class="bulleted-list"><li style="list-style-type:circle">les méthodes du contrat de l’interface</li></ul></li></ul><blockquote id="da1ba90f-e63a-4991-a063-c98bb93ce732" class="">Dans une classe service, on crée les attributs nécessaires, un constructeur vide, les méthodes du contrat de l’interface implémentée, éventuellement d’autres méthodes.<p id="92c5ddbe-9a9a-45a4-b77d-c9c4580c610e" class="">Dans une classe service mock, on ajoute des données-bouchon dans le constructeur vide.</p></blockquote><blockquote id="b461827c-9226-407b-9a84-bbc3b6a0f06c" class="">Les genres et les participants sont des tables de référentiel : il faut qu’ils existent avant de pouvoir créer un film.</blockquote><blockquote id="bd970bb6-d660-4a11-b1a8-b1a6a5969afc" class="">BP : on externalise un maximum avec des méthodes privées explicites pour améliorer la lisibilité, “un code bien fait est un code qui n’a pas besoin de commentaires”.</blockquote><blockquote id="616b3cce-712d-4bfd-b30c-d6b8d31e4107" class="">Dans le <code>save()</code>,on fait les vérifications métier et seulement à la fin le <code>add()</code>. On utilise nos propres exceptions pour dire si tout s’est bien passé ou pas.</blockquote><p id="e7f4c1e7-dd4d-4ee8-a713-b472fdb011e9" class="">
+</p><p id="8ed963c9-e9a7-4316-aac3-7bf351e1ecc3" class="">Package <em>controller</em> (ihm), on crée une classe MovieController <code>@Controller</code> avec </p><ul id="df0b34e6-6329-40b4-8b41-162c1d42b6ec" class="bulleted-list"><li style="list-style-type:disc">un attribut privé du service</li></ul><ul id="985f7acc-8cdd-47f3-9db2-1b717f048e3f" class="bulleted-list"><li style="list-style-type:disc">un constructeur <code>@Autowired</code> avec le service</li></ul><ul id="4623eda9-3657-45f7-851a-53d23fb896f9" class="bulleted-list"><li style="list-style-type:disc">une méthode pour retourner tous les films</li></ul><ul id="b4a7b78a-a441-4256-bea1-9d860cd936ac" class="bulleted-list"><li style="list-style-type:disc">une méthode pour trouver un film à partir de son identifiant</li></ul><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="37f9dece-2229-4ed1-aa57-b2910623275c"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">On devrait retourner un film o<em>ptional</em> dans le <code>getMovieById()</code> (et dans d’autres) : ça devient la norme.
+On utilise le type <code>Optionnal</code> pour décrire l’attribut de l’interface (<code>Optional&lt;Movie&gt;</code>) et dans la signature de la méthode :<pre id="80b082d6-bae6-467b-87ee-cf13f2c4ce85" class="code"><code>@Override
+public Optional&lt;Movie&gt; getMovieById(long id) {
+    Optional&lt;Movie&gt; optMovie = Optional.empty();
+    for (Movie movie : listMovies) {
+        if (movie.getId() == id) {
+            optMovie = Optional.of(movie);
+            break;
+        }
+    }
+    return optMovie;
+}</code></pre><p id="9c761213-292b-4511-80af-326ace7fa0dc" class="">Dans la classe d’exécution fournie, on met à jour le bean qui appelle maintenant un Optional :</p><ul id="9c437a49-3122-4121-87e2-d99e615d3281" class="bulleted-list"><li style="list-style-type:disc">on déclare une variable <code>Optional&lt;Movie&gt;</code></li></ul><ul id="cb169b27-3cab-4678-bda5-659f39877a42" class="bulleted-list"><li style="list-style-type:disc">on fait une condition qui vérifie si la variable a un contenu (<code>isPresent()</code>) et affiche un message adéquouète</li></ul><ul id="66d860c2-2126-47ab-8ddd-ba1d29411e74" class="bulleted-list"><li style="list-style-type:disc">(+) Il ne peut pas être nul car <code>Optional</code> s’assure que l’objet existe dans tous les cas, on vérifie donc s’il a un contenu.</li></ul></div></figure></details></li></ul><p id="e9bf2113-21e0-42bf-97e0-1c250a2180e7" class="">
+</p><h3 id="cfb385c5-58f1-492d-bfd3-1fa963f40910" class="">Beans par programmation</h3><p id="2743d16a-82a6-44c0-82e8-201d9df3d4f1" class="">Les beans définis par programmation doivent </p><ul id="9ce854cb-f3b8-4bd2-ac81-6f2ef25c6d1a" class="bulleted-list"><li style="list-style-type:disc">être placés dans un package <em><em><em><em><em>config</em></em></em></em></em> &gt; dans une classe de configuration annotée <code>@Configuration</code> </li></ul><ul id="ca1ed49f-9650-4e7d-8f0e-e12a8619bf32" class="bulleted-list"><li style="list-style-type:disc">avoir une méthode annotée <code>@Bean</code></li></ul><pre id="1da937f7-6deb-4d8a-ab9a-f4563f99350b" class="code"><code>@Configuration
+public class EditeurConfiguration {
+  @Bean
+  public List&lt;Editeur&gt; avoirListeEditeurs() {
+
+		...
+
+    return listeEditeur;
+  }
+}</code></pre><p id="6f86820a-5ea8-4cfa-879e-de3672af8653" class="">
+</p><ul id="155370f5-c508-49ba-9c25-11b999c4aef4" class="toggle"><li><details open=""><summary><strong>Exemple</strong></summary><p id="e5d6410c-f0e2-4493-b6d2-d887e40411bb" class="">Créer un nouveau projet sans starters.</p><blockquote id="3f2dafff-cdfa-4b4f-911c-bbceabe5c9c3" class="">On est dans un contexte de client lourd.</blockquote><p id="fec2e0c7-f02a-4bbb-a69f-746c18dbf661" class="">Modifier la classe d’exécution Application, annotée <code>@SpringBootApplication</code>, avec la méthode qui charge l’environnement Spring.</p><p id="c0f23a53-4092-4676-9cee-5657fa563b4b" class="">Dans le package <em>bo</em>, créer la classe Editeur avec les attributs privés, les constructeurs vide et full, les getters/setters/, la méthode toString.</p><pre id="cbcf6dcb-147f-4d66-9f0e-814474fdf927" class="code"><code>public class Editeur {
+    private int id;
+    private String nom;
+
+    public Editeur() {
+    }
+
+    public Editeur(int id, String nom) {
+        this.id = id;
+        this.nom = nom;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Editeur{&quot; +
+                &quot;id=&quot; + id +
+                &quot;, nom=&#x27;&quot; + nom + &#x27;\&#x27;&#x27; +
+                &#x27;}&#x27;;
+    }
+}</code></pre><p id="0e691b0d-37c2-47b2-a779-a93c1f3180be" class="">Dans le package <em>config</em>, créer la classe EditeurConfiguration annotée <code>@Configuration</code> avec la méthode avoirListeEditeurs() annotée <code>@Bean</code>.</p><pre id="8c1b91f4-4311-4f32-b20b-0c2d15f8316f" class="code"><code>@Configuration
+public class EditeurConfiguration {
+    @Bean
+    public List&lt;Editeur&gt; avoirListeEditeurs() {
+
+        // un conteneur peut être vide mais pas nul
+        List&lt;Editeur&gt; listeEditeur = new ArrayList();
+
+        // deux editeurs
+        Editeur poche = new Editeur(1, &quot;Poche&quot;);
+        Editeur hachette = new Editeur(2, &quot;Hachette&quot;);
+
+        // ajout des editeurs a la liste
+        listeEditeur.add(poche);
+        listeEditeur.add(hachette);
+
+        return listeEditeur;
+    }
+}</code></pre><p id="d8af249e-bd79-4f07-a977-594ec82a5115" class="">Dans la classe d’exécution, récupérer le bean avec <code>getBean()</code> et l’afficher.</p><pre id="3dd08682-8be6-4406-bc5c-db7ba37679ac" class="code"><code>@SpringBootApplication
+public class Application {
+    public static void main(String[] args) {
+        ApplicationContext context = SpringApplication.run(Application.class, args);
+        EditeurConfiguration ec = context.getBean(EditeurConfiguration.class);
+        System.out.println(ec.avoirListeEditeurs());
+    }
+}</code></pre><p id="b9e052d5-a554-4316-8196-d94555f770c1" class="">
+</p><p id="1eb716dd-a45d-42f8-a443-dd807d21b8bb" class="">
+</p><p id="b5950743-cfee-414f-9f4f-e1a4156f935e" class="">
+</p><p id="72313934-801f-48fc-95a0-d2d68fbacc91" class="">Suite du projet démo.</p><p id="39e38c4c-cf95-4612-9d24-8c6a14b17772" class="">Dans le main,</p><ul id="0ba9c7e7-a0c7-4ecd-823b-147d988ed27c" class="bulleted-list"><li style="list-style-type:disc">j’ajoute un attribut privé Trainer formateurJava avec @Autowired</li></ul><ul id="b6a49607-08a7-4c32-9329-f525dcff222c" class="bulleted-list"><li style="list-style-type:disc">dans la méthode overridée run, je sout les infos de ce formateurJava</li></ul><p id="7e20680f-31d4-437c-98ed-9954736fb0f4" class="">Dans le package config, on crée une classe TrainerConfiguration,</p><ul id="d4b7295a-0082-4c94-b698-bb0039d608ab" class="bulleted-list"><li style="list-style-type:disc">on lui met l’annotation @Configuration</li></ul><p id="16597ef0-3654-4dcf-935f-bb6ab91641ac" class="">(+) le but : créer des vrais objets</p><ul id="e365cc35-58a3-44c4-bf17-7993bcc8b22c" class="bulleted-list"><li style="list-style-type:disc">on ajoute une méthode getTrainerJava qui retourne un new Trainer(…) avec l’annotation @Bean</li></ul><p id="17bdf15c-e60a-4bf5-aca3-d5a2306c9090" class="">—&gt; à l’exécution, Spring lit la classe et crée l’objet que l’on veut, qu’il stocke.</p><p id="6a509fa3-4cee-4fe6-b895-c4d50691191d" class="block-color-teal_background">Ca fonctionne !</p><ul id="2999d56a-5131-42c2-be2c-f98ca12aa422" class="bulleted-list"><li style="list-style-type:disc">on ajoute une méthode getTrainerPhp qui retourne un new Trainer(…) avec l’annotation @Bean</li></ul><p id="2089e5d6-f80f-4d55-9f41-f2ae4e8a9a0e" class="">—&gt; à l’exécution, Spring lit la classe et crée les deux objets que l’on veut, qu’il stocke.</p><p id="feae2c6e-89b4-4b86-8d22-66998ef3bdb4" class="block-color-orange_background">Conflit : on injecte juste un Trainer et on en a deux en mémoire.</p><p id="544e579b-1ee7-4054-8aac-d4098f6a1b60" class="">Plusieurs options :</p><ol type="1" id="322cf0c2-a8a1-4e59-9353-3b730b2786aa" class="numbered-list" start="1"><li>on ajoute un nom aux @Bean qui est le même que le nom de la variable (pas besoin de @Qualifier dans ce cas)</li></ol><ol type="1" id="077d158d-9d6f-4d96-931e-c54d243cf2fb" class="numbered-list" start="2"><li>on nomme la méthode comme la variable (Spring fait l’équivalence)</li></ol><ol type="1" id="08933146-c4f9-460d-bb9b-2702e9f19abe" class="numbered-list" start="3"><li>on ajoute une annotation @Qualifier(”nomMethode”) = la mieux</li></ol><ol type="1" id="efd5eaa3-63e3-4440-9104-5c027baeda59" class="numbered-list" start="4"><li>dans la vraie vie, on fait même un mix de tout ça : <pre id="482a180f-420f-4df0-a799-1c40b4196c0c" class="code"><code>// dans TrainerConfiguration
+@Bean(name = &quot;formCPP&quot;)
+public Trainer getFormateurCpp() { ... }
+
+// dans main
+@Autowired
+@Qualifier(&quot;formCpp&quot;)
+private Trainer formateurCpp;</code></pre></li></ol></details></li></ul><p id="cc53bca3-5b87-4e0f-8fce-5ef78866a93a" class="">
+</p><h3 id="1452b125-2d41-402b-ad53-771af7b40213" class="">Bonus : CommandLineRunner</h3><blockquote id="ddc194d6-160a-4cf1-b1e9-262163790c24" class="">= interface Spring Boot avec une méthode d&#x27;exécution. </blockquote><p id="ad2c0494-aa79-4efb-be55-00130df47f19" class="">Spring Boot appellera automatiquement la méthode run de tous les beans implémentant cette interface après le chargement du contexte de l&#x27;application.</p><ul id="70715da3-a31a-4002-89b2-cfb828314aab" class="bulleted-list"><li style="list-style-type:disc">on modifie la classe d’exécution avec l’annotation <code>@SpringBootApplication</code>,  qui doit implémenter <code>CommandLineRunner</code></li></ul><ul id="66bfe720-2901-42c9-9fb6-3d08d9ae62d5" class="bulleted-list"><li style="list-style-type:disc">on lui met un attribut annoté <code>@Autowired</code> qui correspondant au bean que l’on veut récupérer</li></ul><ul id="a88f0ff2-c0aa-47f3-afac-304ba8d83f4a" class="bulleted-list"><li style="list-style-type:disc">on garde la méthode <code>main()</code> avec la méthode run qui crée l’instance de sa classe (et charge l’environnement Spring)</li></ul><ul id="7d8b6e66-b97b-4b97-9002-4421caaa9989" class="bulleted-list"><li style="list-style-type:disc">on surcharge la méthode <code>run()</code> qui affichera notre bean à l’exécution de l’application</li></ul><pre id="93b10ac2-e82c-402a-8f7d-dfbfe9dc1178" class="code"><code>@SpringBootApplication
+public class Application implements CommandLineRunner {
+
+    @Autowired
+    private List&lt;Editeur&gt; listeEditeurs;
+
+    public static void main(String[] args) {
+        ApplicationContext context = SpringApplication.run(Application.class, args);
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        System.out.println(listeEditeurs);
+    }
+}</code></pre><p id="7d3a95af-b2b0-462d-978b-14b5ddc102ff" class="">
+</p><h2 id="ac1e46bb-35a7-492b-a71a-6c756077cdac" class="">Gérer un conflit</h2><hr id="8b34dd57-ba12-4a50-9f36-a88fc5275bc9"/><p id="99df9984-79a9-485f-a4e6-bbe4bfc87ffa" class="">S’il existe deux instances d’un même objet dans le conteneur, Spring ne sait pas comment choisir  cela crée un conflit.</p><p id="907daaa0-d96c-43f8-99bb-e9e7c6687495" class="">Par exemple, un bean livreController demande l’injection d’un bean de type livreService par constructeur. Hélas, il existe deux beans correspondant au type demandé : deux classes qui implémente l’interface LivreService, qui sont LivreServiceImpl et LivreServiceMock.</p><p id="0abdd0e5-007c-46b3-9a69-82ed966347e8" class="">
+</p><p id="ab1d9988-2612-4b18-ada3-1349cd6c0d66" class="">Les conflits peuvent être résolus par annotation :</p><ul id="24578f03-809d-4036-baae-fc9bc4e90c18" class="bulleted-list"><li style="list-style-type:disc"><code>@Primary</code> qui rend le bean de la classe annotée prioritaire</li></ul><ul id="5b6be38f-1c11-42e0-a538-b2b08d0a57b6" class="bulleted-list"><li style="list-style-type:disc"><code>@Qualifier(ImplementationSouhaitee)</code> qui transforme l’injection en une injection par nom<ul id="65d4705c-eeac-4fdc-9831-66f5fd633656" class="bulleted-list"><li style="list-style-type:circle">si le <code>@Autowired</code> est sur le constructeur, on le met directement dans ses paramètres en précisant le bean qu’on veut : <code>unconstructeur(@Qualifier(ImplementationSouhaitee) …)</code></li></ul><ul id="00451910-8744-4cbb-ade4-a58300753bf5" class="bulleted-list"><li style="list-style-type:circle">si le <code>@Autowired</code> est sur l’attribut, on ajoute l’annotation au même endroit</li></ul></li></ul><ul id="e9c619f1-7b3e-4123-9551-b0b86302e3e8" class="bulleted-list"><li style="list-style-type:disc"><code>@Profile(&quot;unprofil&quot;)</code> qui définit l’association du bean de la classe annotée avec un ou plusieurs profils, qui sont activés dans <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>application.properties</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em> avec <code>spring.config.activate.on-profile=&quot;unprofil&quot;</code></li></ul><p id="b2dfe621-5944-428b-8736-dcd6d86872a3" class="">
+</p><figure class="block-color-brown callout" style="white-space:pre-wrap;display:flex" id="397e2eb3-8302-4b04-9fc2-8a50c1f5950a"><div style="font-size:1.5em"><span class="icon">ℹ️</span></div><div style="width:100%">On peut avoir différents fichiers de configuration : application-dev.properties, application-prod.properties… puis on passe le profil qu’on veut en ligne de commande quand on construit une archive complète ~ <code>java-jar -D</code> (ou bien on édite la configuration avant de lancer l’application).</div></figure><p id="ed1fa8e5-d4db-430a-9e60-e30a4f8376fe" class="">
+</p><ul id="3c301403-8544-4332-990a-d440d8e979ff" class="toggle"><li><details open=""><summary><strong><strong><strong><strong><strong><strong><strong>Exemple</strong></strong></strong></strong></strong></strong></strong></summary><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="9bccc90b-53ab-4530-8bf4-fe1aea17ae8a"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Seul le code concernant directement l’exemple est fourni.</div></figure><p id="e8971775-95f2-49ba-a7f6-bbbc69bcbd48" class="">Dans le package <em><em><em><em><em><em><em>service</em></em></em></em></em></em></em>, créer les deux classes qui implémentent LivreService : LivreServiceImpl et LivreServiceMock, annotées <code>@Service</code>.</p><blockquote id="b812317e-5c6d-4ba8-b118-3765c679b4be" class="">Par défaut, Spring Boot prend les constructeurs pour l’injection (<code>@Autowired</code>).</blockquote><p id="1599328b-b0f1-4fd5-ad65-297530ffe46c" class="">Dans le package <em>controller</em>, créer la classe LivreController annotée <code>@Controller</code> avec </p><ul id="2b01fa3d-525d-4b8a-bb1d-1d2d5de6d177" class="bulleted-list"><li style="list-style-type:disc">un attribut privé livreService annoté <code>@Autowired</code></li></ul><ul id="b2e9aacd-f2ad-4991-ad18-03424a275578" class="bulleted-list"><li style="list-style-type:disc">un constructeur qui injecte le livreService</li></ul><p id="fe83023b-27b2-4d75-85b1-a4e93a27871b" class="block-color-orange_background">Si on lance maintenant : conflit !</p><p id="43caa37d-c141-4a2f-b84e-23dc8a851b0c" class="">Les différentes options pour gérer le conflit :</p><ol type="1" id="c513075b-7415-4bc4-ac21-998eefb610f5" class="numbered-list" start="1"><li>ajouter l’annotation <code>@Qualifier(&quot;LivreServiceMock&quot;)</code> au dessus de l’attribut qui porte <p id="cbbcd2e8-f2f8-487c-aa4b-46d6eb591ad4" class="block-color-teal_background">Ca fonctionne, il sait quel bean choisir. Si on modifie l’annotation <code>@Qualifier(&quot;LivreServiceImpl&quot;)</code>, il prend l’autre.</p></li></ol><ol type="1" id="8517f989-4faf-4bc2-8136-cdc672aacb31" class="numbered-list" start="2"><li>choisir une implémentation prioritaire avec <code>@Primary</code> au dessus d’une des deux classes <p id="99fdf13d-10fe-448e-9262-aca2fbeda53b" class="block-color-teal_background">Ca fonctionne, il sait quel bean choisir. </p></li></ol><ol type="1" id="136c7f63-cd39-4d65-b0c9-585786d3ca7a" class="numbered-list" start="3"><li>définir des profils : <code>@Profile(&quot;dev&quot;)</code> pour les classes qu’on ne souhaite pas avoir lorsqu’on est en défaut, ici la classe <code>LivreServiceMock</code><blockquote id="e3ef3c4c-1520-42bf-8034-69279dbdef7b" class="">Attention, on doit définir un profil partout sinon une classe sans rien est prise par défaut dans “<em>default</em>”.</blockquote><p id="c6db058b-0cf3-4203-83cc-d8ea1f7e89e2" class="block-color-teal_background">Ca fonctionne, il choisit le profil par défaut. Si on change la configuration (<code>spring.profiles.active=dev</code>), il prend bien le mock.</p></li></ol></details></li></ul><p id="459dc18b-aae5-46fa-a4b0-ac3b649b8bf1" class="">
+</p><h2 id="da70826e-d02a-4021-b7af-50f5722c4ef8" class="">En vrac</h2><hr id="45567bde-113f-4c3c-a2df-807fae009e1e"/><ul id="5ca23bbd-7b54-4ea1-b53c-ecc063505d9e" class="bulleted-list"><li style="list-style-type:disc">BP : il est conseillé de limiter les <code>final</code>, il est préférable de ne pas créer de setter pour les attributs que l’on ne veut pas pouvoir modifer.</li></ul><ul id="ce04895e-3139-453e-88ab-f27b010c70b0" class="bulleted-list"><li style="list-style-type:disc"><strong>JavaDoc</strong> :
+On génère de la JavaDoc surtout pour les méthodes publiques.
+On écrit un commentaire javadoc au dessus de la méthode concernée : on décrit ce que fait la méthode et dans quel but, s’il y a des exceptions, les paramètres et le retour. D’autres annotations existent : @since, @see, @author…
+On génère la documentation avec l’option <em><em><em><em><em><em>Generate JavaDoc</em></em></em></em></em></em> : un répertoire avec la documentation, sous différents formats. On fournit en général la documentation dans un jar  à part.</li></ul></div></article></body></html>
